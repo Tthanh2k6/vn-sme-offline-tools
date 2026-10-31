@@ -20,3 +20,6 @@ __pycache__/
 # Single-file builds with embedded fonts are kept out of the repo
 *.single.html
 dist/
+
+# Nguồn dựng video (HyperFrames) — chỉ giữ bản MP4 trong assets/video
+/video/

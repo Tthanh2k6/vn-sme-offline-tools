@@ -6,6 +6,8 @@ Offline browser tools for Vietnamese small businesses: VietQR cashier, receivabl
 
 **Status:** Built as demos/templates; adapt fields to each business.
 
+**Live demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/ · **Video tour (41 s, no sound):** [assets/video/gioi-thieu-720p.mp4](assets/video/gioi-thieu-720p.mp4)
+
 ## How it works
 
 - Every tool is a single HTML page with vanilla JavaScript. There is no server, no build step and no account.
