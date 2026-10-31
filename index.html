@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Công cụ offline cho doanh nghiệp nhỏ</title>
+<meta name="description" content="9 offline browser tools for Vietnamese small businesses. Runs in the browser, no server.">
+<style>
+@font-face{font-family:'Work Sans';font-weight:400;src:url(assets/fonts/WorkSans-Regular.ttf) format('truetype');font-display:swap}
+@font-face{font-family:'Work Sans';font-weight:700;src:url(assets/fonts/WorkSans-Bold.ttf) format('truetype');font-display:swap}
+@font-face{font-family:'JetBrains Mono';font-weight:400;src:url(assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-display:swap}
+:root{--paper:#F1EFEA;--card:#FBFAF7;--ink:#1C1B19;--muted:#5E5A53;--line:#D9D5CC;--accent:#E0461D}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 'Work Sans',system-ui,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.kicker{font:13px/1 'JetBrains Mono',monospace;letter-spacing:.06em;color:var(--accent);margin:0 0 18px}
+h1{font-size:clamp(30px,4.6vw,48px);line-height:1.12;margin:0 0 16px;letter-spacing:-.02em;max-width:18ch}
+.lead{max-width:62ch;color:var(--muted);margin:0 0 6px}
+.lead.en{font-size:15px}
+.notes{display:flex;flex-wrap:wrap;gap:8px 24px;margin:24px 0 0;padding:0;list-style:none;font-size:14px}
+.notes li::before{content:'';display:inline-block;width:6px;height:6px;background:var(--accent);margin-right:8px;vertical-align:middle}
+main{padding:40px 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column}
+.shot{display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#E6E3DC}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top left;display:block;transition:transform .3s ease}
+.tool:hover .shot img{transform:scale(1.02)}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.num{font:12px/1 'JetBrains Mono',monospace;color:var(--muted);margin:0 0 10px}
+h2{font-size:19px;line-height:1.3;margin:0}
+.en{color:var(--muted);font-size:14px;margin:2px 0 10px}
+.desc{font-size:15px;margin:0 0 18px;flex:1}
+.open{align-self:flex-start;color:#fff;background:var(--accent);text-decoration:none;font-weight:700;font-size:14px;padding:9px 16px;border-radius:4px}
+.open:hover,.open:focus-visible{background:#B9370F}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+footer{border-top:1px solid var(--line);padding:24px 0 48px;font-size:14px;color:var(--muted)}
+footer a{color:var(--ink)}
+@media (max-width:520px){.wrap{padding:0 16px}header{padding:40px 0 28px}.grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="kicker">vn-sme-offline-tools</p>
+    <h1>Công cụ offline cho doanh nghiệp nhỏ</h1>
+    <p class="lead">9 công cụ chạy ngay trong trình duyệt: thu ngân VietQR, công nợ, báo giá, đội xe, hóa đơn XML và một số mẫu khác. Không cần máy chủ, dữ liệu nằm trên máy của bạn.</p>
+    <p class="lead en">Offline browser tools for Vietnamese small businesses. No server; data stays on the device.</p>
+    <ul class="notes">
+      <li>HTML, CSS và JavaScript thuần</li>
+      <li>Mọi số liệu trong ví dụ là dữ liệu mẫu</li>
+      <li>Bản demo / mẫu, cần chỉnh trường theo từng doanh nghiệp</li>
+    </ul>
+  </div>
+</header>
+<main>
+  <div class="wrap grid">
+    <article class="tool">
+      <a class="shot" href="tools/vietqr-cashier.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/vietqr-cashier.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">01</p>
+        <h2>VietQR động &amp; loa thu ngân</h2>
+        <p class="en">Dynamic VietQR cashier with payment voice alert</p>
+        <p class="desc">Tạo mã VietQR theo từng đơn ngay trong trình duyệt, đọc số tiền bằng giọng nói khi tiền về và ghi sổ đối soát kiểu S2e-HKD.</p>
+        <a class="open" href="tools/vietqr-cashier.html">Mở demo<span class="sr"> VietQR động &amp; loa thu ngân</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/ar-aging.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/ar-aging.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">02</p>
+        <h2>Thu hồi &amp; đối chiếu công nợ B2B</h2>
+        <p class="en">B2B receivables aging and reconciliation</p>
+        <p class="desc">Nhập CSV/TSV từ Excel hoặc MISA, chia tuổi nợ theo số ngày quá hạn, in biên bản đối chiếu A4 có VietQR và soạn tin nhắc nợ Zalo 3 cấp.</p>
+        <a class="open" href="tools/ar-aging.html">Mở demo<span class="sr"> Thu hồi &amp; đối chiếu công nợ B2B</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/wholesale-quote.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/wholesale-quote.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">03</p>
+        <h2>Báo giá sỉ &amp; quà tặng doanh nghiệp</h2>
+        <p class="en">Wholesale and corporate gift quote builder</p>
+        <p class="desc">Tính chiết khấu bậc thang theo tổng số lượng, tách VAT 8% và 10%, tạo QR đặt cọc và bản báo giá A4 để in.</p>
+        <a class="open" href="tools/wholesale-quote.html">Mở demo<span class="sr"> Báo giá sỉ &amp; quà tặng doanh nghiệp</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/clinic-commission.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/clinic-commission.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">04</p>
+        <h2>Hoa hồng &amp; trả góp phòng khám, học viện</h2>
+        <p class="en">Clinic and academy commission and installment tracker</p>
+        <p class="desc">Tính hoa hồng bác sĩ / tư vấn sau khi trừ phí labo và phí POS, theo dõi các đợt thu trả góp và in phiếu A4.</p>
+        <a class="open" href="tools/clinic-commission.html">Mở demo<span class="sr"> Hoa hồng &amp; trả góp phòng khám, học viện</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/landed-cost.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/landed-cost.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">05</p>
+        <h2>Giá vốn hàng nhập khẩu</h2>
+        <p class="en">Import landed cost and allocation</p>
+        <p class="desc">Phân bổ cước quốc tế, bảo hiểm, phí cảng và thuế vào từng dòng hàng để ra giá vốn nhập kho (TK 1562).</p>
+        <a class="open" href="tools/landed-cost.html">Mở demo<span class="sr"> Giá vốn hàng nhập khẩu</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/tax-xml-reconciler.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/tax-xml-reconciler.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">06</p>
+        <h2>Đối soát hóa đơn XML &amp; phí sàn TMĐT</h2>
+        <p class="en">E-invoice XML and marketplace fee reconciler</p>
+        <p class="desc">Đọc file hóa đơn điện tử .xml hoặc .zip, lọc hóa đơn trùng, cảnh báo MST sai chuẩn và đối soát tiền về từ Shopee / TikTok Shop.</p>
+        <a class="open" href="tools/tax-xml-reconciler.html">Mở demo<span class="sr"> Đối soát hóa đơn XML &amp; phí sàn TMĐT</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/fleet-reconciler.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/fleet-reconciler.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">07</p>
+        <h2>Đối soát đội xe</h2>
+        <p class="en">Fleet fuel, toll and driver pay reconciler</p>
+        <p class="desc">Nhập bảng kê chuyến từ Excel hoặc CSV, so dầu thực đổ với định mức, đối chiếu vé VETC và tính lương chuyến cho từng tài xế.</p>
+        <a class="open" href="tools/fleet-reconciler.html">Mở demo<span class="sr"> Đối soát đội xe</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/yep-lucky-draw.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/yep-lucky-draw.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">08</p>
+        <h2>Check-in QR &amp; quay số year-end party</h2>
+        <p class="en">Year-end party QR check-in and lucky draw</p>
+        <p class="desc">Cấp vé QR cho khách mời, check-in tại bàn đón, chặn quét trùng và quay số trên sân khấu bằng crypto.getRandomValues.</p>
+        <a class="open" href="tools/yep-lucky-draw.html">Mở demo<span class="sr"> Check-in QR &amp; quay số year-end party</span></a>
+      </div>
+    </article>
+    <article class="tool">
+      <a class="shot" href="tools/nail-salon-booking.html" tabindex="-1" aria-hidden="true"><img src="assets/screenshots/nail-salon-booking.png" alt="" loading="lazy" width="1280" height="800"></a>
+      <div class="body">
+        <p class="num">09</p>
+        <h2>Mẫu website tiệm nail (Mỹ / Úc)</h2>
+        <p class="en">Nail salon booking page template</p>
+        <p class="desc">Trang giới thiệu và đặt lịch cho tiệm nail người Việt ở nước ngoài; đổi tên, địa chỉ, giờ mở cửa và tiền tệ qua tham số URL.</p>
+        <a class="open" href="tools/nail-salon-booking.html">Mở demo<span class="sr"> Mẫu website tiệm nail (Mỹ / Úc)</span></a>
+      </div>
+    </article>
+  </div>
+</main>
+<footer>
+  <div class="wrap">Trung Thanh Tran · MIT License · <a href="https://github.com/Tthanh2k6/vn-sme-offline-tools">Mã nguồn</a></div>
+</footer>
+</body>
+</html>
