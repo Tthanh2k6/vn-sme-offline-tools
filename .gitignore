@@ -1,0 +1,22 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Local test output and scratch files
+*.log
+*.before.png
+*.after.png
+*.mobile.png
+*.print.*
+test-output/
+__pycache__/
+*.pyc
+*.xlsx
+*.csv
+
+# Single-file builds with embedded fonts are kept out of the repo
+*.single.html
+dist/
