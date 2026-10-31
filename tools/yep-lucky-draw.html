@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GALA YEAR-END PARTY 2026 — Hệ Thống QR Check-in & Quay Số Sân Khấu LED</title>
+  <style id="embedded-fonts">@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}</style>
+  <style>
+    :root {
+      --paper: #f6f6f3;
+      --ink: #1b1c1d;
+      --line: #dfdfda;
+      --accent: #b42318;        /* one signal colour: blocked/duplicate scans + the primary action */
+      --accent-dark: #8f1c13;
+      --accent-tint: #fbefed;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      /* old token names kept (JS templates use some inline), values remapped for the light screens */
+      --obsidian-950: #ffffff;
+      --obsidian-900: #ffffff;
+      --obsidian-850: #ffffff;
+      --obsidian-800: #fafaf8;
+      --obsidian-700: #cfcfca;
+      --gold-100: var(--ink);
+      --gold-200: var(--ink);
+      --gold-300: #5f6064;
+      --gold-400: var(--ink);
+      --gold-500: var(--ink);
+      --gold-600: var(--ink);
+      --gold-glow: transparent;
+      --gold-border: var(--line);
+      --gold-border-soft: var(--line);
+      --ivory: var(--ink);
+      --platinum: #2c2d30;
+      --muted: #5f6064;
+      --subtle: #7a7b7f;
+      --emerald-bg: transparent;
+      --emerald-border: transparent;
+      --emerald-text: var(--ink);
+      --crimson-bg: var(--accent-tint);
+      --crimson-deep: var(--accent-tint);
+      --crimson-border: var(--accent);
+      --crimson-text: var(--accent);
+      --amber-bg: transparent;
+      --amber-border: var(--ink);
+      --amber-text: var(--ink);
+      --radius: 6px;
+      --radius-lg: 6px;
+      --shadow-lux: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Work Sans", system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.5;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .num { font-variant-numeric: tabular-nums; }
+    code { font-family: var(--mono); font-size: 0.92em; }
+    button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* Compact header */
+    .topbar {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .topbar-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 18px;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand > div:last-child { display: flex; flex-direction: column-reverse; }
+    .crest { display: none; }
+    .brand-eyebrow { font-size: 13px; color: var(--muted); }
+    .brand-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+    .header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .offline-pill { font-size: 13px; color: var(--muted); margin-right: 6px; }
+    .status-dot { display: none; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px 28px 48px; }
+
+    /* Tabs */
+    .nav-strip {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-tabs { display: inline-flex; gap: 24px; }
+    .nav-tab {
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 15px;
+      padding: 10px 0 12px;
+      margin-bottom: -1px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-tab svg { display: none; }
+    .nav-tab:hover { color: var(--ink); }
+    .nav-tab.active { color: var(--ink); font-weight: 700; border-bottom-color: var(--ink); }
+    .tab-badge { font-family: var(--mono); font-size: 12.5px; font-weight: 400; color: var(--muted); }
+    .nav-strip > .btn-row { padding-bottom: 10px; }
+
+    .btn-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      font-family: inherit;
+      font-size: 13.5px;
+      padding: 7px 13px;
+      border-radius: 5px;
+      border: 1px solid #cfcfca;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .btn:hover { border-color: var(--ink); }
+    .btn-gold { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+    .btn-gold:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+    .btn-crimson { background: #fff; border-color: var(--accent); color: var(--accent); }
+    .btn-crimson:hover { background: var(--accent-tint); color: var(--accent); }
+
+    /* KPI row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    @media (max-width: 980px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-box { padding: 16px 20px; border-left: 1px solid var(--line); }
+    .kpi-box:first-child { border-left: none; }
+    .kpi-label { font-size: 13px; color: var(--muted); }
+    .kpi-val { font-size: 26px; font-weight: 700; color: var(--ink); margin: 4px 0 2px; white-space: nowrap; }
+    .kpi-box.gold-accent .kpi-label { color: var(--muted); }
+    .kpi-box.gold-accent .kpi-val { color: var(--ink); }
+    #kpiPassbackBlocks { color: var(--accent) !important; }
+    .kpi-sub { font-size: 12.5px; color: var(--subtle); }
+
+    /* Cards */
+    .lux-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .card-header {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .card-title { font-size: 15px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+    .input-lux {
+      background: #fff;
+      border: 1px solid #cfcfca;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 13.5px;
+      padding: 7px 11px;
+      border-radius: 5px;
+      outline: none;
+    }
+    .input-lux:focus { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+
+    /* Tables */
+    .table-scroll { overflow-x: auto; max-height: 490px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 400;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1.5px solid var(--ink);
+      white-space: nowrap;
+    }
+    tbody td { padding: 9px 14px; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: middle; }
+    tbody tr:hover { background: #fafaf8; }
+    tbody td:first-child { font-family: var(--mono); font-size: 13px; }
+
+    /* Status tags: text first, colour only for blocked scans */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      padding: 0;
+      border-radius: 4px;
+      white-space: nowrap;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+    .tag-emerald { color: var(--ink); }
+    .tag-emerald::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+    .tag-muted { color: var(--muted); }
+    .tag-gold { color: var(--ink); font-family: var(--mono); font-size: 12.5px; }
+    .tag-crimson { color: var(--accent); background: var(--accent-tint); border-color: transparent; padding: 1px 7px; font-weight: 700; }
+
+    /* Gate scanner */
+    .scanner-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 20px; }
+    .scanner-grid > * { min-width: 0; }
+    @media (max-width: 1024px) { .scanner-grid { grid-template-columns: 1fr; } }
+    .scan-bar { display: flex; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .scan-input-big {
+      flex: 1;
+      min-width: 240px;
+      background: #fff;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 16px;
+      padding: 11px 14px;
+      border-radius: 5px;
+      outline: none;
+      text-transform: uppercase;
+    }
+    .scan-input-big::placeholder { text-transform: none; font-family: "Work Sans", system-ui, sans-serif; color: #8a8b8f; }
+    .gate-display {
+      padding: 32px 26px;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .gate-display.state-valid { box-shadow: inset 0 0 0 2px var(--ink); }
+    .gate-display.state-duplicate { background: var(--accent-tint); box-shadow: inset 0 0 0 3px var(--accent); }
+    .gate-display.state-invalid { box-shadow: inset 0 0 0 2px var(--ink); background: #fafaf8; }
+    .gate-status-banner { font-size: 14px; font-weight: 700; padding: 4px 12px; border-radius: 4px; margin-bottom: 14px; }
+    .gate-guest-name { font-size: 32px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 4px; }
+    .gate-guest-dept { font-size: 15px; color: var(--muted); margin-bottom: 22px; }
+    .vip-table-monument { border: 1.5px solid var(--ink); border-radius: 6px; padding: 12px 36px; margin-bottom: 14px; }
+    .vip-table-eyebrow { font-size: 13px; color: var(--muted); }
+    .vip-table-number { font-size: 40px; font-weight: 700; color: var(--ink); line-height: 1.15; }
+    .passback-warning-box {
+      background: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 12px 20px;
+      max-width: 560px;
+      color: var(--ink);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* Stage screen: stays dark because it is projected in a dark hall; flat, no glow */
+    .stage-wrapper {
+      --ivory: #ffffff;
+      --platinum: #e4e4e0;
+      --muted: #b4b4ae;
+      --subtle: #9a9a94;
+      --gold-100: #ffffff;
+      --gold-200: #ffffff;
+      --gold-300: #c9c9c3;
+      --gold-400: #ffffff;
+      --gold-border: #3a3a38;
+      --gold-border-soft: #3a3a38;
+      --emerald-text: #ffffff;
+      position: relative;
+      background: #161615;
+      color: #fff;
+      border-radius: 8px;
+      padding: 28px 32px 30px;
+      overflow: hidden;
+    }
+    #confettiCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+    .stage-content { position: relative; z-index: 3; }
+    .stage-top-controls { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
+    .prize-selector-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .prize-pill {
+      background: transparent;
+      border: 1px solid #4a4a47;
+      color: #e4e4e0;
+      font-family: inherit;
+      font-size: 13.5px;
+      padding: 7px 13px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .prize-pill:hover { border-color: #fff; }
+    .prize-pill.active { background: #fff; border-color: #fff; color: #161615; font-weight: 700; }
+    .stage-wrapper .btn { background: transparent; color: #fff; border-color: #4a4a47; }
+    .stage-wrapper .btn:hover { border-color: #fff; }
+    .stage-wrapper .btn-gold { background: var(--accent); border-color: var(--accent); }
+    .stage-wrapper .btn-crimson { color: #fff; border-color: var(--accent); }
+    .stage-wrapper .tag-emerald::before { background: #fff; }
+    .stage-wrapper .tag-gold, .stage-wrapper .tag-emerald { color: #e4e4e0; }
+    .stage-header-center { text-align: center; margin-bottom: 24px; }
+    .stage-event-subtitle { font-size: 15px; color: #b4b4ae; margin-bottom: 6px; }
+    .stage-prize-headline { font-size: 40px; font-weight: 700; color: #fff; letter-spacing: 0.02em; margin-bottom: 4px; line-height: 1.15; }
+    .stage-prize-reward { font-size: 18px; color: #e4e4e0; }
+    .slot-machine-frame { max-width: 880px; margin: 0 auto 24px; padding: 8px 0 4px; text-align: center; }
+    .slot-tiles { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: nowrap; }
+    .slot-tile {
+      width: 78px;
+      height: 98px;
+      background: #232321;
+      border: 1px solid #3a3a38;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 50px;
+      color: #fff;
+    }
+    .slot-tile.locked { background: #fff; color: #161615; border-color: #fff; }
+    .winner-spotlight-name { font-size: 34px; font-weight: 700; color: #fff; min-height: 46px; }
+    .winner-spotlight-meta { font-size: 16px; color: #c9c9c3; min-height: 24px; margin-top: 4px; }
+    .spin-cta-row { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 26px; flex-wrap: wrap; }
+    .btn-spin-mega {
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 14px 44px;
+      border-radius: 6px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .btn-spin-mega:hover:not(:disabled) { background: var(--accent-dark); }
+    .btn-spin-mega:disabled { opacity: 0.5; cursor: not-allowed; }
+    .stage-ledger-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .stage-wrapper .lux-card { background: #1e1e1d !important; border-color: #3a3a38; }
+    .stage-wrapper .card-header { border-bottom-color: #3a3a38; }
+    .stage-wrapper thead th { background: #1e1e1d; color: #b4b4ae; border-bottom-color: #8a8a85; }
+    .stage-wrapper tbody td { color: #e4e4e0; border-bottom-color: #2e2e2c; }
+    .stage-wrapper tbody tr:hover { background: #262624; }
+
+    /* QR invitation modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 28, 29, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .ticket-modal {
+      background: #fff;
+      border-radius: 8px;
+      padding: 26px 28px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .qr-frame { background: #fff; padding: 12px; border: 1px solid var(--line); border-radius: 6px; display: inline-block; margin: 14px 0; }
+
+    /* Fullscreen stage mode */
+    body.stage-cinema { background: #161615; }
+    body.stage-cinema .topbar, body.stage-cinema .nav-strip, body.stage-cinema .footer-bar { display: none !important; }
+    body.stage-cinema .container { max-width: 100%; padding: 16px 24px; }
+
+    .hidden { display: none !important; }
+
+    .footer-bar {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      color: var(--subtle);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .topbar, .container { padding-left: 16px; padding-right: 16px; }
+      .nav-tabs { gap: 16px; flex-wrap: wrap; }
+      .slot-tile { width: 40px; height: 56px; font-size: 28px; }
+      .stage-wrapper { padding: 20px 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* Printing the invitation card: only the card, black on white */
+    @media print {
+      body { background: #fff; }
+      body:has(#qrModalBackdrop:not(.hidden)) > *:not(#qrModalBackdrop) { display: none !important; }
+      .modal-backdrop { position: static; background: none; padding: 0; }
+      .ticket-modal { border: 1px solid #999; margin: 0 auto; }
+      .ticket-modal .btn-row { display: none !important; }
+      .topbar { position: static; }
+      thead th { position: static; }
+    }
+    .stage-wrapper .card-title { color: #fff; }
+    tbody td[colspan] { font-family: inherit !important; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP LUXURY BAR -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="crest" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-eyebrow" id="brandEyebrow">Gala dinner & year-end party 2026</div>
+          <div class="brand-title">Đón khách bằng mã QR và quay số trúng thưởng</div>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="offline-pill">
+          <span class="status-dot"></span>
+          <span>Lưu ngay trên máy (localStorage), không cần Wi-Fi khách sạn</span>
+        </div>
+        <button class="btn" onclick="resetDemoGuests()" id="btnResetDemo">
+          Khôi phục 30 khách mẫu
+        </button>
+        <button class="btn btn-gold" onclick="exportWinnersXLS()" id="btnExportWinnersTop">
+          Xuất biên bản trúng thưởng (.xls)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- NAVIGATION STRIP -->
+    <div class="nav-strip">
+      <div class="nav-tabs">
+        <button class="nav-tab active" id="tabBtnGuests" onclick="switchGalaTab('guests')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Khách mời và thẻ QR</span>
+          <span class="tab-badge num" id="badgeTotalGuests">0</span>
+        </button>
+        <button class="nav-tab" id="tabBtnScanner" onclick="switchGalaTab('scanner')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
+          <span>Bàn đón khách</span>
+          <span class="tab-badge num" id="badgeCheckedIn">0</span>
+        </button>
+        <button class="nav-tab" id="tabBtnStage" onclick="switchGalaTab('stage')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          <span>Quay số trên sân khấu</span>
+          <span class="tab-badge num" id="badgeWinnersCount">0</span>
+        </button>
+      </div>
+
+      <div class="btn-row">
+        <input type="file" id="guestCsvInput" accept=".csv,.txt" class="hidden" onchange="handleGuestCsvUpload(this.files)" />
+        <button class="btn" onclick="document.getElementById('guestCsvInput').click()">
+          Nạp danh sách khách (.csv)
+        </button>
+        <button class="btn" onclick="exportGuestListCSV()">
+          Xuất danh sách check-in (.csv)
+        </button>
+        <button class="btn" onclick="toggleCinemaMode()" id="btnCinemaToggle">
+          Trình chiếu toàn màn hình (F11)
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: GUEST LIST & QR PASSES ==================== -->
+    <section id="secGuests">
+      <div class="kpi-grid">
+        <div class="kpi-box">
+          <div class="kpi-label">Tổng khách mời</div>
+          <div class="kpi-val num" id="kpiTotalGuests">0</div>
+          <div class="kpi-sub">Đã cấp mã vé định danh duy nhất</div>
+        </div>
+        <div class="kpi-box gold-accent">
+          <div class="kpi-label">Đã check-in</div>
+          <div class="kpi-val num" id="kpiPresentGuests">0</div>
+          <div class="kpi-sub" id="kpiPresentRatio">Tỷ lệ hiện diện: 0%</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-label">Chưa đến</div>
+          <div class="kpi-val num" id="kpiAbsentGuests">0</div>
+          <div class="kpi-sub">Không được đưa vào quay số</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-label">Lượt quét trùng vé bị chặn</div>
+          <div class="kpi-val num" id="kpiPassbackBlocks" style="color:#fca5a5;">0 lượt</div>
+          <div class="kpi-sub">Chặn dùng chung ảnh chụp mã QR</div>
+        </div>
+      </div>
+
+      <div class="lux-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>Danh sách khách, bàn và trạng thái check-in</span>
+          </div>
+          <div class="btn-row">
+            <input type="text" class="input-lux" id="guestSearchInput" placeholder="Tìm mã vé, họ tên, phòng ban, số bàn..." style="min-width:250px;" oninput="renderGuestTable()" />
+            <button class="btn" onclick="openAddGuestPrompt()">+ Thêm khách</button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã vé QR</th>
+                <th>Họ và tên đại biểu</th>
+                <th>Khối / phòng ban / đơn vị</th>
+                <th>Bàn tiệc</th>
+                <th>Trạng thái check-in</th>
+                <th>Giải thưởng đã trúng</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="guestTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: ANTI-PASSBACK SCANNER ==================== -->
+    <section id="secScanner" class="hidden">
+      <div class="scanner-grid">
+        <div class="lux-card">
+          <div class="card-header">
+            <div class="card-title">Quét thẻ mời và chỉ bàn</div>
+            <div class="btn-row">
+              <button class="btn" id="btnSimValidScan" onclick="simulateNextValidScan()">Thử: vé hợp lệ</button>
+              <button class="btn btn-crimson" id="btnSimDupScan" onclick="simulateDuplicateScan()">Thử: vé quét lần 2</button>
+            </div>
+          </div>
+
+          <div class="scan-bar">
+            <input
+              type="text"
+              id="scanCodeInput"
+              class="scan-input-big num"
+              placeholder="Nhập hoặc quét mã vé (VD: YEP-025) rồi nhấn Enter"
+              onkeydown="if(event.key==='Enter'){ processTicketScan(this.value); }"
+            />
+            <button class="btn btn-gold" id="btnConfirmScan" onclick="processTicketScan(document.getElementById('scanCodeInput').value)" style="padding:12px 24px; font-size:14px;">
+              Xác nhận vé
+            </button>
+          </div>
+
+          <div class="gate-display" id="gateDisplayPanel">
+            <div class="gate-status-banner tag-gold" id="gateBanner">CỔNG ĐÓN KHÁCH SẴN SÀNG</div>
+            <div class="gate-guest-name" id="gateGuestName">Chờ quét mã QR hoặc mã vạch</div>
+            <div class="gate-guest-dept" id="gateGuestDept">Dùng máy bắn mã vạch USB hoặc gõ mã vé trực tiếp</div>
+
+            <div class="vip-table-monument" id="gateTableBox">
+              <div class="vip-table-eyebrow">Bàn tiệc</div>
+              <div class="vip-table-number num" id="gateTableNumber">SẢNH GALA</div>
+            </div>
+
+            <div class="passback-warning-box hidden" id="gatePassbackAlert"></div>
+          </div>
+        </div>
+
+        <div class="lux-card">
+          <div class="card-header">
+            <div class="card-title">Nhật ký quét vé</div>
+            <span class="tag tag-gold num" id="scanLogCountBadge">0 sự kiện</span>
+          </div>
+          <div class="table-scroll" style="max-height:430px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Mã vé</th>
+                  <th>Khách mời & bàn</th>
+                  <th>Kết quả cổng</th>
+                </tr>
+              </thead>
+              <tbody id="scanLogTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: FULLSCREEN 60FPS LUCKY DRAW STAGE ==================== -->
+    <section id="secStage" class="hidden">
+      <div class="stage-wrapper">
+        <canvas id="confettiCanvas"></canvas>
+
+        <div class="stage-content">
+          <div class="stage-top-controls">
+            <div class="prize-selector-group" id="prizeTierPills"></div>
+
+            <div class="btn-row">
+              <span class="tag tag-emerald num" id="stagePoolBadge">Hợp lệ trong lồng cầu: 0 khách có mặt</span>
+              <button class="btn" onclick="toggleCinemaMode()" id="btnExitCinema">Thu nhỏ / đổi màn hình</button>
+            </div>
+          </div>
+
+          <div class="stage-header-center">
+            <div class="stage-event-subtitle" id="stageCompanyHeader">Gala dinner & year-end party 2026</div>
+            <div class="stage-prize-headline" id="stagePrizeTitle">GIẢI ĐẶC BIỆT</div>
+            <div class="stage-prize-reward" id="stagePrizeDesc">01 lượng vàng SJC 9999. Chỉ quay trong số khách đã check-in.</div>
+          </div>
+
+          <div class="slot-machine-frame">
+            <div class="slot-tiles" id="slotTilesContainer">
+              <div class="slot-tile">Y</div>
+              <div class="slot-tile">E</div>
+              <div class="slot-tile">P</div>
+              <div class="slot-tile">-</div>
+              <div class="slot-tile">0</div>
+              <div class="slot-tile">0</div>
+              <div class="slot-tile">0</div>
+            </div>
+
+            <div class="winner-spotlight-name" id="stageWinnerName">SẴN SÀNG QUAY SỐ TRÚNG THƯỞNG</div>
+            <div class="winner-spotlight-meta" id="stageWinnerMeta">Người vắng mặt và người đã trúng giải được loại ra tự động</div>
+          </div>
+
+          <div class="spin-cta-row">
+            <button class="btn-spin-mega" id="btnSpinTrigger" onclick="startSlotRollDraw()">
+              Quay số
+            </button>
+            <button class="btn btn-crimson hidden" id="btnRedrawAbsent" onclick="voidLastWinnerAndRedraw()">
+              Người trúng vắng mặt: hủy và quay lại
+            </button>
+            <button class="btn" onclick="exportWinnersCSV()">
+              Xuất biên bản (.csv)
+            </button>
+            <button class="btn btn-gold" onclick="exportWinnersXLS()">
+              Xuất biên bản ký nhận (.xls)
+            </button>
+          </div>
+
+          <div class="stage-ledger-grid">
+            <div class="lux-card" style="background:rgba(8, 11, 20, 0.88);">
+              <div class="card-header">
+                <div class="card-title">Danh sách trúng thưởng</div>
+                <span class="tag tag-gold num" id="winnersLedgerBadge">0 giải đã trao</span>
+              </div>
+              <div class="table-scroll" style="max-height:230px;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>STT</th>
+                      <th>Hạng giải thưởng</th>
+                      <th>Hiện vật giải thưởng</th>
+                      <th>Mã vé trúng</th>
+                      <th>Họ và tên người trúng</th>
+                      <th>Đơn vị / phòng ban</th>
+                      <th>Bàn tiệc</th>
+                      <th>Giờ quay</th>
+                    </tr>
+                  </thead>
+                  <tbody id="winnersTbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-bar">
+      <div>Phiên bản 2026.11. Quay số bằng <code>crypto.getRandomValues</code>, chặn quét trùng vé.</div>
+      <div>Thiết kế bởi Trung Thanh Tran. Nhận làm giao diện theo thương hiệu và vận hành trọn gói year-end party cho doanh nghiệp.</div>
+    </div>
+  </main>
+
+  <!-- VIP QR INVITATION PASS MODAL -->
+  <div class="modal-backdrop hidden" id="qrModalBackdrop" onclick="if(event.target===this) closeQrModal()">
+    <div class="ticket-modal">
+      <div class="brand-eyebrow">Thẻ mời</div>
+      <h3 style="font-size:21px; margin:6px 0 2px; color:var(--ivory);" id="modalGuestName">—</h3>
+      <div style="font-size:13px; color:var(--muted);" id="modalGuestDept">—</div>
+      <div class="qr-frame" id="modalQrSvgContainer"></div>
+      <div style="margin-bottom:14px;">
+        <span class="tag tag-gold num" style="font-size:14px; padding:6px 16px;" id="modalTicketAndTable">YEP-001 • BÀN VIP 01</span>
+      </div>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-gold" onclick="window.print()">In thẻ mời / lưu PDF</button>
+        <button class="btn" onclick="closeQrModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+
+    const STORAGE_KEY = "YEP_GALA_SUITE_2026_STATE_V1";
+
+    const PRIZE_TIERS = [
+      { id: "special", label: "GIẢI ĐẶC BIỆT", quota: 1, reward: "01 Lượng Vàng SJC 9999 & Cúp Vinh Danh" },
+      { id: "first",   label: "GIẢI NHẤT",     quota: 2, reward: "MacBook Air M4 15-inch Chính Hãng" },
+      { id: "second",  label: "GIẢI NHÌ",      quota: 3, reward: "iPad Air M3 WiFi 256GB" },
+      { id: "third",   label: "GIẢI BA",       quota: 5, reward: "Tai Nghe Không Dây AirPods Pro 3" }
+    ];
+
+    function buildDefault30Guests() {
+      const roster = [
+        ["YEP-001", "Nguyễn Minh Hoàng", "Ban Tổng Giám Đốc", "BÀN VIP 01", "18:04:12"],
+        ["YEP-002", "Trần Thị Thanh Tâm", "Giám Đốc Tài Chính (CFO)", "BÀN VIP 01", "18:05:40"],
+        ["YEP-003", "Lê Quốc Bảo", "Đối Tác Chiến Lược Miền Nam", "BÀN VIP 01", "18:07:19"],
+        ["YEP-004", "Phạm Hồng Nhung", "Trưởng Khối Kinh Doanh", "BÀN VIP 01", "18:09:05"],
+        ["YEP-005", "Võ Đăng Khoa", "Giám Đốc Công Nghệ (CTO)", "BÀN VIP 01", "18:10:33"],
+        ["YEP-006", "Đặng Thu Thảo", "Trưởng Phòng Nhân Sự & Văn Hóa", "BÀN VIP 02", "18:12:08"],
+        ["YEP-007", "Hoàng Tuấn Kiệt", "Khối Kinh Doanh Doanh Nghiệp (B2B)", "BÀN VIP 02", "18:13:45"],
+        ["YEP-008", "Bùi Ngọc Ánh", "Phòng Kế Toán & Kiểm Soát Nội Bộ", "BÀN VIP 02", "18:15:11"],
+        ["YEP-009", "Đỗ Mạnh Hùng", "Khối Kỹ Thuật & Tự Động Hóa", "BÀN VIP 02", "18:16:29"],
+        ["YEP-010", "Ngô Phương Linh", "Phòng Marketing & Thương Hiệu", "BÀN VIP 02", "18:18:02"],
+        ["YEP-011", "Dương Gia Huy", "Khối Vận Hành Chuỗi Cung Ứng", "BÀN TIỆC 03", "18:19:50"],
+        ["YEP-012", "Lý Thanh Trúc", "Phòng Chăm Sóc Khách Hàng VIP", "BÀN TIỆC 03", "18:21:14"],
+        ["YEP-013", "Trịnh Quốc Khánh", "Khối Phát Triển Sản Phẩm Số", "BÀN TIỆC 03", "18:22:38"],
+        ["YEP-014", "Mai Lan Hương", "Phòng Thu Mua & Xuất Nhập Khẩu", "BÀN TIỆC 03", "18:24:09"],
+        ["YEP-015", "Phan Tấn Phát", "Chi Nhánh TP. Hồ Chí Minh", "BÀN TIỆC 03", "18:25:47"],
+        ["YEP-016", "Vũ Thị Minh Châu", "Phòng Pháp Chế & Tuân Thủ", "BÀN TIỆC 04", "18:27:15"],
+        ["YEP-017", "Hồ Trọng Nghĩa", "Khối Kinh Doanh Thương Mại Điện Tử", "BÀN TIỆC 04", "18:29:03"],
+        ["YEP-018", "Đinh Bảo Ngọc", "Phòng Thiết Kế Sáng Tạo", "BÀN TIỆC 04", "18:30:44"],
+        ["YEP-019", "Lâm Nhật Minh", "Trung Tâm Dữ Liệu & AI", "BÀN TIỆC 04", "18:32:18"],
+        ["YEP-020", "Tạ Thùy Dương", "Phòng Kế Toán Thuế", "BÀN TIỆC 04", "18:34:01"],
+        ["YEP-021", "Châu Hoàng Nam", "Khối Dự Án Trọng Điểm", "BÀN TIỆC 05", "18:35:52"],
+        ["YEP-022", "Nguyễn Khánh Vy", "Phòng Truyền Thông Đối Ngoại", "BÀN TIỆC 05", "18:37:26"],
+        ["YEP-023", "Trương Đức Anh", "Chi Nhánh Hà Nội", "BÀN TIỆC 05", "18:39:10"],
+        ["YEP-024", "Lương Mỹ Duyên", "Phòng Hành Chính Quản Trị", "BÀN TIỆC 05", "18:41:05"],
+        // 6 Unchecked-in guests ready for live Tab 2 Scanner Demo & Absentee Exclusion Proof
+        ["YEP-025", "Đoàn Quốc Việt", "Đối Tác Ngân Hàng Đầu Tư", "BÀN VIP 02", ""],
+        ["YEP-026", "Hà Kiều Trinh", "Khối Kinh Doanh Quốc Tế", "BÀN TIỆC 05", ""],
+        ["YEP-027", "Nguyễn Thái Sơn", "Chi Nhánh Đà Nẵng", "BÀN TIỆC 06", ""],
+        ["YEP-028", "Phạm Thanh Hà", "Phòng Kiểm Toán Nội Bộ", "BÀN TIỆC 06", ""],
+        ["YEP-029", "Vương Gia Bảo", "Khối Hạ Tầng Đám Mây", "BÀN TIỆC 06", ""],
+        ["YEP-030", "Lê Minh Thư", "Phòng Đào Tạo & Phát Triển", "BÀN TIỆC 06", ""]
+      ];
+
+      return roster.map(([code, name, dept, table, checkInTime]) => ({
+        code,
+        name,
+        dept,
+        table,
+        checkedIn: Boolean(checkInTime),
+        checkInTime: checkInTime || "",
+        scanAttempts: checkInTime ? 1 : 0,
+        wonPrize: "",
+        wonReward: "",
+        wonTime: ""
+      }));
+    }
+
+    let state = {
+      activeTab: "guests",
+      selectedTierId: "special",
+      passbackBlocks: 0,
+      lastWinnerCode: "",
+      guests: [],
+      scanLogs: [],
+      winners: []
+    };
+
+    let isSpinning = false;
+
+    const esc = (s) => String(s ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+    function nowTimeStr() {
+      const d = new Date();
+      const p = (n) => String(n).padStart(2, "0");
+      return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          passbackBlocks: state.passbackBlocks,
+          guests: state.guests,
+          scanLogs: state.scanLogs,
+          winners: state.winners
+        }));
+      } catch (_) {}
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed.guests) && parsed.guests.length > 0) {
+            state.guests = parsed.guests;
+            state.passbackBlocks = Number(parsed.passbackBlocks || 0);
+            state.scanLogs = Array.isArray(parsed.scanLogs) ? parsed.scanLogs : [];
+            state.winners = Array.isArray(parsed.winners) ? parsed.winners : [];
+            return;
+          }
+        }
+      } catch (_) {}
+      resetDemoGuests(false);
+    }
+
+    function resetDemoGuests(confirmPrompt = false) {
+      if (confirmPrompt && !confirm("Khôi phục danh sách 30 khách mời Gala mẫu và xóa lịch sử quay thưởng hiện tại?")) return;
+      state.guests = buildDefault30Guests();
+      state.passbackBlocks = 0;
+      state.lastWinnerCode = "";
+      state.winners = [];
+      state.scanLogs = [
+        { time: "18:41:05", code: "YEP-024", name: "Lương Mỹ Duyên", table: "BÀN TIỆC 05", status: "VALID", note: "Check-in hợp lệ" },
+        { time: "18:39:10", code: "YEP-023", name: "Trương Đức Anh", table: "BÀN TIỆC 05", status: "VALID", note: "Check-in hợp lệ" }
+      ];
+      saveState();
+      refreshAllViews();
+    }
+
+    function switchGalaTab(tab) {
+      state.activeTab = tab;
+      document.getElementById("tabBtnGuests").classList.toggle("active", tab === "guests");
+      document.getElementById("tabBtnScanner").classList.toggle("active", tab === "scanner");
+      document.getElementById("tabBtnStage").classList.toggle("active", tab === "stage");
+
+      document.getElementById("secGuests").classList.toggle("hidden", tab !== "guests");
+      document.getElementById("secScanner").classList.toggle("hidden", tab !== "scanner");
+      document.getElementById("secStage").classList.toggle("hidden", tab !== "stage");
+
+      if (tab === "scanner") {
+        setTimeout(() => document.getElementById("scanCodeInput").focus(), 60);
+      }
+      if (tab === "stage") {
+        resizeConfettiCanvas();
+      }
+    }
+
+    function toggleCinemaMode() {
+      if (state.activeTab !== "stage") switchGalaTab("stage");
+      document.body.classList.toggle("stage-cinema");
+      if (document.body.classList.contains("stage-cinema") && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if (!document.body.classList.contains("stage-cinema") && document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      setTimeout(resizeConfettiCanvas, 100);
+    }
+
+    // =========================================================================
+    // DETERMINISTIC OFFLINE QR-STYLE 21x21 VECTOR MATRIX FOR VIP BADGES
+    // =========================================================================
+    function generateTicketQrSVG(codeStr) {
+      const size = 21;
+      const grid = Array.from({ length: size }, () => Array(size).fill(false));
+
+      function placeFinder(r0, c0) {
+        for (let r = 0; r < 7; r++) {
+          for (let c = 0; c < 7; c++) {
+            const border = r === 0 || r === 6 || c === 0 || c === 6;
+            const inner = r >= 2 && r <= 4 && c >= 2 && c <= 4;
+            grid[r0 + r][c0 + c] = border || inner;
+          }
+        }
+      }
+      placeFinder(0, 0);
+      placeFinder(0, size - 7);
+      placeFinder(size - 7, 0);
+
+      // Timing lines
+      for (let i = 8; i < size - 8; i++) {
+        grid[6][i] = i % 2 === 0;
+        grid[i][6] = i % 2 === 0;
+      }
+
+      // Deterministic FNV-1a seeded modules for remaining cells
+      let hash = 2166136261;
+      for (let i = 0; i < codeStr.length; i++) {
+        hash ^= codeStr.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const inTopLeft = r < 8 && c < 8;
+          const inTopRight = r < 8 && c >= size - 8;
+          const inBotLeft = r >= size - 8 && c < 8;
+          if (inTopLeft || inTopRight || inBotLeft || r === 6 || c === 6) continue;
+          hash ^= (r * 31 + c * 17);
+          hash = Math.imul(hash, 16777619);
+          grid[r][c] = ((hash >>> 0) % 100) < 48;
+        }
+      }
+
+      const cell = 8;
+      const dim = size * cell;
+      let rects = "";
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (grid[r][c]) {
+            rects += `<rect x="${c * cell}" y="${r * cell}" width="${cell}" height="${cell}" fill="#090c15"/>`;
+          }
+        }
+      }
+      return `<svg width="${dim}" height="${dim}" viewBox="0 0 ${dim} ${dim}" xmlns="http://www.w3.org/2000/svg"><rect width="${dim}" height="${dim}" fill="#ffffff"/>${rects}</svg>`;
+    }
+
+    function openQrModal(code) {
+      const g = state.guests.find((x) => x.code === code);
+      if (!g) return;
+      document.getElementById("modalGuestName").textContent = g.name;
+      document.getElementById("modalGuestDept").textContent = g.dept;
+      document.getElementById("modalTicketAndTable").textContent = `${g.code} • ${g.table}`;
+      document.getElementById("modalQrSvgContainer").innerHTML = generateTicketQrSVG(`${g.code}|${g.name}|${g.table}`);
+      document.getElementById("qrModalBackdrop").classList.remove("hidden");
+    }
+
+    function closeQrModal() {
+      document.getElementById("qrModalBackdrop").classList.add("hidden");
+    }
+
+    // =========================================================================
+    // TAB 1: GUEST MANAGEMENT & CSV IMPORT
+    // =========================================================================
+    function renderGuestTable() {
+      const q = (document.getElementById("guestSearchInput").value || "").toLowerCase().trim();
+      const tbody = document.getElementById("guestTbody");
+
+      const filtered = state.guests.filter((g) =>
+        !q ||
+        g.code.toLowerCase().includes(q) ||
+        g.name.toLowerCase().includes(q) ||
+        g.dept.toLowerCase().includes(q) ||
+        g.table.toLowerCase().includes(q)
+      );
+
+      tbody.innerHTML = filtered.map((g) => {
+        const statusHtml = g.checkedIn
+          ? `<span class="tag tag-emerald num">Đã có mặt (${esc(g.checkInTime)})</span>`
+          : `<span class="tag tag-muted">Chưa check-in</span>`;
+
+        const prizeHtml = g.wonPrize
+          ? `<span class="tag tag-gold">${esc(g.wonPrize)}</span>`
+          : `<span style="color:var(--subtle);font-size:12px;">—</span>`;
+
+        return `
+          <tr>
+            <td class="num"><strong style="color:var(--gold-200);">${esc(g.code)}</strong></td>
+            <td><strong style="color:var(--ivory);">${esc(g.name)}</strong></td>
+            <td>${esc(g.dept)}</td>
+            <td><span class="tag tag-gold">${esc(g.table)}</span></td>
+            <td>${statusHtml}</td>
+            <td>${prizeHtml}</td>
+            <td>
+              <div class="btn-row">
+                <button class="btn" style="padding:4px 10px;font-size:11.5px;" onclick="openQrModal('${esc(g.code)}')">Thẻ QR</button>
+                ${!g.checkedIn
+                  ? `<button class="btn btn-gold" style="padding:4px 10px;font-size:11.5px;" onclick="quickCheckInFromTable('${esc(g.code)}')">Check-in</button>`
+                  : ""}
+              </div>
+            </td>
+          </tr>`;
+      }).join("");
+    }
+
+    function quickCheckInFromTable(code) {
+      processTicketScan(code);
+      refreshAllViews();
+    }
+
+    function openAddGuestPrompt() {
+      const name = prompt("Nhập Họ và Tên khách mời mới:");
+      if (!name || !name.trim()) return;
+      const dept = prompt("Phòng ban / Công ty:", "Khách Mời Danh Dự") || "Khách Mời Danh Dự";
+      const table = prompt("Số bàn tiệc VIP:", "BÀN VIP 01") || "BÀN VIP 01";
+      const nextNum = state.guests.length + 1;
+      const code = `YEP-${String(nextNum).padStart(3, "0")}`;
+      state.guests.unshift({
+        code,
+        name: name.trim(),
+        dept: dept.trim(),
+        table: table.trim().toUpperCase(),
+        checkedIn: false,
+        checkInTime: "",
+        scanAttempts: 0,
+        wonPrize: "",
+        wonReward: "",
+        wonTime: ""
+      });
+      saveState();
+      refreshAllViews();
+    }
+
+    async function handleGuestCsvUpload(files) {
+      if (!files || files.length === 0) return;
+      const text = (await files[0].text()).replace(/^\uFEFF/, "");
+      const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+      if (lines.length < 2) return;
+
+      const imported = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = lines[i].split(",").map((c) => c.replace(/^"|"$/g, "").trim());
+        if (cols.length < 2) continue;
+        const code = (cols[0] || `YEP-${String(i).padStart(3, "0")}`).toUpperCase();
+        const name = cols[1] || "";
+        const dept = cols[2] || "Đại biểu Gala";
+        const table = (cols[3] || "BÀN TIỆC 01").toUpperCase();
+        const checkedRaw = (cols[4] || "").toLowerCase();
+        const isChecked = checkedRaw === "1" || checkedRaw === "true" || checkedRaw.includes("có mặt") || checkedRaw.includes("đã");
+        if (!name) continue;
+        imported.push({
+          code,
+          name,
+          dept,
+          table,
+          checkedIn: isChecked,
+          checkInTime: isChecked ? nowTimeStr() : "",
+          scanAttempts: isChecked ? 1 : 0,
+          wonPrize: "",
+          wonReward: "",
+          wonTime: ""
+        });
+      }
+      if (imported.length > 0) {
+        state.guests = imported;
+        state.winners = [];
+        state.passbackBlocks = 0;
+        saveState();
+        refreshAllViews();
+      }
+    }
+
+    // =========================================================================
+    // TAB 2: ANTI-PASSBACK SCANNER ENGINE
+    // =========================================================================
+    function processTicketScan(rawInput) {
+      const code = String(rawInput || "").trim().toUpperCase();
+      if (!code) return;
+
+      const inputEl = document.getElementById("scanCodeInput");
+      inputEl.value = "";
+
+      const panel = document.getElementById("gateDisplayPanel");
+      const banner = document.getElementById("gateBanner");
+      const gName = document.getElementById("gateGuestName");
+      const gDept = document.getElementById("gateGuestDept");
+      const tBox = document.getElementById("gateTableBox");
+      const tNum = document.getElementById("gateTableNumber");
+      const alertBox = document.getElementById("gatePassbackAlert");
+
+      panel.classList.remove("state-valid", "state-duplicate", "state-invalid");
+      alertBox.classList.add("hidden");
+
+      const guest = state.guests.find((x) => x.code.toUpperCase() === code);
+      const ts = nowTimeStr();
+
+      if (!guest) {
+        panel.classList.add("state-invalid");
+        banner.className = "gate-status-banner tag-crimson";
+        banner.textContent = "MÃ VÉ KHÔNG TỒN TẠI TRONG DANH SÁCH KHÁCH MỜI";
+        gName.textContent = code;
+        gDept.textContent = "Đề nghị lễ tân kiểm tra lại Thẻ mời hoặc bổ sung khách phát sinh tại bàn điều phối.";
+        tNum.textContent = "CHƯA ĐỊNH DANH";
+        state.scanLogs.unshift({ time: ts, code, name: "Mã vé lạ", table: "—", status: "INVALID", note: "Không có trong DS" });
+        saveState();
+        refreshAllViews();
+        return;
+      }
+
+      guest.scanAttempts = (guest.scanAttempts || 0) + 1;
+
+      if (guest.checkedIn) {
+        // ANTI-PASSBACK BLOCK!
+        state.passbackBlocks++;
+        panel.classList.add("state-duplicate");
+        banner.className = "gate-status-banner tag-crimson";
+        banner.textContent = "CẢNH BÁO AN NINH: PHÁT HIỆN QUÉT TRÙNG VÉ (ANTI-PASSBACK)";
+        gName.textContent = guest.name;
+        gDept.textContent = `${guest.dept} • Mã vé: ${guest.code}`;
+        tNum.textContent = guest.table;
+
+        alertBox.classList.remove("hidden");
+        alertBox.innerHTML = `<strong>TỪ CHỐI LƯỢT QUÉT THỨ ${guest.scanAttempts}:</strong> Mã vé <strong>${esc(guest.code)}</strong> đã được Check-in hợp lệ lần thứ nhất vào lúc <strong>${esc(guest.checkInTime)}</strong>. Hệ thống khóa tự động để chống chuyển tiếp ảnh chụp mã QR.`;
+
+        state.scanLogs.unshift({
+          time: ts,
+          code: guest.code,
+          name: guest.name,
+          table: guest.table,
+          status: "DUPLICATE",
+          note: `Chặn quét trùng (Lần 1: ${guest.checkInTime})`
+        });
+      } else {
+        // VALID FIRST-TIME CHECK-IN!
+        guest.checkedIn = true;
+        guest.checkInTime = ts;
+
+        panel.classList.add("state-valid");
+        banner.className = "gate-status-banner tag-emerald";
+        banner.textContent = "XÁC THỰC THÀNH CÔNG — CHÀO MỪNG ĐẠI BIỂU THAM DỰ GALA";
+        gName.textContent = guest.name;
+        gDept.textContent = `${guest.dept} • Mã vé: ${guest.code} • Check-in lúc ${ts}`;
+        tNum.textContent = guest.table;
+
+        state.scanLogs.unshift({
+          time: ts,
+          code: guest.code,
+          name: guest.name,
+          table: guest.table,
+          status: "VALID",
+          note: "Check-in lần đầu hợp lệ"
+        });
+      }
+
+      saveState();
+      refreshAllViews();
+    }
+
+    function simulateNextValidScan() {
+      const nextUnchecked = state.guests.find((g) => !g.checkedIn);
+      if (!nextUnchecked) {
+        alert("Toàn bộ 30 khách mời đều đã Check-in!");
+        return;
+      }
+      processTicketScan(nextUnchecked.code);
+    }
+
+    function simulateDuplicateScan() {
+      const alreadyChecked = state.guests.find((g) => g.checkedIn);
+      if (!alreadyChecked) return;
+      processTicketScan(alreadyChecked.code);
+    }
+
+    function renderScanLogs() {
+      document.getElementById("scanLogCountBadge").textContent = `${state.scanLogs.length} sự kiện`;
+      const tbody = document.getElementById("scanLogTbody");
+      tbody.innerHTML = state.scanLogs.slice(0, 40).map((l) => {
+        let badge = `<span class="tag tag-emerald">Hợp lệ</span>`;
+        if (l.status === "DUPLICATE") badge = `<span class="tag tag-crimson">${esc(l.note)}</span>`;
+        if (l.status === "INVALID") badge = `<span class="tag tag-muted">Mã vé lạ</span>`;
+        return `
+          <tr>
+            <td class="num">${esc(l.time)}</td>
+            <td class="num"><strong style="color:var(--gold-200);">${esc(l.code)}</strong></td>
+            <td><strong>${esc(l.name)}</strong><br/><span style="font-size:11.5px;color:var(--muted);">${esc(l.table)}</span></td>
+            <td>${badge}</td>
+          </tr>`;
+      }).join("");
+    }
+
+    // =========================================================================
+    // TAB 3: 60FPS CRYPTOGRAPHIC SLOT-ROLL LUCKY DRAW ENGINE
+    // =========================================================================
+    function getEligiblePool() {
+      return state.guests.filter((g) => g.checkedIn && !g.wonPrize);
+    }
+
+    function secureRandomInt(maxExclusive) {
+      const arr = new Uint32Array(1);
+      window.crypto.getRandomValues(arr);
+      return arr[0] % maxExclusive;
+    }
+
+    function selectPrizeTier(tierId) {
+      if (isSpinning) return;
+      state.selectedTierId = tierId;
+      renderStageControls();
+    }
+
+    function renderStageControls() {
+      const currentTier = PRIZE_TIERS.find((t) => t.id === state.selectedTierId) || PRIZE_TIERS[0];
+      const pillsEl = document.getElementById("prizeTierPills");
+
+      pillsEl.innerHTML = PRIZE_TIERS.map((t) => {
+        const wonInTier = state.winners.filter((w) => w.tierId === t.id).length;
+        const activeCls = t.id === currentTier.id ? "active" : "";
+        return `<button class="prize-pill ${activeCls}" onclick="selectPrizeTier('${t.id}')">${esc(t.label)} (${wonInTier}/${t.quota})</button>`;
+      }).join("");
+
+      document.getElementById("stagePrizeTitle").textContent = currentTier.label;
+      document.getElementById("stagePrizeDesc").textContent = `${currentTier.reward} — Cơ cấu: ${currentTier.quota} giải`;
+
+      const pool = getEligiblePool();
+      const absentCount = state.guests.filter((g) => !g.checkedIn).length;
+      document.getElementById("stagePoolBadge").textContent = `Hợp lệ trong lồng cầu: ${pool.length} khách có mặt (Đã khóa ${absentCount} khách vắng)`;
+    }
+
+    function setSlotTilesString(codeStr, lockedUpTo = -1) {
+      const padded = String(codeStr || "YEP-000").padEnd(7, " ").slice(0, 7);
+      const container = document.getElementById("slotTilesContainer");
+      const tiles = container.children;
+      for (let i = 0; i < 7; i++) {
+        if (tiles[i]) {
+          tiles[i].textContent = padded[i];
+          tiles[i].classList.toggle("locked", i <= lockedUpTo);
+        }
+      }
+    }
+
+    function startSlotRollDraw() {
+      if (isSpinning) return;
+      const pool = getEligiblePool();
+      if (pool.length === 0) {
+        alert("Không còn khách mời hợp lệ (đã Check-in & chưa trúng giải) trong lồng cầu!");
+        return;
+      }
+
+      const currentTier = PRIZE_TIERS.find((t) => t.id === state.selectedTierId) || PRIZE_TIERS[0];
+      const chosenWinner = pool[secureRandomInt(pool.length)];
+
+      isSpinning = true;
+      document.getElementById("btnSpinTrigger").disabled = true;
+      document.getElementById("btnRedrawAbsent").classList.add("hidden");
+
+      const nameEl = document.getElementById("stageWinnerName");
+      const metaEl = document.getElementById("stageWinnerMeta");
+      const glyphs = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+
+      const durationMs = 1550;
+      const startTs = performance.now();
+
+      function frame(now) {
+        const elapsed = now - startTs;
+        const progress = Math.min(1, elapsed / durationMs);
+
+        // Lock tiles progressively from left to right
+        const lockedIdx = Math.floor(progress * 8) - 1;
+        let displayCode = "";
+        const targetCode = chosenWinner.code.padEnd(7, " ").slice(0, 7);
+
+        for (let i = 0; i < 7; i++) {
+          if (i <= lockedIdx || targetCode[i] === "-") {
+            displayCode += targetCode[i];
+          } else {
+            displayCode += glyphs[Math.floor(Math.random() * glyphs.length)];
+          }
+        }
+        setSlotTilesString(displayCode, lockedIdx);
+
+        if (progress < 1) {
+          const previewGuest = pool[Math.floor(Math.random() * pool.length)];
+          nameEl.textContent = previewGuest.name.toUpperCase();
+          metaEl.textContent = `${previewGuest.dept} • ${previewGuest.table}`;
+          requestAnimationFrame(frame);
+        } else {
+          // Finalize Winner!
+          setSlotTilesString(targetCode, 7);
+          const winTime = nowTimeStr();
+          chosenWinner.wonPrize = currentTier.label;
+          chosenWinner.wonReward = currentTier.reward;
+          chosenWinner.wonTime = winTime;
+          state.lastWinnerCode = chosenWinner.code;
+
+          state.winners.unshift({
+            tierId: currentTier.id,
+            tierLabel: currentTier.label,
+            reward: currentTier.reward,
+            code: chosenWinner.code,
+            name: chosenWinner.name,
+            dept: chosenWinner.dept,
+            table: chosenWinner.table,
+            checkInTime: chosenWinner.checkInTime,
+            wonTime: winTime
+          });
+
+          nameEl.textContent = chosenWinner.name.toUpperCase();
+          metaEl.textContent = `CHÚC MỪNG MÃ VÉ ${chosenWinner.code} • ${chosenWinner.dept} • ${chosenWinner.table}`;
+
+          isSpinning = false;
+          document.getElementById("btnSpinTrigger").disabled = false;
+          document.getElementById("btnRedrawAbsent").classList.remove("hidden");
+
+          launchGoldConfettiBurst();
+          saveState();
+          refreshAllViews();
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    function voidLastWinnerAndRedraw() {
+      if (!state.lastWinnerCode || isSpinning) return;
+      const g = state.guests.find((x) => x.code === state.lastWinnerCode);
+      if (g) {
+        g.wonPrize = "VẮNG MẶT KHI GỌI TÊN (HỦY)";
+        g.wonReward = "";
+      }
+      state.winners = state.winners.filter((w) => w.code !== state.lastWinnerCode);
+      state.lastWinnerCode = "";
+      saveState();
+      refreshAllViews();
+      startSlotRollDraw();
+    }
+
+    function renderWinnersLedger() {
+      document.getElementById("winnersLedgerBadge").textContent = `${state.winners.length} giải đã trao`;
+      const tbody = document.getElementById("winnersTbody");
+      if (state.winners.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--subtle);padding:22px;">Chưa có lượt quay thưởng nào được thực hiện. Nhấn nút QUAY SỐ phía trên để bắt đầu.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = state.winners.map((w, idx) => `
+        <tr>
+          <td class="num">${state.winners.length - idx}</td>
+          <td><span class="tag tag-gold">${esc(w.tierLabel)}</span></td>
+          <td>${esc(w.reward)}</td>
+          <td class="num"><strong style="color:var(--gold-200);">${esc(w.code)}</strong></td>
+          <td><strong style="color:#ffffff;">${esc(w.name)}</strong></td>
+          <td>${esc(w.dept)}</td>
+          <td><span class="tag tag-emerald">${esc(w.table)}</span></td>
+          <td class="num">${esc(w.wonTime)}</td>
+        </tr>`).join("");
+    }
+
+    // =========================================================================
+    // CHAMPAGNE GOLD PARTICLE FIREWORKS ON STAGE CANVAS (60FPS)
+    // =========================================================================
+    let particles = [];
+    let confettiAnimId = 0;
+
+    function resizeConfettiCanvas() {
+      const c = document.getElementById("confettiCanvas");
+      if (!c || !c.parentElement) return;
+      c.width = c.parentElement.clientWidth;
+      c.height = c.parentElement.clientHeight;
+    }
+    window.addEventListener("resize", resizeConfettiCanvas);
+
+    function launchGoldConfettiBurst() {
+      resizeConfettiCanvas();
+      const c = document.getElementById("confettiCanvas");
+      const palette = ["#fbf3d5", "#f5e2a4", "#e7c86b", "#d4af37", "#ffffff", "#f59e0b"];
+      for (let i = 0; i < 95; i++) {
+        const angle = (Math.random() * Math.PI) + Math.PI;
+        const speed = 3 + Math.random() * 8.5;
+        particles.push({
+          x: c.width * (0.25 + Math.random() * 0.5),
+          y: c.height * 0.42,
+          vx: Math.cos(angle) * speed * (Math.random() > 0.5 ? 1 : -1),
+          vy: -Math.abs(Math.sin(angle) * speed) - 2,
+          w: 5 + Math.random() * 6,
+          h: 3 + Math.random() * 4,
+          rot: Math.random() * Math.PI,
+          vrot: (Math.random() - 0.5) * 0.2,
+          color: palette[i % palette.length],
+          alpha: 1
+        });
+      }
+      if (!confettiAnimId) stepConfetti();
+    }
+
+    function stepConfetti() {
+      const c = document.getElementById("confettiCanvas");
+      const ctx = c.getContext("2d");
+      ctx.clearRect(0, 0, c.width, c.height);
+
+      particles = particles.filter((p) => p.alpha > 0.04 && p.y < c.height + 20);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.18;
+        p.rot += p.vrot;
+        p.alpha *= 0.986;
+
+        ctx.save();
+        ctx.globalAlpha = p.alpha;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+
+      if (particles.length > 0) {
+        confettiAnimId = requestAnimationFrame(stepConfetti);
+      } else {
+        confettiAnimId = 0;
+      }
+    }
+
+    // =========================================================================
+    // OFFICIAL AUDIT EXPORTERS (.CSV UTF-8 BOM & .XLS SPREADSHEETML)
+    // =========================================================================
+    function downloadBlob(filename, mime, content) {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 250);
+    }
+
+    function csvRow(arr) {
+      return arr.map((v) => {
+        const s = String(v ?? "");
+        return (s.includes(",") || s.includes('"') || s.includes("\n"))
+          ? '"' + s.replace(/"/g, '""') + '"'
+          : s;
+      }).join(",");
+    }
+
+    function exportGuestListCSV() {
+      const lines = [
+        csvRow(["Mã Vé", "Họ và Tên", "Phòng Ban / Đơn Vị", "Bàn Tiệc", "Trạng Thái Check-in", "Giờ Check-in", "Số Lượt Quét", "Giải Thưởng Trúng"])
+      ];
+      state.guests.forEach((g) => {
+        lines.push(csvRow([
+          g.code, g.name, g.dept, g.table,
+          g.checkedIn ? "Đã có mặt" : "Vắng mặt",
+          g.checkInTime, g.scanAttempts, g.wonPrize
+        ]));
+      });
+      downloadBlob("Danh_Sach_CheckIn_Gala_YEP_2026.csv", "text/csv;charset=utf-8", "\uFEFF" + lines.join("\r\n"));
+    }
+
+    function exportWinnersCSV() {
+      if (state.winners.length === 0) return alert("Chưa có người trúng thưởng để xuất biên bản!");
+      const lines = [
+        csvRow(["STT", "Hạng Giải Thưởng", "Hiện Vật Giải Thưởng", "Mã Vé Trúng", "Họ và Tên Người Trúng", "Phòng Ban / Đơn Vị", "Số Bàn", "Giờ Check-in", "Giờ Quay Trúng", "Ký Nhận Tại Sân Khấu"])
+      ];
+      [...state.winners].reverse().forEach((w, i) => {
+        lines.push(csvRow([
+          i + 1, w.tierLabel, w.reward, w.code, w.name, w.dept, w.table, w.checkInTime, w.wonTime, ""
+        ]));
+      });
+      downloadBlob("Bien_Ban_Trung_Thuong_Gala_YEP_2026.csv", "text/csv;charset=utf-8", "\uFEFF" + lines.join("\r\n"));
+    }
+
+    function exportWinnersXLS() {
+      const cell = (v, isNum = false) =>
+        isNum ? `<Cell><Data ss:Type="Number">${Number(v) || 0}</Data></Cell>`
+              : `<Cell><Data ss:Type="String">${esc(v)}</Data></Cell>`;
+
+      let winRows = `<Row>${["STT", "Hạng Giải Thưởng", "Hiện Vật / Giá Trị", "Mã Vé Trúng", "Họ và Tên Người Trúng", "Phòng Ban / Đơn Vị", "Bàn Tiệc", "Giờ Check-in", "Giờ Quay Trúng", "Chữ Ký Người Nhận"].map((h) => cell(h)).join("")}</Row>`;
+      [...state.winners].reverse().forEach((w, i) => {
+        winRows += `<Row>${[
+          cell(i + 1, true), cell(w.tierLabel), cell(w.reward), cell(w.code),
+          cell(w.name), cell(w.dept), cell(w.table), cell(w.checkInTime), cell(w.wonTime), cell("")
+        ].join("")}</Row>`;
+      });
+
+      let checkinRows = `<Row>${["Mã Vé", "Họ và Tên", "Đơn Vị", "Bàn Tiệc", "Trạng Thái", "Giờ Check-in", "Số Lần Quét"].map((h) => cell(h)).join("")}</Row>`;
+      state.guests.forEach((g) => {
+        checkinRows += `<Row>${[
+          cell(g.code), cell(g.name), cell(g.dept), cell(g.table),
+          cell(g.checkedIn ? "Đã có mặt" : "Vắng mặt"), cell(g.checkInTime), cell(g.scanAttempts, true)
+        ].join("")}</Row>`;
+      });
+
+      const wb = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Worksheet ss:Name="1_Bien_Ban_Trung_Thuong"><Table>${winRows}</Table></Worksheet>
+ <Worksheet ss:Name="2_Danh_Sach_CheckIn_Gala"><Table>${checkinRows}</Table></Worksheet>
+</Workbook>`;
+
+      downloadBlob("Bien_Ban_Quay_So_Va_CheckIn_YEP_2026.xls", "application/vnd.ms-excel;charset=utf-8", wb);
+    }
+
+    // =========================================================================
+    // MASTER REFRESH
+    // =========================================================================
+    function refreshAllViews() {
+      const total = state.guests.length;
+      const present = state.guests.filter((g) => g.checkedIn).length;
+      const absent = total - present;
+      const pct = total > 0 ? Math.round((present / total) * 100) : 0;
+
+      document.getElementById("badgeTotalGuests").textContent = String(total);
+      document.getElementById("badgeCheckedIn").textContent = `${present}/${total}`;
+      document.getElementById("badgeWinnersCount").textContent = String(state.winners.length);
+
+      document.getElementById("kpiTotalGuests").textContent = `${total} khách`;
+      document.getElementById("kpiPresentGuests").textContent = `${present} có mặt`;
+      document.getElementById("kpiPresentRatio").textContent = `Tỷ lệ hiện diện: ${pct}%`;
+      document.getElementById("kpiAbsentGuests").textContent = `${absent} khách`;
+      document.getElementById("kpiPassbackBlocks").textContent = `${state.passbackBlocks} lượt chặn`;
+
+      renderGuestTable();
+      renderScanLogs();
+      renderStageControls();
+      renderWinnersLedger();
+    }
+
+    loadState();
+    refreshAllViews();
+  </script>
+</body>
+</html>

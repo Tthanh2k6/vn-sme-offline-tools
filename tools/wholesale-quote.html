@@ -1,0 +1,3249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ Thống Báo Giá Chiết Khấu Bậc Thang B2B &amp; Đặt Cọc VietQR Động — Xuân Đinh Mùi 2027</title>
+  <style>
+    :root {
+      --burgundy-950: #2A060C;
+      --burgundy-900: #4A0E17;
+      --burgundy-800: #631521;
+      --burgundy-700: #7D1D2C;
+      --burgundy-100: #F9EBEE;
+      --burgundy-50:  #FDF6F7;
+
+      --cream-50:     #FCFBF8;
+      --cream-100:    #FAF7F2;
+      --cream-200:    #F2ECE1;
+      --cream-300:    #E5DBC8;
+
+      --gold-700:     #8C6200;
+      --gold-600:     #B8860B;
+      --gold-500:     #CCA028;
+      --gold-400:     #D4AF37;
+      --gold-100:     #FBF3DC;
+      --gold-50:      #FEFBF1;
+
+      --ink-900:      #1C1412;
+      --ink-700:      #433633;
+      --ink-500:      #6E5D58;
+      --ink-400:      #94827C;
+
+      --emerald-700:  #047857;
+      --emerald-100:  #D1FAE5;
+
+      --radius-xl:    16px;
+      --radius-lg:    12px;
+      --radius-md:    9px;
+
+      --shadow-luxury: 0 18px 42px -14px rgba(74, 14, 23, 0.16), 0 4px 14px -4px rgba(74, 14, 23, 0.07);
+      --shadow-card:   0 8px 24px -8px rgba(42, 6, 12, 0.09);
+      --font-serif:    "Playfair Display", "Cormorant Garamond", "Times New Roman", Georgia, serif;
+      --font-sans:     "Be Vietnam Pro", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--cream-100);
+      color: var(--ink-900);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
+    }
+
+    /* Top Luxury Brand Banner */
+    .luxury-topbar {
+      background: linear-gradient(135deg, var(--burgundy-950) 0%, var(--burgundy-900) 58%, var(--burgundy-800) 100%);
+      color: var(--cream-50);
+      border-bottom: 2px solid var(--gold-400);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .luxury-topbar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 88% 20%, rgba(212, 175, 55, 0.16) 0%, transparent 46%),
+                        radial-gradient(circle at 12% 85%, rgba(184, 134, 11, 0.12) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .topbar-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+      flex-wrap: wrap;
+    }
+
+    .brand-identity {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-crest {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.24), rgba(74, 14, 23, 0.85));
+      border: 1.5px solid var(--gold-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-400);
+      flex-shrink: 0;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    }
+
+    .brand-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .brand-subtitle {
+      font-size: 12.5px;
+      color: rgba(250, 247, 242, 0.84);
+      margin-top: 3px;
+    }
+
+    .topbar-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      color: #FFFDF9;
+      font-size: 12.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .btn-config-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold-600), var(--gold-400));
+      color: var(--burgundy-950);
+      border: none;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-config-toggle:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Supplier Settings & Google Sheets CSV Sync Drawer */
+    .config-drawer {
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--cream-300);
+      display: none;
+    }
+
+    .config-drawer.open {
+      display: block;
+    }
+
+    .config-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field input, .field select {
+      padding: 8px 11px;
+      border: 1px solid var(--cream-300);
+      border-radius: var(--radius-md);
+      background: var(--cream-50);
+      color: var(--ink-900);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .field input:focus, .field select:focus {
+      border-color: var(--burgundy-800);
+      background: #FFFFFF;
+    }
+
+    .csv-sync-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--cream-300);
+      flex-wrap: wrap;
+    }
+
+    .csv-sync-bar .field {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    /* Main Workspace Container */
+    .workspace {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 20px 24px 44px;
+    }
+
+    /* Vertical Industry Switcher + Tier Milestone Bar */
+    .control-ribbon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .preset-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 4px;
+    }
+
+    .preset-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--cream-300);
+      background: #FFFFFF;
+      color: var(--ink-700);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--gold-600);
+      color: var(--burgundy-900);
+    }
+
+    .preset-btn.active {
+      background: var(--burgundy-900);
+      border-color: var(--gold-400);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(74, 14, 23, 0.22);
+    }
+
+    .policy-note-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--gold-50);
+      border: 1px solid rgba(184, 134, 11, 0.35);
+      color: var(--gold-700);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Tiered Volume Milestone Ladder */
+    .tier-ladder-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--cream-50) 100%);
+      border: 1.5px solid var(--cream-300);
+      border-radius: var(--radius-xl);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .tier-ladder-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tier-ladder-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--burgundy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .upsell-nudge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--burgundy-900);
+      color: #FFFDF7;
+      font-size: 12.5px;
+      font-weight: 600;
+      border: 1px solid var(--gold-400);
+    }
+
+    .upsell-nudge strong {
+      color: var(--gold-400);
+    }
+
+    .tier-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .tier-step {
+      padding: 11px 13px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--cream-300);
+      background: #FFFFFF;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .tier-step.unlocked {
+      border-color: rgba(184, 134, 11, 0.45);
+      background: var(--gold-50);
+    }
+
+    .tier-step.current {
+      background: linear-gradient(135deg, var(--burgundy-900) 0%, var(--burgundy-800) 100%);
+      border-color: var(--gold-400);
+      color: #FFFFFF;
+      box-shadow: 0 10px 24px -8px rgba(74, 14, 23, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .tier-range {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ink-500);
+    }
+
+    .tier-step.current .tier-range {
+      color: var(--gold-400);
+    }
+
+    .tier-rate {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+      line-height: 1.15;
+      margin-top: 3px;
+    }
+
+    .tier-step.current .tier-rate {
+      color: #FFFFFF;
+    }
+
+    .tier-perk {
+      font-size: 11.5px;
+      color: var(--ink-700);
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .tier-step.current .tier-perk {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tier-active-tag {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--gold-400);
+      color: var(--burgundy-950);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: none;
+    }
+
+    .tier-step.current .tier-active-tag {
+      display: inline-block;
+    }
+
+    /* Main 2-Column Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.46fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--cream-300);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-luxury);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 16px 20px;
+      background: linear-gradient(180deg, var(--cream-50) 0%, var(--cream-200) 100%);
+      border-bottom: 1.5px solid var(--cream-300);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--burgundy-900);
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+    }
+
+    .panel-subtitle {
+      font-size: 12px;
+      color: var(--ink-500);
+    }
+
+    /* Buyer Corporate Details Form */
+    .buyer-box {
+      padding: 15px 20px;
+      background: var(--cream-50);
+      border-bottom: 1.5px solid var(--cream-300);
+      display: grid;
+      grid-template-columns: 1.38fr 0.82fr;
+      gap: 10px 14px;
+    }
+
+    /* Catalog Table */
+    .catalog-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.sku-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.sku-table thead th {
+      background: var(--burgundy-900);
+      color: var(--cream-50);
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 11px 12px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    table.sku-table thead th.num {
+      text-align: right;
+    }
+
+    table.sku-table thead th.center {
+      text-align: center;
+    }
+
+    table.sku-table tbody tr {
+      border-bottom: 1px solid var(--cream-200);
+      transition: background 0.14s ease;
+    }
+
+    table.sku-table tbody tr:hover {
+      background: var(--cream-50);
+    }
+
+    table.sku-table tbody tr.active-row {
+      background: var(--gold-50);
+    }
+
+    table.sku-table td {
+      padding: 12px;
+      vertical-align: middle;
+    }
+
+    .sku-code-pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: var(--burgundy-100);
+      color: var(--burgundy-900);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      margin-bottom: 3px;
+    }
+
+    .sku-name {
+      font-weight: 700;
+      color: var(--ink-900);
+      font-size: 13.5px;
+      line-height: 1.3;
+    }
+
+    .sku-spec {
+      font-size: 11.5px;
+      color: var(--ink-500);
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    .vat-pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .vat-pill.vat8 {
+      background: var(--emerald-100);
+      color: var(--emerald-700);
+    }
+
+    .vat-pill.vat10 {
+      background: var(--burgundy-100);
+      color: var(--burgundy-800);
+    }
+
+    .price-orig {
+      font-size: 12px;
+      color: var(--ink-400);
+      text-decoration: line-through;
+      display: block;
+    }
+
+    .price-net {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--burgundy-900);
+      white-space: nowrap;
+    }
+
+    .qty-stepper {
+      display: inline-flex;
+      align-items: center;
+      border: 1.5px solid var(--cream-300);
+      border-radius: 8px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .qty-stepper button {
+      width: 28px;
+      height: 30px;
+      border: none;
+      background: var(--cream-100);
+      color: var(--burgundy-900);
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .qty-stepper button:hover {
+      background: var(--gold-100);
+    }
+
+    .qty-stepper input {
+      width: 54px;
+      height: 30px;
+      border: none;
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink-900);
+      outline: none;
+    }
+
+    .line-total {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink-900);
+      white-space: nowrap;
+    }
+
+    /* Options Bar below SKU Table */
+    .catalog-options-bar {
+      padding: 14px 20px;
+      background: var(--cream-50);
+      border-top: 1.5px solid var(--cream-300);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .checkbox-luxury {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-900);
+    }
+
+    .checkbox-luxury input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--burgundy-900);
+      cursor: pointer;
+    }
+
+    .free-laser-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--gold-100);
+      border: 1px solid var(--gold-500);
+      color: var(--gold-700);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* Right Column: Summary + Dynamic VietQR Deposit */
+    .summary-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .quote-summary-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .vat-mode-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-bottom: 11px;
+      border-bottom: 1px dashed var(--cream-300);
+    }
+
+    .vat-mode-row label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .vat-mode-row select {
+      padding: 8px 11px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--cream-300);
+      background: var(--cream-50);
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ink-900);
+    }
+
+    .calc-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--ink-700);
+    }
+
+    .calc-line.discount {
+      color: var(--emerald-700);
+      font-weight: 700;
+    }
+
+    .calc-line .val {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .grand-total-box {
+      margin-top: 4px;
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--burgundy-950) 0%, var(--burgundy-900) 100%);
+      color: #FFFFFF;
+      border: 1.5px solid var(--gold-400);
+    }
+
+    .grand-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .grand-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gold-400);
+    }
+
+    .grand-number {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      font-weight: 700;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    .grand-words {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.82);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* VietQR Dynamic Deposit Box */
+    .deposit-card {
+      padding: 16px 20px 20px;
+      background: linear-gradient(180deg, var(--cream-50) 0%, #FFFFFF 100%);
+      border-top: 1.5px solid var(--cream-300);
+    }
+
+    .deposit-ratio-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .dep-tab {
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1.5px solid var(--cream-300);
+      background: #FFFFFF;
+      color: var(--ink-700);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .dep-tab.active {
+      background: var(--gold-100);
+      border-color: var(--gold-600);
+      color: var(--burgundy-900);
+    }
+
+    .qr-standee-grid {
+      display: grid;
+      grid-template-columns: 164px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 13px;
+      border-radius: var(--radius-lg);
+      background: #FFFFFF;
+      border: 1.5px solid var(--gold-400);
+      box-shadow: 0 8px 20px -8px rgba(74, 14, 23, 0.14);
+    }
+
+    .qr-frame {
+      width: 164px;
+      height: 164px;
+      padding: 7px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 1px solid var(--cream-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-frame svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-details {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .qr-kicker {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--burgundy-800);
+    }
+
+    .qr-deposit-val {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--burgundy-900);
+      line-height: 1.15;
+    }
+
+    .qr-bank-line {
+      font-size: 12px;
+      color: var(--ink-700);
+      line-height: 1.4;
+    }
+
+    .qr-memo-tag {
+      display: inline-block;
+      margin-top: 2px;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: var(--burgundy-900);
+      color: var(--gold-400);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+
+    .emv-crc-note {
+      font-size: 10.5px;
+      color: var(--emerald-700);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Action CTA Buttons */
+    .cta-stack {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .btn-primary-print {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--gold-400);
+      background: linear-gradient(135deg, var(--burgundy-900) 0%, var(--burgundy-700) 100%);
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 10px 22px -8px rgba(74, 14, 23, 0.45);
+      transition: transform 0.14s ease;
+    }
+
+    .btn-primary-print:hover {
+      transform: translateY(-1px);
+    }
+
+    .secondary-cta-row {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 8px;
+    }
+
+    .btn-zalo-copy {
+      padding: 11px 14px;
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--gold-600);
+      background: var(--gold-100);
+      color: var(--burgundy-950);
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .btn-zalo-copy:hover {
+      background: var(--gold-400);
+    }
+
+    .btn-outline-soft {
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--cream-300);
+      background: #FFFFFF;
+      color: var(--burgundy-900);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-outline-soft:hover {
+      border-color: var(--burgundy-800);
+      background: var(--burgundy-50);
+    }
+
+    /* Toast Notification */
+    .toast-banner {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: var(--burgundy-950);
+      border: 1.5px solid var(--gold-400);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: all 0.22s ease;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Formal Stamped A4 Corporate Quotation Sheet (On-screen Preview + @media print) */
+    .a4-preview-wrapper {
+      margin-top: 26px;
+      display: none;
+    }
+
+    .a4-preview-wrapper.visible {
+      display: block;
+    }
+
+    .a4-sheet {
+      max-width: 920px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1.5px solid var(--gold-400);
+      border-radius: 10px;
+      padding: 28px 34px;
+      box-shadow: var(--shadow-luxury);
+      color: #1A1210;
+    }
+
+    .a4-letterhead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2.5px solid var(--burgundy-900);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 16px;
+    }
+
+    .a4-supplier-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+      text-transform: uppercase;
+    }
+
+    .a4-doc-title-box {
+      text-align: right;
+    }
+
+    .a4-doc-title {
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--burgundy-900);
+      letter-spacing: 0.03em;
+    }
+
+    .a4-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+      padding: 11px 14px;
+      background: var(--cream-100);
+      border: 1px solid var(--cream-300);
+      border-radius: 8px;
+      margin-bottom: 14px;
+      font-size: 12.5px;
+    }
+
+    table.a4-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    table.a4-table th {
+      background: var(--burgundy-900);
+      color: #FFFFFF;
+      padding: 8px 9px;
+      border: 1px solid var(--burgundy-900);
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    table.a4-table td {
+      padding: 7px 9px;
+      border: 1px solid #D9CFC1;
+    }
+
+    .a4-bottom-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .a4-qr-deposit-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--burgundy-900);
+      border-radius: 8px;
+      background: var(--cream-50);
+    }
+
+    .a4-qr-mini {
+      width: 108px;
+      height: 108px;
+      flex-shrink: 0;
+      background: #FFFFFF;
+      padding: 4px;
+      border: 1px solid var(--cream-300);
+    }
+
+    .a4-qr-mini svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .a4-stamp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed #CBBBA4;
+    }
+
+    .corporate-red-seal {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      border: 3px double #B91C1C;
+      color: #B91C1C;
+      text-align: center;
+      padding: 10px;
+      transform: rotate(-7deg);
+      background: rgba(185, 28, 28, 0.03);
+    }
+
+    @media (max-width: 1120px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .tier-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .buyer-box, .config-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .tier-steps-grid, .buyer-box, .config-grid, .qr-standee-grid, .a4-bottom-grid {
+        grid-template-columns: 1fr;
+      }
+      .qr-frame {
+        margin: 0 auto;
+      }
+    }
+
+    /* Strict 1-Page A4 @media print Engine */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm;
+      }
+      html, body {
+        background: #FFFFFF !important;
+        font-size: 11.5px;
+      }
+      .luxury-topbar,
+      .config-drawer,
+      .control-ribbon,
+      .tier-ladder-card,
+      .main-grid,
+      .toast-banner,
+      .no-print {
+        display: none !important;
+      }
+      .workspace {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .a4-preview-wrapper {
+        display: block !important;
+        margin: 0 !important;
+      }
+      .a4-sheet {
+        box-shadow: none !important;
+        border: 1.5px solid #4A0E17 !important;
+        padding: 16px 20px !important;
+        max-width: 100% !important;
+      }
+    }
+  </style>
+<style id="paper-workbench">
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+/* Paper workbench: shared visual system, embedded into each standalone file. */
+:root { --paper:#f7f7f2; --surface:#fff; --ink:#252722; --muted:#64685f; --rule:#dcded5; --accent:#aa460e; --signal:#fff3e9; }
+html, body { background:var(--paper) !important; color:var(--ink) !important; font-family:'Work Sans' !important; font-size:14px; }
+body * { font-family:inherit !important; color:inherit !important; border-color:var(--rule) !important; box-shadow:none !important; text-shadow:none !important; background-image:none !important; text-transform:none !important; letter-spacing:normal !important; }
+body :is(div,section,aside,header,span,th,td,label,p,strong,b,footer,a,button) { background-color:transparent !important; }
+body :is(input,select,textarea,button) { font-family:'Work Sans' !important; }
+body :is(.num,code,.qr-memo-tag,.kpi-val,.grand-number,.tier-rate,input[inputmode=numeric],input[type=number]) { font-family:'JetBrains Mono' !important; font-variant-numeric:tabular-nums; }
+body :is(.topbar,.luxury-topbar,.app-header) { position:static; padding:0 24px; background:var(--surface) !important; border-bottom:1px solid var(--rule); }
+body :is(.topbar-inner,.header-inner) { max-width:1500px; padding:16px 0; gap:12px 24px; }
+body .brand-title { font-size:19px; line-height:1.35; font-weight:700; }
+body :is(.brand-sub,.brand-subtitle) { font-size:12px; color:var(--muted) !important; margin-top:5px; max-width:85ch; }
+body :is(.brand-mark,.brand-shield,.brand-icon,.brand-crest,.brand-kicker,.offline-badge,.pulse-dot,.dot-live,.card-tag,.panel-icon,.contact-chip,.trust-pill.emerald,.guard-kicker,.eq-bars,#audioLatencyTag) { display:none; }
+body .luxury-topbar::before { display:none; }
+body :is(.trust-pill,.panel-badge,.napas-badge,.policy-note-badge,.free-laser-badge) { padding:0; border:0; border-radius:0; font-weight:400; font-size:12px; color:var(--muted) !important; }
+body :is(.workspace,.container) { max-width:1500px; }
+body :is(.card,.panel,.panel-card,.control-card,.ledger-card,.side-box,.tier-ladder-card) { background:var(--surface) !important; border:0; border-radius:6px; overflow:hidden; }
+body :is(.card-header,.panel-head,.panel-header,.ledger-toolbar) { background:transparent !important; border-bottom:1px solid var(--rule); padding:18px 20px; gap:12px; }
+body :is(.card-title,.panel-title,.ledger-title,.tier-ladder-title) { font-size:15px; font-weight:700; line-height:1.5; }
+body .card-title-wrap > svg { display:none; }
+body :is(.card-body,.panel-body) { padding:20px; }
+body :is(.field label,.preset-label,.kpi-label,.kpi-lbl) { font-size:12px; font-weight:400; color:var(--muted) !important; line-height:1.5; }
+body :is(input,select,textarea) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule); border-radius:4px !important; font-size:13px; font-weight:400; accent-color:var(--accent) !important; }
+body .field :is(input,select) { min-height:38px; padding:8px 10px; }
+body :is(input,select,textarea,button,a):focus-visible { outline:2px solid var(--accent) !important; outline-offset:3px; }
+body :is(button,.btn,.btn-config-toggle,.btn-primary-print,.btn-zalo-copy,.btn-outline-soft) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule) !important; border-radius:4px; font-weight:700; font-size:12px; line-height:1.4; padding:8px 12px; transform:none !important; }
+body button:hover,body a.btn:hover { background:#f0f1eb !important; }
+body :is(.btn-primary-print,#btnPrintA4,#btnPrintA4Top,#btnSimulateRealTx) { background:var(--accent) !important; color:#fff !important; border-color:var(--accent) !important; }
+body :is(.preset-btn,.preset-pill,.bucket-pill,.dep-tab,.a4-tab-btn,.zalo-tab) { border-radius:4px; font-size:12px; padding:7px 10px; }
+body :is(.preset-btn.active,.preset-pill.active,.bucket-pill.active,.dep-tab.active,.a4-tab-btn.active,.zalo-tab.active-l1,.zalo-tab.active-l2,.zalo-tab.active-l3) { background:#eaece4 !important; border-color:#7c8175 !important; color:var(--ink) !important; }
+body :is(.kpi-box,.kpi-card) { background:transparent !important; border:0; border-left:1px solid var(--rule); padding:10px 18px; border-radius:0; }
+body :is(.kpi-box,.kpi-card):first-child { border-left:0; }
+body .kpi-grid { gap:0; padding:12px 0; }
+body .kpi-val { font-size:20px; font-weight:400; margin:8px 0; }
+body :is(.kpi-meta,.kpi-note,.panel-subtitle,.helper-note) { color:var(--muted) !important; font-size:12px; line-height:1.6; }
+body :is(.table-wrap,.table-scroll,.catalog-table-wrap) { border-radius:0; border:0; overflow-x:auto; }
+body table { border-collapse:collapse; }
+body :is(thead th,table.comm-table th,.a4-table th,.staff-summary-table th) { background:#eff0e9 !important; color:var(--ink) !important; font-weight:700; line-height:1.45; }
+body :is(tbody td,table.comm-table td,.staff-summary-table td) { border-left:0; border-right:0; border-bottom:1px solid var(--rule); line-height:1.5; }
+body tbody tr:hover td { background:#f7f7f2 !important; }
+body :is(tfoot td,.a4-grand-row td) { background:#eff0e9 !important; border-top:1px solid #858a7d !important; }
+body :is(.status-badge,.badge-method,.role-pill,.debt-tag,.paid-done) { border:0; background:transparent !important; border-radius:0; padding:2px 0; font-size:11px; }
+body :is(.a4-shell,.a4-preview-wrapper,.a4-panel) { background:#eceee6 !important; border:0; border-radius:4px; }
+body :is(.a4-sheet,.a4-paper) { background:#fff !important; font-family:'Work Sans' !important; border:1px solid var(--rule); border-radius:0; }
+body :is(.a4-mode-tabs,.a4-filter-bar,.a4-toolbar) { background:transparent !important; padding:14px; gap:10px; }
+body :is(.standee-wrap,.soundbox-panel,.deposit-card,.qr-standee-grid,.grand-total-box) { background:#f3f4ee !important; border:1px solid var(--rule); border-radius:4px; }
+body :is(.qr-paper,.qr-frame,.qr-svg-box) { background:#fff !important; border-radius:2px; }
+body :is(.standee-shop,.qr-bank-line,.qr-amount-display,.grand-number) { color:var(--ink) !important; }
+body :is(.qr-memo-pill,.qr-memo-tag,.emv-inspector,.voice-transcript) { background:transparent !important; border:0; color:var(--muted) !important; border-radius:0; }
+body .guard-banner { background:var(--signal) !important; border:0; border-left:3px solid var(--accent) !important; border-radius:4px; padding:20px; }
+body .guard-headline { font-size:16px; font-weight:700; line-height:1.5; }
+body .guard-desc { font-size:13px; line-height:1.7; margin-top:8px; }
+body .guard-icon-box { display:none; }
+body .guard-badge-big { font-size:11px; white-space:normal; padding:0; border:0; min-width:85px; color:var(--accent) !important; }
+body .guard-banner.confirmed { background:#f3f4ee !important; border-left-color:var(--ink) !important; }
+body :is(.soundbox-top,.speaker-status) { gap:12px; }
+body .soundbox-top { align-items:flex-start; }
+body .soundbox-panel { padding:16px; }
+body .voice-transcript { padding:12px 0 0; font-size:13px; }
+body .tier-ladder-card { padding:20px; }
+body .tier-step { background:transparent !important; border:0; border-left:1px solid var(--rule); border-radius:0; padding:12px 16px; }
+body .tier-step.active { background:#eff0e9 !important; }
+body .tier-rate { font-size:22px; font-weight:400; }
+body :is(.tier-active-tag,.upsell-nudge) { background:transparent !important; color:var(--muted) !important; border:0; border-radius:0; }
+body .grand-total-box { padding:20px; }
+body .grand-label { font-size:13px; }
+body .grand-number { font-size:24px; }
+body :is(.demo-lock-banner,.demo-acc-warning,.a4-qr-lock-box) { background:var(--signal) !important; color:var(--accent) !important; border:1px solid var(--rule); font-weight:400; }
+body :is(.red-audit-stamp,.corporate-red-seal,.sig-stamp) { color:var(--ink) !important; border-color:var(--ink) !important; }
+body .modal-backdrop { background:rgba(37,39,34,.4) !important; }
+body .modal-card { background:#fff !important; }
+body :is(.toast,.copy-toast,.toast-banner) { background:var(--ink) !important; color:#fff !important; }
+body .btn svg { stroke:currentColor; }
+@media screen and (min-width:1101px) {
+ body.ar .workspace { grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); }
+ body.cashier .workspace { grid-template-columns:440px minmax(0,1fr); }
+ body.clinic .brand-title { font-size:17px; }
+}
+@media screen {
+ body :is(.panel,.card,.left-column,.main-grid>*,.bottom-grid>*,.a4-shell,.brand-group,.brand-left) { min-width:0; }
+ body .comm-table { min-width:1450px; }
+ body .comm-table td { padding:12px 9px; font-size:12px; }
+ body .comm-table th { font-size:11px; padding:12px 9px; }
+ body .staff-summary-table td { padding:12px 6px; }
+ body.clinic .org-config-grid { grid-template-columns:2fr 1fr 1fr 1fr; gap:16px; }
+ body .a4-doc-title h1 { font-size:19px; }
+ body .brand-sub,body .brand-subtitle { display:none; }
+ body .toolbar-actions,body .header-actions { gap:8px; }
+ body.ar .brand-title { font-size:17px; }
+ body.ar .topbar-inner { gap:12px; }
+ body :is(.a4-sheet,.a4-paper) { overflow-wrap:anywhere; }
+}
+@media screen and (max-width:760px) {
+ body :is(.topbar,.luxury-topbar,.app-header) { padding:0 16px; }
+ body .brand-title { font-size:17px; }
+ body :is(.workspace,.container) { padding-left:12px; padding-right:12px; }
+ body :is(.form-grid-3,.org-config-grid,.quick-add-grid,.bottom-grid,.main-grid,.workspace,.webhook-grid) { grid-template-columns:minmax(0,1fr) !important; }
+ body :is(.kpi-grid,.tier-steps-grid) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ body :is(.header-actions,.toolbar-actions,.topbar-meta,.preset-group,.preset-strip,.a4-toolbar,.ledger-toolbar,.soundbox-top) { flex-wrap:wrap; }
+ body .brand-group,body .brand-left { max-width:100%; }
+ body :is(.panel-head,.card-header) { flex-wrap:wrap; }
+ body .field { min-width:0; }
+ body .field :is(input,select,textarea) { max-width:100%; }
+ body :is(.a4-sheet,.a4-paper) { padding:18px 12px; }
+ body .guard-banner { flex-direction:column; align-items:flex-start; }
+ body .a4-shell { overflow-x:auto; }
+ body .a4-sheet { min-width:560px; }
+ body .kpi-val { font-size:17px; }
+}
+@media print {
+ html,body { background:#fff !important; }
+ body :is(.a4-sheet,.a4-paper,.standee-wrap,.qr-paper) { background:#fff !important; color:#000 !important; box-shadow:none !important; }
+ body :is(.a4-sheet,.a4-paper) { font-family:'Work Sans' !important; font-size:10px; line-height:1.35; }
+ body :is(th,td) { font-size:9px; }
+ body .a4-sheet { border-color:#888 !important; }
+ body .a4-doc-title h1 { font-size:17px; }
+ body .a4-doc-title h2 { font-size:17px; }
+}
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+/* Final review adjustments. */
+body.cashier { --accent:#176447; --signal:#edf5ef; }
+body.cashier .guard-banner.pending,body.cashier .guard-banner.mismatch { background:#efefea !important; border-left-color:#252722 !important; }
+body.cashier .guard-banner.confirmed { background:#edf5ef !important; border-left-color:var(--accent) !important; }
+body.cashier .guard-banner.confirmed .guard-headline { color:var(--accent) !important; }
+body.cashier input.amount-input { background:#fff !important; color:var(--ink) !important; border-color:var(--rule) !important; }
+body .tier-step.current { background:#eff0e9 !important; border-bottom:2px solid #64685f !important; }
+body table tbody tr { background:transparent !important; }
+body table tbody tr.selected { background:#eff0e9 !important; }
+body .tier-ladder-title svg { display:none; }
+body .sample-note { font-size:12px; color:var(--muted) !important; margin:0 0 8px; }
+body .kpi-note,body .kpi-meta { font-weight:400; }
+body .aging-table td.num { white-space:nowrap; }
+body .status-badge { border:0 !important; }
+body .field :is(input,select,textarea) { font-weight:400; }
+body .kpi-val { white-space:nowrap; }
+body.wholesale .brand-title { text-transform:lowercase !important; }
+body.wholesale .brand-title::first-letter { text-transform:uppercase !important; }
+@media screen and (max-width:760px) {
+ body.clinic .preset-strip>div { max-width:100%; flex-wrap:wrap; }
+ body.clinic .preset-strip select { width:100%; min-width:0; }
+ body :is(.a4-filter-bar,.a4-mode-tabs,.tab-btn-group) { flex-wrap:wrap; max-width:100%; }
+ body .a4-filter-bar select { max-width:100%; }
+ body .sample-note { margin-top:8px; }
+}
+@media print {
+ body .sample-note { display:none !important; }
+ body.cashier .workspace { max-width:420px !important; padding:0 !important; }
+ body :is(.a4-sheet,.a4-paper) { font-size:12px; }
+ body :is(th,td) { font-size:11px; }
+}
+@media print {
+ body.clinic .a4-table { table-layout:fixed; width:100%; }
+ body.clinic .a4-table th:nth-child(1) { width:4%; }
+ body.clinic .a4-table th:nth-child(2) { width:7%; }
+ body.clinic .a4-table th:nth-child(3) { width:23%; }
+ body.clinic .a4-table th:nth-child(8) { width:6%; }
+ body.clinic .a4-table th:nth-child(4),body.clinic .a4-table th:nth-child(5),body.clinic .a4-table th:nth-child(6),body.clinic .a4-table th:nth-child(7),body.clinic .a4-table th:nth-child(9) { width:12%; }
+ body.clinic .a4-table :is(th,td) { padding:8px 4px; font-size:10px; }
+}
+</style>
+</head>
+<body class="wholesale">
+
+  <!-- TOP LUXURY B2B CORPORATE HEADER -->
+  <header class="luxury-topbar">
+    <div class="topbar-inner">
+      <div class="brand-identity">
+        <div class="brand-crest" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-kicker">
+            <span>CỔNG BÁO GIÁ SỈ &amp; HỢP ĐỒNG DOANH NGHIỆP B2B</span>
+            <span>•</span>
+            <span id="seasonKickerText">XUÂN ĐINH MÙI 2027</span>
+          </div>
+          <h1 class="brand-title" id="brandTitleDisplay">CÔNG TY MẪU — QUÀ TẾT B2B</h1>
+          <p class="brand-subtitle" id="brandSubDisplay">Bộ Sưu Tập Quà Tết Doanh Nghiệp Đinh Mùi 2027 — Chiết Khấu Xưởng Tự Động &amp; Khắc Laser Logo</p>
+        </div>
+      </div>
+
+      <div class="topbar-meta">
+        <div class="contact-chip tabular">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span>Hotline / Zalo Sỉ: <strong id="brandPhoneDisplay">0900 000 000</strong></span>
+        </div>
+        <button type="button" class="btn-config-toggle" id="btnToggleConfig">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>Cấu hình nhà cung cấp &amp; CSV</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- COLLAPSIBLE SUPPLIER PERSONALIZATION & GOOGLE SHEETS CSV SYNC -->
+  <section class="config-drawer" id="configDrawer">
+    <div class="config-inner">
+      <div class="config-grid">
+        <div class="field">
+          <label for="cfgBrand">Tên thương hiệu / xưởng sỉ (?brand=)</label>
+          <input type="text" id="cfgBrand" />
+        </div>
+        <div class="field">
+          <label for="cfgPhone">Hotline / Zalo kinh doanh (?phone=)</label>
+          <input type="text" id="cfgPhone" />
+        </div>
+        <div class="field">
+          <label for="cfgMst">Mã số thuế nhà cung cấp (?MST=)</label>
+          <input type="text" id="cfgMst" />
+        </div>
+        <div class="field">
+          <label for="cfgAddr">Địa chỉ xưởng / kho sỉ (?addr=)</label>
+          <input type="text" id="cfgAddr" />
+        </div>
+        <div class="field">
+          <label for="cfgBankBin">Ngân hàng nhận đặt cọc (?bin=)</label>
+          <select id="cfgBankBin"></select>
+        </div>
+        <div class="field">
+          <label for="cfgAcc">Số tài khoản nhận cọc (?acc=)</label>
+          <input type="text" id="cfgAcc" />
+        </div>
+        <div class="field">
+          <label for="cfgHolder">Tên chủ tài khoản (?holder=)</label>
+          <input type="text" id="cfgHolder" />
+        </div>
+        <div class="field">
+          <label for="cfgShareBtn">Link cá nhân hóa 1 giây</label>
+          <button type="button" class="btn-outline-soft" id="btnCopyPersonalizedUrl" style="height:36px;">
+            Sao chép link riêng cho xưởng này
+          </button>
+        </div>
+      </div>
+
+      <div class="csv-sync-bar">
+        <div class="field">
+          <label for="cfgSheetCsvUrl">Đồng bộ bảng giá trực tiếp từ Google Sheets (publish to Web &rarr; CSV, 0đ server)</label>
+          <input type="url" id="cfgSheetCsvUrl" placeholder="https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?output=csv" />
+        </div>
+        <button type="button" class="btn-outline-soft" id="btnFetchCsvUrl" style="height:36px;">Đồng bộ link CSV</button>
+        <label class="btn-outline-soft" style="height:36px; cursor:pointer;">
+          <span>Nhập file .CSV máy tính</span>
+          <input type="file" id="csvFileInput" accept=".csv,text/csv" style="display:none;" />
+        </label>
+        <button type="button" class="btn-outline-soft" id="btnDownloadSampleCsv" style="height:36px;">Tải file CSV mẫu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN WORKSPACE -->
+  <main class="workspace">
+
+    <!-- INDUSTRY PRESET SWITCHER & VAT REGULATION CALLOUT -->
+    <div class="control-ribbon">
+      <div class="preset-pills" role="tablist" aria-label="Ngành hàng B2B">
+        <span class="preset-label">Bộ danh mục mẫu:</span>
+        <button type="button" class="preset-btn active" data-preset="tet">Quà tết &amp; Rượu vang 2027</button>
+        <button type="button" class="preset-btn" data-preset="yensao">Yến sào &amp; Hạt dinh dưỡng sỉ</button>
+        <button type="button" class="preset-btn" data-preset="gomsu">Gốm sứ &amp; Bình giữ nhiệt in logo</button>
+        <button type="button" class="preset-btn" data-preset="yte">Tổng kho vật tư y tế phòng khám</button>
+      </div>
+      <div class="policy-note-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>Tích hợp tách thuế GTGT 8% &amp; 10% chuẩn Nghị định 174/2025/NĐ-CP</span>
+      </div>
+    </div>
+
+    <!-- 5-TIER VOLUME DISCOUNT ENGINE LADDER -->
+    <section class="tier-ladder-card" aria-label="Bậc chiết khấu số lượng B2B">
+      <div class="tier-ladder-top">
+        <div class="tier-ladder-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+          </svg>
+          <span>Chính sách chiết khấu bậc thang theo tổng số lượng gộp đơn</span>
+        </div>
+        <div class="upsell-nudge tabular" id="upsellNudgeBanner">
+          Đang mở khóa Bậc 3 (-18%)
+        </div>
+      </div>
+
+      <div class="tier-steps-grid" id="tierStepsContainer">
+        <div class="tier-step" data-tier-idx="0">
+          <span class="tier-active-tag">Đang áp dụng</span>
+          <div class="tier-range">1 – 9 Set</div>
+          <div class="tier-rate tabular">0%</div>
+          <div class="tier-perk">Đơn mẫu thử nghiệm &amp; duyệt chất lượng hộp</div>
+        </div>
+        <div class="tier-step" data-tier-idx="1">
+          <span class="tier-active-tag">Đang áp dụng</span>
+          <div class="tier-range">10 – 49 Set</div>
+          <div class="tier-rate tabular">-5%</div>
+          <div class="tier-perk">Tặng thiệp chúc Tết thiết kế riêng</div>
+        </div>
+        <div class="tier-step" data-tier-idx="2">
+          <span class="tier-active-tag">Đang áp dụng</span>
+          <div class="tier-range">50 – 99 Set</div>
+          <div class="tier-rate tabular">-12%</div>
+          <div class="tier-perk">Miễn phí khắc Laser Logo lên hộp gỗ/da</div>
+        </div>
+        <div class="tier-step" data-tier-idx="3">
+          <span class="tier-active-tag">Đang áp dụng</span>
+          <div class="tier-range">100 – 299 Set</div>
+          <div class="tier-rate tabular">-18%</div>
+          <div class="tier-perk">Miễn phí khắc Logo + Giao đa điểm nội thành</div>
+        </div>
+        <div class="tier-step" data-tier-idx="4">
+          <span class="tier-active-tag">Đang áp dụng</span>
+          <div class="tier-range">Từ 300+ Set</div>
+          <div class="tier-rate tabular">-25%</div>
+          <div class="tier-perk">Giá Sỉ Nhà Máy VIP + Khuôn hộp độc quyền</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN 2-COLUMN QUOTATION BUILDER -->
+    <div class="main-grid">
+
+      <!-- LEFT COLUMN: BUYER DETAILS + INTERACTIVE SKU TABLE -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title-wrap">
+            <div class="panel-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="panel-title" id="catalogTitleText">Danh mục sản phẩm &amp; Cấu hình số lượng đặt sỉ</h2>
+              <p class="panel-subtitle">Tăng/giảm số lượng từng mã — hệ thống tự cộng gộp tổng sản phẩm để kích hoạt mức chiết khấu cao nhất</p>
+            </div>
+          </div>
+          <button type="button" class="btn-outline-soft" id="btnResetZero">Đặt về 0 tất cả</button>
+        </div>
+
+        <!-- BUYER INFO INPUTS -->
+        <div class="buyer-box">
+          <div class="field">
+            <label for="buyerCompany">Đơn vị nhận báo giá (doanh nghiệp / đại lý)</label>
+            <input type="text" id="buyerCompany" value="Công ty TNHH Mẫu B" />
+          </div>
+          <div class="field">
+            <label for="buyerTaxId">Mã số thuế mua (10 / 12 số)</label>
+            <input type="text" id="buyerTaxId" class="tabular" value="0100000018" />
+          </div>
+          <div class="field">
+            <label for="buyerContact">Người nhận (phòng hr / thu mua)</label>
+            <input type="text" id="buyerContact" value="Chị Thanh Thảo — Trưởng phòng HCNS" />
+          </div>
+          <div class="field">
+            <label for="deliveryDate">Ngày giao hàng dự kiến</label>
+            <input type="date" id="deliveryDate" class="tabular" value="2027-01-15" />
+          </div>
+        </div>
+
+        <!-- SKU TABLE -->
+        <div class="catalog-table-wrap">
+          <table class="sku-table">
+            <thead>
+              <tr>
+                <th style="width:42%;">Mã SKU &amp; Quy Cách Đóng Gói</th>
+                <th class="center">Thuế GTGT</th>
+                <th class="num">Đơn Giá Sau CK</th>
+                <th class="center">Số Lượng</th>
+                <th class="num">Thành Tiền (Trước VAT)</th>
+              </tr>
+            </thead>
+            <tbody id="skuTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- LOGO LASER & PACKAGING BAR -->
+        <div class="catalog-options-bar">
+          <label class="checkbox-luxury">
+            <input type="checkbox" id="chkLogoLaser" checked />
+            <span>Gia công khắc laser / ép kim logo doanh nghiệp lên hộp quà (+18.000đ/set)</span>
+            <span class="free-laser-badge" id="laserPerkBadge">Miễn phí từ 50 set</span>
+          </label>
+          <div style="font-size:12px; color:var(--ink-500);" class="tabular" id="catalogFooterSummary">
+            Đã chọn 2 mã hàng • Tổng gộp: 120 set
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: REAL-TIME SUMMARY + DYNAMIC VIETQR DEPOSIT + PRINT/ZALO ACTIONS -->
+      <aside class="panel-card summary-stack">
+        <div>
+          <div class="panel-header">
+            <div class="panel-title-wrap">
+              <div class="panel-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="panel-title">Tổng hợp báo giá &amp; Đặt cọc VietQR</h2>
+                <p class="panel-subtitle tabular" id="quoteCodeSubtitle">Mã báo giá: #BG-202611-882</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-summary-body tabular">
+            <div class="vat-mode-row">
+              <label for="vatModeSelect">Chế độ xuất hóa đơn GTGT (VAT năm 2026)</label>
+              <select id="vatModeSelect">
+                <option value="auto" selected>Tách tự động VAT 8% &amp; 10% (Chuẩn NĐ 174/2025/NĐ-CP)</option>
+                <option value="vat8">Đồng nhất VAT 8% toàn đơn (Nhóm giảm thuế GTGT)</option>
+                <option value="vat10">Đồng nhất VAT 10% toàn đơn</option>
+                <option value="none">Chưa xuất VAT (0% — Báo giá nội bộ)</option>
+              </select>
+            </div>
+
+            <div class="calc-line">
+              <span>Tổng số lượng gộp đơn:</span>
+              <span class="val" id="sumTotalQty">120 set</span>
+            </div>
+            <div class="calc-line">
+              <span>Tổng tiền hàng theo giá niêm yết:</span>
+              <span class="val" id="sumGrossAmount">0 đ</span>
+            </div>
+            <div class="calc-line discount">
+              <span id="sumDiscountLabel">Chiết khấu bậc thang (-18%):</span>
+              <span class="val" id="sumDiscountAmount">-0 đ</span>
+            </div>
+            <div class="calc-line">
+              <span id="sumLaserLabel">Phí khắc Laser / Ép kim Logo:</span>
+              <span class="val" id="sumLaserAmount">0 đ (Miễn phí)</span>
+            </div>
+            <div class="calc-line" style="padding-top:6px; border-top:1px solid var(--cream-200); font-weight:700; color:var(--ink-900);">
+              <span>Tạm tính sau chiết khấu (Trước VAT):</span>
+              <span class="val" id="sumNetBeforeVat">0 đ</span>
+            </div>
+            <div class="calc-line" id="rowVat8">
+              <span>Thuế GTGT 8% (Thực phẩm / Quà tặng giảm thuế):</span>
+              <span class="val" id="sumVat8">0 đ</span>
+            </div>
+            <div class="calc-line" id="rowVat10">
+              <span>Thuế GTGT 10% (Nhóm Rượu vang chịu TTĐB):</span>
+              <span class="val" id="sumVat10">0 đ</span>
+            </div>
+
+            <div class="grand-total-box">
+              <div class="grand-top">
+                <span class="grand-label">Tổng Thanh Toán Hợp Đồng</span>
+                <span class="grand-number" id="sumGrandTotal">0 đ</span>
+              </div>
+              <div class="grand-words" id="sumGrandWords">Bằng chữ: Không đồng.</div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC VIETQR DEPOSIT BOX -->
+          <div class="deposit-card tabular">
+            <div class="deposit-ratio-tabs" role="tablist" aria-label="Tỷ lệ đặt cọc">
+              <button type="button" class="dep-tab active" data-dep="0.3">Đặt cọc 30% giữ hàng</button>
+              <button type="button" class="dep-tab" data-dep="0.5">Đặt cọc 50% sản xuất</button>
+              <button type="button" class="dep-tab" data-dep="1">Thanh toán 100%</button>
+            </div>
+
+            <div class="qr-standee-grid">
+              <div class="qr-frame" id="vietQrSvgBox" aria-label="Mã VietQR Đặt Cọc Động"></div>
+              <div class="qr-details">
+                <span class="qr-kicker" id="depositKickerLabel">Quét VietQR Đặt Cọc 30% Giữ Khuôn &amp; Giá Sỉ</span>
+                <div class="qr-deposit-val" id="sumDepositAmount">0 đ</div>
+                <div class="qr-bank-line" id="qrBankMetaText">
+                  Ngân hàng: <strong>MB Bank</strong> • STK: <strong>0000000000</strong><br />
+                  Chủ TK: <strong>CONG TY MAU</strong>
+                </div>
+                <div>
+                  <span class="qr-memo-tag" id="qrMemoText">COC BG2611 MINH LONG 30P</span>
+                </div>
+                <div class="emv-crc-note" id="emvCrcBadge">Chuẩn EMVCo NAPAS 247 • Khoá cứng số tiền &amp; nội dung</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRIMARY B2B CLOSING ACTIONS -->
+          <div class="cta-stack">
+            <button type="button" class="btn-primary-print" id="btnPrintA4">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+              </svg>
+              <span>Xuất phiếu báo giá đóng dấu A4 / PDF</span>
+            </button>
+
+            <div class="secondary-cta-row">
+              <button type="button" class="btn-zalo-copy" id="btnCopyZaloOrder">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span>Sao chép đơn chốt gửi Zalo kinh doanh</span>
+              </button>
+              <button type="button" class="btn-outline-soft" id="btnToggleA4Preview">
+                Xem bản A4 đóng dấu
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- FORMAL STAMPED A4 CORPORATE QUOTATION SHEET (FOR @MEDIA PRINT + ON-SCREEN PREVIEW) -->
+    <section class="a4-preview-wrapper" id="a4PreviewWrapper" aria-label="Phiếu báo giá đóng dấu chuẩn A4">
+      <div class="a4-sheet tabular">
+        <div class="a4-letterhead">
+          <div>
+            <div class="a4-supplier-name" id="a4SupplierName">CÔNG TY MẪU — QUÀ TẾT B2B</div>
+            <div style="font-size:12px; color:#433633; margin-top:3px;" id="a4SupplierMeta">
+              MST: 0100000019 • Đ/c: Số 1 Đường Mẫu, Quận Mẫu, TP.HCM<br />
+              Hotline / Zalo Phòng Kinh Doanh Sỉ: 0900 000 000
+            </div>
+          </div>
+          <div class="a4-doc-title-box">
+            <div class="a4-doc-title">BẢNG BÁO GIÁ B2B</div>
+            <div style="font-size:11.5px; color:#6E5D58; margin-top:2px;" id="a4QuoteMeta">
+              Số: #BG-202611-882 • Ngày lập: 31/10/2026<br />
+              Hiệu lực báo giá: 07 ngày kể từ ngày phát hành
+            </div>
+          </div>
+        </div>
+
+        <div class="a4-meta-grid">
+          <div><strong>Kính gửi Đơn vị:</strong> <span id="a4BuyerCompany"></span></div>
+          <div><strong>Mã số thuế:</strong> <span id="a4BuyerTax"></span></div>
+          <div><strong>Người nhận / Phòng ban:</strong> <span id="a4BuyerContact"></span></div>
+          <div><strong>Ngày giao dự kiến:</strong> <span id="a4DeliveryDate"></span></div>
+        </div>
+
+        <table class="a4-table">
+          <thead>
+            <tr>
+              <th style="width:5%;">STT</th>
+              <th style="width:15%;">Mã SKU</th>
+              <th style="width:33%;">Tên Hàng Hóa &amp; Quy Cách</th>
+              <th style="width:7%; text-align:center;">SL</th>
+              <th style="width:13%; text-align:right;">Giá Niêm Yết</th>
+              <th style="width:13%; text-align:right;">Giá Sau CK</th>
+              <th style="width:14%; text-align:right;">Thành Tiền</th>
+            </tr>
+          </thead>
+          <tbody id="a4TableBody"></tbody>
+        </table>
+
+        <div class="a4-bottom-grid">
+          <div class="a4-qr-deposit-box">
+            <div class="a4-qr-mini" id="a4QrMiniBox"></div>
+            <div style="font-size:11.5px; line-height:1.45;">
+              <div style="font-weight:800; color:#4A0E17; text-transform:uppercase;" id="a4DepositHeadline">
+                ĐẶT CỌC GIỮ HÀNG &amp; KHUÔN LOGO (30%)
+              </div>
+              <div style="font-size:15px; font-weight:800; color:#4A0E17; margin:2px 0;" id="a4DepositAmount">0 đ</div>
+              <div id="a4BankDetails"></div>
+              <div style="margin-top:3px;">Nội dung CK: <strong id="a4MemoCode"></strong></div>
+            </div>
+          </div>
+
+          <div style="font-size:12px; display:flex; flex-direction:column; gap:5px;">
+            <div style="display:flex; justify-content:space-between;">
+              <span>Tổng tiền hàng niêm yết:</span>
+              <strong id="a4Gross">0 đ</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; color:#047857;">
+              <span id="a4DiscLabel">Chiết khấu bậc thang:</span>
+              <strong id="a4DiscVal">-0 đ</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span>Gia công khắc Laser Logo:</span>
+              <strong id="a4LaserVal">0 đ</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span>Thuế GTGT (8% &amp; 10%):</span>
+              <strong id="a4VatTotal">0 đ</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:14.5px; color:#4A0E17; border-top:1.5px solid #4A0E17; padding-top:5px; margin-top:2px;">
+              <strong>TỔNG CỘNG THANH TOÁN:</strong>
+              <strong id="a4GrandTotal">0 đ</strong>
+            </div>
+            <div style="font-size:11px; font-style:italic; color:#433633;" id="a4GrandWords"></div>
+          </div>
+        </div>
+
+        <div class="a4-stamp-row">
+          <div style="font-size:11.5px; color:#433633; max-width:58%;">
+            <strong>Điều khoản thương mại:</strong> Đơn giá đã áp dụng chính sách chiết khấu gộp số lượng B2B. Tiến độ sản xuất hộp khắc logo từ 05–07 ngày làm việc ngay sau khi hệ thống ghi nhận đặt cọc qua mã VietQR định danh. Hỗ trợ xuất hóa đơn điện tử hợp lệ chuẩn Nghị định 174/2025/NĐ-CP.
+          </div>
+          <div style="display:flex; align-items:center; gap:24px;">
+            <div style="text-align:center; font-size:11.5px;">
+              <strong>ĐẠI DIỆN BÊN MUA</strong><br />
+              <span style="color:#6E5D58; font-size:10.5px;">(Ký, ghi rõ họ tên)</span>
+              <div style="height:64px;"></div>
+            </div>
+            <div style="text-align:center;">
+              <div class="corporate-red-seal">
+                <span style="font-size:9px; font-weight:800; letter-spacing:0.06em;">XÁC THỰC BÁO GIÁ</span>
+                <strong style="font-size:11.5px; margin:3px 0; display:block;" id="a4SealBrand">THƯỢNG ĐỈNH B2B</strong>
+                <span style="font-size:9px; font-weight:700;">ĐÃ DUYỆT CHIẾT KHẤU</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast-banner" id="toastBanner" role="status" aria-live="polite"></div>
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+       * 1. DANH MỤC 15 NGÂN HÀNG NAPAS VIỆT NAM (BIN 6 SỐ CHUẨN EMVCO NAPAS 247)
+       * ========================================================================= */
+      const NAPAS_BANKS = [
+        { code: 'MB',   bin: '970422', name: 'MB Bank (Quân Đội)' },
+        { code: 'VCB',  bin: '970436', name: 'Vietcombank (Ngoại Thương)' },
+        { code: 'TCB',  bin: '970407', name: 'Techcombank (Kỹ Thương)' },
+        { code: 'BIDV', bin: '970418', name: 'BIDV (Đầu Tư & Phát Triển)' },
+        { code: 'ACB',  bin: '970416', name: 'ACB (Á Châu)' },
+        { code: 'VPB',  bin: '970432', name: 'VPBank (VN Thịnh Vượng)' },
+        { code: 'ICB',  bin: '970415', name: 'VietinBank (Công Thương)' },
+        { code: 'TPB',  bin: '970423', name: 'TPBank (Tiên Phong)' },
+        { code: 'STB',  bin: '970403', name: 'Sacombank (Sài Gòn Thương Tín)' },
+        { code: 'VIB',  bin: '970441', name: 'VIB (Quốc Tế)' },
+        { code: 'HDB',  bin: '970437', name: 'HDBank (Phát Triển TP.HCM)' },
+        { code: 'SHB',  bin: '970443', name: 'SHB (Sài Gòn - Hà Nội)' },
+        { code: 'MSB',  bin: '970426', name: 'MSB (Hàng Hải)' },
+        { code: 'OCB',  bin: '970448', name: 'OCB (Phương Đông)' },
+        { code: 'VBA',  bin: '970405', name: 'Agribank (NN & PTNT)' }
+      ];
+
+      /* =========================================================================
+       * 2. BỘ DANH MỤC ĐA NGÀNH B2B THÁNG 11/2026 - TẾT ĐINH MÙI 2027
+       * ========================================================================= */
+      const PRESETS = {
+        tet: {
+          kicker: 'XUÂN ĐINH MÙI 2027 • MÙNG 1 TẾT: 06/02/2027',
+          unitLabel: 'set',
+          laserFeePerUnit: 18000,
+          laserLabel: 'Gia công khắc Laser / Ép kim Logo Doanh nghiệp lên hộp quà (+18.000đ/set)',
+          items: [
+            {
+              sku: 'QT-PHUQUY-01',
+              name: 'Hộp Gỗ Sơn Mài Phú Quý Đoàn Viên',
+              spec: 'Hạt Điều Bình Phước W180, Macca Úc, Yến Chưng Đường Phèn, Trà Shan Tuyết Cổ Thụ + Túi xách ép kim',
+              price: 850000,
+              vat: 8,
+              qty: 80
+            },
+            {
+              sku: 'QT-CHILE-VIP',
+              name: 'Hộp Gỗ Thông Đôi Vang Chile Reserva & Hạt Thượng Hạng',
+              spec: '01 Chai Vang Đỏ Chile Cabernet Sauvignon 14% + Hạnh Nhân Bơ, Dẻ Cười Mỹ, Bộ khui rượu Inox',
+              price: 1250000,
+              vat: 10,
+              qty: 40
+            },
+            {
+              sku: 'QT-HOANGKIM-03',
+              name: 'Vali Da Đôi Hoàng Kim Thượng Đỉnh Yến & Saffron',
+              spec: '06 Hũ Yến Chưng Đông Trùng 35%, Saffron Iran 1g, Táo Đỏ Tân Cương, Mật Ong Hoa Bạc Hà',
+              price: 1680000,
+              vat: 8,
+              qty: 0
+            },
+            {
+              sku: 'QT-ANKHANG-04',
+              name: 'Hộp Cứng Nam Châm An Khang Tri Ân Nhân Viên',
+              spec: 'Hạt Điều Rang Củi, Xoài Sấy Dẻo Xuất Khẩu, Trà Ô Long Cầu Đất, Bánh Quy Bơ Đan Mạch',
+              price: 490000,
+              vat: 8,
+              qty: 0
+            },
+            {
+              sku: 'QT-BORDEAUX-05',
+              name: 'Tuyệt Phẩm Hộp Da Đôi Vang Pháp Bordeaux AOC VIP',
+              spec: '02 Chai Vang Pháp Bordeaux AOC 750ml + Phụ kiện rót vang mạ vàng + Khắc bảng đồng tên Đối tác',
+              price: 2350000,
+              vat: 10,
+              qty: 0
+            }
+          ]
+        },
+        yensao: {
+          kicker: 'XƯỞNG CHƯNG CẤT & GIA CÔNG OEM B2B • ATTP ISO 22000',
+          unitLabel: 'hộp',
+          laserFeePerUnit: 15000,
+          laserLabel: 'In nhũ vàng thương hiệu riêng (OEM) lên đai hộp & nắp hũ (+15.000đ/hộp)',
+          items: [
+            {
+              sku: 'YS-TINHCHE-50G',
+              name: 'Tổ Yến Tinh Chế Thượng Hạng Sợi Phồng (Hộp Quà 50g)',
+              spec: '100% Tổ yến nguyên chất rút lông khô + Tặng kèm Táo đỏ, Đường phèn kết tinh & Nhíp chuyên dụng',
+              price: 1850000,
+              vat: 8,
+              qty: 60
+            },
+            {
+              sku: 'YS-CHUNG-SET6',
+              name: 'Set 06 Hũ Yến Chưng Tươi Đông Trùng Hạ Thảo (35% Yến)',
+              spec: 'Hũ thủy tinh 75ml tiệt trùng hấp áp suất, hạn dùng 12 tháng, hộp cứng quai lụa biếu tặng',
+              price: 540000,
+              vat: 8,
+              qty: 60
+            },
+            {
+              sku: 'HD-BPHUOC-VIP',
+              name: 'Set 04 Hũ Hạt Dinh Dưỡng Xuất Khẩu (Điều W180, Macca, Dẻ Cười)',
+              spec: 'Khối lượng tịnh 1.1kg, rang củi thủ công mới trong tuần, hộp quà Tết ép kim nổi 3D',
+              price: 620000,
+              vat: 8,
+              qty: 0
+            },
+            {
+              sku: 'YS-RUTLONG-100G',
+              name: 'Hộp Gỗ Sơn Mài Yến Rút Lông Nguyên Tổ VIP (100g)',
+              spec: 'Tổ yến tuyển chọn hạng A xuất khẩu, kèm thố sứ chưng điện cao cấp biếu Lãnh đạo',
+              price: 3950000,
+              vat: 8,
+              qty: 0
+            }
+          ]
+        },
+        gomsu: {
+          kicker: 'XƯỞNG GỐM SỨ BÁT TRÀNG & QUÀ TẶNG DOANH NGHIỆP IN LOGO',
+          unitLabel: 'bộ',
+          laserFeePerUnit: 16000,
+          laserLabel: 'Nung hấp Decal Vàng Kim / Khắc Laser Logo lên sản phẩm & hộp xi lụa (+16.000đ/bộ)',
+          items: [
+            {
+              sku: 'GS-AMTRA-01',
+              name: 'Bộ Ấm Chén Sứ Trắng Bát Tràng Viền Kim 24K (01 Ấm + 06 Chén)',
+              spec: 'Men sứ khử chì nung 1.280 độ C, lót hộp xi đỏ lụa vàng sang trọng tặng khách hàng cuối năm',
+              price: 385000,
+              vat: 8,
+              qty: 90
+            },
+            {
+              sku: 'QT-BINHNHIET-02',
+              name: 'Set Giftset Bình Giữ Nhiệt Inox 304 Hiển Thị Nhiệt Độ + Bút Ký',
+              spec: 'Dung tích 500ml giữ nhiệt 12h, hộp cứng mút định hình EVA đen nhám cao cấp cho hội nghị',
+              price: 295000,
+              vat: 8,
+              qty: 50
+            },
+            {
+              sku: 'GS-HUTLOC-VIP',
+              name: 'Bình Hút Tài Lộc Vẽ Vàng Thuận Buồm Xuôi Gió (Cao 28cm)',
+              spec: 'Chế tác thủ công nghệ nhân Bát Tràng, kèm đế gỗ hương & hộp gấm trao tặng Đối tác Chiến lược',
+              price: 1150000,
+              vat: 8,
+              qty: 0
+            },
+            {
+              sku: 'GS-KHAYMUT-04',
+              name: 'Khay Mứt Tết Sứ Hoa Mai 5 Ngăn Kèm Khung Gỗ Tự Nhiên',
+              spec: 'Nắp sứ núm mạ vàng, hộp quà carton sóng E bồi mỹ thuật in thông điệp Chúc Mừng Năm Mới',
+              price: 440000,
+              vat: 8,
+              qty: 0
+            }
+          ]
+        },
+        yte: {
+          kicker: 'TỔNG KHO VẬT TƯ Y TẾ & THIẾT BỊ PHÒNG KHÁM • CHUẨN CO/CQ BỘ Y TẾ',
+          unitLabel: 'thùng',
+          laserFeePerUnit: 12000,
+          laserLabel: 'Đóng tem phụ / In nhãn nhận diện chuỗi Phòng khám - Nhà thuốc (+12.000đ/thùng)',
+          items: [
+            {
+              sku: 'YT-GANG-NITRILE',
+              name: 'Thùng Găng Tay Khám Y Tế Nitrile Không Bột (10 Hộp x 100 Chiếc)',
+              spec: 'Đạt chuẩn ISO 13485 & CE, dẻo dai chống thủng cho Nha khoa, Phòng khám & Thẩm mỹ viện',
+              price: 920000,
+              vat: 8,
+              qty: 70
+            },
+            {
+              sku: 'YT-KHAUTRANG-4D',
+              name: 'Thùng Khẩu Trang Y Tế Kháng Khuẩn 4 Lớp Chuẩn Xuất Khẩu (50 Hộp)',
+              spec: 'Giấy lọc Meltblown BFE > 99%, thanh nẹp mũi êm, đầy đủ hồ sơ công bố Sở Y Tế',
+              price: 680000,
+              vat: 8,
+              qty: 50
+            },
+            {
+              sku: 'YT-HUYETAP-BAP',
+              name: 'Lô 05 Máy Đo Huyết Áp Bắp Tay Tự Động Cảnh Báo Nhịp Tim (Quà Sức Khỏe)',
+              spec: 'Màn hình LCD lớn, bộ nhớ 90 lần đo, bảo hành chính hãng 5 năm (Phù hợp làm quà tri ân VIP)',
+              price: 3450000,
+              vat: 8,
+              qty: 0
+            },
+            {
+              sku: 'YT-CON-GAC-SET',
+              name: 'Combo Vật Tư Tiêu Hao Phòng Thủ Thuật (Bông Gạc Vô Trùng + Cồn 70 Độ)',
+              spec: 'Đóng thùng tiêu chuẩn 24 gói gạc phẫu thuật tiệt trùng EO + 20 chai dung dịch sát khuẩn 500ml',
+              price: 1180000,
+              vat: 8,
+              qty: 0
+            }
+          ]
+        }
+      };
+
+      /* =========================================================================
+       * 3. CHÍNH SÁCH CHIẾT KHẤU BẬC THANG B2B (TIERED VOLUME PRICING ENGINE)
+       * ========================================================================= */
+      const VOLUME_TIERS = [
+        { min: 1,   max: 9,        rate: 0.00, freeLaser: false, name: 'Bậc 0 (Đơn mẫu lẻ)',       nextMin: 10,  nextRate: 5  },
+        { min: 10,  max: 49,       rate: 0.05, freeLaser: false, name: 'Bậc 1 (10–49: -5%)',       nextMin: 50,  nextRate: 12 },
+        { min: 50,  max: 99,       rate: 0.12, freeLaser: true,  name: 'Bậc 2 (50–99: -12%)',      nextMin: 100, nextRate: 18 },
+        { min: 100, max: 299,      rate: 0.18, freeLaser: true,  name: 'Bậc 3 (100–299: -18%)',    nextMin: 300, nextRate: 25 },
+        { min: 300, max: Infinity, rate: 0.25, freeLaser: true,  name: 'Bậc 4 (300+: -25% VIP)',   nextMin: null, nextRate: null }
+      ];
+
+      function resolveVolumeTier(totalQty) {
+        if (totalQty <= 0) {
+          return { idx: -1, rate: 0, freeLaser: false, name: 'Chưa chọn số lượng', nextMin: 10, nextRate: 5 };
+        }
+        for (let i = 0; i < VOLUME_TIERS.length; i++) {
+          const t = VOLUME_TIERS[i];
+          if (totalQty >= t.min && totalQty <= t.max) {
+            return {
+              idx: i,
+              rate: t.rate,
+              freeLaser: t.freeLaser,
+              name: t.name,
+              nextMin: t.nextMin,
+              nextRate: t.nextRate
+            };
+          }
+        }
+        return { idx: 4, rate: 0.25, freeLaser: true, name: VOLUME_TIERS[4].name, nextMin: null, nextRate: null };
+      }
+
+      /* =========================================================================
+       * 4. EMVCO NAPAS 247 VIETQR + PURE-JS ISO/IEC 18004 QR CODE ENCODER (OFFLINE)
+       * ========================================================================= */
+      function tlv(id, value) {
+        const str = String(value || '');
+        const len = String(str.length).padStart(2, '0');
+        return id + len + str;
+      }
+
+      function crc16CcittFalse(asciiStr) {
+        let crc = 0xFFFF;
+        for (let i = 0; i < asciiStr.length; i++) {
+          crc ^= (asciiStr.charCodeAt(i) & 0xFF) << 8;
+          for (let b = 0; b < 8; b++) {
+            if ((crc & 0x8000) !== 0) {
+              crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+            } else {
+              crc = (crc << 1) & 0xFFFF;
+            }
+          }
+        }
+        return crc.toString(16).toUpperCase().padStart(4, '0');
+      }
+
+      function stripVietnameseTones(str) {
+        return String(str || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd')
+          .replace(/Đ/g, 'D')
+          .replace(/[^A-Za-z0-9 ]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function buildVietQrEmvPayload(bankBin, accountNo, amountVnd, orderMemo) {
+        const cleanAcc = String(accountNo || '').replace(/[^0-9A-Za-z]/g, '').slice(0, 25) || '0000000000';
+        const cleanBin = String(bankBin || '970422').replace(/\D/g, '').slice(0, 6) || '970422';
+        const intAmount = Math.max(0, Math.round(Number(amountVnd) || 0));
+        const cleanMemo = stripVietnameseTones(orderMemo).toUpperCase().slice(0, 46);
+
+        const beneficiary = tlv('00', cleanBin) + tlv('01', cleanAcc);
+        const consumerAccountInfo = tlv('38',
+          tlv('00', 'A000000727') +
+          tlv('01', beneficiary) +
+          tlv('02', 'QRIBFTTA')
+        );
+
+        const pointOfInitiation = intAmount > 0 ? '010212' : '010211';
+        const amountTag = intAmount > 0 ? tlv('54', String(intAmount)) : '';
+        const additionalDataTag = cleanMemo ? tlv('62', tlv('08', cleanMemo)) : '';
+
+        const payloadWithoutCrc =
+          '000201' +
+          pointOfInitiation +
+          consumerAccountInfo +
+          '5303704' +
+          amountTag +
+          '5802VN' +
+          additionalDataTag +
+          '6304';
+
+        return payloadWithoutCrc + crc16CcittFalse(payloadWithoutCrc);
+      }
+
+      const QrIso18004 = (function () {
+        const RS_BLOCKS_M = {
+          1:  [1, 26, 16],
+          2:  [1, 44, 28],
+          3:  [1, 70, 44],
+          4:  [2, 50, 32],
+          5:  [2, 67, 43],
+          6:  [4, 43, 27],
+          7:  [4, 49, 31],
+          8:  [2, 60, 38, 2, 61, 39],
+          9:  [3, 58, 36, 2, 59, 37],
+          10: [4, 69, 43, 1, 70, 44],
+          11: [1, 80, 50, 4, 81, 51],
+          12: [6, 58, 36, 2, 59, 37]
+        };
+
+        const ALIGN_POS = {
+          1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34],
+          7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50],
+          11: [6, 30, 54], 12: [6, 32, 58]
+        };
+
+        const EXP = new Uint8Array(512);
+        const LOG = new Uint8Array(256);
+        (function initGf256() {
+          let x = 1;
+          for (let i = 0; i < 255; i++) {
+            EXP[i] = x;
+            LOG[x] = i;
+            x <<= 1;
+            if (x & 0x100) x ^= 0x11D;
+          }
+          for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+        })();
+
+        function gfMul(a, b) {
+          if (a === 0 || b === 0) return 0;
+          return EXP[LOG[a] + LOG[b]];
+        }
+
+        function polyMul(p, q) {
+          const out = new Uint8Array(p.length + q.length - 1);
+          for (let i = 0; i < p.length; i++) {
+            for (let j = 0; j < q.length; j++) {
+              out[i + j] ^= gfMul(p[i], q[j]);
+            }
+          }
+          return out;
+        }
+
+        function rsGeneratorPoly(ecLen) {
+          let poly = new Uint8Array([1]);
+          for (let i = 0; i < ecLen; i++) {
+            poly = polyMul(poly, new Uint8Array([1, EXP[i]]));
+          }
+          return poly;
+        }
+
+        function rsComputeEc(dataBytes, ecLen) {
+          const gen = rsGeneratorPoly(ecLen);
+          const msg = new Uint8Array(dataBytes.length + ecLen);
+          msg.set(dataBytes, 0);
+          for (let i = 0; i < dataBytes.length; i++) {
+            const coef = msg[i];
+            if (coef !== 0) {
+              for (let j = 1; j < gen.length; j++) {
+                msg[i + j] ^= gfMul(gen[j], coef);
+              }
+            }
+          }
+          return msg.slice(dataBytes.length);
+        }
+
+        function expandRsBlocks(spec) {
+          const list = [];
+          for (let i = 0; i < spec.length; i += 3) {
+            const count = spec[i], totalCount = spec[i + 1], dataCount = spec[i + 2];
+            for (let c = 0; c < count; c++) {
+              list.push({ totalCount: totalCount, dataCount: dataCount, ecCount: totalCount - dataCount });
+            }
+          }
+          return list;
+        }
+
+        function pickVersion(byteLen) {
+          for (let v = 1; v <= 12; v++) {
+            const blocks = expandRsBlocks(RS_BLOCKS_M[v]);
+            const totalDataBytes = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+            const lenBits = v < 10 ? 8 : 16;
+            const maxPayload = Math.floor((totalDataBytes * 8 - 4 - lenBits) / 8);
+            if (byteLen <= maxPayload) return v;
+          }
+          throw new Error('Chuỗi QR vượt dung lượng Version 12.');
+        }
+
+        function bchDigit(data) {
+          let digit = 0;
+          while (data !== 0) { digit++; data >>>= 1; }
+          return digit;
+        }
+
+        function getBchTypeInfo(data) {
+          let d = data << 10;
+          while (bchDigit(d) - bchDigit(0x537) >= 0) {
+            d ^= (0x537 << (bchDigit(d) - bchDigit(0x537)));
+          }
+          return ((data << 10) | d) ^ 0x5412;
+        }
+
+        function getBchTypeNumber(version) {
+          let d = version << 12;
+          while (bchDigit(d) - bchDigit(0x1F25) >= 0) {
+            d ^= (0x1F25 << (bchDigit(d) - bchDigit(0x1F25)));
+          }
+          return (version << 12) | d;
+        }
+
+        function buildCodewords(version, utf8Bytes) {
+          const blocks = expandRsBlocks(RS_BLOCKS_M[version]);
+          const totalDataBytes = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+          const bits = [];
+          function pushBits(val, len) {
+            for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1);
+          }
+
+          pushBits(0x4, 4);
+          pushBits(utf8Bytes.length, version < 10 ? 8 : 16);
+          for (let i = 0; i < utf8Bytes.length; i++) pushBits(utf8Bytes[i], 8);
+
+          const maxBits = totalDataBytes * 8;
+          for (let i = 0; i < 4 && bits.length < maxBits; i++) bits.push(0);
+          while (bits.length % 8 !== 0) bits.push(0);
+
+          const dataCodewords = new Uint8Array(totalDataBytes);
+          let byteIdx = 0;
+          for (let i = 0; i < bits.length; i += 8) {
+            let b = 0;
+            for (let k = 0; k < 8; k++) b = (b << 1) | bits[i + k];
+            dataCodewords[byteIdx++] = b;
+          }
+          let padToggle = true;
+          while (byteIdx < totalDataBytes) {
+            dataCodewords[byteIdx++] = padToggle ? 0xEC : 0x11;
+            padToggle = !padToggle;
+          }
+
+          let offset = 0;
+          const dcBlocks = [], ecBlocks = [];
+          let maxDc = 0, maxEc = 0;
+          for (let i = 0; i < blocks.length; i++) {
+            const b = blocks[i];
+            const slice = dataCodewords.slice(offset, offset + b.dataCount);
+            offset += b.dataCount;
+            const ec = rsComputeEc(slice, b.ecCount);
+            dcBlocks.push(slice);
+            ecBlocks.push(ec);
+            if (b.dataCount > maxDc) maxDc = b.dataCount;
+            if (b.ecCount > maxEc) maxEc = b.ecCount;
+          }
+
+          const finalBytes = [];
+          for (let c = 0; c < maxDc; c++) {
+            for (let r = 0; r < dcBlocks.length; r++) {
+              if (c < dcBlocks[r].length) finalBytes.push(dcBlocks[r][c]);
+            }
+          }
+          for (let c = 0; c < maxEc; c++) {
+            for (let r = 0; r < ecBlocks.length; r++) {
+              if (c < ecBlocks[r].length) finalBytes.push(ecBlocks[r][c]);
+            }
+          }
+          return finalBytes;
+        }
+
+        function maskBit(maskPattern, r, c) {
+          switch (maskPattern) {
+            case 0: return (r + c) % 2 === 0;
+            case 1: return r % 2 === 0;
+            case 2: return c % 3 === 0;
+            case 3: return (r + c) % 3 === 0;
+            case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+            case 5: return ((r * c) % 2) + ((r * c) % 3) === 0;
+            case 6: return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+            case 7: return (((r * c) % 3) + ((r + c) % 2)) % 2 === 0;
+            default: return false;
+          }
+        }
+
+        function createMatrixWithMask(version, codewords, maskPattern) {
+          const size = version * 4 + 17;
+          const modules = Array.from({ length: size }, function () { return new Array(size).fill(null); });
+
+          function placeFinder(row, col) {
+            for (let r = -1; r <= 7; r++) {
+              if (row + r < 0 || row + r >= size) continue;
+              for (let c = -1; c <= 7; c++) {
+                if (col + c < 0 || col + c >= size) continue;
+                const on = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                           (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                           (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+                modules[row + r][col + c] = on;
+              }
+            }
+          }
+
+          placeFinder(0, 0);
+          placeFinder(size - 7, 0);
+          placeFinder(0, size - 7);
+
+          const pos = ALIGN_POS[version];
+          for (let i = 0; i < pos.length; i++) {
+            for (let j = 0; j < pos.length; j++) {
+              const row = pos[i], col = pos[j];
+              if (modules[row][col] !== null) continue;
+              for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                  modules[row + r][col + c] =
+                    r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0);
+                }
+              }
+            }
+          }
+
+          for (let i = 8; i < size - 8; i++) {
+            if (modules[i][6] === null) modules[i][6] = (i % 2 === 0);
+            if (modules[6][i] === null) modules[6][i] = (i % 2 === 0);
+          }
+
+          if (version >= 7) {
+            const vBits = getBchTypeNumber(version);
+            for (let i = 0; i < 18; i++) {
+              const bit = ((vBits >>> i) & 1) === 1;
+              modules[Math.floor(i / 3)][(i % 3) + size - 11] = bit;
+              modules[(i % 3) + size - 11][Math.floor(i / 3)] = bit;
+            }
+          }
+
+          const fBits = getBchTypeInfo((0 << 3) | maskPattern);
+          for (let i = 0; i < 15; i++) {
+            const bit = ((fBits >>> i) & 1) === 1;
+            if (i < 6) modules[i][8] = bit;
+            else if (i < 8) modules[i + 1][8] = bit;
+            else modules[size - 15 + i][8] = bit;
+
+            if (i < 8) modules[8][size - i - 1] = bit;
+            else if (i < 9) modules[8][15 - i - 1 + 1] = bit;
+            else modules[8][15 - i - 1] = bit;
+          }
+          modules[size - 8][8] = true;
+
+          let inc = -1, row = size - 1, bitIndex = 7, byteIndex = 0;
+          for (let col = size - 1; col > 0; col -= 2) {
+            if (col === 6) col--;
+            while (true) {
+              for (let c = 0; c < 2; c++) {
+                if (modules[row][col - c] === null) {
+                  let dark = false;
+                  if (byteIndex < codewords.length) {
+                    dark = ((codewords[byteIndex] >>> bitIndex) & 1) === 1;
+                  }
+                  if (maskBit(maskPattern, row, col - c)) dark = !dark;
+                  modules[row][col - c] = dark;
+                  bitIndex--;
+                  if (bitIndex === -1) {
+                    byteIndex++;
+                    bitIndex = 7;
+                  }
+                }
+              }
+              row += inc;
+              if (row < 0 || row >= size) {
+                row -= inc;
+                inc = -inc;
+                break;
+              }
+            }
+          }
+          return modules;
+        }
+
+        function penaltyScore(modules) {
+          const n = modules.length;
+          let score = 0;
+          for (let r = 0; r < n; r++) {
+            let runColor = modules[r][0], runLen = 1;
+            for (let c = 1; c < n; c++) {
+              if (modules[r][c] === runColor) runLen++;
+              else {
+                if (runLen >= 5) score += 3 + (runLen - 5);
+                runColor = modules[r][c];
+                runLen = 1;
+              }
+            }
+            if (runLen >= 5) score += 3 + (runLen - 5);
+          }
+          for (let c = 0; c < n; c++) {
+            let runColor = modules[0][c], runLen = 1;
+            for (let r = 1; r < n; r++) {
+              if (modules[r][c] === runColor) runLen++;
+              else {
+                if (runLen >= 5) score += 3 + (runLen - 5);
+                runColor = modules[r][c];
+                runLen = 1;
+              }
+            }
+            if (runLen >= 5) score += 3 + (runLen - 5);
+          }
+          for (let r = 0; r < n - 1; r++) {
+            for (let c = 0; c < n - 1; c++) {
+              const v = modules[r][c];
+              if (v === modules[r][c + 1] && v === modules[r + 1][c] && v === modules[r + 1][c + 1]) {
+                score += 3;
+              }
+            }
+          }
+          return score;
+        }
+
+        function toSvg(text) {
+          const utf8 = new TextEncoder().encode(text);
+          const version = pickVersion(utf8.length);
+          const codewords = buildCodewords(version, utf8);
+
+          let bestMatrix = null, bestPenalty = Infinity;
+          for (let m = 0; m < 8; m++) {
+            const candidate = createMatrixWithMask(version, codewords, m);
+            const p = penaltyScore(candidate);
+            if (p < bestPenalty) {
+              bestPenalty = p;
+              bestMatrix = candidate;
+            }
+          }
+
+          const n = bestMatrix.length;
+          const quiet = 3;
+          const total = n + quiet * 2;
+          let pathData = '';
+          for (let r = 0; r < n; r++) {
+            for (let c = 0; c < n; c++) {
+              if (bestMatrix[r][c]) {
+                pathData += 'M' + (c + quiet) + ',' + (r + quiet) + 'h1v1h-1z';
+              }
+            }
+          }
+
+          return (
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + total + ' ' + total + '" shape-rendering="crispEdges">' +
+            '<rect width="' + total + '" height="' + total + '" fill="#FFFFFF"/>' +
+            '<path d="' + pathData + '" fill="#2A060C"/>' +
+            '</svg>'
+          );
+        }
+
+        return { toSvg: toSvg };
+      })();
+
+      /* =========================================================================
+       * 5. CHUYỂN SỐ TIỀN VND SANG CHỮ TIẾNG VIỆT CHUẨN KẾ TOÁN HỢP ĐỒNG
+       * ========================================================================= */
+      function vndToVietnameseWords(amount) {
+        const n = Math.round(Math.max(0, Number(amount) || 0));
+        if (n === 0) return 'Không đồng chẵn.';
+        const digits = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+        const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ'];
+
+        function readTriple(num, showZeroHundred) {
+          const h = Math.floor(num / 100);
+          const t = Math.floor((num % 100) / 10);
+          const u = num % 10;
+          const parts = [];
+          if (h > 0 || showZeroHundred) {
+            parts.push(digits[h] + ' trăm');
+          }
+          if (t > 1) {
+            parts.push(digits[t] + ' mươi');
+            if (u === 1) parts.push('mốt');
+            else if (u === 5) parts.push('lăm');
+            else if (u > 0) parts.push(digits[u]);
+          } else if (t === 1) {
+            parts.push('mười');
+            if (u === 5) parts.push('lăm');
+            else if (u > 0) parts.push(digits[u]);
+          } else if (t === 0 && u > 0) {
+            if (h > 0 || showZeroHundred) parts.push('lẻ');
+            parts.push(digits[u]);
+          }
+          return parts.join(' ');
+        }
+
+        const groups = [];
+        let temp = n;
+        while (temp > 0) {
+          groups.push(temp % 1000);
+          temp = Math.floor(temp / 1000);
+        }
+
+        const words = [];
+        for (let i = groups.length - 1; i >= 0; i--) {
+          if (groups[i] > 0) {
+            const showZeroHundred = i < groups.length - 1;
+            const seg = readTriple(groups[i], showZeroHundred);
+            words.push(seg + (units[i] ? ' ' + units[i] : ''));
+          }
+        }
+        const sentence = words.join(' ').replace(/\s+/g, ' ').trim();
+        return sentence.charAt(0).toUpperCase() + sentence.slice(1) + ' đồng chẵn.';
+      }
+
+      function formatVnd(n) {
+        const val = Math.round(Number(n) || 0);
+        return val.toLocaleString('vi-VN') + ' đ';
+      }
+
+      function escapeHtml(s) {
+        return String(s || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      /* =========================================================================
+       * 6. TRẠNG THÁI ỨNG DỤNG & CÁ NHÂN HÓA 1 GIÂY QUA URL QUERY PARAMS
+       * ========================================================================= */
+      const state = {
+        brand: 'CÔNG TY MẪU — QUÀ TẾT B2B',
+        sub: 'Bộ Sưu Tập Quà Tết Doanh Nghiệp Đinh Mùi 2027 — Chiết Khấu Xưởng Tự Động & Khắc Laser Logo',
+        phone: '0900 000 000',
+        mst: '0100000019',
+        addr: 'Số 1 Đường Mẫu, Quận Mẫu, TP.HCM',
+        bankBin: '970422',
+        acc: '0000000000',
+        holder: 'CONG TY MAU',
+        presetKey: 'tet',
+        unitLabel: 'set',
+        laserFeePerUnit: 18000,
+        depositRatio: 0.3,
+        vatMode: 'auto',
+        quoteCode: 'BG-2611-' + String(Math.floor(100 + Math.random() * 899)),
+        items: [],
+        lastSummary: null
+      };
+
+      // Populate Bank Select
+      const cfgBankSelect = document.getElementById('cfgBankBin');
+      NAPAS_BANKS.forEach(function (b) {
+        const opt = document.createElement('option');
+        opt.value = b.bin;
+        opt.textContent = b.code + ' — ' + b.name + ' (BIN ' + b.bin + ')';
+        cfgBankSelect.appendChild(opt);
+      });
+
+      function findBankByBin(bin) {
+        return NAPAS_BANKS.find(function (b) { return b.bin === bin; }) || NAPAS_BANKS[0];
+      }
+
+      function loadPreset(presetKey) {
+        const key = PRESETS[presetKey] ? presetKey : 'tet';
+        state.presetKey = key;
+        const p = PRESETS[key];
+        state.unitLabel = p.unitLabel;
+        state.laserFeePerUnit = p.laserFeePerUnit;
+        state.items = p.items.map(function (it) {
+          return {
+            sku: it.sku,
+            name: it.name,
+            spec: it.spec,
+            price: it.price,
+            vat: it.vat,
+            qty: it.qty
+          };
+        });
+        document.getElementById('seasonKickerText').textContent = p.kicker;
+        const laserSpan = document.querySelector('#chkLogoLaser + span');
+        if (laserSpan) laserSpan.textContent = p.laserLabel;
+        document.querySelectorAll('.preset-btn').forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-preset') === key);
+        });
+      }
+
+      function applyUrlQueryPersonalization() {
+        const params = new URLSearchParams(window.location.search);
+        const presetParam = params.get('preset');
+        loadPreset(presetParam || 'tet');
+
+        if (params.get('brand'))  state.brand   = params.get('brand').trim();
+        if (params.get('sub'))    state.sub     = params.get('sub').trim();
+        if (params.get('phone'))  state.phone   = params.get('phone').trim();
+        if (params.get('mst'))    state.mst     = params.get('mst').trim();
+        if (params.get('addr'))   state.addr    = params.get('addr').trim();
+        if (params.get('bin'))    state.bankBin = params.get('bin').replace(/\D/g, '').slice(0, 6) || '970422';
+        if (params.get('acc'))    state.acc     = params.get('acc').trim();
+        if (params.get('holder')) state.holder  = stripVietnameseTones(params.get('holder')).toUpperCase();
+        else if (params.get('brand')) {
+          state.holder = stripVietnameseTones(state.brand).toUpperCase().slice(0, 32);
+        }
+        if (params.get('quote'))  state.quoteCode = params.get('quote').trim();
+
+        syncConfigInputsFromState();
+
+        const csvUrl = params.get('csv');
+        if (csvUrl) {
+          document.getElementById('cfgSheetCsvUrl').value = csvUrl;
+          fetchGoogleSheetCsv(csvUrl);
+        }
+      }
+
+      function syncConfigInputsFromState() {
+        document.getElementById('cfgBrand').value   = state.brand;
+        document.getElementById('cfgPhone').value   = state.phone;
+        document.getElementById('cfgMst').value     = state.mst;
+        document.getElementById('cfgAddr').value    = state.addr;
+        document.getElementById('cfgBankBin').value = findBankByBin(state.bankBin).bin;
+        document.getElementById('cfgAcc').value     = state.acc;
+        document.getElementById('cfgHolder').value  = state.holder;
+
+        document.getElementById('brandTitleDisplay').textContent = state.brand;
+        document.getElementById('brandSubDisplay').textContent   = state.sub;
+        document.getElementById('brandPhoneDisplay').textContent = state.phone;
+      }
+
+      /* =========================================================================
+       * 7. RENDER BẢNG SKU & TÍNH TOÁN CHIẾT KHẤU + VAT 8%/10% + VIETQR ĐỘNG
+       * ========================================================================= */
+      function renderCatalogRows() {
+        const tbody = document.getElementById('skuTableBody');
+        const totalQty = state.items.reduce(function (s, it) { return s + (Math.max(0, parseInt(it.qty, 10) || 0)); }, 0);
+        const tier = resolveVolumeTier(totalQty);
+        const vatMode = document.getElementById('vatModeSelect').value;
+
+        let html = '';
+        state.items.forEach(function (it, idx) {
+          const qty = Math.max(0, parseInt(it.qty, 10) || 0);
+          const unitNet = Math.round(it.price * (1 - tier.rate));
+          const lineNet = unitNet * qty;
+          const effVat = vatMode === 'none' ? 0 : (vatMode === 'vat8' ? 8 : (vatMode === 'vat10' ? 10 : it.vat));
+
+          html += '<tr class="' + (qty > 0 ? 'active-row' : '') + '">' +
+            '<td>' +
+              '<span class="sku-code-pill tabular">' + escapeHtml(it.sku) + '</span>' +
+              '<div class="sku-name">' + escapeHtml(it.name) + '</div>' +
+              '<div class="sku-spec">' + escapeHtml(it.spec) + '</div>' +
+            '</td>' +
+            '<td style="text-align:center;">' +
+              '<span class="vat-pill ' + (effVat === 10 ? 'vat10' : 'vat8') + ' tabular">VAT ' + effVat + '%</span>' +
+            '</td>' +
+            '<td style="text-align:right;" class="tabular">' +
+              (tier.rate > 0 ? '<span class="price-orig">' + formatVnd(it.price) + '</span>' : '') +
+              '<span class="price-net">' + formatVnd(unitNet) + '</span>' +
+            '</td>' +
+            '<td style="text-align:center;">' +
+              '<div class="qty-stepper tabular">' +
+                '<button type="button" data-action="dec" data-idx="' + idx + '" aria-label="Giảm số lượng">&minus;</button>' +
+                '<input type="number" min="0" max="99999" value="' + qty + '" data-idx="' + idx + '" class="sku-qty-input tabular" aria-label="Số lượng ' + escapeHtml(it.sku) + '" />' +
+                '<button type="button" data-action="inc" data-idx="' + idx + '" aria-label="Tăng số lượng">+</button>' +
+              '</div>' +
+            '</td>' +
+            '<td style="text-align:right;" class="line-total tabular">' + formatVnd(lineNet) + '</td>' +
+          '</tr>';
+        });
+        tbody.innerHTML = html;
+      }
+
+      function recalculateAll(shouldRebuildRows) {
+        const vatMode = document.getElementById('vatModeSelect').value;
+        state.vatMode = vatMode;
+
+        const totalQty = state.items.reduce(function (s, it) {
+          return s + Math.max(0, parseInt(it.qty, 10) || 0);
+        }, 0);
+        const activeSkus = state.items.filter(function (it) { return (parseInt(it.qty, 10) || 0) > 0; }).length;
+        const tier = resolveVolumeTier(totalQty);
+
+        if (shouldRebuildRows) {
+          renderCatalogRows();
+        } else {
+          // Update row prices & line totals in-place without losing input focus
+          const rows = document.querySelectorAll('#skuTableBody tr');
+          state.items.forEach(function (it, idx) {
+            const tr = rows[idx];
+            if (!tr) return;
+            const qty = Math.max(0, parseInt(it.qty, 10) || 0);
+            tr.classList.toggle('active-row', qty > 0);
+            const unitNet = Math.round(it.price * (1 - tier.rate));
+            const effVat = vatMode === 'none' ? 0 : (vatMode === 'vat8' ? 8 : (vatMode === 'vat10' ? 10 : it.vat));
+            const tds = tr.querySelectorAll('td');
+            if (tds[1]) {
+              tds[1].innerHTML = '<span class="vat-pill ' + (effVat === 10 ? 'vat10' : 'vat8') + ' tabular">VAT ' + effVat + '%</span>';
+            }
+            if (tds[2]) {
+              tds[2].innerHTML = (tier.rate > 0 ? '<span class="price-orig">' + formatVnd(it.price) + '</span>' : '') +
+                '<span class="price-net">' + formatVnd(unitNet) + '</span>';
+            }
+            if (tds[4]) {
+              tds[4].textContent = formatVnd(unitNet * qty);
+            }
+          });
+        }
+
+        // Highlight active Tier card & Upsell Nudge
+        document.querySelectorAll('#tierStepsContainer .tier-step').forEach(function (el) {
+          const idx = parseInt(el.getAttribute('data-tier-idx'), 10);
+          el.classList.toggle('current', idx === tier.idx);
+          el.classList.toggle('unlocked', tier.idx >= 0 && idx < tier.idx);
+        });
+
+        const upsellEl = document.getElementById('upsellNudgeBanner');
+        if (totalQty === 0) {
+          upsellEl.innerHTML = 'Chọn từ <strong>10 ' + state.unitLabel + '</strong> để mở khóa chiết khấu sỉ <strong>-5%</strong>';
+        } else if (tier.nextMin !== null) {
+          const needMore = tier.nextMin - totalQty;
+          upsellEl.innerHTML = 'Đang hưởng <strong>-' + Math.round(tier.rate * 100) + '%</strong> • Đặt thêm <strong>' +
+            needMore + ' ' + state.unitLabel + '</strong> (mốc ' + tier.nextMin + ') nhận ngay <strong>-' + tier.nextRate + '%</strong>';
+        } else {
+          upsellEl.innerHTML = 'Đã đạt đỉnh <strong>Giá Sỉ Nhà Máy VIP (-25%)</strong> + Khuôn hộp độc quyền';
+        }
+
+        // Compute Gross, Discount, Laser Customization, VAT 8% & VAT 10%
+        let grossTotal = 0;
+        let netSub8 = 0;
+        let netSub10 = 0;
+
+        state.items.forEach(function (it) {
+          const qty = Math.max(0, parseInt(it.qty, 10) || 0);
+          if (qty <= 0) return;
+          grossTotal += it.price * qty;
+          const unitNet = Math.round(it.price * (1 - tier.rate));
+          const lineNet = unitNet * qty;
+          const effVat = vatMode === 'none' ? 0 : (vatMode === 'vat8' ? 8 : (vatMode === 'vat10' ? 10 : it.vat));
+          if (effVat === 8) netSub8 += lineNet;
+          else if (effVat === 10) netSub10 += lineNet;
+          else netSub8 += lineNet;
+        });
+
+        const netGoods = netSub8 + netSub10;
+        const discountVal = Math.max(0, grossTotal - netGoods);
+
+        const wantLaser = document.getElementById('chkLogoLaser').checked;
+        let laserCharge = 0;
+        const laserBadge = document.getElementById('laserPerkBadge');
+        if (!wantLaser || totalQty === 0) {
+          laserCharge = 0;
+          laserBadge.textContent = 'MIỄN PHÍ TỪ 50 ' + state.unitLabel.toUpperCase();
+        } else if (tier.freeLaser) {
+          laserCharge = 0;
+          const waived = totalQty * state.laserFeePerUnit;
+          laserBadge.textContent = 'ĐÃ TẶNG MIỄN PHÍ (' + formatVnd(waived) + ')';
+        } else {
+          laserCharge = totalQty * state.laserFeePerUnit;
+          laserBadge.textContent = 'CÒN ' + (50 - totalQty) + ' ' + state.unitLabel.toUpperCase() + ' ĐỂ MIỄN PHÍ';
+        }
+
+        // Laser fee follows 8% VAT service reduction unless VAT mode is 10% or none
+        const netBeforeVat = netGoods + laserCharge;
+        let vat8Val = 0;
+        let vat10Val = 0;
+        if (vatMode === 'auto') {
+          vat8Val = Math.round((netSub8 + laserCharge) * 0.08);
+          vat10Val = Math.round(netSub10 * 0.10);
+        } else if (vatMode === 'vat8') {
+          vat8Val = Math.round(netBeforeVat * 0.08);
+        } else if (vatMode === 'vat10') {
+          vat10Val = Math.round(netBeforeVat * 0.10);
+        }
+
+        const grandTotal = netBeforeVat + vat8Val + vat10Val;
+        const depositAmount = Math.round(grandTotal * state.depositRatio);
+        const pctDeposit = Math.round(state.depositRatio * 100);
+
+        // Update Summary DOM
+        document.getElementById('catalogFooterSummary').textContent =
+          'Đã chọn ' + activeSkus + ' mã hàng • Tổng gộp: ' + totalQty + ' ' + state.unitLabel;
+        document.getElementById('quoteCodeSubtitle').textContent = 'Mã báo giá: #' + state.quoteCode;
+        document.getElementById('sumTotalQty').textContent = totalQty + ' ' + state.unitLabel;
+        document.getElementById('sumGrossAmount').textContent = formatVnd(grossTotal);
+        document.getElementById('sumDiscountLabel').textContent =
+          'Chiết khấu bậc thang (-' + Math.round(tier.rate * 100) + '%):';
+        document.getElementById('sumDiscountAmount').textContent = '-' + formatVnd(discountVal);
+
+        if (!wantLaser || totalQty === 0) {
+          document.getElementById('sumLaserAmount').textContent = 'Không chọn (0 đ)';
+        } else if (tier.freeLaser) {
+          document.getElementById('sumLaserAmount').textContent = '0 đ (Miễn phí B2B ≥ 50 ' + state.unitLabel + ')';
+        } else {
+          document.getElementById('sumLaserAmount').textContent = formatVnd(laserCharge);
+        }
+
+        document.getElementById('sumNetBeforeVat').textContent = formatVnd(netBeforeVat);
+        document.getElementById('sumVat8').textContent = formatVnd(vat8Val);
+        document.getElementById('sumVat10').textContent = formatVnd(vat10Val);
+        document.getElementById('rowVat8').style.display = (vatMode === 'vat10' || vatMode === 'none') ? 'none' : 'flex';
+        document.getElementById('rowVat10').style.display = (vatMode === 'vat8' || vatMode === 'none') ? 'none' : 'flex';
+
+        document.getElementById('sumGrandTotal').textContent = formatVnd(grandTotal);
+        document.getElementById('sumGrandWords').textContent = 'Bằng chữ: ' + vndToVietnameseWords(grandTotal);
+
+        // Build VietQR Dynamic Deposit Payload & SVG
+        const buyerNameRaw = document.getElementById('buyerCompany').value || 'KHACH B2B';
+        const buyerTokens = stripVietnameseTones(buyerNameRaw)
+          .toUpperCase()
+          .replace(/\b(CONG TY|TNHH|CO PHAN|CP|TM|DV|MTV|THUONG MAI|CONG NGHE| DICH VU|TAP DOAN)\b/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        const shortBuyer = (buyerTokens.length > 14 ? buyerTokens.slice(-14).trim() : buyerTokens) || 'DOANHNGHIEP';
+
+        const memoStr = ('COC ' + state.quoteCode.replace(/[^A-Za-z0-9]/g, '') + ' ' + shortBuyer + ' ' + pctDeposit + 'P').slice(0, 42);
+        const bankObj = findBankByBin(state.bankBin);
+        const cleanAccDigits = String(state.acc || '').replace(/[^0-9A-Za-z]/g, '');
+        const isDemoSandboxAcc = !cleanAccDigits || /^0+$/.test(cleanAccDigits) || cleanAccDigits.length < 6;
+        const emvPayload = isDemoSandboxAcc ? '' : buildVietQrEmvPayload(bankObj.bin, state.acc, depositAmount, memoStr);
+        const qrSvgMarkup = isDemoSandboxAcc
+          ? '<div style="padding:10px 8px;border:2px dashed #B91C1C;border-radius:8px;background:#FEF2F2;color:#991B1B;font-size:10.5px;font-weight:800;line-height:1.35;text-align:center;display:flex;align-items:center;justify-content:center;height:100%;">[CHẾ ĐỘ CHẠY THỬ DEMO — NHẬP STK CÔNG TY CỦA BẠN ĐỂ TẠO QR THẬT]</div>'
+          : QrIso18004.toSvg(emvPayload);
+
+        document.getElementById('depositKickerLabel').textContent =
+          pctDeposit === 100
+            ? 'Quét VietQR Thanh Toán Trọn Gói 100% Hợp Đồng'
+            : 'Quét VietQR Đặt Cọc ' + pctDeposit + '% Giữ Khuôn & Giá Sỉ';
+        document.getElementById('sumDepositAmount').textContent = formatVnd(depositAmount);
+        document.getElementById('qrBankMetaText').innerHTML =
+          'Ngân hàng: <strong>' + escapeHtml(bankObj.code + ' - ' + bankObj.name) + '</strong><br />' +
+          'STK: <strong>' + escapeHtml(state.acc) + '</strong> • Chủ TK: <strong>' + escapeHtml(state.holder) + '</strong>';
+        document.getElementById('qrMemoText').textContent = memoStr;
+        document.getElementById('emvCrcBadge').textContent = isDemoSandboxAcc
+          ? '[CHẾ ĐỘ CHẠY THỬ DEMO — MỞ "CẤU HÌNH NHÀ CUNG CẤP" NHẬP STK THẬT ĐỂ BẬT QR]'
+          : ('Chuẩn EMVCo NAPAS 247 • CRC16: ' + emvPayload.slice(-4) + ' (Khóa cứng số tiền)');
+
+        const qrBox = document.getElementById('vietQrSvgBox');
+        qrBox.innerHTML = qrSvgMarkup;
+        if (isDemoSandboxAcc) {
+          qrBox.removeAttribute('data-emv-payload');
+        } else {
+          qrBox.setAttribute('data-emv-payload', emvPayload);
+        }
+
+        // Save summary snapshot & populate A4 Formal Sheet
+        state.lastSummary = {
+          totalQty: totalQty,
+          tier: tier,
+          grossTotal: grossTotal,
+          discountVal: discountVal,
+          laserCharge: laserCharge,
+          wantLaser: wantLaser,
+          netBeforeVat: netBeforeVat,
+          vat8Val: vat8Val,
+          vat10Val: vat10Val,
+          grandTotal: grandTotal,
+          depositAmount: depositAmount,
+          pctDeposit: pctDeposit,
+          memoStr: memoStr,
+          bankObj: bankObj,
+          emvPayload: emvPayload,
+          qrSvgMarkup: qrSvgMarkup
+        };
+
+        renderA4Sheet();
+      }
+
+      function renderA4Sheet() {
+        const s = state.lastSummary;
+        if (!s) return;
+
+        document.getElementById('a4SupplierName').textContent = state.brand;
+        document.getElementById('a4SupplierMeta').innerHTML =
+          'MST: <strong>' + escapeHtml(state.mst) + '</strong> • Đ/c: ' + escapeHtml(state.addr) + '<br />' +
+          'Hotline / Zalo Phòng Kinh Doanh Sỉ: <strong>' + escapeHtml(state.phone) + '</strong>';
+
+        const todayStr = '31/10/2026';
+        document.getElementById('a4QuoteMeta').innerHTML =
+          'Số báo giá: <strong>#' + escapeHtml(state.quoteCode) + '</strong> • Ngày lập: ' + todayStr + '<br />' +
+          'Hiệu lực báo giá: 07 ngày • Áp dụng NĐ 174/2025/NĐ-CP';
+
+        document.getElementById('a4BuyerCompany').textContent = document.getElementById('buyerCompany').value || 'Quý Doanh Nghiệp';
+        document.getElementById('a4BuyerTax').textContent     = document.getElementById('buyerTaxId').value || '—';
+        document.getElementById('a4BuyerContact').textContent = document.getElementById('buyerContact').value || 'Phòng Thu Mua / HCNS';
+        document.getElementById('a4DeliveryDate').textContent = document.getElementById('deliveryDate').value || 'Tháng 01/2027';
+
+        let rowsHtml = '';
+        let stt = 1;
+        state.items.forEach(function (it) {
+          const qty = Math.max(0, parseInt(it.qty, 10) || 0);
+          if (qty <= 0) return;
+          const unitNet = Math.round(it.price * (1 - s.tier.rate));
+          const effVat = state.vatMode === 'none' ? 0 : (state.vatMode === 'vat8' ? 8 : (state.vatMode === 'vat10' ? 10 : it.vat));
+          rowsHtml += '<tr>' +
+            '<td style="text-align:center;">' + (stt++) + '</td>' +
+            '<td style="white-space:nowrap;"><strong>' + escapeHtml(it.sku) + '</strong></td>' +
+            '<td><strong>' + escapeHtml(it.name) + '</strong><br /><span style="color:#6E5D58; font-size:10.5px;">' + escapeHtml(it.spec) + ' (GTGT ' + effVat + '%)</span></td>' +
+            '<td style="text-align:center; font-weight:700;">' + qty + '</td>' +
+            '<td style="text-align:right;">' + formatVnd(it.price) + '</td>' +
+            '<td style="text-align:right; font-weight:700;">' + formatVnd(unitNet) + '</td>' +
+            '<td style="text-align:right; font-weight:800;">' + formatVnd(unitNet * qty) + '</td>' +
+          '</tr>';
+        });
+
+        if (rowsHtml === '') {
+          rowsHtml = '<tr><td colspan="7" style="text-align:center; padding:14px; color:#6E5D58;">Chưa có mã hàng nào được chọn số lượng lớn hơn 0.</td></tr>';
+        }
+        document.getElementById('a4TableBody').innerHTML = rowsHtml;
+
+        document.getElementById('a4QrMiniBox').innerHTML = s.qrSvgMarkup;
+        document.getElementById('a4DepositHeadline').textContent =
+          'ĐẶT CỌC GIỮ HÀNG & KHUÔN LOGO (' + s.pctDeposit + '%)';
+        document.getElementById('a4DepositAmount').textContent = formatVnd(s.depositAmount);
+        document.getElementById('a4BankDetails').innerHTML =
+          escapeHtml(s.bankObj.code + ' - ' + s.bankObj.name) + '<br />STK: <strong>' +
+          escapeHtml(state.acc) + '</strong> (' + escapeHtml(state.holder) + ')';
+        document.getElementById('a4MemoCode').textContent = s.memoStr;
+
+        document.getElementById('a4Gross').textContent = formatVnd(s.grossTotal);
+        document.getElementById('a4DiscLabel').textContent = 'Chiết khấu bậc thang (-' + Math.round(s.tier.rate * 100) + '%):';
+        document.getElementById('a4DiscVal').textContent = '-' + formatVnd(s.discountVal);
+        document.getElementById('a4LaserVal').textContent =
+          (!s.wantLaser || s.totalQty === 0) ? '0 đ' : (s.tier.freeLaser ? '0 đ (Miễn phí ≥ 50)' : formatVnd(s.laserCharge));
+        document.getElementById('a4VatTotal').textContent = formatVnd(s.vat8Val + s.vat10Val);
+        document.getElementById('a4GrandTotal').textContent = formatVnd(s.grandTotal);
+        document.getElementById('a4GrandWords').textContent = 'Bằng chữ: ' + vndToVietnameseWords(s.grandTotal);
+
+        const baseSeal = state.brand.split(/[—\-•|&]/)[0].trim();
+        const shortSeal = baseSeal.length <= 22 ? baseSeal : baseSeal.slice(0, 22).trim();
+        document.getElementById('a4SealBrand').textContent = shortSeal;
+      }
+
+      /* =========================================================================
+       * 8. ĐỒNG BỘ BẢNG GIÁ GOOGLE SHEETS CSV (0Đ SERVER) & XUẤT ZALO / PRINT A4
+       * ========================================================================= */
+      function parseCsvRows(csvText) {
+        const rows = [];
+        let row = [], cur = '', inQuotes = false;
+        const clean = String(csvText || '').replace(/^\uFEFF/, '');
+        for (let i = 0; i < clean.length; i++) {
+          const ch = clean[i];
+          const next = clean[i + 1];
+          if (inQuotes) {
+            if (ch === '"' && next === '"') { cur += '"'; i++; }
+            else if (ch === '"') { inQuotes = false; }
+            else { cur += ch; }
+          } else {
+            if (ch === '"') inQuotes = true;
+            else if (ch === ',') { row.push(cur.trim()); cur = ''; }
+            else if (ch === '\n' || ch === '\r') {
+              if (ch === '\r' && next === '\n') i++;
+              row.push(cur.trim());
+              if (row.some(function (c) { return c !== ''; })) rows.push(row);
+              row = [];
+              cur = '';
+            } else {
+              cur += ch;
+            }
+          }
+        }
+        if (cur.length > 0 || row.length > 0) {
+          row.push(cur.trim());
+          if (row.some(function (c) { return c !== ''; })) rows.push(row);
+        }
+        return rows;
+      }
+
+      function importCatalogFromCsvText(csvText) {
+        const rows = parseCsvRows(csvText);
+        if (rows.length < 2) {
+          showToast('File CSV cần tối thiểu dòng tiêu đề và 1 dòng sản phẩm.');
+          return;
+        }
+        const parsedItems = [];
+        for (let i = 1; i < rows.length; i++) {
+          const r = rows[i];
+          if (r.length < 4) continue;
+          const sku = r[0] || ('SKU-' + i);
+          const name = r[1] || 'Sản phẩm B2B';
+          const spec = r[2] || '';
+          const price = Math.max(0, parseInt(String(r[3]).replace(/[^\d]/g, ''), 10) || 0);
+          const vat = parseInt(r[4], 10) === 10 ? 10 : 8;
+          const qty = Math.max(0, parseInt(r[5], 10) || 0);
+          if (price > 0) {
+            parsedItems.push({ sku: sku, name: name, spec: spec, price: price, vat: vat, qty: qty });
+          }
+        }
+        if (parsedItems.length === 0) {
+          showToast('Không tìm thấy dòng sản phẩm hợp lệ trong file CSV.');
+          return;
+        }
+        state.items = parsedItems;
+        recalculateAll(true);
+        showToast('Đã đồng bộ thành công ' + parsedItems.length + ' mã hàng từ CSV!');
+      }
+
+      function fetchGoogleSheetCsv(url) {
+        fetch(url)
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.text();
+          })
+          .then(function (txt) { importCatalogFromCsvText(txt); })
+          .catch(function () {
+            showToast('Không tải được link CSV. Hãy chắc chắn đã chọn File -> Share -> Publish to web (CSV).');
+          });
+      }
+
+      function buildZaloOrderSummaryText() {
+        const s = state.lastSummary;
+        const buyerCompany = document.getElementById('buyerCompany').value || 'Quý Doanh Nghiệp';
+        const buyerTax = document.getElementById('buyerTaxId').value || 'Chưa cập nhật';
+        const buyerContact = document.getElementById('buyerContact').value || 'Phòng Thu Mua';
+        const deliveryDate = document.getElementById('deliveryDate').value || 'Thỏa thuận';
+
+        const lines = [];
+        lines.push('[PHIẾU CHỐT BÁO GIÁ SỈ B2B — ' + state.brand.toUpperCase() + ']');
+        lines.push('• Mã báo giá: #' + state.quoteCode);
+        lines.push('• Đơn vị mua: ' + buyerCompany + ' (MST: ' + buyerTax + ')');
+        lines.push('• Người nhận: ' + buyerContact + ' | Giao dự kiến: ' + deliveryDate);
+        lines.push('----------------------------------------');
+        state.items.forEach(function (it) {
+          const qty = Math.max(0, parseInt(it.qty, 10) || 0);
+          if (qty <= 0) return;
+          const unitNet = Math.round(it.price * (1 - s.tier.rate));
+          lines.push('- [' + it.sku + '] ' + it.name + ': ' + qty + ' ' + state.unitLabel + ' x ' + formatVnd(unitNet) + ' = ' + formatVnd(unitNet * qty));
+        });
+        lines.push('----------------------------------------');
+        lines.push('• Tổng số lượng gộp: ' + s.totalQty + ' ' + state.unitLabel + ' -> Hưởng chiết khấu -' + Math.round(s.tier.rate * 100) + '% (-' + formatVnd(s.discountVal) + ')');
+        lines.push('• Gia công khắc Laser Logo: ' + ((!s.wantLaser || s.totalQty === 0) ? 'Không chọn' : (s.tier.freeLaser ? '0 đ (MIỄN PHÍ B2B)' : formatVnd(s.laserCharge))));
+        lines.push('• Thuế GTGT (VAT 8% / 10%): ' + formatVnd(s.vat8Val + s.vat10Val));
+        lines.push('=> TỔNG THANH TOÁN HỢP ĐỒNG: ' + formatVnd(s.grandTotal));
+        lines.push('=> CẦN ĐẶT CỌC GIỮ HÀNG (' + s.pctDeposit + '%): ' + formatVnd(s.depositAmount));
+        lines.push('• Chuyển khoản: ' + s.bankObj.code + ' (' + s.bankObj.name + ') | STK: ' + state.acc + ' | Chủ TK: ' + state.holder);
+        lines.push('• Nội dung CK chuẩn: ' + s.memoStr);
+        lines.push('• Hotline/Zalo xác nhận cọc: ' + state.phone);
+        return lines.join('\n');
+      }
+
+      let toastTimer = null;
+      function showToast(msg) {
+        const el = document.getElementById('toastBanner');
+        el.textContent = msg;
+        el.classList.add('show');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { el.classList.remove('show'); }, 3400);
+      }
+
+      /* =========================================================================
+       * 9. GẮN SỰ KIỆN TƯƠNG TÁC (EVENT LISTENERS)
+       * ========================================================================= */
+      document.getElementById('btnToggleConfig').addEventListener('click', function () {
+        document.getElementById('configDrawer').classList.toggle('open');
+      });
+
+      ['cfgBrand', 'cfgPhone', 'cfgMst', 'cfgAddr', 'cfgBankBin', 'cfgAcc', 'cfgHolder'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', function () {
+          state.brand   = document.getElementById('cfgBrand').value.trim() || state.brand;
+          state.phone   = document.getElementById('cfgPhone').value.trim() || state.phone;
+          state.mst     = document.getElementById('cfgMst').value.trim() || state.mst;
+          state.addr    = document.getElementById('cfgAddr').value.trim() || state.addr;
+          state.bankBin = document.getElementById('cfgBankBin').value;
+          state.acc     = document.getElementById('cfgAcc').value.trim() || '0000000000';
+          state.holder  = stripVietnameseTones(document.getElementById('cfgHolder').value).toUpperCase() || 'CHU TAI KHOAN';
+
+          document.getElementById('brandTitleDisplay').textContent = state.brand;
+          document.getElementById('brandPhoneDisplay').textContent = state.phone;
+          recalculateAll(false);
+        });
+      });
+
+      document.getElementById('btnCopyPersonalizedUrl').addEventListener('click', function () {
+        const base = window.location.href.split('?')[0];
+        const q = new URLSearchParams({
+          brand: state.brand,
+          phone: state.phone,
+          mst: state.mst,
+          addr: state.addr,
+          bin: state.bankBin,
+          acc: state.acc,
+          holder: state.holder,
+          preset: state.presetKey
+        });
+        const fullUrl = base + '?' + q.toString();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(fullUrl).then(function () {
+            showToast('Đã sao chép Link Báo Giá Cá Nhân Hóa cho ' + state.brand + '!');
+          });
+        } else {
+          showToast('Link cá nhân hóa: ' + fullUrl);
+        }
+      });
+
+      document.querySelectorAll('.preset-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          loadPreset(btn.getAttribute('data-preset'));
+          recalculateAll(true);
+        });
+      });
+
+      document.getElementById('skuTableBody').addEventListener('click', function (e) {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        if (!state.items[idx]) return;
+        const step = 5;
+        if (btn.getAttribute('data-action') === 'inc') {
+          state.items[idx].qty = (parseInt(state.items[idx].qty, 10) || 0) + step;
+        } else {
+          state.items[idx].qty = Math.max(0, (parseInt(state.items[idx].qty, 10) || 0) - step);
+        }
+        const input = document.querySelector('.sku-qty-input[data-idx="' + idx + '"]');
+        if (input) input.value = state.items[idx].qty;
+        recalculateAll(false);
+      });
+
+      document.getElementById('skuTableBody').addEventListener('input', function (e) {
+        const input = e.target.closest('.sku-qty-input');
+        if (!input) return;
+        const idx = parseInt(input.getAttribute('data-idx'), 10);
+        if (!state.items[idx]) return;
+        state.items[idx].qty = Math.max(0, parseInt(input.value, 10) || 0);
+        recalculateAll(false);
+      });
+
+      document.getElementById('btnResetZero').addEventListener('click', function () {
+        state.items.forEach(function (it) { it.qty = 0; });
+        recalculateAll(true);
+      });
+
+      document.getElementById('chkLogoLaser').addEventListener('change', function () {
+        recalculateAll(false);
+      });
+
+      document.getElementById('vatModeSelect').addEventListener('change', function () {
+        recalculateAll(false);
+      });
+
+      ['buyerCompany', 'buyerTaxId', 'buyerContact', 'deliveryDate'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', function () {
+          recalculateAll(false);
+        });
+      });
+
+      document.querySelectorAll('.dep-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          document.querySelectorAll('.dep-tab').forEach(function (t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          state.depositRatio = parseFloat(tab.getAttribute('data-dep')) || 0.3;
+          recalculateAll(false);
+        });
+      });
+
+      document.getElementById('btnPrintA4').addEventListener('click', function () {
+        document.getElementById('a4PreviewWrapper').classList.add('visible');
+        window.print();
+      });
+
+      document.getElementById('btnToggleA4Preview').addEventListener('click', function () {
+        const wrap = document.getElementById('a4PreviewWrapper');
+        const isVis = wrap.classList.toggle('visible');
+        if (isVis) {
+          wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+
+      document.getElementById('btnCopyZaloOrder').addEventListener('click', function () {
+        const txt = buildZaloOrderSummaryText();
+        window.__lastZaloCopiedText = txt;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(function () {
+            showToast('Đã sao chép Đơn Chốt B2B kèm STK & Nội dung đặt cọc để dán vào Zalo!');
+          }).catch(function () {
+            showToast('Đã tạo nội dung Đơn Chốt Zalo sẵn sàng sao chép!');
+          });
+        } else {
+          showToast('Đã tạo nội dung Đơn Chốt Zalo!');
+        }
+      });
+
+      document.getElementById('btnFetchCsvUrl').addEventListener('click', function () {
+        const u = document.getElementById('cfgSheetCsvUrl').value.trim();
+        if (!u) {
+          showToast('Vui lòng dán link Google Sheets CSV (Publish to web -> CSV).');
+          return;
+        }
+        fetchGoogleSheetCsv(u);
+      });
+
+      document.getElementById('csvFileInput').addEventListener('change', function (e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          importCatalogFromCsvText(String(ev.target.result || ''));
+        };
+        reader.readAsText(file, 'utf-8');
+      });
+
+      document.getElementById('btnDownloadSampleCsv').addEventListener('click', function () {
+        const csvLines = [
+          'sku,name,spec,price,vat,qty',
+          '"QT-PHUQUY-01","Hộp Gỗ Sơn Mài Phú Quý Đoàn Viên","Hạt Điều Bình Phước W180, Macca Úc, Yến Chưng, Trà Shan Tuyết",850000,8,80',
+          '"QT-CHILE-VIP","Hộp Gỗ Đôi Vang Chile Reserva & Hạt Thượng Hạng","01 Chai Vang Chile 14% + Hạnh Nhân, Dẻ Cười Mỹ",1250000,10,40',
+          '"QT-ANKHANG-04","Hộp Nam Châm An Khang Tri Ân Nhân Viên","Hạt Điều Rang Củi, Xoài Sấy Dẻo, Trà Ô Long",490000,8,0'
+        ];
+        const blob = new Blob(['\uFEFF' + csvLines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'bang_gia_si_b2b_mau_2027.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Đã tải xuống file bang_gia_si_b2b_mau_2027.csv!');
+      });
+
+      // Initialize App
+      applyUrlQueryPersonalization();
+      recalculateAll(true);
+    })();
+  </script>
+</body>
+</html>

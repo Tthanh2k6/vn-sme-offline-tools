@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đối soát đội xe — Dầu, phí trạm và lương chuyến</title>
+  <style>
+@font-face{font-family:'Work Sans';font-weight:400;font-style:normal;src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-display:swap;}
+@font-face{font-family:'Work Sans';font-weight:700;font-style:normal;src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-display:swap;}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-style:normal;src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-display:swap;}
+
+    :root {
+      --navy-950: #555A52;
+      --navy-900: #555A52;
+      --navy-800: #555A52;
+      --navy-700: #555A52;
+      --amber-600: #555A52;
+      --amber-500: #555A52;
+      --amber-100: #555A52;
+      --amber-50: #555A52;
+      --emerald-800: #555A52;
+      --emerald-700: #555A52;
+      --emerald-100: #555A52;
+      --emerald-50: #555A52;
+      --crimson-700: #555A52;
+      --crimson-600: #555A52;
+      --crimson-100: #555A52;
+      --crimson-50: #555A52;
+      --slate-900: #555A52;
+      --slate-800: #555A52;
+      --slate-700: #555A52;
+      --slate-600: #555A52;
+      --slate-500: #555A52;
+      --slate-300: #E2E3DE;
+      --slate-200: #E2E3DE;
+      --slate-100: #E2E3DE;
+      --slate-50: #555A52;
+      --font-sans: 'Segoe UI', Inter, Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: Consolas, 'Cascadia Mono', 'Courier New', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #555A52;
+      color: var(--slate-900);
+      font-size: 13px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .app-header {
+      background: linear-gradient(125deg, var(--navy-950) 0%, var(--navy-900) 60%, #555A52 100%);
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--amber-500);
+      padding: 13px 22px;
+    }
+
+    .header-inner {
+      max-width: 1460px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--amber-500), #555A52);
+      color: var(--navy-950);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.32);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 15.8px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #242622;
+    }
+
+    .brand-sub {
+      font-size: 11.8px;
+      color: #E2E3DE;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .offline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(6, 95, 70, 0.45);
+      border: 1px solid #555A52;
+      color: #555A52;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 11.2px;
+      font-weight: 800;
+    }
+
+    .dot-live {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #555A52;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-amber {
+      background: linear-gradient(135deg, #555A52, #555A52);
+      color: var(--navy-950);
+      border-color: #555A52;
+    }
+
+    .btn-amber:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-navy {
+      background: var(--navy-800);
+      color: #FFFFFF;
+      border-color: var(--navy-700);
+    }
+
+    .btn-navy:hover {
+      background: var(--navy-700);
+    }
+
+    .btn-emerald {
+      background: var(--emerald-800);
+      color: #FFFFFF;
+      border-color: var(--emerald-700);
+    }
+
+    .btn-emerald:hover {
+      background: var(--emerald-700);
+    }
+
+    .btn-ghost-light {
+      background: rgba(255, 255, 255, 0.09);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-ghost-light:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      color: var(--navy-900);
+      border-color: var(--slate-300);
+    }
+
+    .btn-outline:hover {
+      background: var(--slate-50);
+      border-color: var(--navy-800);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1460px;
+      margin: 15px auto 34px;
+      padding: 0 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    /* Config Card */
+    .control-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      padding: 14px 16px;
+      box-shadow: 0 5px 16px rgba(15, 23, 42, 0.05);
+    }
+
+    .preset-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 11px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .preset-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-pill {
+      padding: 6px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--slate-300);
+      background: var(--slate-50);
+      color: var(--slate-700);
+      cursor: pointer;
+    }
+
+    .preset-pill.active {
+      background: var(--navy-900);
+      color: #555A52;
+      border-color: var(--navy-900);
+    }
+
+    .fleet-config-grid {
+      display: grid;
+      grid-template-columns: 1.55fr 0.72fr 0.82fr 0.85fr 0.72fr 0.85fr 0.9fr 1.05fr;
+      gap: 9px;
+      align-items: end;
+    }
+
+    @media (max-width: 1260px) {
+      .fleet-config-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 10.6px;
+      font-weight: 800;
+      color: var(--slate-600);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 7px 9px;
+      border: 1px solid var(--slate-300);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 12.2px;
+      color: var(--slate-900);
+      background: #FFFFFF;
+    }
+
+    .field input.num {
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    /* 6 KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 11px;
+    }
+
+    @media (max-width: 1200px) {
+      .kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .kpi-box {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-top: 3.5px solid var(--navy-800);
+      border-radius: 10px;
+      padding: 11px 13px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .kpi-box.amber {
+      border-top-color: var(--amber-600);
+      background: linear-gradient(180deg, #555A52 0%, #FFFFFF 100%);
+    }
+
+    .kpi-box.crimson {
+      border-top-color: var(--crimson-600);
+      background: linear-gradient(180deg, #555A52 0%, #FFFFFF 100%);
+    }
+
+    .kpi-box.emerald {
+      border-top-color: var(--emerald-700);
+      background: linear-gradient(180deg, #555A52 0%, #FFFFFF 100%);
+    }
+
+    .kpi-lbl {
+      font-size: 10.6px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--slate-600);
+      letter-spacing: 0.025em;
+    }
+
+    .kpi-val {
+      font-size: 17.5px;
+      font-weight: 900;
+      color: var(--navy-950);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-box.crimson .kpi-val {
+      color: var(--crimson-700);
+    }
+
+    .kpi-box.emerald .kpi-val {
+      color: var(--emerald-800);
+    }
+
+    .kpi-box.amber .kpi-val {
+      color: #555A52;
+    }
+
+    .kpi-note {
+      font-size: 10.8px;
+      color: var(--slate-500);
+      margin-top: 3px;
+    }
+
+    /* Main Reconciliation Ledger */
+    .ledger-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .ledger-toolbar {
+      padding: 12px 16px;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ledger-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--navy-950);
+    }
+
+    .quick-add-bar {
+      padding: 12px 16px;
+      background: #555A52;
+      border-bottom: 1px solid var(--slate-200);
+      display: none;
+    }
+
+    .quick-add-bar.open {
+      display: block;
+    }
+
+    .quick-add-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      align-items: end;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table.fleet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.7px;
+    }
+
+    table.fleet-table th {
+      background: var(--navy-900);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding: 8px 6px;
+      border: 1px solid #555A52;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    table.fleet-table th.sub-fuel {
+      background: #555A52;
+      color: #555A52;
+    }
+
+    table.fleet-table th.sub-etc {
+      background: #555A52;
+      color: #555A52;
+    }
+
+    table.fleet-table th.sub-pay {
+      background: var(--emerald-800);
+      color: #555A52;
+    }
+
+    table.fleet-table td {
+      padding: 6px 6px;
+      border: 1px solid var(--slate-200);
+      vertical-align: middle;
+    }
+
+    table.fleet-table tbody tr:nth-child(even) td {
+      background: #555A52;
+    }
+
+    table.fleet-table tbody tr:hover td {
+      background: #555A52;
+    }
+
+    table.fleet-table tfoot td {
+      background: var(--amber-100);
+      font-weight: 900;
+      border-top: 2px solid var(--amber-600);
+      color: var(--navy-950);
+      padding: 8px 6px;
+    }
+
+    .right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .plate-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--amber-100);
+      border: 1px solid #555A52;
+      color: var(--navy-950);
+    }
+
+    .veh-type-sub {
+      font-size: 10.3px;
+      color: var(--slate-500);
+      display: block;
+      margin-top: 1px;
+    }
+
+    .flag-over {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10.2px;
+      font-weight: 800;
+      background: var(--crimson-100);
+      color: var(--crimson-700);
+      border: 1px solid #555A52;
+    }
+
+    .flag-save {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10.2px;
+      font-weight: 800;
+      background: var(--emerald-100);
+      color: var(--emerald-800);
+      border: 1px solid #555A52;
+    }
+
+    .flag-ok {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10.2px;
+      font-weight: 700;
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .row-btn {
+      padding: 3px 7px;
+      border-radius: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      border: 1px solid var(--navy-800);
+      background: var(--slate-50);
+      color: var(--navy-900);
+      cursor: pointer;
+    }
+
+    .row-btn:hover {
+      background: var(--navy-900);
+      color: #FFFFFF;
+    }
+
+    /* Bottom Dual Grid */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 425px minmax(0, 1fr);
+      gap: 17px;
+      align-items: start;
+    }
+
+    @media (max-width: 1180px) {
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .side-box {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      padding: 15px 16px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .driver-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.7px;
+    }
+
+    .driver-table th {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-size: 10.6px;
+      text-transform: uppercase;
+      padding: 6px 7px;
+      text-align: left;
+      border-bottom: 1.5px solid var(--slate-300);
+    }
+
+    .driver-table td {
+      padding: 7px 7px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .driver-row {
+      cursor: pointer;
+    }
+
+    .driver-row:hover td,
+    .driver-row.active td {
+      background: var(--amber-50);
+    }
+
+    /* Printable A4 Sheet */
+    .a4-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .a4-mode-tabs {
+      background: var(--navy-950);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .a4-tab-btn {
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 11.8px;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.07);
+      color: #E2E3DE;
+      cursor: pointer;
+    }
+
+    .a4-tab-btn.active {
+      background: var(--amber-500);
+      color: var(--navy-950);
+      border-color: var(--amber-500);
+    }
+
+    .a4-filter-bar {
+      padding: 10px 18px;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .a4-paper {
+      padding: 26px 32px 30px;
+      background: #FFFFFF;
+      color: #555A52;
+    }
+
+    .a4-head-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--navy-900);
+    }
+
+    .a4-org-name {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--navy-900);
+      text-transform: uppercase;
+    }
+
+    .a4-org-meta {
+      font-size: 11.3px;
+      color: var(--slate-600);
+      margin-top: 2px;
+    }
+
+    .a4-motto {
+      text-align: center;
+      font-size: 11.5px;
+    }
+
+    .a4-doc-title {
+      text-align: center;
+      margin: 14px 0 11px;
+    }
+
+    .a4-doc-title h2 {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--navy-950);
+      text-transform: uppercase;
+      letter-spacing: 0.015em;
+    }
+
+    .a4-doc-title p {
+      font-size: 11.6px;
+      color: var(--slate-600);
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    .a4-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.2px;
+      margin-top: 9px;
+    }
+
+    .a4-table th {
+      background: var(--navy-900);
+      color: #FFFFFF;
+      padding: 6px 7px;
+      border: 1px solid var(--navy-900);
+      text-align: left;
+      font-size: 10.5px;
+      text-transform: uppercase;
+    }
+
+    .a4-table td {
+      padding: 6px 7px;
+      border: 1px solid var(--slate-300);
+    }
+
+    .a4-table tfoot td {
+      background: var(--amber-100);
+      font-weight: 900;
+      border-top: 2px solid var(--amber-600);
+    }
+
+    .settlement-grid {
+      display: grid;
+      grid-template-columns: 1.32fr 0.68fr;
+      gap: 14px;
+      margin-top: 12px;
+      align-items: stretch;
+    }
+
+    .settle-box {
+      border: 1px solid var(--slate-300);
+      border-radius: 7px;
+      padding: 10px 13px;
+      font-size: 11.6px;
+      background: #555A52;
+    }
+
+    .settle-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--slate-200);
+    }
+
+    .settle-line:last-child {
+      border-bottom: none;
+      padding-top: 6px;
+      font-weight: 900;
+      font-size: 13px;
+      color: var(--navy-950);
+    }
+
+    .qr-settle-box {
+      border: 1.5px solid var(--navy-800);
+      border-radius: 7px;
+      padding: 10px;
+      background: var(--amber-50);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .demo-lock-banner {
+      border: 1.5px dashed var(--crimson-600);
+      background: var(--crimson-50);
+      color: var(--crimson-700);
+      border-radius: 6px;
+      padding: 8px 9px;
+      font-size: 10.6px;
+      font-weight: 800;
+      line-height: 1.4;
+      width: 100%;
+    }
+
+    .live-fleet-qr {
+      width: 136px;
+      height: 136px;
+      padding: 4px;
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
+      display: none;
+    }
+
+    .live-fleet-qr svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .words-banner {
+      margin-top: 9px;
+      padding: 7px 11px;
+      background: #555A52;
+      border: 1px dashed var(--slate-300);
+      border-radius: 5px;
+      font-size: 11.5px;
+    }
+
+    .sig-3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+      text-align: center;
+      font-size: 11.4px;
+    }
+
+    .sig-stamp {
+      display: inline-block;
+      margin: 10px auto 5px;
+      padding: 4px 10px;
+      border: 2px solid var(--crimson-700);
+      color: var(--crimson-700);
+      font-size: 9.8px;
+      font-weight: 900;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+      background: var(--crimson-50);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--navy-950);
+      color: #555A52;
+      border: 1px solid var(--amber-500);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 10mm 11mm;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF !important;
+      }
+      .no-print,
+      .app-header,
+      .control-card,
+      .kpi-grid,
+      .ledger-card,
+      .side-box,
+      .a4-mode-tabs,
+      .a4-filter-bar,
+      .toast {
+        display: none !important;
+      }
+      .container,
+      .bottom-grid {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .a4-panel {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .a4-paper {
+        padding: 0 !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  
+/* Accounting workspace: paper, ink, quiet rules, orange exceptions. */
+:root {
+  --font-sans:'Work Sans',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  --navy-950:#242622; --navy-900:#242622; --navy-800:#393D36; --navy-700:#555A52;
+  --slate-900:#242622; --slate-800:#393D36; --slate-700:#555A52; --slate-600:#60665C;
+  --slate-500:#6A7066; --slate-300:#D5D8D0; --slate-200:#E5E7E1; --slate-100:#F0F2EC; --slate-50:#F8F9F5;
+  --amber-600:#6A7066; --amber-500:#D5D8D0; --amber-100:#F0F2EC; --amber-50:#F8F9F5;
+  --emerald-800:#242622; --emerald-700:#555A52; --emerald-100:#F0F2EC; --emerald-50:#F8F9F5;
+  --crimson-700:#E03E1A; --crimson-600:#E03E1A; --crimson-100:#FFF0EB; --crimson-50:#FFF8F5;
+}
+body {background:#F7F8F4; color:var(--slate-900); font-size:14px; line-height:1.5;}
+button,input,select {font-family:var(--font-sans);}
+.app-header {background:#FFF; color:var(--navy-950); border-bottom:1px solid var(--slate-200); padding:15px 28px;}
+.header-inner {max-width:1600px; flex-wrap:nowrap;}
+.brand-left>div {display:flex;align-items:baseline;gap:18px;}
+.brand-title {font-size:21px; font-weight:700; color:var(--navy-950);letter-spacing:-.5px;}
+.brand-sub {font-size:13px; color:var(--slate-500);}
+.offline-pill {background:none;border:0;color:var(--slate-500);font-weight:400;padding:0 8px;}
+.btn {border-radius:5px;padding:9px 13px;font-size:13px;font-weight:700;transition:none;}
+.btn-amber,.btn-navy,.btn-emerald,.btn-ghost-light,.btn-outline {background:#FFF;color:var(--navy-950);border:1px solid var(--slate-300);}
+.btn:hover {background:var(--slate-100);filter:none;}
+#btnImportFile {background:#E03E1A;border-color:#E03E1A;color:white;}
+#btnImportFile:hover {background:#BF3213;}
+:focus-visible {outline:2px solid var(--navy-950);outline-offset:3px;}
+.container {max-width:1656px;padding:0 28px;margin:28px auto 48px;gap:28px;}
+.control-card,.ledger-card,.side-box,.a4-panel {box-shadow:none;border:0;border-radius:6px;background:white;}
+.control-card {padding:20px 22px;}
+.preset-strip {padding-bottom:16px;margin-bottom:14px;gap:14px;}
+.preset-pill {font-family:inherit;border-radius:5px;background:white;font-size:13px;}
+.preset-pill.active,.a4-tab-btn.active {background:var(--slate-100);color:var(--navy-950);border-color:var(--slate-500);}
+.sample-note {color:var(--slate-500);font-size:12px;margin-bottom:18px;}
+.fleet-config-grid {grid-template-columns:2fr 1fr 1.2fr 1.4fr;gap:16px 22px;}
+.field {min-width:0;gap:6px;}
+.field label {font-size:12px;text-transform:none;letter-spacing:0;font-weight:400;}
+.field input,.field select {font-size:13px;min-height:38px;border-radius:4px;padding:8px 10px;}
+.field input.num {font-weight:400;}
+.kpi-grid {gap:0;background:transparent;}
+.kpi-box,.kpi-box.amber,.kpi-box.crimson,.kpi-box.emerald {background:none;border:0;border-right:1px solid var(--slate-300);border-radius:0;box-shadow:none;padding:0 18px;}
+.kpi-box:first-child {padding-left:0;}.kpi-box:last-child {border:0;}
+.kpi-lbl {font-size:12px;font-weight:400;text-transform:none;letter-spacing:0;min-height:36px;}
+.kpi-val {font-family:var(--font-mono);font-size:18px;font-weight:400;margin-top:8px;}
+.kpi-box.amber .kpi-val,.kpi-box.emerald .kpi-val,#kpiEtcTotal {color:var(--navy-950);}
+.kpi-note {font-size:11px;margin-top:7px;}
+.ledger-toolbar {padding:20px 18px;background:white;gap:16px;}
+.ledger-title {font-size:18px;font-weight:700;margin-bottom:4px;}
+table.fleet-table {font-size:12px;}
+table.fleet-table th,table.fleet-table th.sub-fuel,table.fleet-table th.sub-etc,table.fleet-table th.sub-pay {background:#F0F2EC;color:var(--slate-700);text-transform:none;letter-spacing:0;font-size:11px;font-weight:700;border:0;border-bottom:1px solid var(--slate-300);padding:12px 8px;white-space:normal;}
+table.fleet-table th.right {text-align:right;}table.fleet-table th.center {text-align:center;}
+table.fleet-table td {border:0;border-bottom:1px solid var(--slate-200);padding:13px 8px;}
+table.fleet-table tbody tr:nth-child(even) td {background:#FCFCFA;}
+table.fleet-table tbody tr:hover td {background:#F0F2EC;}
+table.fleet-table tfoot td {background:#F0F2EC;border-top:1px solid var(--slate-300);padding:14px 8px;}
+.right,.plate-badge,code {font-family:var(--font-mono);font-weight:400;}
+.plate-badge {background:none;border:0;padding:0;font-weight:400;color:var(--navy-950);}
+.flag-save,.flag-ok {background:none;border:0;color:var(--slate-600);padding:2px 0;font-weight:400;}
+.flag-over {background:#FFF0EB;border:0;color:#E03E1A;font-weight:700;}
+.row-btn {font-family:inherit;border-color:var(--slate-300);background:white;font-size:11px;padding:5px 7px;}
+.bottom-grid {grid-template-columns:minmax(340px,.85fr) minmax(0,1.8fr);gap:28px;}
+.side-box {padding:22px 18px;gap:20px;}
+.driver-table th {text-transform:none;font-size:11px;padding:10px 6px;}
+.driver-table td {padding:14px 6px;}
+.driver-row.active td {background:var(--slate-100);}.driver-row.active td:first-child {box-shadow:inset 3px 0 var(--slate-700);}
+.a4-mode-tabs {background:#F0F2EC;padding:14px 18px;}
+.a4-tab-btn {font-family:inherit;background:transparent;border:1px solid transparent;color:var(--slate-600);font-weight:700;font-size:12px;}
+.a4-filter-bar {background:white;padding:15px 18px;}
+.a4-paper {color:var(--navy-950);padding:30px;}
+.a4-org-name,.a4-doc-title h2,.a4-table th {text-transform:none;letter-spacing:0;}
+.a4-table th {background:var(--slate-100);color:var(--navy-950);border-color:var(--slate-300);}
+.a4-table tfoot td {background:var(--slate-100);border-color:var(--slate-300);}
+.settle-box,.qr-settle-box,.words-banner {background:#FAFBF8;border-color:var(--slate-300);}
+.demo-lock-banner,.sig-stamp {background:var(--slate-100);color:var(--slate-700);border:1px solid var(--slate-300);transform:none;}
+[style*="color:#B91C1C"] {color:#E03E1A!important;}
+[style*="color:#065F46"] {color:var(--navy-950)!important;}
+.toast {background:var(--navy-950);color:white;border:0;max-width:calc(100vw - 40px);}
+@media(max-width:1200px) {.brand-sub{display:none;}.kpi-grid{grid-template-columns:repeat(3,1fr);gap:22px 0;}.kpi-box:nth-child(4){padding-left:0;}.bottom-grid{grid-template-columns:1fr;}}
+@media(max-width:700px) {.header-inner{flex-wrap:wrap;gap:10px;}.app-header{padding:14px 16px;}.header-actions{gap:6px;}.offline-pill{padding-left:0;font-size:11px;}.container{padding:0 12px;margin-top:16px;gap:22px;}.fleet-config-grid,.quick-add-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.preset-strip>div:last-child{flex-wrap:wrap;}select{max-width:100%;}.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.kpi-box{padding:0 12px!important;}.kpi-val{font-size:16px;}.kpi-box:nth-child(even){border:0;}.a4-panel{overflow-x:auto;}.a4-paper{min-width:740px;}.fleet-table{min-width:1250px;}.bottom-grid{min-width:0;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+.a4-fixed{table-layout:fixed;width:100%;}.a4-fixed th,.a4-fixed td{white-space:normal!important;overflow-wrap:anywhere;font-size:9.5px;padding:5px 4px;}.a4-fixed th{font-size:9px;line-height:1.25;}
+@media print {.a4-paper{min-width:0!important;padding:0!important;}.a4-panel{overflow:visible;}.a4-table{font-size:10px;}.a4-table th,.a4-table td{padding:5px;}.sig-3-grid,.settlement-grid{break-inside:avoid;}thead{display:table-header-group;}tr{break-inside:avoid;} .a4-org-name{overflow-wrap:anywhere;}}
+
+table.fleet-table th,.driver-table th,.a4-table th {font-family:var(--font-sans);}
+#importReport [style] {color:var(--slate-600)!important;}
+@media(max-width:700px){.preset-strip>div{min-width:0;max-width:100%;}.side-box,.a4-panel{min-width:0;}.driver-table{font-size:10px;}}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand-left">
+        
+        <div>
+          <div class="brand-title">Đối soát đội xe</div>
+          <div class="brand-sub">Dầu DO, phí trạm và lương chuyến</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="offline-pill">
+          
+          <span>Làm việc ngoại tuyến</span>
+        </div>
+        <button type="button" class="btn btn-ghost-light" id="btnExportCsv">
+          Xuất CSV
+        </button>
+        <button type="button" class="btn btn-amber" id="btnPrintA4Top">
+          In phiếu A4
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. Industry Presets & Fleet Policy Config -->
+    <section class="control-card no-print">
+      <div class="preset-strip">
+        <div class="preset-group" id="fleetPresetBar">
+          <span style="font-size:12px; font-weight:800; color:var(--navy-950);">Dữ liệu mẫu:</span>
+          <button type="button" class="preset-pill active" data-preset="cold_fmcg">
+            Xe phân phối &amp; kho lạnh
+          </button>
+          <button type="button" class="preset-pill" data-preset="container_port">
+            Đầu kéo container
+          </button>
+        </div>
+
+        <div style="display:flex; gap:8px; align-items:center;">
+          <label for="penaltyRuleSelect" style="font-size:11.5px; font-weight:700; color:var(--slate-700);">Chế tài vượt định mức dầu:</label>
+          <select id="penaltyRuleSelect" style="padding:5px 9px; border-radius:6px; border:1px solid var(--slate-300); font-size:12px; font-weight:700;">
+            <option value="strict" selected>Trừ 100% lít vượt (&gt;2L) &amp; Thưởng 30% lít tiết kiệm</option>
+            <option value="tolerance2">Miễn trừ dung sai 2% kẹt xe • Chỉ trừ phần vượt quá ngưỡng</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="sample-note">Dữ liệu ban đầu là ví dụ minh họa. Nhập file và thông tin công ty trước khi quyết toán.</p>
+      <div class="fleet-config-grid">
+        <div class="field">
+          <label for="fleetCompanyInput">Tên công ty vận tải (in trên phiếu A4)</label>
+          <input type="text" id="fleetCompanyInput" value="CÔNG TY TNHH VẬN TẢI MẪU A" />
+        </div>
+        <div class="field">
+          <label for="fleetMstInput">Mã số thuế</label>
+          <input type="text" id="fleetMstInput" value="0100000009" />
+        </div>
+        <div class="field">
+          <label for="fleetPhoneInput">Hotline điều vận / Zalo</label>
+          <input type="text" id="fleetPhoneInput" value="0900 000 000" />
+        </div>
+        <div class="field">
+          <label for="fleetPeriodInput">Kỳ quyết toán chuyến</label>
+          <input type="text" id="fleetPeriodInput" value="Tháng 10/2026 (Chốt 31/10)" />
+        </div>
+        <div class="field">
+          <label for="dieselPriceInput">Giá dầu DO 0,05s (đ/l)</label>
+          <input type="number" id="dieselPriceInput" class="num" value="20450" step="50" />
+        </div>
+        <div class="field">
+          <label for="fleetBankSelect">Ngân hàng chi lương / thu ứng</label>
+          <select id="fleetBankSelect">
+            <option value="970422" selected>MB Bank (970422)</option>
+            <option value="970436">Vietcombank (970436)</option>
+            <option value="970407">Techcombank (970407)</option>
+            <option value="970416">ACB (970416)</option>
+            <option value="970415">VietinBank (970415)</option>
+            <option value="970418">BIDV (970418)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fleetAccInput">Stk nhận/chi (nhập để bật QR)</label>
+          <input type="text" id="fleetAccInput" class="num" value="0000000000" placeholder="Nhập STK thật..." />
+        </div>
+        <div class="field">
+          <label for="fleetHolderInput">Chủ tài khoản thụ hưởng</label>
+          <input type="text" id="fleetHolderInput" value="CONG TY TNHH VAN TAI MAU A" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 6 Executive KPIs -->
+    <section class="kpi-grid no-print">
+      <div class="kpi-box">
+        <div class="kpi-lbl">Tổng km hành trình GPS</div>
+        <div class="kpi-val" id="kpiTotalKm">0 km</div>
+        <div class="kpi-note" id="kpiKmSplitNote">Có hàng: 0 km • Chạy rỗng: 0 km</div>
+      </div>
+
+      <div class="kpi-box amber">
+        <div class="kpi-lbl">Định mức DO chuẩn vs thực đổ</div>
+        <div class="kpi-val" id="kpiFuelCompare">0 L / 0 L</div>
+        <div class="kpi-note" id="kpiFuelMoneyNote">Tổng tiền dầu HĐ: 0 đ</div>
+      </div>
+
+      <div class="kpi-box crimson">
+        <div class="kpi-lbl">Dầu DO vượt định mức bất thường</div>
+        <div class="kpi-val" id="kpiOverFuelLiters">+0,0 L</div>
+        <div class="kpi-note" id="kpiOverFuelMoney">Thu hồi hao hụt: 0 đ</div>
+      </div>
+
+      <div class="kpi-box crimson">
+        <div class="kpi-lbl">Đối soát vé trạm VETC / ePass</div>
+        <div class="kpi-val" id="kpiEtcTotal">0 đ</div>
+        <div class="kpi-note" id="kpiEtcDiffNote">Phát sinh lệch tuyến: 0 đ</div>
+      </div>
+
+      <div class="kpi-box">
+        <div class="kpi-lbl">Tổng lương chuyến &amp; phụ cấp</div>
+        <div class="kpi-val" id="kpiGrossDriverPay">0 đ</div>
+        <div class="kpi-note" id="kpiAdvanceNote">Đã tạm ứng dọc đường: 0 đ</div>
+      </div>
+
+      <div class="kpi-box emerald">
+        <div class="kpi-lbl">Thực chi lương tài xế cuối kỳ</div>
+        <div class="kpi-val" id="kpiNetDriverTransfer">0 đ</div>
+        <div class="kpi-note" id="kpiNetDriverNote">Sau trừ tạm ứng, dầu vượt &amp; vé sai tuyến</div>
+      </div>
+    </section>
+
+    <!-- 3. Detailed 3-Way Fleet Reconciliation Table -->
+    <section class="ledger-card no-print">
+      <div class="ledger-toolbar">
+        <div>
+          <div class="ledger-title">Sổ đối soát chuyến xe</div>
+          <div style="font-size:11.5px; color:var(--slate-500);">
+            Bấm nút <strong>[Phiếu Lương A4]</strong> ở từng chuyến hoặc chọn tên Tài xế bên dưới để xuất Bảng kê đối chiếu cuối tháng
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <button type="button" class="btn btn-outline" id="btnImportFile">
+            Nhập file excel / CSV
+          </button>
+          <input type="file" id="importFileInput" accept=".xlsx,.csv,.txt" hidden />
+          <span id="autosaveStatus" style="font-size:11.5px; color:var(--slate-500);"></span>
+          <button type="button" class="btn btn-outline" id="btnToggleAddTrip">
+            + Thêm chuyến
+          </button>
+          <button type="button" class="btn btn-emerald" id="btnResetSample">
+            Nạp lại dữ liệu mẫu
+          </button>
+        </div>
+      </div>
+
+      <div id="importReport" style="display:none; font-size:11.5px; color:var(--slate-600); padding:6px 16px 10px;"></div>
+
+      <!-- Quick Add Trip Drawer -->
+      <div class="quick-add-bar" id="quickAddTripBar">
+        <div class="quick-add-grid">
+          <div class="field">
+            <label for="addTripCode">Mã lệnh / ngày</label>
+            <input type="text" id="addTripCode" value="LX-1031" />
+          </div>
+          <div class="field">
+            <label for="addPlate">Biển số &amp; loại xe</label>
+            <select id="addPlate">
+              <option value="51D-684.21|Xe tải nhẹ 2.5T|12.5|9.8">51D-684.21 (Xe tải 2.5T • ĐM 12.5L)</option>
+              <option value="51C-912.45|Xe tải lạnh 8T|22.0|16.5" selected>51C-912.45 (Xe lạnh 8T • ĐM 22L)</option>
+              <option value="50H-338.90|Đầu kéo Cont 40ft|34.0|24.0">50H-338.90 (Đầu kéo 40ft • ĐM 34L)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="addDriverName">Họ tên tài xế</label>
+            <input type="text" id="addDriverName" value="Nguyễn Văn Hùng" />
+          </div>
+          <div class="field">
+            <label for="addRoute">Tuyến lệnh điều xe</label>
+            <input type="text" id="addRoute" value="KCN Tân Bình - Siêu thị Cần Thơ (Khứ hồi)" />
+          </div>
+          <div class="field">
+            <label for="addKmLoaded">Km có hàng (GPS)</label>
+            <input type="number" id="addKmLoaded" value="185" step="5" />
+          </div>
+          <div class="field">
+            <label for="addKmEmpty">Km chạy rỗng</label>
+            <input type="number" id="addKmEmpty" value="165" step="5" />
+          </div>
+          <div class="field">
+            <label for="addExtraLoad">Giờ máy lạnh / phụ tải (l)</label>
+            <input type="number" id="addExtraLoad" value="6.5" step="0.5" title="Số lít phụ cấp chạy máy lạnh thùng hoặc kẹt cảng" />
+          </div>
+          <div class="field">
+            <label for="addActualFuel">Dầu DO thực đổ (lít hđ)</label>
+            <input type="number" id="addActualFuel" value="84" step="1" />
+          </div>
+          <div class="field">
+            <label for="addEtcStd">Định mức vé VETC (đ)</label>
+            <input type="number" id="addEtcStd" value="360000" step="10000" />
+          </div>
+          <div class="field">
+            <label for="addEtcActual">Thực trừ ví VETC (đ)</label>
+            <input type="number" id="addEtcActual" value="360000" step="10000" />
+          </div>
+          <div class="field">
+            <label for="addTripWage">Lương chuyến + phụ cấp (đ)</label>
+            <input type="number" id="addTripWage" value="1450000" step="50000" />
+          </div>
+          <div class="field">
+            <button type="button" class="btn btn-emerald" id="btnConfirmAddTrip" style="width:100%;">
+              Ghi vào sổ đối soát
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="fleet-table">
+          <thead>
+            <tr>
+              <th>Lệnh / xe</th>
+              <th>Tài xế &amp; lộ trình điều vận</th>
+              <th class="right">Km hàng / rỗng</th>
+              <th class="sub-fuel right">Đm dầu chuẩn</th>
+              <th class="sub-fuel right">Thực đổ (hđ)</th>
+              <th class="sub-fuel center">Lệch dầu do</th>
+              <th class="sub-etc right">VETC chuẩn</th>
+              <th class="sub-etc right">VETC thực trừ</th>
+              <th class="sub-etc right">Vé sai tuyến</th>
+              <th class="right">Lương + phụ cấp</th>
+              <th class="right">Tạm ứng đường</th>
+              <th class="sub-pay right">Thực lĩnh ròng</th>
+              <th class="center">Tác vụ</th>
+            </tr>
+          </thead>
+          <tbody id="fleetLedgerBody"></tbody>
+          <tfoot id="fleetLedgerFoot"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. Bottom Grid: Driver Settlement Summary + Official Printable A4 -->
+    <section class="bottom-grid">
+
+      <!-- Left: Driver Payroll & Fuel Variance Ranking -->
+      <aside class="side-box no-print">
+        <div>
+          <div style="font-size:13px; font-weight:800; color:var(--navy-950); text-transform:none;">
+            Quyết toán theo tài xế
+          </div>
+          <div style="font-size:11.4px; color:var(--slate-500); margin-top:2px;">
+            Bấm vào tên Tài xế để xuất ngay Phiếu xác nhận dầu - VETC &amp; lương chuyến khổ A4 cho tài xế ký:
+          </div>
+        </div>
+
+        <table class="driver-table">
+          <thead>
+            <tr>
+              <th>Tài xế &amp; số chuyến</th>
+              <th class="right">Lệch dầu / VETC</th>
+              <th class="right">Thực lĩnh lương</th>
+            </tr>
+          </thead>
+          <tbody id="driverSummaryBody"></tbody>
+        </table>
+
+        <div style="padding:10px 12px; border-radius:8px; background:var(--amber-100); border:1px solid var(--amber-500); font-size:11.4px; color:var(--slate-800);">
+          <strong style="color:var(--navy-950);">Cách đối chiếu</strong><br />
+          Tách riêng <code>Km có hàng</code>, <code>Km chạy rỗng</code>, <code>Phụ cấp nổ máy lạnh/chờ cảng</code> và đối chiếu trực tiếp với sao kê trừ tự động <code>VETC / ePass</code> để kiểm tra phí trạm ngoài lộ trình.
+        </div>
+      </aside>
+
+      <!-- Right: Official Printable A4 Panel -->
+      <div class="a4-panel">
+        <div class="a4-mode-tabs no-print">
+          <div class="tab-btn-group">
+            <button type="button" class="a4-tab-btn active" data-a4mode="driver" id="tabBtnDriverSlip">
+              Phiếu quyết toán tài xế
+            </button>
+            <button type="button" class="a4-tab-btn" data-a4mode="director" id="tabBtnDirectorAudit">
+              Báo cáo đội xe
+            </button>
+          </div>
+
+          <button type="button" class="btn btn-amber" id="btnPrintA4Inner">
+            In / xuất pdf
+          </button>
+        </div>
+
+        <div class="a4-filter-bar no-print">
+          <div id="driverFilterWrap" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <label for="driverSelectA4" style="font-size:12px; font-weight:800; color:var(--navy-950);">Chọn tài xế in phiếu quyết toán:</label>
+            <select id="driverSelectA4" style="padding:6px 10px; border-radius:6px; border:1px solid var(--slate-300); font-size:12.2px; font-weight:700; min-width:255px;"></select>
+          </div>
+
+          <button type="button" class="btn btn-emerald" id="btnCopyDriverZalo">
+            Sao chép gửi zalo
+          </button>
+        </div>
+
+        <article class="a4-paper" id="a4SheetContent"></article>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="toast" id="fleetToast">Đã sao chép thành công!</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+       * 1. REALISTIC VIETNAMESE FLEET PRESETS (COLD CHAIN FMCG & PORT CONTAINER)
+       * ========================================================================= */
+      const PRESETS = {
+        cold_fmcg: {
+          company: 'CÔNG TY TNHH VẬN TẢI MẪU A',
+          mst: '0100000009',
+          phone: '0900 000 000',
+          holder: 'CONG TY TNHH VAN TAI MAU A',
+          period: 'Tháng 10/2026 (Chốt sổ 31/10)',
+          dieselPrice: 20450,
+          trips: [
+            {
+              code: 'LX-26101',
+              date: '26/10',
+              plate: '51C-912.45',
+              vehType: 'Xe tải lạnh 8T',
+              driver: 'Nguyễn Văn Hùng',
+              driverPhone: '0900 000 111',
+              route: 'Kho lạnh KCN Sóng Thần - Hệ thống siêu thị Cần Thơ (Khứ hồi)',
+              kmLoaded: 195,
+              kmEmpty: 175,
+              normLoaded: 22.0,
+              normEmpty: 16.5,
+              reeferExtraL: 8.0,
+              actualFuelL: 98.5,
+              etcStd: 380000,
+              etcActual: 452000,
+              etcNote: 'Phát sinh +1 trạm nhánh Cai Lậy ngoài lệnh',
+              tripWage: 1650000,
+              allowance: 350000,
+              advance: 800000
+            },
+            {
+              code: 'LX-26102',
+              date: '27/10',
+              plate: '51D-684.21',
+              vehType: 'Xe tải nhẹ 2.5T',
+              driver: 'Lê Quốc Bảo',
+              driverPhone: '0900 000 112',
+              route: 'Tổng kho Quận 12 - Chuỗi cửa hàng Biên Hòa & Long Thành',
+              kmLoaded: 118,
+              kmEmpty: 62,
+              normLoaded: 12.5,
+              normEmpty: 9.8,
+              reeferExtraL: 0,
+              actualFuelL: 19.2,
+              etcStd: 140000,
+              etcActual: 140000,
+              etcNote: 'Khớp 100% trạm VETC Quốc lộ 51',
+              tripWage: 950000,
+              allowance: 200000,
+              advance: 300000
+            },
+            {
+              code: 'LX-26103',
+              date: '28/10',
+              plate: '51C-912.45',
+              vehType: 'Xe tải lạnh 8T',
+              driver: 'Nguyễn Văn Hùng',
+              driverPhone: '0900 000 111',
+              route: 'KCN Tân Tạo - Kho phân phối Đà Lạt / Lâm Đồng (Hàng đông lạnh)',
+              kmLoaded: 310,
+              kmEmpty: 295,
+              normLoaded: 23.5,
+              normEmpty: 17.0,
+              reeferExtraL: 12.0,
+              actualFuelL: 149.0,
+              etcStd: 520000,
+              etcActual: 520000,
+              etcNote: 'Khớp sao kê ePass cao tốc Dầu Giây',
+              tripWage: 2400000,
+              allowance: 500000,
+              advance: 1000000
+            },
+            {
+              code: 'LX-26104',
+              date: '29/10',
+              plate: '51C-805.19',
+              vehType: 'Xe tải mui bạt 5T',
+              driver: 'Trần Thanh Phong',
+              driverPhone: '0900 000 113',
+              route: 'KCN Vĩnh Lộc - Đại lý phân phối Tây Ninh & Củ Chi',
+              kmLoaded: 142,
+              kmEmpty: 98,
+              normLoaded: 16.5,
+              normEmpty: 12.5,
+              reeferExtraL: 0,
+              actualFuelL: 34.0,
+              etcStd: 70000,
+              etcActual: 70000,
+              etcNote: 'Khớp trạm An Sương - An Lạc',
+              tripWage: 1100000,
+              allowance: 220000,
+              advance: 400000
+            },
+            {
+              code: 'LX-26105',
+              date: '30/10',
+              plate: '51C-805.19',
+              vehType: 'Xe tải mui bạt 5T',
+              driver: 'Trần Thanh Phong',
+              driverPhone: '0900 000 113',
+              route: 'KCN Hiệp Phước - Phan Thiết / Bình Thuận (Giao hàng sỉ)',
+              kmLoaded: 215,
+              kmEmpty: 210,
+              normLoaded: 16.5,
+              normEmpty: 12.5,
+              reeferExtraL: 0,
+              actualFuelL: 74.5,
+              etcStd: 490000,
+              etcActual: 585000,
+              etcNote: 'Vượt +95.000đ trạm ngoài lộ trình chuẩn',
+              tripWage: 1750000,
+              allowance: 350000,
+              advance: 700000
+            }
+          ]
+        },
+
+        container_port: {
+          company: 'CÔNG TY TNHH CONTAINER MẪU B',
+          mst: '0100000010',
+          phone: '0900 000 000',
+          holder: 'CONG TY TNHH CONTAINER MAU B',
+          period: 'Tháng 10/2026 (Chốt sổ 31/10)',
+          dieselPrice: 20450,
+          trips: [
+            {
+              code: 'CONT-801',
+              date: '27/10',
+              plate: '50H-338.90',
+              vehType: 'Đầu kéo Cont 40ft',
+              driver: 'Phạm Văn Cường',
+              driverPhone: '0900 000 114',
+              route: 'Cảng Cát Lái - KCN VSIP II Bình Dương (Hàng nhập 27 tấn)',
+              kmLoaded: 58,
+              kmEmpty: 54,
+              normLoaded: 35.0,
+              normEmpty: 24.0,
+              reeferExtraL: 4.5,
+              actualFuelL: 51.0,
+              etcStd: 340000,
+              etcActual: 340000,
+              etcNote: 'Khớp trạm VETC Xa lộ Hà Nội & ĐT743',
+              tripWage: 1350000,
+              allowance: 300000,
+              advance: 500000
+            },
+            {
+              code: 'CONT-802',
+              date: '28/10',
+              plate: '51D-772.18',
+              vehType: 'Đầu kéo Cont 40ft',
+              driver: 'Đỗ Hoàng Quân',
+              driverPhone: '0900 000 115',
+              route: 'Cảng Cái Mép Thị Vải - KCN Amata Đồng Nai (Cont lạnh 40HR)',
+              kmLoaded: 74,
+              kmEmpty: 68,
+              normLoaded: 36.0,
+              normEmpty: 24.5,
+              reeferExtraL: 6.0,
+              actualFuelL: 46.5,
+              etcStd: 420000,
+              etcActual: 420000,
+              etcNote: 'Khớp 100% vé trạm QL51',
+              tripWage: 1550000,
+              allowance: 350000,
+              advance: 600000
+            },
+            {
+              code: 'CONT-803',
+              date: '29/10',
+              plate: '50H-338.90',
+              vehType: 'Đầu kéo Cont 40ft',
+              driver: 'Phạm Văn Cường',
+              driverPhone: '0900 000 114',
+              route: 'Cảng Cát Lái - KCN Phước Đông Tây Ninh (Cont hàng máy móc)',
+              kmLoaded: 86,
+              kmEmpty: 82,
+              normLoaded: 35.0,
+              normEmpty: 24.0,
+              reeferExtraL: 4.0,
+              actualFuelL: 62.5,
+              etcStd: 290000,
+              etcActual: 375000,
+              etcNote: 'Trừ nhầm +85.000đ trạm ngoài tuyến',
+              tripWage: 1700000,
+              allowance: 350000,
+              advance: 700000
+            },
+            {
+              code: 'CONT-804',
+              date: '30/10',
+              plate: '51D-772.18',
+              vehType: 'Đầu kéo Cont 40ft',
+              driver: 'Đỗ Hoàng Quân',
+              driverPhone: '0900 000 115',
+              route: 'ICD Sóng Thần - Cảng Hiệp Phước Nhà Bè (Xuất hàng gỗ)',
+              kmLoaded: 49,
+              kmEmpty: 46,
+              normLoaded: 34.0,
+              normEmpty: 23.5,
+              reeferExtraL: 3.5,
+              actualFuelL: 30.2,
+              etcStd: 260000,
+              etcActual: 260000,
+              etcNote: 'Khớp sao kê VETC Nguyễn Văn Linh',
+              tripWage: 1250000,
+              allowance: 250000,
+              advance: 400000
+            }
+          ]
+        }
+      };
+
+      /* =========================================================================
+       * 2. FORMATTING, VIETNAMESE WORDS & ISO/IEC 18004 VIETQR ENGINE
+       * ========================================================================= */
+      function fmtVnd(n) {
+        const v = Math.round(Number(n) || 0);
+        return v.toLocaleString('vi-VN') + ' đ';
+      }
+
+      function fmtLiters(n) {
+        return (Number(n) || 0).toLocaleString('vi-VN', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' L';
+      }
+
+      function escapeHtml(s) {
+        return String(s || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function stripVi(str) {
+        return String(str || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd')
+          .replace(/Đ/g, 'D')
+          .replace(/[^A-Za-z0-9 ]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function readThreeDigits(num, showZeroHundred) {
+        const digits = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+        const tram = Math.floor(num / 100);
+        const chuc = Math.floor((num % 100) / 10);
+        const donvi = num % 10;
+        const parts = [];
+        if (tram > 0 || showZeroHundred) parts.push(digits[tram] + ' trăm');
+        if (chuc > 1) {
+          parts.push(digits[chuc] + ' mươi');
+          if (donvi === 1) parts.push('mốt');
+          else if (donvi === 4) parts.push('tư');
+          else if (donvi === 5) parts.push('lăm');
+          else if (donvi > 0) parts.push(digits[donvi]);
+        } else if (chuc === 1) {
+          parts.push('mười');
+          if (donvi === 5) parts.push('lăm');
+          else if (donvi > 0) parts.push(digits[donvi]);
+        } else if (chuc === 0 && donvi > 0) {
+          if (tram > 0 || showZeroHundred) parts.push('lẻ');
+          parts.push(digits[donvi]);
+        }
+        return parts.join(' ');
+      }
+
+      function readVndWords(amount) {
+        const val = Math.abs(Math.round(Number(amount) || 0));
+        if (val <= 0) return 'Không đồng chẵn.';
+        const units = ['', 'nghìn', 'triệu', 'tỷ'];
+        const groups = [];
+        let rem = val;
+        while (rem > 0) {
+          groups.push(rem % 1000);
+          rem = Math.floor(rem / 1000);
+        }
+        const words = [];
+        for (let i = groups.length - 1; i >= 0; i--) {
+          if (groups[i] === 0) continue;
+          const seg = readThreeDigits(groups[i], i < groups.length - 1);
+          if (seg) words.push(seg + (units[i] ? ' ' + units[i] : ''));
+        }
+        const s = words.join(' ').replace(/\s+/g, ' ').trim();
+        return s.charAt(0).toUpperCase() + s.slice(1) + ' đồng chẵn.';
+      }
+
+      function isRealClientAccount(acc) {
+        const clean = String(acc || '').replace(/[^0-9A-Za-z]/g, '');
+        if (!clean || clean.length < 6 || clean.length > 25) return false;
+        if (/^0+$/.test(clean)) return false;
+        if (clean.toUpperCase().indexOf('DEMO') !== -1 || clean.toUpperCase().indexOf('XACNHAN') !== -1) return false;
+        return true;
+      }
+
+      function tlv(id, val) {
+        const s = String(val || '');
+        return id + String(s.length).padStart(2, '0') + s;
+      }
+
+      function crc16CcittFalse(str) {
+        let crc = 0xFFFF;
+        for (let i = 0; i < str.length; i++) {
+          crc ^= (str.charCodeAt(i) & 0xFF) << 8;
+          for (let b = 0; b < 8; b++) {
+            crc = (crc & 0x8000) ? (((crc << 1) ^ 0x1021) & 0xFFFF) : ((crc << 1) & 0xFFFF);
+          }
+        }
+        return crc.toString(16).toUpperCase().padStart(4, '0');
+      }
+
+      function buildVietQrPayload(bin, acc, amount, memo) {
+        if (!isRealClientAccount(acc)) return '';
+        const cleanBin = String(bin || '970422').replace(/\D/g, '').slice(0, 6) || '970422';
+        const cleanAcc = String(acc).replace(/[^0-9A-Za-z]/g, '').slice(0, 25);
+        const intAmt = Math.max(0, Math.round(Math.abs(Number(amount) || 0)));
+        const cleanMemo = stripVi(memo).toUpperCase().slice(0, 44);
+        const consumer = tlv('38',
+          tlv('00', 'A000000727') +
+          tlv('01', tlv('00', cleanBin) + tlv('01', cleanAcc)) +
+          tlv('02', 'QRIBFTTA')
+        );
+        const body =
+          '000201' +
+          (intAmt > 0 ? '010212' : '010211') +
+          consumer +
+          '5303704' +
+          (intAmt > 0 ? tlv('54', String(intAmt)) : '') +
+          '5802VN' +
+          (cleanMemo ? tlv('62', tlv('08', cleanMemo)) : '') +
+          '6304';
+        return body + crc16CcittFalse(body);
+      }
+
+      const QrEncoder = (function () {
+        const RS_BLOCKS_M = {
+          1: [1, 26, 16], 2: [1, 44, 28], 3: [1, 70, 44], 4: [2, 50, 32],
+          5: [2, 67, 43], 6: [4, 43, 27], 7: [4, 49, 31], 8: [2, 60, 38, 2, 61, 39],
+          9: [3, 58, 36, 2, 59, 37], 10: [4, 69, 43, 1, 70, 44],
+          11: [1, 80, 50, 4, 81, 51], 12: [6, 58, 36, 2, 59, 37]
+        };
+        const ALIGN_POS = {
+          1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34],
+          7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50],
+          11: [6, 30, 54], 12: [6, 32, 58]
+        };
+        const EXP = new Uint8Array(512);
+        const LOG = new Uint8Array(256);
+        let x = 1;
+        for (let i = 0; i < 255; i++) {
+          EXP[i] = x; LOG[x] = i; x <<= 1;
+          if (x & 0x100) x ^= 0x11D;
+        }
+        for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+
+        function gfMul(a, b) { return (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]]; }
+        function polyMul(p, q) {
+          const out = new Uint8Array(p.length + q.length - 1);
+          for (let i = 0; i < p.length; i++) {
+            for (let j = 0; j < q.length; j++) out[i + j] ^= gfMul(p[i], q[j]);
+          }
+          return out;
+        }
+        function rsComputeEc(dataBytes, ecLen) {
+          let gen = new Uint8Array([1]);
+          for (let i = 0; i < ecLen; i++) gen = polyMul(gen, new Uint8Array([1, EXP[i]]));
+          const msg = new Uint8Array(dataBytes.length + ecLen);
+          msg.set(dataBytes, 0);
+          for (let i = 0; i < dataBytes.length; i++) {
+            const c = msg[i];
+            if (c !== 0) {
+              for (let j = 1; j < gen.length; j++) msg[i + j] ^= gfMul(gen[j], c);
+            }
+          }
+          return msg.slice(dataBytes.length);
+        }
+        function expandBlocks(spec) {
+          const res = [];
+          for (let i = 0; i < spec.length; i += 3) {
+            for (let c = 0; c < spec[i]; c++) {
+              res.push({ totalCount: spec[i + 1], dataCount: spec[i + 2], ecCount: spec[i + 1] - spec[i + 2] });
+            }
+          }
+          return res;
+        }
+        function pickVersion(len) {
+          for (let v = 1; v <= 12; v++) {
+            const blocks = expandBlocks(RS_BLOCKS_M[v]);
+            const cap = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+            const maxP = Math.floor((cap * 8 - 4 - (v < 10 ? 8 : 16)) / 8);
+            if (len <= maxP) return v;
+          }
+          return 12;
+        }
+        function bchDigit(d) { let k = 0; while (d !== 0) { k++; d >>>= 1; } return k; }
+        function getBchTypeInfo(data) {
+          let d = data << 10;
+          while (bchDigit(d) - bchDigit(0x537) >= 0) d ^= (0x537 << (bchDigit(d) - bchDigit(0x537)));
+          return ((data << 10) | d) ^ 0x5412;
+        }
+        function getBchTypeNumber(v) {
+          let d = v << 12;
+          while (bchDigit(d) - bchDigit(0x1F25) >= 0) d ^= (0x1F25 << (bchDigit(d) - bchDigit(0x1F25)));
+          return (v << 12) | d;
+        }
+        function buildCodewords(v, bytes) {
+          const blocks = expandBlocks(RS_BLOCKS_M[v]);
+          const totalData = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+          const bits = [];
+          function push(val, l) { for (let i = l - 1; i >= 0; i--) bits.push((val >>> i) & 1); }
+          push(0x4, 4);
+          push(bytes.length, v < 10 ? 8 : 16);
+          for (let i = 0; i < bytes.length; i++) push(bytes[i], 8);
+          for (let i = 0; i < 4 && bits.length < totalData * 8; i++) bits.push(0);
+          while (bits.length % 8 !== 0) bits.push(0);
+
+          const dc = new Uint8Array(totalData);
+          let idx = 0;
+          for (let i = 0; i < bits.length; i += 8) {
+            let b = 0;
+            for (let k = 0; k < 8; k++) b = (b << 1) | bits[i + k];
+            dc[idx++] = b;
+          }
+          let pad = true;
+          while (idx < totalData) { dc[idx++] = pad ? 0xEC : 0x11; pad = !pad; }
+
+          let off = 0, maxD = 0, maxE = 0;
+          const dArr = [], eArr = [];
+          for (let i = 0; i < blocks.length; i++) {
+            const sl = dc.slice(off, off + blocks[i].dataCount);
+            off += blocks[i].dataCount;
+            dArr.push(sl);
+            eArr.push(rsComputeEc(sl, blocks[i].ecCount));
+            if (blocks[i].dataCount > maxD) maxD = blocks[i].dataCount;
+            if (blocks[i].ecCount > maxE) maxE = blocks[i].ecCount;
+          }
+          const out = [];
+          for (let c = 0; c < maxD; c++) for (let r = 0; r < dArr.length; r++) if (c < dArr[r].length) out.push(dArr[r][c]);
+          for (let c = 0; c < maxE; c++) for (let r = 0; r < eArr.length; r++) if (c < eArr[r].length) out.push(eArr[r][c]);
+          return out;
+        }
+        function maskBit(m, r, c) {
+          if (m === 0) return (r + c) % 2 === 0;
+          if (m === 1) return r % 2 === 0;
+          if (m === 2) return c % 3 === 0;
+          if (m === 3) return (r + c) % 3 === 0;
+          if (m === 4) return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+          if (m === 5) return ((r * c) % 2) + ((r * c) % 3) === 0;
+          if (m === 6) return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+          return (((r * c) % 3) + ((r + c) % 2)) % 2 === 0;
+        }
+        function makeMatrix(v, cw, mp) {
+          const sz = v * 4 + 17;
+          const mod = Array.from({ length: sz }, function () { return new Array(sz).fill(null); });
+          function finder(row, col) {
+            for (let r = -1; r <= 7; r++) {
+              if (row + r < 0 || row + r >= sz) continue;
+              for (let c = -1; c <= 7; c++) {
+                if (col + c < 0 || col + c >= sz) continue;
+                mod[row + r][col + c] =
+                  (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                  (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                  (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+              }
+            }
+          }
+          finder(0, 0); finder(sz - 7, 0); finder(0, sz - 7);
+          const pos = ALIGN_POS[v];
+          for (let i = 0; i < pos.length; i++) {
+            for (let j = 0; j < pos.length; j++) {
+              if (mod[pos[i]][pos[j]] !== null) continue;
+              for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                  mod[pos[i] + r][pos[j] + c] = (r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0));
+                }
+              }
+            }
+          }
+          for (let i = 8; i < sz - 8; i++) {
+            if (mod[i][6] === null) mod[i][6] = (i % 2 === 0);
+            if (mod[6][i] === null) mod[6][i] = (i % 2 === 0);
+          }
+          if (v >= 7) {
+            const vb = getBchTypeNumber(v);
+            for (let i = 0; i < 18; i++) {
+              const bit = ((vb >>> i) & 1) === 1;
+              mod[Math.floor(i / 3)][(i % 3) + sz - 11] = bit;
+              mod[(i % 3) + sz - 11][Math.floor(i / 3)] = bit;
+            }
+          }
+          const fb = getBchTypeInfo((0 << 3) | mp);
+          for (let i = 0; i < 15; i++) {
+            const bit = ((fb >>> i) & 1) === 1;
+            if (i < 6) mod[i][8] = bit;
+            else if (i < 8) mod[i + 1][8] = bit;
+            else mod[sz - 15 + i][8] = bit;
+            if (i < 8) mod[8][sz - i - 1] = bit;
+            else if (i < 9) mod[8][15 - i] = bit;
+            else mod[8][15 - i - 1] = bit;
+          }
+          mod[sz - 8][8] = true;
+
+          let inc = -1, row = sz - 1, bIdx = 7, byteIdx = 0;
+          for (let col = sz - 1; col > 0; col -= 2) {
+            if (col === 6) col--;
+            while (true) {
+              for (let c = 0; c < 2; c++) {
+                if (mod[row][col - c] === null) {
+                  let dark = byteIdx < cw.length ? (((cw[byteIdx] >>> bIdx) & 1) === 1) : false;
+                  if (maskBit(mp, row, col - c)) dark = !dark;
+                  mod[row][col - c] = dark;
+                  bIdx--;
+                  if (bIdx === -1) { byteIdx++; bIdx = 7; }
+                }
+              }
+              row += inc;
+              if (row < 0 || row >= sz) { row -= inc; inc = -inc; break; }
+            }
+          }
+          return mod;
+        }
+        function toSvg(text) {
+          const bytes = new TextEncoder().encode(text);
+          const v = pickVersion(bytes.length);
+          const cw = buildCodewords(v, bytes);
+          const m = makeMatrix(v, cw, 2);
+          const n = m.length, q = 3, tot = n + q * 2;
+          let d = '';
+          for (let r = 0; r < n; r++) {
+            for (let c = 0; c < n; c++) {
+              if (m[r][c]) d += 'M' + (c + q) + ',' + (r + q) + 'h1v1h-1z';
+            }
+          }
+          return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + tot + ' ' + tot + '" shape-rendering="crispEdges"><rect width="' + tot + '" height="' + tot + '" fill="#FFFFFF"/><path d="' + d + '" fill="#091322"/></svg>';
+        }
+        return { toSvg: toSvg };
+      })();
+
+      /* =========================================================================
+       * 3. 3-WAY FLEET RECONCILIATION & DRIVER PAYROLL ENGINE
+       * ========================================================================= */
+      let activePresetKey = 'cold_fmcg';
+      let trips = JSON.parse(JSON.stringify(PRESETS.cold_fmcg.trips));
+      let activeA4Mode = 'driver';
+      let selectedDriverName = '';
+      let computedTrips = [];
+      let driverAggList = [];
+
+      function computeAll() {
+        const dieselPrice = Math.max(1000, Number(document.getElementById('dieselPriceInput').value) || 20450);
+        const ruleMode = document.getElementById('penaltyRuleSelect').value;
+
+        let sumKmLoaded = 0;
+        let sumKmEmpty = 0;
+        let sumStdFuel = 0;
+        let sumActualFuel = 0;
+        let sumOverLiters = 0;
+        let sumFuelPenalty = 0;
+        let sumFuelBonus = 0;
+        let sumEtcStd = 0;
+        let sumEtcActual = 0;
+        let sumEtcOver = 0;
+        let sumGrossPay = 0;
+        let sumAdvance = 0;
+        let sumNetTransfer = 0;
+
+        const driverMap = {};
+
+        computedTrips = trips.map(function (t) {
+          const kmL = Math.max(0, Number(t.kmLoaded) || 0);
+          const kmE = Math.max(0, Number(t.kmEmpty) || 0);
+          const normL = Math.max(0, Number(t.normLoaded) || 0);
+          const normE = Math.max(0, Number(t.normEmpty) || 0);
+          const extraL = Math.max(0, Number(t.reeferExtraL) || 0);
+
+          const stdLiters = Math.round(((kmL * normL) / 100 + (kmE * normE) / 100 + extraL) * 10) / 10;
+          const actualLiters = Math.round((Number(t.actualFuelL) || 0) * 10) / 10;
+          const diffLiters = Math.round((actualLiters - stdLiters) * 10) / 10;
+
+          let chargeableOverL = 0;
+          let fuelPenalty = 0;
+          let fuelBonus = 0;
+
+          if (ruleMode === 'strict') {
+            if (diffLiters > 2.0) {
+              chargeableOverL = diffLiters;
+              fuelPenalty = Math.round(chargeableOverL * dieselPrice);
+            } else if (diffLiters < -1.0) {
+              fuelBonus = Math.round(Math.abs(diffLiters) * dieselPrice * 0.30);
+            }
+          } else {
+            const tol = Math.max(2.0, stdLiters * 0.02);
+            if (diffLiters > tol) {
+              chargeableOverL = Math.round((diffLiters - tol) * 10) / 10;
+              fuelPenalty = Math.round(chargeableOverL * dieselPrice);
+            } else if (diffLiters < -1.0) {
+              fuelBonus = Math.round(Math.abs(diffLiters) * dieselPrice * 0.30);
+            }
+          }
+
+          const etcStd = Math.max(0, Math.round(Number(t.etcStd) || 0));
+          const etcActual = Math.max(0, Math.round(Number(t.etcActual) || 0));
+          const etcOver = Math.max(0, etcActual - etcStd);
+
+          const tripWage = Math.max(0, Math.round(Number(t.tripWage) || 0));
+          const allowance = Math.max(0, Math.round(Number(t.allowance) || 0));
+          const advance = Math.max(0, Math.round(Number(t.advance) || 0));
+          const gross = tripWage + allowance;
+          const netPay = gross + fuelBonus - advance - fuelPenalty - etcOver;
+
+          sumKmLoaded += kmL;
+          sumKmEmpty += kmE;
+          sumStdFuel += stdLiters;
+          sumActualFuel += actualLiters;
+          if (diffLiters > 2.0) sumOverLiters += diffLiters;
+          sumFuelPenalty += fuelPenalty;
+          sumFuelBonus += fuelBonus;
+          sumEtcStd += etcStd;
+          sumEtcActual += etcActual;
+          sumEtcOver += etcOver;
+          sumGrossPay += gross;
+          sumAdvance += advance;
+          sumNetTransfer += netPay;
+
+          const row = {
+            code: t.code,
+            date: t.date || '30/10',
+            plate: t.plate,
+            vehType: t.vehType,
+            driver: t.driver,
+            driverPhone: t.driverPhone || '0900 000 000',
+            route: t.route,
+            kmLoaded: kmL,
+            kmEmpty: kmE,
+            stdLiters: stdLiters,
+            actualLiters: actualLiters,
+            diffLiters: diffLiters,
+            fuelPenalty: fuelPenalty,
+            fuelBonus: fuelBonus,
+            etcStd: etcStd,
+            etcActual: etcActual,
+            etcOver: etcOver,
+            etcNote: t.etcNote || '',
+            tripWage: tripWage,
+            allowance: allowance,
+            gross: gross,
+            advance: advance,
+            netPay: netPay
+          };
+
+          if (!driverMap[t.driver]) {
+            driverMap[t.driver] = {
+              driver: t.driver,
+              phone: row.driverPhone,
+              plate: t.plate,
+              vehType: t.vehType,
+              tripsCount: 0,
+              totalKm: 0,
+              stdLiters: 0,
+              actualLiters: 0,
+              diffLiters: 0,
+              fuelPenalty: 0,
+              fuelBonus: 0,
+              etcStd: 0,
+              etcActual: 0,
+              etcOver: 0,
+              gross: 0,
+              advance: 0,
+              netPay: 0,
+              trips: []
+            };
+          }
+          const dm = driverMap[t.driver];
+          dm.tripsCount += 1;
+          dm.totalKm += (kmL + kmE);
+          dm.stdLiters += stdLiters;
+          dm.actualLiters += actualLiters;
+          dm.diffLiters = Math.round((dm.diffLiters + diffLiters) * 10) / 10;
+          dm.fuelPenalty += fuelPenalty;
+          dm.fuelBonus += fuelBonus;
+          dm.etcStd += etcStd;
+          dm.etcActual += etcActual;
+          dm.etcOver += etcOver;
+          dm.gross += gross;
+          dm.advance += advance;
+          dm.netPay += netPay;
+          dm.trips.push(row);
+
+          return row;
+        });
+
+        driverAggList = Object.keys(driverMap).map(function (k) { return driverMap[k]; }).sort(function (a, b) {
+          return b.fuelPenalty + b.etcOver - (a.fuelPenalty + a.etcOver);
+        });
+
+        if (!selectedDriverName || !driverMap[selectedDriverName]) {
+          selectedDriverName = driverAggList.length > 0 ? driverAggList[0].driver : '';
+        }
+
+        // Update 6 KPIs
+        const totalKm = sumKmLoaded + sumKmEmpty;
+        document.getElementById('kpiTotalKm').textContent = totalKm.toLocaleString('vi-VN') + ' km';
+        document.getElementById('kpiKmSplitNote').textContent = 'Có hàng: ' + sumKmLoaded.toLocaleString('vi-VN') + ' km • Rỗng: ' + sumKmEmpty.toLocaleString('vi-VN') + ' km';
+
+        document.getElementById('kpiFuelCompare').textContent = fmtLiters(sumStdFuel) + ' / ' + fmtLiters(sumActualFuel);
+        document.getElementById('kpiFuelMoneyNote').textContent = 'Tiền dầu HĐ: ' + fmtVnd(sumActualFuel * dieselPrice);
+
+        document.getElementById('kpiOverFuelLiters').textContent = (sumOverLiters > 0 ? '+' : '') + fmtLiters(sumOverLiters);
+        document.getElementById('kpiOverFuelMoney').textContent = 'Khấu trừ vượt ĐM: ' + fmtVnd(sumFuelPenalty) + (sumFuelBonus > 0 ? ' • Thưởng: ' + fmtVnd(sumFuelBonus) : '');
+
+        document.getElementById('kpiEtcTotal').textContent = fmtVnd(sumEtcActual);
+        document.getElementById('kpiEtcDiffNote').textContent = 'Vé VETC ngoài tuyến: ' + fmtVnd(sumEtcOver);
+
+        document.getElementById('kpiGrossDriverPay').textContent = fmtVnd(sumGrossPay);
+        document.getElementById('kpiAdvanceNote').textContent = 'Đã tạm ứng dọc đường: ' + fmtVnd(sumAdvance);
+
+        document.getElementById('kpiNetDriverTransfer').textContent = fmtVnd(sumNetTransfer);
+        document.getElementById('kpiNetDriverNote').textContent = driverAggList.length + ' tài xế • Đã cấn trừ dầu vượt & vé sai tuyến';
+
+        renderLedgerTable(sumKmLoaded, sumKmEmpty, sumStdFuel, sumActualFuel, sumFuelPenalty, sumEtcStd, sumEtcActual, sumEtcOver, sumGrossPay, sumAdvance, sumNetTransfer);
+        renderDriverSidebar();
+        renderA4Sheet();
+      }
+
+      function renderLedgerTable(sumKmL, sumKmE, sumStdF, sumActF, sumFuelPen, sumEtcS, sumEtcA, sumEtcO, sumGross, sumAdv, sumNet) {
+        const tbody = document.getElementById('fleetLedgerBody');
+        tbody.innerHTML = computedTrips.map(function (r) {
+          let fuelFlag = '';
+          if (r.fuelPenalty > 0) {
+            fuelFlag = '<span class="flag-over">+' + fmtLiters(r.diffLiters) + '</span><div style="font-size:10px; color:var(--crimson-700); font-weight:700; margin-top:2px;">-' + fmtVnd(r.fuelPenalty) + '</div>';
+          } else if (r.fuelBonus > 0) {
+            fuelFlag = '<span class="flag-save">' + fmtLiters(r.diffLiters) + '</span><div style="font-size:10px; color:var(--emerald-800); font-weight:700; margin-top:2px;">+' + fmtVnd(r.fuelBonus) + '</div>';
+          } else {
+            fuelFlag = '<span class="flag-ok">' + (r.diffLiters >= 0 ? '+' : '') + fmtLiters(r.diffLiters) + '</span>';
+          }
+
+          const etcDiffHtml = r.etcOver > 0
+            ? '<span style="color:var(--crimson-700); font-weight:800;">-' + fmtVnd(r.etcOver) + '</span>'
+            : '<span style="color:var(--emerald-800); font-weight:700;">Khớp ĐM</span>';
+
+          return (
+            '<tr>' +
+              '<td>' +
+                '<div style="font-weight:800; color:var(--navy-950);">' + escapeHtml(r.code) + ' <span style="font-weight:600; color:var(--slate-500);">(' + escapeHtml(r.date) + ')</span></div>' +
+                '<span class="plate-badge">' + escapeHtml(r.plate) + '</span>' +
+                '<span class="veh-type-sub">' + escapeHtml(r.vehType) + '</span>' +
+              '</td>' +
+              '<td>' +
+                '<div style="font-weight:800; color:var(--navy-900);">' + escapeHtml(r.driver) + '</div>' +
+                '<div style="font-size:11px; color:var(--slate-600);">' + escapeHtml(r.route) + '</div>' +
+              '</td>' +
+              '<td class="right">' +
+                '<strong>' + r.kmLoaded + ' km</strong><br />' +
+                '<span style="font-size:10.5px; color:var(--slate-500);">Rỗng: ' + r.kmEmpty + ' km</span>' +
+              '</td>' +
+              '<td class="right" style="font-weight:700;">' + fmtLiters(r.stdLiters) + '</td>' +
+              '<td class="right" style="font-weight:800;">' + fmtLiters(r.actualLiters) + '</td>' +
+              '<td class="center">' + fuelFlag + '</td>' +
+              '<td class="right">' + fmtVnd(r.etcStd) + '</td>' +
+              '<td class="right" style="font-weight:700;">' + fmtVnd(r.etcActual) + '</td>' +
+              '<td class="right">' + etcDiffHtml + '</td>' +
+              '<td class="right" style="font-weight:700;">' + fmtVnd(r.gross) + '</td>' +
+              '<td class="right" style="color:var(--slate-600);">- ' + fmtVnd(r.advance) + '</td>' +
+              '<td class="right" style="font-weight:900; color:var(--emerald-800);">' + fmtVnd(r.netPay) + '</td>' +
+              '<td class="center">' +
+                '<button type="button" class="row-btn" data-pickdriver="' + escapeHtml(r.driver) + '">Phiếu Lương A4</button>' +
+              '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        document.getElementById('fleetLedgerFoot').innerHTML =
+          '<tr>' +
+            '<td colspan="2">TỔNG CỘNG ĐỘI XE KỲ NÀY (' + computedTrips.length + ' CHUYẾN):</td>' +
+            '<td class="right">' + (sumKmL + sumKmE).toLocaleString('vi-VN') + ' km</td>' +
+            '<td class="right">' + fmtLiters(sumStdF) + '</td>' +
+            '<td class="right">' + fmtLiters(sumActF) + '</td>' +
+            '<td class="center" style="color:var(--crimson-700);">Trừ ĐM: -' + fmtVnd(sumFuelPen) + '</td>' +
+            '<td class="right">' + fmtVnd(sumEtcS) + '</td>' +
+            '<td class="right">' + fmtVnd(sumEtcA) + '</td>' +
+            '<td class="right" style="color:var(--crimson-700);">- ' + fmtVnd(sumEtcO) + '</td>' +
+            '<td class="right">' + fmtVnd(sumGross) + '</td>' +
+            '<td class="right">- ' + fmtVnd(sumAdv) + '</td>' +
+            '<td class="right" style="color:var(--emerald-800); font-size:12.5px;">' + fmtVnd(sumNet) + '</td>' +
+            '<td></td>' +
+          '</tr>';
+
+        tbody.querySelectorAll('[data-pickdriver]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            selectedDriverName = btn.getAttribute('data-pickdriver');
+            activeA4Mode = 'driver';
+            syncA4ModeTabs();
+            renderDriverSidebar();
+            renderA4Sheet();
+          });
+        });
+      }
+
+      function renderDriverSidebar() {
+        const tbody = document.getElementById('driverSummaryBody');
+        tbody.innerHTML = driverAggList.map(function (d) {
+          const isAct = d.driver === selectedDriverName;
+          const totalDeduct = d.fuelPenalty + d.etcOver;
+          return (
+            '<tr class="driver-row ' + (isAct ? 'active' : '') + '" data-drv="' + escapeHtml(d.driver) + '">' +
+              '<td>' +
+                '<div style="font-weight:800; color:var(--navy-950);">' + escapeHtml(d.driver) + '</div>' +
+                '<span class="plate-badge" style="font-size:10px;">' + escapeHtml(d.plate) + '</span> ' +
+                '<span style="font-size:10.5px; color:var(--slate-500);">• ' + d.tripsCount + ' chuyến (' + d.totalKm + ' km)</span>' +
+              '</td>' +
+              '<td class="right">' +
+                (totalDeduct > 0
+                  ? '<span style="color:var(--crimson-700); font-weight:800;">-' + fmtVnd(totalDeduct) + '</span>'
+                  : '<span style="color:var(--emerald-800); font-weight:700;">+' + fmtVnd(d.fuelBonus) + '</span>') +
+              '</td>' +
+              '<td class="right" style="font-weight:900; color:var(--navy-950);">' + fmtVnd(d.netPay) + '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        tbody.querySelectorAll('.driver-row').forEach(function (tr) {
+          tr.addEventListener('click', function () {
+            selectedDriverName = tr.getAttribute('data-drv');
+            activeA4Mode = 'driver';
+            syncA4ModeTabs();
+            renderDriverSidebar();
+            renderA4Sheet();
+          });
+        });
+
+        const sel = document.getElementById('driverSelectA4');
+        sel.innerHTML = driverAggList.map(function (d) {
+          return '<option value="' + escapeHtml(d.driver) + '" ' + (d.driver === selectedDriverName ? 'selected' : '') + '>' +
+            escapeHtml(d.driver) + ' (' + escapeHtml(d.plate) + ' — Thực lĩnh: ' + fmtVnd(d.netPay) + ')' +
+          '</option>';
+        }).join('');
+      }
+
+      function syncA4ModeTabs() {
+        document.getElementById('tabBtnDriverSlip').classList.toggle('active', activeA4Mode === 'driver');
+        document.getElementById('tabBtnDirectorAudit').classList.toggle('active', activeA4Mode === 'director');
+        document.getElementById('driverFilterWrap').style.display = activeA4Mode === 'driver' ? 'flex' : 'none';
+      }
+
+      function renderA4Sheet() {
+        const company = document.getElementById('fleetCompanyInput').value.trim() || 'CÔNG TY VẬN TẢI';
+        const mst = document.getElementById('fleetMstInput').value.trim() || 'Đang cập nhật';
+        const phone = document.getElementById('fleetPhoneInput').value.trim() || '0900 000 000';
+        const period = document.getElementById('fleetPeriodInput').value.trim() || 'Tháng 10/2026';
+        const dieselPrice = Math.max(1000, Number(document.getElementById('dieselPriceInput').value) || 20450);
+        const bankBin = document.getElementById('fleetBankSelect').value;
+        const bankLabel = document.getElementById('fleetBankSelect').options[document.getElementById('fleetBankSelect').selectedIndex].text;
+        const acc = document.getElementById('fleetAccInput').value.trim();
+        const holder = stripVi(document.getElementById('fleetHolderInput').value || company).toUpperCase();
+
+        const container = document.getElementById('a4SheetContent');
+
+        if (activeA4Mode === 'director') {
+          let totStd = 0, totAct = 0, totPen = 0, totEtcO = 0, totNet = 0;
+          const rowsHtml = driverAggList.map(function (d, i) {
+            totStd += d.stdLiters;
+            totAct += d.actualLiters;
+            totPen += d.fuelPenalty;
+            totEtcO += d.etcOver;
+            totNet += d.netPay;
+            return (
+              '<tr>' +
+                '<td class="center">' + (i + 1) + '</td>' +
+                '<td><strong>' + escapeHtml(d.driver) + '</strong><br /><span style="font-size:10.2px; color:#475569;">Xe: ' + escapeHtml(d.plate) + ' (' + escapeHtml(d.vehType) + ')</span></td>' +
+                '<td class="center">' + d.tripsCount + ' (' + d.totalKm + ' km)</td>' +
+                '<td class="right">' + fmtLiters(d.stdLiters) + '</td>' +
+                '<td class="right">' + fmtLiters(d.actualLiters) + '</td>' +
+                '<td class="right" style="color:#B91C1C; font-weight:700;">-' + fmtVnd(d.fuelPenalty) + '</td>' +
+                '<td class="right" style="color:#B91C1C; font-weight:700;">-' + fmtVnd(d.etcOver) + '</td>' +
+                '<td class="right" style="font-weight:800;">' + fmtVnd(d.netPay) + '</td>' +
+              '</tr>'
+            );
+          }).join('');
+
+          container.innerHTML =
+            '<div class="a4-head-grid">' +
+              '<div>' +
+                '<div class="a4-org-name">' + escapeHtml(company) + '</div>' +
+                '<div class="a4-org-meta">Mã số thuế: <strong>' + escapeHtml(mst) + '</strong> • Điều vận: <strong>' + escapeHtml(phone) + '</strong></div>' +
+                '<div class="a4-org-meta">Đơn giá dầu DO 0,05S tham chiếu: <strong>' + fmtVnd(dieselPrice) + '/lít</strong></div>' +
+              '</div>' +
+              '<div class="a4-motto">' +
+                '<strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br />' +
+                'Độc lập - Tự do - Hạnh phúc<br />' +
+                '<span style="font-size:11px; color:#475569;">Kỳ quyết toán: ' + escapeHtml(period) + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="a4-doc-title">' +
+              '<h2>BÁO CÁO QUẢN TRỊ ĐỊNH MỨC DẦU DO, SAO KÊ VETC/ePASS &amp; QUỸ LƯƠNG ĐỘI XE</h2>' +
+              '<p>Tổng hợp kiểm soát hao hụt nhiên liệu &amp; phí cầu đường trình Ban Giám đốc phê duyệt cuối kỳ</p>' +
+            '</div>' +
+            '<table class="a4-table">' +
+              '<thead>' +
+                '<tr>' +
+                  '<th class="center">STT</th>' +
+                  '<th>Tài Xế &amp; Đầu Xe Phụ Trách</th>' +
+                  '<th class="center">Chuyến / Km</th>' +
+                  '<th class="right">ĐM Dầu Chuẩn</th>' +
+                  '<th class="right">Thực Đổ HĐ</th>' +
+                  '<th class="right">Trừ Vượt ĐM</th>' +
+                  '<th class="right">Trừ VETC Lệch</th>' +
+                  '<th class="right">Thực Lĩnh Ròng</th>' +
+                '</tr>' +
+              '</thead>' +
+              '<tbody>' + rowsHtml + '</tbody>' +
+              '<tfoot>' +
+                '<tr>' +
+                  '<td colspan="3">TỔNG CỘNG TOÀN ĐỘI XE:</td>' +
+                  '<td class="right">' + fmtLiters(totStd) + '</td>' +
+                  '<td class="right">' + fmtLiters(totAct) + '</td>' +
+                  '<td class="right" style="color:#B91C1C;">-' + fmtVnd(totPen) + '</td>' +
+                  '<td class="right" style="color:#B91C1C;">-' + fmtVnd(totEtcO) + '</td>' +
+                  '<td class="right">' + fmtVnd(totNet) + '</td>' +
+                '</tr>' +
+              '</tfoot>' +
+            '</table>' +
+            '<div class="words-banner"><strong>Tổng số tiền thực chi lương chuyến đội xe bằng chữ:</strong> <em>' + escapeHtml(readVndWords(totNet)) + '</em></div>' +
+            '<div class="sig-3-grid">' +
+              '<div><strong>ĐIỀU VẬN ĐỐI SOÁT GPS</strong><br /><span style="font-size:10.5px; color:#64748B;">(Ký, xác nhận lộ trình &amp; trạm)</span><div style="height:52px;"></div><strong>Phòng Điều Vận</strong></div>' +
+              '<div><strong>KẾ TOÁN ĐỘI XE LẬP BIỂU</strong><br /><span style="font-size:10.5px; color:#64748B;">(Đã khớp HĐ dầu DO &amp; ví VETC)</span><div style="height:52px;"></div><strong>Phòng Kế Toán</strong></div>' +
+              '<div><strong>GIÁM ĐỐC PHÊ DUYỆT CHI</strong><br /><span style="font-size:10.5px; color:#64748B;">(Ký duyệt chuyển khoản lương)</span><div><span class="sig-stamp">ĐÃ KIỂM SOÁT DẦU DO &amp; VETC</span></div><strong>Ban Giám Đốc</strong></div>' +
+            '</div>';
+          return;
+        }
+
+        // Mode #1: Individual Driver Slip
+        const drv = driverAggList.find(function (x) { return x.driver === selectedDriverName; }) || driverAggList[0];
+        if (!drv) {
+          container.innerHTML = '<p>Chưa có dữ liệu chuyến xe.</p>';
+          return;
+        }
+
+        const tripRowsHtml = drv.trips.map(function (t, idx) {
+          return (
+            '<tr>' +
+              '<td class="center">' + (idx + 1) + '</td>' +
+              '<td><strong>' + escapeHtml(t.code) + '</strong> (' + escapeHtml(t.date) + ')<br /><span style="font-size:10.3px; color:#475569;">' + escapeHtml(t.route) + '</span></td>' +
+              '<td class="right">' + (t.kmLoaded + t.kmEmpty) + ' km<br /><span style="font-size:10px; color:#64748B;">(' + t.kmLoaded + '/' + t.kmEmpty + ')</span></td>' +
+              '<td class="right">' + fmtLiters(t.stdLiters) + '<br /><strong>' + fmtLiters(t.actualLiters) + '</strong></td>' +
+              '<td class="right">' + fmtVnd(t.etcStd) + '<br /><strong>' + fmtVnd(t.etcActual) + '</strong></td>' +
+              '<td class="right">' + fmtVnd(t.gross) + '</td>' +
+              '<td class="right">- ' + fmtVnd(t.advance) + '</td>' +
+              '<td class="right" style="color:#B91C1C;">' + ((t.fuelPenalty + t.etcOver) > 0 ? '-' + fmtVnd(t.fuelPenalty + t.etcOver) : (t.fuelBonus > 0 ? '+' + fmtVnd(t.fuelBonus) : '0 đ')) + '</td>' +
+              '<td class="right" style="font-weight:800;">' + fmtVnd(t.netPay) + '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        const memo = 'LUONG CHUYEN ' + stripVi(drv.driver).toUpperCase().slice(0, 18) + ' ' + drv.plate.replace(/[^A-Z0-9]/gi, '');
+        const qrPayload = buildVietQrPayload(bankBin, acc, drv.netPay, memo);
+        let qrBoxInner = '';
+        if (qrPayload) {
+          qrBoxInner =
+            '<div style="font-size:10.2px; font-weight:800; color:var(--navy-900); margin-bottom:4px;">VIETQR CHUYỂN KHOẢN ĐỊNH DANH</div>' +
+            '<div class="live-fleet-qr" style="display:block;">' + QrEncoder.toSvg(qrPayload) + '</div>' +
+            '<div style="font-size:10px; color:var(--slate-600); margin-top:4px;">' + escapeHtml(bankLabel) + ' • STK: <strong>' + escapeHtml(acc) + '</strong></div>';
+        } else {
+          qrBoxInner =
+            '<div class="demo-lock-banner">' +
+              '[CHẾ ĐỘ CHẠY THỬ DEMO — STK 0000000000]<br />' +
+              'Nhập STK thật tại thanh cấu hình trên cùng để tạo mã VietQR Napas247 chuyển lương / thu hoàn ứng.' +
+            '</div>';
+        }
+
+        container.innerHTML =
+          '<div class="a4-head-grid">' +
+            '<div>' +
+              '<div class="a4-org-name">' + escapeHtml(company) + '</div>' +
+              '<div class="a4-org-meta">Mã số thuế: <strong>' + escapeHtml(mst) + '</strong> • Hotline điều vận: <strong>' + escapeHtml(phone) + '</strong></div>' +
+              '<div class="a4-org-meta">Chứng từ đối chiếu nội bộ đội xe • Lưu hành kỳ chốt lương cuối tháng</div>' +
+            '</div>' +
+            '<div class="a4-motto">' +
+              '<strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br />' +
+              'Độc lập - Tự do - Hạnh phúc<br />' +
+              '<span style="font-size:11px; color:#475569;">Kỳ quyết toán: ' + escapeHtml(period) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="a4-doc-title">' +
+            '<h2>BẢNG KÊ ĐỐI CHIẾU ĐỊNH MỨC DẦU DO - VETC &amp; XÁC NHẬN LƯƠNG CHUYẾN TÀI XẾ</h2>' +
+            '<p>Họ tên tài xế: ' + escapeHtml(drv.driver) + ' (' + escapeHtml(drv.phone) + ') • Đầu xe phụ trách: ' + escapeHtml(drv.plate) + ' (' + escapeHtml(drv.vehType) + ')</p>' +
+          '</div>' +
+          '<table class="a4-table a4-fixed">' +
+            '<thead>' +
+              '<tr>' +
+                '<th class="center" style="width:5%;">STT</th>' +
+                '<th style="width:19%;">Lệnh điều xe &amp; tuyến</th>' +
+                '<th class="right">Tổng Km</th>' +
+                '<th class="right">Dầu Chuẩn/Thực</th>' +
+                '<th class="right">VETC Chuẩn/Thực</th>' +
+                '<th class="right">Lương+PC</th>' +
+                '<th class="right">Tạm Ứng</th>' +
+                '<th class="right">Thưởng/Trừ</th>' +
+                '<th class="right">Thực Lĩnh</th>' +
+              '</tr>' +
+            '</thead>' +
+            '<tbody>' + tripRowsHtml + '</tbody>' +
+            '<tfoot>' +
+              '<tr>' +
+                '<td colspan="2">TỔNG KẾT KỲ (' + drv.tripsCount + ' CHUYẾN):</td>' +
+                '<td class="right">' + drv.totalKm + ' km</td>' +
+                '<td class="right">' + fmtLiters(drv.stdLiters) + '<br />' + fmtLiters(drv.actualLiters) + '</td>' +
+                '<td class="right">' + fmtVnd(drv.etcStd) + '<br />' + fmtVnd(drv.etcActual) + '</td>' +
+                '<td class="right">' + fmtVnd(drv.gross) + '</td>' +
+                '<td class="right">- ' + fmtVnd(drv.advance) + '</td>' +
+                '<td class="right" style="color:#B91C1C;">' + ((drv.fuelPenalty + drv.etcOver) > 0 ? '-' + fmtVnd(drv.fuelPenalty + drv.etcOver) : '+' + fmtVnd(drv.fuelBonus)) + '</td>' +
+                '<td class="right">' + fmtVnd(drv.netPay) + '</td>' +
+              '</tr>' +
+            '</tfoot>' +
+          '</table>' +
+
+          '<div class="settlement-grid">' +
+            '<div class="settle-box">' +
+              '<div class="settle-line"><span>1. Tổng lương chuyến &amp; phụ cấp ăn ca/lưu đêm:</span><strong>+ ' + fmtVnd(drv.gross) + '</strong></div>' +
+              '<div class="settle-line"><span>2. Thưởng tiết kiệm dầu DO dưới định mức:</span><strong style="color:#065F46;">+ ' + fmtVnd(drv.fuelBonus) + '</strong></div>' +
+              '<div class="settle-line"><span>3. Trừ tiền tạm ứng dọc đường đã nhận:</span><span>- ' + fmtVnd(drv.advance) + '</span></div>' +
+              '<div class="settle-line"><span>4. Khấu trừ dầu DO vượt định mức (' + fmtVnd(dieselPrice) + '/L):</span><strong style="color:#B91C1C;">- ' + fmtVnd(drv.fuelPenalty) + '</strong></div>' +
+              '<div class="settle-line"><span>5. Khấu trừ vé trạm VETC/ePass đi ngoài lộ trình lệnh:</span><strong style="color:#B91C1C;">- ' + fmtVnd(drv.etcOver) + '</strong></div>' +
+              '<div class="settle-line"><span>SỐ TIỀN THỰC LĨNH CHUYỂN KHOẢN CUỐI KỲ:</span><strong style="color:#065F46;">' + fmtVnd(drv.netPay) + '</strong></div>' +
+            '</div>' +
+            '<div class="qr-settle-box">' + qrBoxInner + '</div>' +
+          '</div>' +
+
+          '<div class="words-banner"><strong>Số tiền thực lĩnh bằng chữ:</strong> <em>' + escapeHtml(readVndWords(drv.netPay)) + '</em> (Chủ TK đối chiếu: ' + escapeHtml(holder) + ')</div>' +
+
+          '<div class="sig-3-grid">' +
+            '<div><strong>KẾ TOÁN VẬN TẢI / ĐIỀU VẬN</strong><br /><span style="font-size:10.5px; color:#64748B;">(Đã đối chiếu GPS, HĐ dầu &amp; VETC)</span><div style="height:50px;"></div><strong>Phòng Kế Toán Đội Xe</strong></div>' +
+            '<div><strong>TÀI XẾ XÁC NHẬN SỐ LIỆU</strong><br /><span style="font-size:10.5px; color:#64748B;">(Ký xác nhận đồng hồ Km &amp; lít dầu)</span><div style="height:50px;"></div><strong>' + escapeHtml(drv.driver) + '</strong></div>' +
+            '<div><strong>BAN GIÁM ĐỐC DUYỆT CHI</strong><br /><span style="font-size:10.5px; color:#64748B;">(Phê duyệt tất toán kỳ lương)</span><div><span class="sig-stamp">ĐÃ ĐỐI CHIẾU ĐỊNH MỨC DẦU &amp; VETC</span></div><strong>Ban Giám Đốc</strong></div>' +
+          '</div>';
+      }
+
+      /* =========================================================================
+       * 4. EVENTS: PRESET SWITCH, QUICK-ADD, COPY ZALO, CSV EXPORT & PRINT
+       * ========================================================================= */
+      function showToast(msg) {
+        const el = document.getElementById('fleetToast');
+        el.textContent = msg;
+        el.classList.add('show');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () { el.classList.remove('show'); }, 2400);
+      }
+
+      /* =========================================================================
+       * 6. TỰ LƯU DỮ LIỆU (localStorage) — đóng trình duyệt mở lại vẫn còn
+       * ========================================================================= */
+      const STORAGE_KEY = 'fleet_reconciler_state_v1';
+      const SAVED_INPUT_IDS = ['fleetCompanyInput', 'fleetMstInput', 'fleetPhoneInput', 'fleetPeriodInput', 'dieselPriceInput', 'penaltyRuleSelect', 'fleetBankSelect', 'fleetAccInput', 'fleetHolderInput'];
+
+      function setAutosaveStatus(text) {
+        document.getElementById('autosaveStatus').textContent = text;
+      }
+
+      function saveState() {
+        const inputs = {};
+        SAVED_INPUT_IDS.forEach(function (id) { inputs[id] = document.getElementById(id).value; });
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ savedAt: Date.now(), preset: activePresetKey, inputs: inputs, trips: trips }));
+          const d = new Date();
+          setAutosaveStatus('Đã tự lưu lúc ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'));
+        } catch (e) {
+          setAutosaveStatus('Trình duyệt chặn lưu, nhớ xuất CSV trước khi đóng');
+        }
+      }
+
+      function restoreState() {
+        let state = null;
+        try { state = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); } catch (e) { state = null; }
+        if (!state || !Array.isArray(state.trips)) return false;
+        Object.keys(state.inputs || {}).forEach(function (id) {
+          const el = document.getElementById(id);
+          if (el) el.value = state.inputs[id];
+        });
+        if (PRESETS[state.preset]) activePresetKey = state.preset;
+        document.querySelectorAll('#fleetPresetBar .preset-pill').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-preset') === activePresetKey);
+        });
+        trips = state.trips;
+        return true;
+      }
+
+      // Mọi lần tính lại đều lưu luôn. Gán lại trước khi các nút bên dưới đăng ký computeAll.
+      const computeAndRender = computeAll;
+      computeAll = function () {
+        computeAndRender();
+        saveState();
+      };
+
+      /* =========================================================================
+       * 7. NHẬP FILE EXCEL (.xlsx) / CSV — không cần thư viện ngoài, chạy offline
+       * ========================================================================= */
+      // Tên cột (đã bỏ dấu, viết thường) → trường của một chuyến. Dài hơn khớp trước.
+      const COLUMN_ALIASES = {
+        code: ['ma lenh', 'so lenh', 'ma chuyen', 'lenh dieu xe', 'ma'],
+        date: ['ngay chay', 'ngay di', 'ngay'],
+        plate: ['bien so xe', 'bien so', 'so xe', 'bks'],
+        vehType: ['loai xe', 'chung loai xe', 'tai trong'],
+        driver: ['ten tai xe', 'ho ten tai xe', 'tai xe', 'lai xe', 'ho ten', 'nguoi lai'],
+        driverPhone: ['sdt tai xe', 'so dien thoai', 'dien thoai', 'sdt'],
+        route: ['tuyen duong', 'lo trinh', 'tuyen', 'hanh trinh'],
+        kmLoaded: ['km co hang', 'km hang', 'km chay hang', 'so km co hang'],
+        kmEmpty: ['km chay rong', 'km rong', 'km khong hang', 'so km rong'],
+        normLoaded: ['dinh muc co hang', 'dm co hang', 'dinh muc dau', 'dinh muc'],
+        normEmpty: ['dinh muc rong', 'dm rong', 'dinh muc khong hang'],
+        reeferExtraL: ['gio may lanh', 'may lanh', 'phu tai', 'dau phu tai'],
+        actualFuelL: ['dau thuc do', 'lit thuc do', 'so lit do', 'dau do', 'lit dau', 'nhien lieu'],
+        etcStd: ['vetc chuan', 've chuan', 'dinh muc ve', 've tram chuan', 'phi duong chuan'],
+        etcActual: ['vetc thuc tru', 've thuc tru', 'thuc tru vetc', 'thuc tru', 'phi duong thuc te', 've tram'],
+        etcNote: ['ghi chu', 'note'],
+        tripWage: ['luong chuyen', 'tien chuyen', 'luong'],
+        allowance: ['phu cap', 'cong tac phi'],
+        advance: ['tam ung', 'ung truoc']
+      };
+      const FIELD_LABELS = {
+        code: 'Mã lệnh', date: 'Ngày', plate: 'Biển số', vehType: 'Loại xe', driver: 'Tài xế', driverPhone: 'SĐT tài xế',
+        route: 'Tuyến', kmLoaded: 'Km có hàng', kmEmpty: 'Km rỗng', normLoaded: 'ĐM có hàng', normEmpty: 'ĐM rỗng',
+        reeferExtraL: 'Máy lạnh/phụ tải', actualFuelL: 'Dầu thực đổ', etcStd: 'VETC chuẩn', etcActual: 'VETC thực trừ',
+        etcNote: 'Ghi chú', tripWage: 'Lương chuyến', allowance: 'Phụ cấp', advance: 'Tạm ứng'
+      };
+      const NUMERIC_FIELDS = ['kmLoaded', 'kmEmpty', 'normLoaded', 'normEmpty', 'reeferExtraL', 'actualFuelL', 'etcStd', 'etcActual', 'tripWage', 'allowance', 'advance'];
+
+      function normHeader(s) {
+        return stripVi(s).toLowerCase().replace(/\s+/g, ' ').trim();
+      }
+
+      function matchHeaders(headerRow) {
+        const pairs = [];
+        Object.keys(COLUMN_ALIASES).forEach(function (field) {
+          COLUMN_ALIASES[field].forEach(function (alias) { pairs.push({ field: field, alias: alias }); });
+        });
+        pairs.sort(function (a, b) { return b.alias.length - a.alias.length; });
+        const map = {};
+        const usedCols = {};
+        const headers = headerRow.map(normHeader);
+        // Khớp đúng tên trước, rồi mới tới "chứa tên"
+        [true, false].forEach(function (exact) {
+          pairs.forEach(function (p) {
+            if (map[p.field] !== undefined) return;
+            for (let c = 0; c < headers.length; c++) {
+              if (usedCols[c] || !headers[c]) continue;
+              const hit = exact ? headers[c] === p.alias : (' ' + headers[c] + ' ').indexOf(' ' + p.alias + ' ') >= 0;
+              if (hit) { map[p.field] = c; usedCols[c] = true; break; }
+            }
+          });
+        });
+        return map;
+      }
+
+      function parseNum(v) {
+        if (typeof v === 'number') return v;
+        let s = String(v == null ? '' : v).trim().replace(/[đ\s]|VND|vnd|lít|lit|km/g, '');
+        if (!s) return 0;
+        if (/^-?\d{1,3}(\.\d{3})+(,\d+)?$/.test(s)) s = s.replace(/\./g, '').replace(',', '.');      // 1.450.000 hoặc 1.450,5
+        else if (/^-?\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, '');                      // 1,450,000
+        else s = s.replace(',', '.');                                                                  // 84,5
+        const n = Number(s);
+        return isFinite(n) ? n : 0;
+      }
+
+      function excelDateToText(v) {
+        if (typeof v !== 'number' || v < 20000 || v > 80000) return String(v == null ? '' : v).trim();
+        const d = new Date(Math.round((v - 25569) * 86400000));
+        return String(d.getUTCDate()).padStart(2, '0') + '/' + String(d.getUTCMonth() + 1).padStart(2, '0');
+      }
+
+      // Định mức mặc định khi file không có cột định mức: lấy theo xe đã có trong sổ, rồi theo loại xe.
+      function guessNorms(plate, vehType) {
+        const known = trips.find(function (t) { return t.plate === plate && Number(t.normLoaded) > 0; });
+        if (known) return [Number(known.normLoaded), Number(known.normEmpty) || Number(known.normLoaded) * 0.75];
+        const s = normHeader(vehType);
+        if (/cont|dau keo|40ft|20ft/.test(s)) return [35, 24];
+        if (/lanh|\b8 ?t\b/.test(s)) return [22, 16.5];
+        if (/\b2 5 ?t|\b2t5|\b1 5 ?t|\b1 ?t\b/.test(s)) return [12.5, 9.8];
+        if (/\b5 ?t\b|bat/.test(s)) return [16.5, 12.5];
+        return [0, 0];
+      }
+
+      function rowsToTrips(rows) {
+        let headerIdx = -1;
+        let colMap = {};
+        for (let i = 0; i < Math.min(rows.length, 15); i++) {
+          const m = matchHeaders(rows[i].map(function (c) { return c == null ? '' : String(c); }));
+          if (Object.keys(m).length > Object.keys(colMap).length) { colMap = m; headerIdx = i; }
+        }
+        if (Object.keys(colMap).length < 3) throw new Error('Không nhận ra dòng tiêu đề (cần ít nhất 3 cột như Biển số, Tài xế, Km...)');
+
+        const out = [];
+        let skipped = 0;
+        let normsGuessed = 0;
+        for (let i = headerIdx + 1; i < rows.length; i++) {
+          const row = rows[i];
+          const get = function (f) { return colMap[f] === undefined ? undefined : row[colMap[f]]; };
+          const hasAny = Object.keys(colMap).some(function (f) { const v = get(f); return v !== undefined && v !== null && String(v).trim() !== ''; });
+          if (!hasAny) continue;
+          const t = {};
+          Object.keys(FIELD_LABELS).forEach(function (f) {
+            const v = get(f);
+            if (NUMERIC_FIELDS.indexOf(f) >= 0) t[f] = parseNum(v);
+            else t[f] = f === 'date' ? excelDateToText(v) : String(v == null ? '' : v).trim();
+          });
+          // Dòng tổng cộng hoặc dòng không có km/dầu thì bỏ
+          if (/tong|cong/.test(normHeader(t.code + ' ' + t.plate + ' ' + t.driver)) || (t.kmLoaded + t.kmEmpty + t.actualFuelL) === 0) { skipped++; continue; }
+          if (!t.normLoaded) {
+            const g = guessNorms(t.plate, t.vehType);
+            t.normLoaded = g[0];
+            if (!t.normEmpty) t.normEmpty = g[1];
+            normsGuessed++;
+          } else if (!t.normEmpty) {
+            t.normEmpty = Math.round(t.normLoaded * 0.75 * 10) / 10;
+          }
+          if (!t.code) t.code = 'L-' + (out.length + 1);
+          if (!t.driver) t.driver = 'Chưa ghi tên';
+          if (!t.vehType) t.vehType = 'Chưa ghi loại xe';
+          out.push(t);
+        }
+        return { trips: out, colMap: colMap, headers: rows[headerIdx], skipped: skipped, normsGuessed: normsGuessed };
+      }
+
+      function parseCsv(text) {
+        text = text.replace(/^﻿/, '');
+        const firstLine = text.split(/\r?\n/)[0] || '';
+        const delim = [';', '\t', ','].sort(function (a, b) { return firstLine.split(b).length - firstLine.split(a).length; })[0];
+        const rows = [];
+        let row = [];
+        let cell = '';
+        let inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          if (inQuotes) {
+            if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+            else if (ch === '"') inQuotes = false;
+            else cell += ch;
+          } else if (ch === '"') inQuotes = true;
+          else if (ch === delim) { row.push(cell); cell = ''; }
+          else if (ch === '\n' || ch === '\r') {
+            if (ch === '\r' && text[i + 1] === '\n') i++;
+            row.push(cell); rows.push(row); row = []; cell = '';
+          } else cell += ch;
+        }
+        if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+        return rows;
+      }
+
+      // Đọc .xlsx: giải nén ZIP bằng DecompressionStream có sẵn trong Chrome/Edge, đọc XML bằng DOMParser.
+      async function readXlsx(buf) {
+        const dv = new DataView(buf);
+        let eocd = -1;
+        for (let i = buf.byteLength - 22; i >= Math.max(0, buf.byteLength - 65557); i--) {
+          if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+        }
+        if (eocd < 0) throw new Error('File không phải .xlsx hợp lệ');
+        const entries = {};
+        let off = dv.getUint32(eocd + 16, true);
+        const count = dv.getUint16(eocd + 10, true);
+        const utf8 = new TextDecoder();
+        for (let n = 0; n < count && dv.getUint32(off, true) === 0x02014b50; n++) {
+          const nameLen = dv.getUint16(off + 28, true);
+          const name = utf8.decode(new Uint8Array(buf, off + 46, nameLen));
+          entries[name] = { method: dv.getUint16(off + 10, true), size: dv.getUint32(off + 20, true), local: dv.getUint32(off + 42, true) };
+          off += 46 + nameLen + dv.getUint16(off + 30, true) + dv.getUint16(off + 32, true);
+        }
+        async function text(name) {
+          const e = entries[name];
+          if (!e) return null;
+          const start = e.local + 30 + dv.getUint16(e.local + 26, true) + dv.getUint16(e.local + 28, true);
+          const data = new Uint8Array(buf, start, e.size);
+          if (e.method === 0) return utf8.decode(data);
+          const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+          return await new Response(stream).text();
+        }
+        const xml = function (s) { return new DOMParser().parseFromString(s, 'application/xml'); };
+
+        // Sheet đầu tiên theo thứ tự trong workbook
+        let sheetPath = null;
+        const wb = await text('xl/workbook.xml');
+        const rels = await text('xl/_rels/workbook.xml.rels');
+        if (wb && rels) {
+          const first = xml(wb).getElementsByTagName('sheet')[0];
+          const rid = first && (first.getAttribute('r:id') || first.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id'));
+          Array.prototype.forEach.call(xml(rels).getElementsByTagName('Relationship'), function (r) {
+            if (r.getAttribute('Id') === rid) sheetPath = 'xl/' + r.getAttribute('Target').replace(/^\/?xl\//, '').replace(/^\//, '');
+          });
+        }
+        if (!sheetPath || !entries[sheetPath]) {
+          sheetPath = Object.keys(entries).filter(function (k) { return /^xl\/worksheets\/sheet\d+\.xml$/.test(k); }).sort()[0];
+        }
+        if (!sheetPath) throw new Error('Không tìm thấy trang tính nào trong file');
+
+        const shared = [];
+        const ss = await text('xl/sharedStrings.xml');
+        if (ss) {
+          Array.prototype.forEach.call(xml(ss).getElementsByTagName('si'), function (si) {
+            shared.push(Array.prototype.map.call(si.getElementsByTagName('t'), function (t) { return t.textContent; }).join(''));
+          });
+        }
+        const colIndex = function (ref) {
+          const letters = (ref.match(/^[A-Z]+/) || ['A'])[0];
+          let n = 0;
+          for (let i = 0; i < letters.length; i++) n = n * 26 + (letters.charCodeAt(i) - 64);
+          return n - 1;
+        };
+        const rows = [];
+        Array.prototype.forEach.call(xml(await text(sheetPath)).getElementsByTagName('row'), function (r) {
+          const row = [];
+          Array.prototype.forEach.call(r.getElementsByTagName('c'), function (c) {
+            const t = c.getAttribute('t');
+            const vNode = c.getElementsByTagName('v')[0];
+            let val;
+            if (t === 's') val = shared[Number(vNode && vNode.textContent)] || '';
+            else if (t === 'inlineStr') val = Array.prototype.map.call(c.getElementsByTagName('t'), function (x) { return x.textContent; }).join('');
+            else if (t === 'str' || t === 'b') val = vNode ? vNode.textContent : '';
+            else val = vNode ? Number(vNode.textContent) : '';
+            row[colIndex(c.getAttribute('r') || '')] = val;
+          });
+          rows[Number(r.getAttribute('r')) - 1 || rows.length] = row;
+        });
+        return rows.filter(Boolean).map(function (r) { return Array.from(r, function (v) { return v === undefined ? '' : v; }); });
+      }
+
+      function showImportReport(result, fileName) {
+        const matched = Object.keys(result.colMap)
+          .sort(function (a, b) { return result.colMap[a] - result.colMap[b]; })
+          .map(function (f) { return FIELD_LABELS[f]; });
+        const usedCols = Object.keys(result.colMap).map(function (f) { return result.colMap[f]; });
+        const unmatched = (result.headers || []).filter(function (h, i) { return String(h).trim() && usedCols.indexOf(i) < 0; });
+        const box = document.getElementById('importReport');
+        box.style.display = 'block';
+        box.innerHTML =
+          '<strong>' + escapeHtml(fileName) + '</strong>: nhận ' + result.trips.length + ' chuyến' +
+          (result.skipped ? ', bỏ ' + result.skipped + ' dòng tổng/trống' : '') +
+          (result.normsGuessed ? ', ' + result.normsGuessed + ' chuyến dùng định mức mặc định' : '') +
+          '. Cột đã khớp: ' + escapeHtml(matched.join(', ')) +
+          (unmatched.length ? '. <span style="color:var(--amber-700, #b45309);">Chưa dùng: ' + escapeHtml(unmatched.join(', ')) + '</span>' : '');
+      }
+
+      async function importFile(file) {
+        const name = file.name || '';
+        let rows;
+        if (/\.xlsx$/i.test(name)) {
+          if (typeof DecompressionStream === 'undefined') throw new Error('Trình duyệt quá cũ, hãy mở bằng Chrome hoặc Edge bản mới, hoặc lưu file thành CSV');
+          rows = await readXlsx(await file.arrayBuffer());
+        } else if (/\.xls$/i.test(name)) {
+          throw new Error('File .xls đời cũ: mở bằng Excel rồi Lưu thành .xlsx hoặc .csv');
+        } else if (/\.(csv|txt)$/i.test(name)) {
+          rows = parseCsv(await file.text());
+        } else {
+          throw new Error('Chỉ nhận file .xlsx hoặc .csv');
+        }
+        const result = rowsToTrips(rows);
+        if (!result.trips.length) throw new Error('Không có dòng chuyến nào có số km hoặc số lít dầu');
+        trips = result.trips;
+        selectedDriverName = '';
+        computeAll();
+        showImportReport(result, name);
+        return result;
+      }
+
+      document.getElementById('btnImportFile').addEventListener('click', function () {
+        document.getElementById('importFileInput').click();
+      });
+      document.getElementById('importFileInput').addEventListener('change', function (e) {
+        const file = e.target.files && e.target.files[0];
+        e.target.value = '';
+        if (!file) return;
+        importFile(file).then(function (r) {
+          showToast('Đã nhập ' + r.trips.length + ' chuyến từ ' + file.name);
+        }).catch(function (err) {
+          showToast('Không nhập được: ' + err.message);
+        });
+      });
+
+      function applyPreset(key) {
+        const p = PRESETS[key];
+        if (!p) return;
+        activePresetKey = key;
+        document.querySelectorAll('#fleetPresetBar .preset-pill').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-preset') === key);
+        });
+        document.getElementById('fleetCompanyInput').value = p.company;
+        document.getElementById('fleetMstInput').value = p.mst;
+        document.getElementById('fleetPhoneInput').value = p.phone;
+        document.getElementById('fleetHolderInput').value = p.holder;
+        document.getElementById('fleetPeriodInput').value = p.period;
+        document.getElementById('dieselPriceInput').value = p.dieselPrice;
+        trips = JSON.parse(JSON.stringify(p.trips));
+        selectedDriverName = '';
+        computeAll();
+      }
+
+      document.querySelectorAll('#fleetPresetBar .preset-pill').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyPreset(btn.getAttribute('data-preset'));
+          showToast('Đã nạp bộ dữ liệu mẫu: ' + btn.textContent.trim());
+        });
+      });
+
+      document.getElementById('btnResetSample').addEventListener('click', function () {
+        applyPreset(activePresetKey);
+        showToast('Đã khôi phục dữ liệu mẫu gốc của đội xe!');
+      });
+
+      ['fleetCompanyInput', 'fleetMstInput', 'fleetPhoneInput', 'fleetPeriodInput', 'dieselPriceInput', 'penaltyRuleSelect', 'fleetBankSelect', 'fleetAccInput', 'fleetHolderInput'].forEach(function (id) {
+        const el = document.getElementById(id);
+        el.addEventListener('input', computeAll);
+        el.addEventListener('change', computeAll);
+      });
+
+      document.getElementById('tabBtnDriverSlip').addEventListener('click', function () {
+        activeA4Mode = 'driver';
+        syncA4ModeTabs();
+        renderA4Sheet();
+      });
+
+      document.getElementById('tabBtnDirectorAudit').addEventListener('click', function () {
+        activeA4Mode = 'director';
+        syncA4ModeTabs();
+        renderA4Sheet();
+      });
+
+      document.getElementById('driverSelectA4').addEventListener('change', function (e) {
+        selectedDriverName = e.target.value;
+        renderDriverSidebar();
+        renderA4Sheet();
+      });
+
+      document.getElementById('btnToggleAddTrip').addEventListener('click', function () {
+        document.getElementById('quickAddTripBar').classList.toggle('open');
+      });
+
+      document.getElementById('btnConfirmAddTrip').addEventListener('click', function () {
+        const plateMeta = document.getElementById('addPlate').value.split('|');
+        const newTrip = {
+          code: document.getElementById('addTripCode').value.trim() || ('LX-' + (trips.length + 101)),
+          date: '31/10',
+          plate: plateMeta[0] || '51C-912.45',
+          vehType: plateMeta[1] || 'Xe tải 8T',
+          driver: document.getElementById('addDriverName').value.trim() || 'Nguyễn Văn Hùng',
+          driverPhone: '0900 000 111',
+          route: document.getElementById('addRoute').value.trim() || 'Tuyến nội bộ TP.HCM',
+          kmLoaded: Number(document.getElementById('addKmLoaded').value) || 120,
+          kmEmpty: Number(document.getElementById('addKmEmpty').value) || 80,
+          normLoaded: Number(plateMeta[2]) || 22,
+          normEmpty: Number(plateMeta[3]) || 16.5,
+          reeferExtraL: Number(document.getElementById('addExtraLoad').value) || 0,
+          actualFuelL: Number(document.getElementById('addActualFuel').value) || 40,
+          etcStd: Number(document.getElementById('addEtcStd').value) || 200000,
+          etcActual: Number(document.getElementById('addEtcActual').value) || 200000,
+          etcNote: 'Bổ sung lệnh chốt sổ 31/10',
+          tripWage: Number(document.getElementById('addTripWage').value) || 1200000,
+          allowance: 250000,
+          advance: 400000
+        };
+        trips.unshift(newTrip);
+        selectedDriverName = newTrip.driver;
+        computeAll();
+        showToast('Đã ghi lệnh điều xe ' + newTrip.code + ' vào sổ đối soát kỳ này!');
+      });
+
+      document.getElementById('btnCopyDriverZalo').addEventListener('click', function () {
+        const drv = driverAggList.find(function (x) { return x.driver === selectedDriverName; }) || driverAggList[0];
+        if (!drv) return;
+        const company = document.getElementById('fleetCompanyInput').value.trim();
+        const period = document.getElementById('fleetPeriodInput').value.trim();
+        const msg =
+          '[PHIẾU ĐỐI CHIẾU DẦU DO - VETC & LƯƠNG CHUYẾN ' + period.toUpperCase() + ']\n' +
+          '• Đơn vị: ' + company + '\n' +
+          '• Tài xế: ' + drv.driver + ' — Xe: ' + drv.plate + ' (' + drv.tripsCount + ' chuyến / ' + drv.totalKm + ' km)\n' +
+          '• Định mức dầu chuẩn: ' + fmtLiters(drv.stdLiters) + ' | Thực đổ HĐ: ' + fmtLiters(drv.actualLiters) + '\n' +
+          '• Tổng lương chuyến & phụ cấp: ' + fmtVnd(drv.gross) + (drv.fuelBonus > 0 ? ' (+Thưởng dầu: ' + fmtVnd(drv.fuelBonus) + ')' : '') + '\n' +
+          '• Đã tạm ứng: -' + fmtVnd(drv.advance) + ' | Khấu trừ vượt ĐM dầu & VETC lệch tuyến: -' + fmtVnd(drv.fuelPenalty + drv.etcOver) + '\n' +
+          '=> THỰC LĨNH CHUYỂN KHOẢN: ' + fmtVnd(drv.netPay) + '. Bác tài kiểm tra và phản hồi xác nhận giúp Kế toán trước 16h00 hôm nay nhé!';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(msg).then(function () {
+            showToast('Đã sao chép Phiếu lương & đối chiếu dầu gửi Zalo cho tài xế ' + drv.driver + '!');
+          });
+        } else {
+          showToast('Đã sẵn sàng sao chép tin nhắn Zalo!');
+        }
+      });
+
+      document.getElementById('btnExportCsv').addEventListener('click', function () {
+        const headers = ['Ma_Lenh', 'Ngay', 'Bien_So', 'Loai_Xe', 'Tai_Xe', 'Tuyen_Duong', 'Km_Co_Hang', 'Km_Chay_Rong', 'DM_Dau_Chuan_L', 'Dau_Thuc_Do_L', 'Lech_Dau_L', 'Tru_Vuot_Dau_VND', 'VETC_Chuan_VND', 'VETC_Thuc_Tru_VND', 'VETC_Sai_Tuyen_VND', 'Luong_Va_Phu_Cap_VND', 'Tam_Ung_VND', 'Thuc_Linh_Rong_VND'];
+        const lines = [headers.join(',')];
+        computedTrips.forEach(function (r) {
+          lines.push([
+            '"' + r.code + '"',
+            '"' + r.date + '"',
+            '"' + r.plate + '"',
+            '"' + r.vehType + '"',
+            '"' + r.driver + '"',
+            '"' + r.route.replace(/"/g, '""') + '"',
+            r.kmLoaded,
+            r.kmEmpty,
+            r.stdLiters,
+            r.actualLiters,
+            r.diffLiters,
+            r.fuelPenalty,
+            r.etcStd,
+            r.etcActual,
+            r.etcOver,
+            r.gross,
+            r.advance,
+            r.netPay
+          ].join(','));
+        });
+        const blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Bang_Doi_Soat_Dau_DO_VETC_Luong_Tai_Xe_20261031.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Đã xuất file Excel/CSV đối soát dầu DO, VETC & lương chuyến!');
+      });
+
+      document.getElementById('btnPrintA4Top').addEventListener('click', function () { window.print(); });
+      document.getElementById('btnPrintA4Inner').addEventListener('click', function () { window.print(); });
+
+      // Hydrate optional URL query params (?company=...&mst=...&phone=...)
+      const q = new URLSearchParams(window.location.search);
+      if (q.get('company')) document.getElementById('fleetCompanyInput').value = q.get('company').trim();
+      if (q.get('mst')) document.getElementById('fleetMstInput').value = q.get('mst').trim();
+      if (q.get('phone')) document.getElementById('fleetPhoneInput').value = q.get('phone').trim();
+
+      if (restoreState()) showToast('Đã mở lại dữ liệu đã lưu lần trước');
+      computeAll();
+    })();
+  </script>
+</body>
+</html>

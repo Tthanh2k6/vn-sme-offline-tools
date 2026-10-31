@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Nail Spa | Luxury Nail Care, Spa Pedicure & Holiday Gift Cards</title>
+  <style id="embedded-fonts">@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}</style>
+  <style>
+    :root {
+      /* tokens kept by name (JS templates + inline styles reference them), values remapped */
+      --paper: #f8f7f4;
+      --ink: #1d1b1a;
+      --muted: #6a6460;
+      --line: #e4e0da;
+      --accent: #8a2433;
+      --ivory-50: var(--paper);
+      --ivory-100: #f1efeb;
+      --ivory-200: var(--line);
+      --sand-300: #d6d1ca;
+      --espresso-950: var(--ink);
+      --espresso-900: var(--ink);
+      --espresso-800: #3a3634;
+      --espresso-600: var(--muted);
+      --espresso-400: #8a847f;
+      --gold-300: var(--ink);
+      --gold-400: var(--line);
+      --gold-500: var(--accent);
+      --gold-600: var(--accent);
+      --sage-700: var(--muted);
+      --sage-100: transparent;
+      --serif: "Work Sans", system-ui, sans-serif;
+      --sans: "Work Sans", system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      --radius-md: 6px;
+      --radius-lg: 8px;
+      --shadow-soft: none;
+      --shadow-card: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .num { font-variant-numeric: tabular-nums; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, .gift-card-tile:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Seasonal line: one quiet sentence */
+    .holiday-ribbon {
+      background: var(--ivory-100);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 8px 16px;
+      text-transform: lowercase;
+    }
+    .holiday-ribbon::first-letter { text-transform: uppercase; }
+    .holiday-ribbon strong { color: var(--ink); font-weight: 700; }
+
+    /* Navigation */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 28px;
+    }
+    .nav-inner {
+      max-width: 1064px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand-lockup { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .monogram {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-name { font-size: 19px; font-weight: 700; line-height: 1.15; }
+    .brand-city { font-size: 13px; color: var(--muted); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { text-decoration: none; color: var(--ink); font-size: 14px; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-ctas { display: flex; align-items: center; gap: 10px; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .navbar { padding: 12px 16px; }
+    }
+    @media (max-width: 600px) {
+      #navBookBtn { display: none; }
+      .brand-name { font-size: 17px; }
+      .brand-city { font-size: 12px; }
+      .monogram { width: 34px; height: 34px; font-size: 13px; }
+      #navCallBtn { padding: 8px 12px; font-size: 13px; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      white-space: nowrap;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .btn-outline { background: transparent; border-color: var(--sand-300); color: var(--ink); }
+    .btn-outline:hover { border-color: var(--ink); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #6f1a28; border-color: #6f1a28; }
+    .btn-gold { background: transparent; border-color: var(--ink); color: var(--ink); }
+    .btn-gold:hover { background: var(--ink); color: var(--paper); }
+
+    /* Hero */
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 64px 28px 56px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 940px) {
+      .hero { grid-template-columns: 1fr; padding: 32px 18px 36px; gap: 36px; }
+    }
+
+    .trust-pill { display: none; }
+    .hero-eyebrow { display: none; }
+
+    .hero-title {
+      font-size: 44px;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 640px) { .hero-title { font-size: 32px; } }
+
+    .hero-lead { font-size: 17px; color: var(--muted); max-width: 34em; margin-bottom: 28px; }
+    .hero-cta-group { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+
+    .pos-connected-badge {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .pos-connected-badge svg { vertical-align: -2px; margin-right: 6px; color: var(--accent); }
+
+    .location-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 560px) { .location-strip { grid-template-columns: 1fr; } }
+    .loc-item-label { font-size: 13px; color: var(--muted); margin-bottom: 2px; }
+    .loc-item-val { font-size: 15px; }
+
+    /* Most-requested list (right column) */
+    .arch-showcase {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px 28px 22px;
+    }
+    .arch-ornament { display: none; }
+    .arch-tag {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: lowercase;
+    }
+    .arch-tag::first-letter { text-transform: uppercase; }
+    .arch-heading { font-size: 22px; font-weight: 700; line-height: 1.2; margin-bottom: 14px; }
+    .signature-list { display: flex; flex-direction: column; margin-bottom: 16px; }
+    .sig-row {
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .sig-name { font-size: 15px; font-weight: 700; }
+    .sig-sub { font-size: 13.5px; color: var(--muted); }
+    .sig-price { font-family: var(--mono); font-size: 15px; white-space: nowrap; }
+    .hygiene-bar {
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Gift cards */
+    .gift-section { max-width: 1120px; margin: 0 auto 64px; padding: 0 28px; }
+    @media (max-width: 940px) { .gift-section { padding: 0 18px; } }
+    .gift-banner {
+      border-top: 1px solid var(--line);
+      padding: 40px 0 0;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .gift-banner h2 { font-size: 26px !important; font-weight: 700; letter-spacing: -0.01em; }
+    .gift-banner p { font-size: 15.5px !important; max-width: 36em; }
+    @media (max-width: 860px) { .gift-banner { grid-template-columns: 1fr; gap: 24px; } }
+    .gift-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .gift-card-tile {
+      background: #fff;
+      border: 1px solid var(--sand-300);
+      border-radius: 6px;
+      padding: 16px 12px;
+      text-align: center;
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .gift-card-tile:hover { border-color: var(--ink); }
+    .gift-amt { font-family: var(--mono); font-size: 22px; }
+    .gift-bonus { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* Service menu */
+    .menu-section { max-width: 1120px; margin: 0 auto 72px; padding: 0 28px; }
+    @media (max-width: 940px) { .menu-section { padding: 0 18px; } }
+    .section-head { border-top: 1px solid var(--line); padding-top: 40px; margin-bottom: 24px; }
+    .section-head h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; }
+    @media (max-width: 860px) { .menu-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .menu-box { background: transparent; }
+    .menu-cat-title {
+      font-size: 17px;
+      font-weight: 700;
+      padding-bottom: 10px;
+      margin-bottom: 4px;
+      border-bottom: 1.5px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .menu-cat-title span + span { font-weight: 400; font-size: 13px !important; color: var(--muted) !important; }
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-name { font-weight: 700; font-size: 15px; }
+    .menu-item-desc { font-size: 13.5px; color: var(--muted); }
+    .menu-item-price { font-family: var(--mono); font-size: 15px; white-space: nowrap; }
+
+    /* Footer */
+    .footer { border-top: 1px solid var(--line); padding: 28px; color: var(--muted); }
+    .footer-inner {
+      max-width: 1064px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .footer strong { color: var(--ink) !important; font-size: 16px !important; }
+
+    /* Booking modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(29, 27, 26, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 18px;
+    }
+    .booking-modal {
+      background: var(--paper);
+      border-radius: 8px;
+      padding: 26px 28px;
+      max-width: 460px;
+      width: 100%;
+    }
+    .booking-modal h3 { font-weight: 700; font-size: 22px !important; }
+    .form-field { margin-bottom: 14px; }
+    .form-field label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .form-field input, .form-field select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--sand-300);
+      font-family: inherit;
+      font-size: 15px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    @media print {
+      .holiday-ribbon, .navbar, .hero-cta-group, .nav-ctas, .footer .btn, .modal-overlay { display: none !important; }
+      body { background: #fff; }
+      .hero { grid-template-columns: 1fr 1fr; padding: 0 0 24px; gap: 32px; }
+      .arch-showcase { border: none; padding: 0; }
+      .menu-item, .sig-row { break-inside: avoid; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP SEASONAL ANNOUNCEMENT RIBBON -->
+  <div class="holiday-ribbon" id="seasonalRibbon">
+    <strong>Thanksgiving and holiday 2026 booking:</strong> reserve your pre-holiday appointment or send an e-gift card
+  </div>
+
+  <!-- STICKY LUXURY NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="brand-lockup">
+        <div class="monogram" id="navMonogram">LN</div>
+        <div>
+          <div class="brand-name" id="navSalonName">Demo Nail Spa</div>
+          <div class="brand-city" id="navSalonCity">Springfield</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#services" id="navMenuLink">Service menu</a>
+        <a href="#giftcards" id="navGiftLink">Gift cards</a>
+        <a href="#concierge">Hours and directions</a>
+      </nav>
+
+      <div class="nav-ctas">
+        <a href="tel:5550100100" class="btn btn-outline num" id="navCallBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span id="navPhoneText">(555) 010-0100</span>
+        </a>
+        <a href="#book" class="btn btn-primary" id="navBookBtn" onclick="handleBookAction(event)">
+          Book appointment
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SPLIT EDITORIAL HERO -->
+  <section class="hero">
+    <div>
+      <div class="trust-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span id="heroTrustText">Single-use liners and autoclave-sterilised tools</span>
+      </div>
+
+      <div class="hero-eyebrow" id="heroEyebrow">Nail care and spa pedicures in Springfield</div>
+      <h1 class="hero-title" id="heroHeadline">Timeless Elegance at Demo Nail Spa</h1>
+      <p class="hero-lead" id="heroDescription">
+        Russian-style cuticle care, Gel-X extensions, SNS dipping powder and hot-stone spa pedicures, done without rushing. Walk-ins welcome; booked appointments are seen first.
+      </p>
+
+      <div class="pos-connected-badge hidden" id="posStatusBadge">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span id="posBadgeText">Direct Live Scheduling Connected via Official Salon POS — Zero Marketplace Fees</span>
+      </div>
+
+      <div class="hero-cta-group">
+        <a href="#book" class="btn btn-primary" id="heroBookBtn" onclick="handleBookAction(event)" style="padding:14px 28px; font-size:13.5px;">
+          Book a holiday appointment
+        </a>
+        <a href="#giftcards" class="btn btn-gold" id="heroGiftBtn" style="padding:14px 24px; font-size:13.5px;">
+          Send an e-gift card
+        </a>
+      </div>
+
+      <div class="location-strip" id="concierge">
+        <div>
+          <div class="loc-item-label" id="locAddrLabel">Address</div>
+          <div class="loc-item-val" id="heroAddressText">123 Main St, Springfield, ST 00000</div>
+        </div>
+        <div>
+          <div class="loc-item-label" id="locHoursLabel">Hours and walk-ins</div>
+          <div class="loc-item-val num" id="heroHoursText">Mon–Sat: 9:30 AM – 7:00 PM • Sun: 11:00 AM – 5:00 PM</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT EDITORIAL ARCH SHOWCASE -->
+    <div class="arch-showcase">
+      <div class="arch-ornament">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+        </svg>
+      </div>
+      <div class="arch-tag" id="archSeasonTag">Autumn and holiday 2026</div>
+      <div class="arch-heading" id="archTitle">Most-requested treatments</div>
+
+      <div class="signature-list" id="signatureList">
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">24K collagen and volcano spa pedicure</div>
+            <div class="sig-sub">Organic sugar scrub, hot stone reflexology and warm paraffin</div>
+          </div>
+          <div class="sig-price num"><span class="curr">$</span><span class="p-val" data-usd="65" data-gbp="52" data-eur="58">65</span></div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">Apres Gel-X soft gel extensions</div>
+            <div class="sig-sub">Lightweight soft gel with a natural apex, plus gel polish</div>
+          </div>
+          <div class="sig-price num"><span class="curr">$</span><span class="p-val" data-usd="68+" data-gbp="55+" data-eur="62+">68+</span></div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">BIAB builder gel or vitamin dip powder</div>
+            <div class="sig-sub">Low-odor strengthening overlay on natural nails, mirror finish</div>
+          </div>
+          <div class="sig-price num"><span class="curr">$</span><span class="p-val" data-usd="50+" data-gbp="42+" data-eur="48+">50+</span></div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">Velvet cat-eye and chrome nail art</div>
+            <div class="sig-sub">Hand-painted seasonal French tips and glazed chrome</div>
+          </div>
+          <div class="sig-price num"><span class="curr">$</span><span class="p-val" data-usd="15+" data-gbp="12+" data-eur="15+">15+</span></div>
+        </div>
+      </div>
+
+      <div class="hygiene-bar" id="hygieneBarText">
+        Single-use pedicure tub liners, tools sterilised in sealed autoclave pouches, 7-day chip guarantee.
+      </div>
+    </div>
+  </section>
+
+  <!-- HOLIDAY GIFT CARD SPOTLIGHT -->
+  <section class="gift-section" id="giftcards">
+    <div class="gift-banner">
+      <div>
+        <div class="hero-eyebrow" id="giftEyebrow">Digital or in-salon gift cards</div>
+        <h2 style="font-family:var(--serif); font-size:28px; color:var(--espresso-950); margin-bottom:6px;" id="giftHeadline">
+          Gift cards for Demo Nail Spa
+        </h2>
+        <p style="font-size:14.5px; color:var(--espresso-600);" id="giftLeadText">
+          For Thanksgiving hosts, teachers, family and Christmas stockings. Choose an e-gift card below, or pick one up in an envelope at the front desk.
+        </p>
+      </div>
+
+      <div class="gift-tiers" id="giftTiersGrid">
+        <div class="gift-card-tile" onclick="handleBookAction(event)">
+          <div class="gift-amt num"><span class="curr">$</span><span class="p-val" data-usd="50" data-gbp="40" data-eur="50">50</span></div>
+          <div class="gift-bonus" id="giftTier1Sub">Classic mani-pedi</div>
+        </div>
+        <div class="gift-card-tile" onclick="handleBookAction(event)">
+          <div class="gift-amt num"><span class="curr">$</span><span class="p-val" data-usd="100" data-gbp="75" data-eur="100">100</span></div>
+          <div class="gift-bonus">+ <span class="curr">$</span><span class="p-val" data-usd="10" data-gbp="10" data-eur="10">10</span> festive bonus</div>
+        </div>
+        <div class="gift-card-tile" onclick="handleBookAction(event)">
+          <div class="gift-amt num"><span class="curr">$</span><span class="p-val" data-usd="150" data-gbp="120" data-eur="150">150</span></div>
+          <div class="gift-bonus">+ <span class="curr">$</span><span class="p-val" data-usd="20" data-gbp="20" data-eur="20">20</span> VIP bonus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPARENT SERVICE MENU -->
+  <section class="menu-section" id="services">
+    <div class="section-head">
+      <div class="hero-eyebrow" id="menuSectionEyebrow">Service menu and prices</div>
+      <h2 id="menuSectionHeading">Nail and spa treatments</h2>
+    </div>
+
+    <div class="menu-grid" id="menuGridContainer">
+      <div class="menu-box">
+        <div class="menu-cat-title">
+          <span>Spa pedicures</span>
+          <span style="font-size:12px; font-family:var(--sans); color:var(--espresso-400);">Disposable liner included</span>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Signature refresh spa pedicure</div>
+            <div class="menu-item-desc">Sea salt soak, cuticle detailing, callus smoothing and warm towel massage</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="38" data-gbp="32" data-eur="38">38</span></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Organic deluxe hot stone pedicure</div>
+            <div class="menu-item-desc">Botanical sugar exfoliation, clay mask and basalt hot stones</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="52" data-gbp="44" data-eur="49">52</span></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Volcano and collagen paraffin spa</div>
+            <div class="menu-item-desc">Bubbling volcano soak, collagen socks and a 15-minute massage</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="65" data-gbp="52" data-eur="58">65</span></div>
+        </div>
+      </div>
+
+      <div class="menu-box">
+        <div class="menu-cat-title">
+          <span>Gel-X, builder gel (BIAB) and dip</span>
+          <span style="font-size:12px; font-family:var(--sans); color:var(--espresso-400);">Lasts 3+ weeks</span>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">SNS dipping powder (natural nails)</div>
+            <div class="menu-item-desc">Lightweight vitamin-infused powder with a gel topcoat</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="50" data-gbp="40" data-eur="46">50</span></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Structured builder gel / BIAB overlay</div>
+            <div class="menu-item-desc">For growing out natural nails, without monomer odor</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="58" data-gbp="45" data-eur="52">58</span></div>
+        </div>
+        <div class="menu-item">
+          <div>
+            <div class="menu-item-name">Apres Gel-X full set + gel polish</div>
+            <div class="menu-item-desc">Almond, coffin, stiletto or square soft-gel extensions</div>
+          </div>
+          <div class="menu-item-price num"><span class="curr">$</span><span class="p-val" data-usd="68" data-gbp="55" data-eur="62">68</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <strong style="color:#ffffff; font-family:var(--serif); font-size:17px;" id="footerSalonName">Demo Nail Spa</strong>
+        <div id="footerAddrPhone">123 Main St, Springfield, ST 00000 • (555) 010-0100</div>
+      </div>
+      <div>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-gold" id="footerMapBtn" style="padding:9px 18px; font-size:12px;">
+          Directions in Google Maps
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BUILT-IN INSTANT VIP BOOKING MODAL (WHEN NO EXTERNAL POS URL IS PROVIDED) -->
+  <div class="modal-overlay hidden" id="bookingModal" onclick="if(event.target===this) closeBookingModal()">
+    <div class="booking-modal">
+      <div class="hero-eyebrow">Appointment request</div>
+      <h3 style="font-family:var(--serif); font-size:24px; margin-bottom:14px;" id="modalBookingTitle">Reserve at Demo Nail Spa</h3>
+
+      <form onsubmit="submitBookingRequest(event)">
+        <div class="form-field">
+          <label>Full name</label>
+          <input type="text" required placeholder="e.g. Sarah Jenkins" />
+        </div>
+        <div class="form-field">
+          <label>Mobile phone (for SMS confirmation)</label>
+          <input type="tel" required placeholder="(555) 234-5678" />
+        </div>
+        <div class="form-field">
+          <label>Treatment</label>
+          <select>
+            <option>Deluxe / Volcano Spa Pedicure + Gel Manicure</option>
+            <option>SNS Dipping Powder / Structured Builder Gel (BIAB)</option>
+            <option>Apres Gel-X / Acrylic Full Set + Holiday Art</option>
+            <option>Holiday e-Gift Card Purchase ($50 - $150)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Preferred date and time</label>
+          <input type="text" required placeholder="e.g. Friday Nov 20 at 2:30 PM" />
+        </div>
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button type="submit" class="btn btn-primary" style="flex:1;">Send request</button>
+          <button type="button" class="btn btn-outline" onclick="closeBookingModal()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+
+    function resolveCurrency(rawCurr) {
+      const upper = String(rawCurr || "$").trim().toUpperCase();
+      if (upper === "GBP" || rawCurr === "£") return { symbol: "£", tier: "gbp", region: "uk" };
+      if (upper === "EUR" || rawCurr === "€") return { symbol: "€", tier: "eur", region: "eu" };
+      if (upper === "AUD" || upper === "A$") return { symbol: "A$", tier: "usd", region: "au" };
+      if (upper === "CAD" || upper === "C$") return { symbol: "C$", tier: "usd", region: "ca" };
+      if (upper === "USD" || rawCurr === "$") return { symbol: "$", tier: "usd", region: "us" };
+      return { symbol: rawCurr, tier: "usd", region: "us" };
+    }
+
+    function parseSalonConfig() {
+      const merged = new URLSearchParams(window.location.search);
+      if (window.location.hash && window.location.hash.includes("=")) {
+        const hashQuery = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+        hashQuery.forEach((v, k) => merged.set(k, v));
+      }
+
+      const name = (merged.get("name") || "Demo Nail Spa").trim();
+      const city = (merged.get("city") || "Springfield").trim();
+      const addr = (merged.get("addr") || "123 Main St, Springfield, ST 00000").trim();
+      const phone = (merged.get("phone") || "(555) 010-0100").trim();
+      const posUrl = (merged.get("pos") || "").trim();
+      const hours = (merged.get("hours") || "Mon–Sat: 9:30 AM – 7:00 PM • Sun: 11:00 AM – 5:00 PM").trim();
+      const season = (merged.get("season") || "").toLowerCase();
+      const currMeta = resolveCurrency(merged.get("curr") || "$");
+      const bizType = (merged.get("type") || "salon").toLowerCase();
+
+      return {
+        name,
+        city,
+        addr,
+        phone,
+        posUrl,
+        hours,
+        season,
+        curr: currMeta.symbol,
+        priceTier: currMeta.tier,
+        region: currMeta.region,
+        bizType
+      };
+    }
+
+    const cfg = parseSalonConfig();
+
+    function computeMonogram(salonName) {
+      const words = salonName.replace(/[^A-Za-z0-9\s]/g, " ").trim().split(/\s+/).filter(Boolean);
+      if (words.length === 0) return "NS";
+      if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+      return (words[0][0] + words[1][0]).toUpperCase();
+    }
+
+    function applyBistroMode() {
+      const s = cfg.curr;
+      const isUkEu = cfg.region === "uk" || cfg.region === "eu";
+      const phoPrice = cfg.priceTier === "gbp" ? "14.50" : (cfg.priceTier === "eur" ? "15.50" : "17.50");
+      const banhMiPrice = cfg.priceTier === "gbp" ? "9.50" : (cfg.priceTier === "eur" ? "9.90" : "11.50");
+      const coffeePrice = cfg.priceTier === "gbp" ? "5.20" : (cfg.priceTier === "eur" ? "5.50" : "6.50");
+      const rollsPrice = cfg.priceTier === "gbp" ? "7.80" : (cfg.priceTier === "eur" ? "8.50" : "9.50");
+      const bunPrice = cfg.priceTier === "gbp" ? "13.90" : (cfg.priceTier === "eur" ? "14.90" : "16.50");
+
+      document.title = `${cfg.name} — ${cfg.city} | Authentic Vietnamese Kitchen, Phở & Direct Table Booking`;
+      document.getElementById("seasonalRibbon").innerHTML = isUkEu
+        ? `<strong>DIRECT ONLINE BOOKING &amp; CLICK-AND-COLLECT:</strong> 0% Lieferando / Wolt / Deliveroo Markup &bull; Priority Festive Tables`
+        : `<strong>HOLIDAY DINING &amp; DIRECT PICKUP:</strong> 0% Delivery App Markup &bull; Reserve Your Table Online Today`;
+
+      document.getElementById("navMenuLink").textContent = "Signature Menu";
+      document.getElementById("navGiftLink").textContent = "Festive Group Dining";
+      document.getElementById("navBookBtn").textContent = "Book Table / Pickup";
+
+      document.getElementById("heroTrustText").textContent = "18-Hour Slow-Simmered Phở Broth • Crispy Daily Baguettes & Hanoi Phin Coffee";
+      document.getElementById("heroEyebrow").textContent = `AUTHENTIC VIETNAMESE BISTRO & SPECIALTY CAFE • ${cfg.city.toUpperCase()}`;
+      document.getElementById("heroHeadline").textContent = `Taste Hanoi Heritage at ${cfg.name}`;
+      document.getElementById("heroDescription").textContent =
+        "Crafted from family recipes using fragrant star anise, charred ginger, crisp artisan baguettes, and single-origin Vietnamese highlands coffee. Reserve your table or pre-order pickup directly with zero third-party app fees.";
+
+      const posBadge = document.getElementById("posStatusBadge");
+      posBadge.classList.remove("hidden");
+      document.getElementById("posBadgeText").textContent =
+        "Direct Bistro Ordering & Table Reservation — 0% Lieferando / Wolt / Marketplace Commission";
+
+      document.getElementById("heroBookBtn").textContent = "Reserve Table / Direct Pickup";
+      document.getElementById("heroGiftBtn").textContent = "Festive Group Vouchers";
+      document.getElementById("locAddrLabel").textContent = "Bistro & Cafe Address";
+      document.getElementById("locHoursLabel").textContent = "Kitchen Hours & Walk-Ins";
+
+      document.getElementById("archSeasonTag").textContent = "2026 WINTER & FESTIVE HOUSE SPECIALTIES";
+      document.getElementById("archTitle").textContent = "Chef's Signature Dishes";
+      document.getElementById("signatureList").innerHTML = `
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">24-Hour Traditional Beef Brisket &amp; Sirloin Phở</div>
+            <div class="sig-sub"> Marrow bone broth, rice noodles, fresh Thai basil &amp; lime</div>
+          </div>
+          <div class="sig-price num">${s}${phoPrice}</div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">Crispy Roasted Pork Belly &amp; House Pâté Bánh Mì</div>
+            <div class="sig-sub">Warm crust baguette, pickled daikon, coriander &amp; chili</div>
+          </div>
+          <div class="sig-price num">${s}${banhMiPrice}</div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">Chargrilled Lemongrass Pork Vermicelli (Bún Thịt Nướng)</div>
+            <div class="sig-sub">Crispy spring rolls, crushed peanuts, herbs &amp; nuoc cham</div>
+          </div>
+          <div class="sig-price num">${s}${bunPrice}</div>
+        </div>
+        <div class="sig-row">
+          <div>
+            <div class="sig-name">Old Quarter Hanoi Egg Coffee (Cà Phê Trứng)</div>
+            <div class="sig-sub">Velvety whipped egg-yolk cream over slow-dripped robusta</div>
+          </div>
+          <div class="sig-price num">${s}${coffeePrice}</div>
+        </div>
+      `;
+      document.getElementById("hygieneBarText").textContent =
+        "Fresh Daily Herbs • Vegan & Gluten-Free Broth Options • Direct Takeaway Ready in 12 Mins";
+
+      document.getElementById("giftEyebrow").textContent = "CHRISTMAS OFFICE LUNCHES & DINING VOUCHERS";
+      document.getElementById("giftHeadline").textContent = `Share Warm Vietnamese Hospitality at ${cfg.name}`;
+      document.getElementById("giftLeadText").textContent =
+        "Planning a festive team lunch, family gathering, or thoughtful foodie gift? Reserve group seating or pick up an instant dining voucher directly from our counter.";
+      document.getElementById("giftTier1Sub").textContent = "Dinner for Two";
+
+      document.getElementById("menuSectionEyebrow").textContent = "HOUSE KITCHEN MENU & DIRECT PRICES";
+      document.getElementById("menuSectionHeading").textContent = "Phở, Artisanal Bánh Mì & Specialty Phin";
+      document.getElementById("menuGridContainer").innerHTML = `
+        <div class="menu-box">
+          <div class="menu-cat-title">
+            <span>Slow-Simmered Phở &amp; Noodle Bowls</span>
+            <span style="font-size:12px; font-family:var(--sans); color:var(--espresso-400);">Gluten-Free Rice Noodles</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Phở Đặc Biệt (House Special Combination)</div>
+              <div class="menu-item-desc">Rare steak, slow-braised brisket &amp; beef meatballs in 24h broth</div>
+            </div>
+            <div class="menu-item-price num">${s}${phoPrice}</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Bún Chả Hà Nội / Lemongrass Grilled Bowl</div>
+              <div class="menu-item-desc">Chargrilled pork or tofu, crispy imperial rolls, fresh herbs &amp; rice vermicelli</div>
+            </div>
+            <div class="menu-item-price num">${s}${bunPrice}</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Creamy Shiitake &amp; Seared Tofu Vegan Phở</div>
+              <div class="menu-item-desc">Roasted vegetable &amp; star-anise broth, bok choy &amp; crispy shallots</div>
+            </div>
+            <div class="menu-item-price num">${s}${bunPrice}</div>
+          </div>
+        </div>
+        <div class="menu-box">
+          <div class="menu-cat-title">
+            <span>Crispy Bánh Mì, Rolls &amp; Hanoi Coffee</span>
+            <span style="font-size:12px; font-family:var(--sans); color:var(--espresso-400);">Baked Fresh Daily</span>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Signature Saigon Cold-Cut / Grilled Pork Bánh Mì</div>
+              <div class="menu-item-desc">Artisanal pâté, butter mayo, pickled carrot-daikon &amp; fresh coriander</div>
+            </div>
+            <div class="menu-item-price num">${s}${banhMiPrice}</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Fresh Tiger Prawn &amp; Avocado Summer Rolls (Gỏi Cuốn)</div>
+              <div class="menu-item-desc">Two hand-rolled rice paper parcels with rich roasted peanut hoisin dip</div>
+            </div>
+            <div class="menu-item-price num">${s}${rollsPrice}</div>
+          </div>
+          <div class="menu-item">
+            <div>
+              <div class="menu-item-name">Hanoi Egg Coffee / Salted Cream Iced Phin (Cà Phê Muối)</div>
+              <div class="menu-item-desc">Traditional phin-brewed robusta topped with signature sweet-salted cream</div>
+            </div>
+            <div class="menu-item-price num">${s}${coffeePrice}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function applyPersonalization() {
+      document.title = `${cfg.name} — ${cfg.city} | Luxury Nail Care, Spa Pedicure & Gift Cards`;
+
+      document.getElementById("navMonogram").textContent = computeMonogram(cfg.name);
+      document.getElementById("navSalonName").textContent = cfg.name;
+      document.getElementById("navSalonCity").textContent = cfg.city;
+
+      const cleanDigits = cfg.phone.replace(/[^\d+]/g, "");
+      document.getElementById("navPhoneText").textContent = cfg.phone;
+      document.getElementById("navCallBtn").href = `tel:${cleanDigits}`;
+
+      document.getElementById("heroEyebrow").textContent = `BESPOKE NAIL ARTISTRY & SPA PEDICURE • ${cfg.city.toUpperCase()}`;
+      document.getElementById("heroHeadline").textContent = `Timeless Elegance at ${cfg.name}`;
+      document.getElementById("heroAddressText").textContent = cfg.addr;
+      document.getElementById("heroHoursText").textContent = cfg.hours;
+
+      document.getElementById("giftHeadline").textContent = `Give the Gift of Pampering at ${cfg.name}`;
+      document.getElementById("footerSalonName").textContent = cfg.name;
+      document.getElementById("footerAddrPhone").textContent = `${cfg.addr} • ${cfg.phone}`;
+      document.getElementById("footerMapBtn").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cfg.name + " " + cfg.addr)}`;
+      document.getElementById("modalBookingTitle").textContent = `Reserve at ${cfg.name}`;
+
+      // Scale tiered salon prices for GBP / EUR while keeping USD/AUD/CAD 100% unchanged
+      document.querySelectorAll(".p-val").forEach((el) => {
+        const val = el.getAttribute("data-" + cfg.priceTier);
+        if (val) el.textContent = val;
+      });
+
+      if (cfg.season === "summer" || cfg.season === "au" || cfg.region === "au") {
+        document.getElementById("seasonalRibbon").innerHTML = `<strong>SUMMER &amp; CHRISTMAS 2026 PRIORITY BOOKING:</strong> Reserve Your Holiday Glow Appointment &amp; Instant Gift Vouchers Today`;
+        document.getElementById("archSeasonTag").textContent = "2026 SUMMER & CHRISTMAS SIGNATURE MENU";
+      } else if (cfg.region === "uk" || cfg.region === "eu" || cfg.season === "christmas") {
+        document.getElementById("seasonalRibbon").innerHTML = `<strong>DIRECT ONLINE BOOKING — 0% TREATWELL / MARKETPLACE COMMISSION:</strong> Priority Christmas &amp; New Year 2026 Slots`;
+        document.getElementById("archSeasonTag").textContent = "2026 CHRISTMAS & FESTIVE SIGNATURE MENU";
+        document.getElementById("heroBookBtn").textContent = "Book Direct (0% Commission)";
+        document.getElementById("heroGiftBtn").textContent = "Christmas Gift Voucher";
+        document.getElementById("giftLeadText").textContent =
+          "Ideal for Christmas stockings, Secret Santa, and festive pampering. Book or request an instant e-Gift Voucher directly with our salon — zero third-party platform fees.";
+        const posBadge = document.getElementById("posStatusBadge");
+        posBadge.classList.remove("hidden");
+        document.getElementById("posBadgeText").textContent =
+          "Direct Online Salon Booking — 0% Treatwell / Marketplace Commission • Priority Confirmation";
+      }
+
+      if (cfg.bizType === "bistro" || cfg.bizType === "restaurant" || cfg.bizType === "pho") {
+        applyBistroMode();
+      }
+
+      document.querySelectorAll(".curr").forEach((el) => {
+        el.textContent = cfg.curr;
+      });
+
+      if (cfg.posUrl) {
+        const badge = document.getElementById("posStatusBadge");
+        badge.classList.remove("hidden");
+        let hostLabel = "Official Salon POS";
+        try {
+          hostLabel = new URL(cfg.posUrl).hostname;
+        } catch (_) {}
+        document.getElementById("posBadgeText").textContent = `Live Instant Scheduling Connected (${hostLabel}) — Zero Marketplace Fees`;
+        document.getElementById("navBookBtn").href = cfg.posUrl;
+        document.getElementById("navBookBtn").target = "_blank";
+        document.getElementById("heroBookBtn").href = cfg.posUrl;
+        document.getElementById("heroBookBtn").target = "_blank";
+      }
+    }
+
+    function handleBookAction(e) {
+      if (cfg.posUrl) {
+        // Allow direct external POS navigation!
+        return true;
+      }
+      e.preventDefault();
+      document.getElementById("bookingModal").classList.remove("hidden");
+      return false;
+    }
+
+    function closeBookingModal() {
+      document.getElementById("bookingModal").classList.add("hidden");
+    }
+
+    function submitBookingRequest(e) {
+      e.preventDefault();
+      alert(`Thank you! Your VIP reservation request for ${cfg.name} has been recorded.`);
+      closeBookingModal();
+    }
+
+    applyPersonalization();
+  </script>
+</body>
+</html>

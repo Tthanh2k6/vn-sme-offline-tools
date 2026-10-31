@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ Thống Tính Giá Vốn Hàng Nhập Khẩu (Landed Cost), Phân Bổ Phí Cảng &amp; Chênh Lệch Tỷ Giá TT200 — 2026</title>
+  <style id="embedded-fonts">@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}</style>
+  <style>
+    :root {
+      --paper: #f6f6f3;
+      --ink: #1b1c1d;
+      --muted: #5f6064;
+      --line: #dfdfda;
+      --soft: #ececE7;
+      --accent: #1f5596;
+      --accent-ink: #163f70;
+      /* old token names kept (inline styles in JS templates use them), values remapped */
+      --navy-950: var(--ink);
+      --navy-900: var(--ink);
+      --navy-800: var(--ink);
+      --navy-700: var(--accent);
+      --slate-900: var(--ink);
+      --slate-800: #2c2d30;
+      --slate-700: #45464a;
+      --slate-600: var(--muted);
+      --slate-500: #7a7b7f;
+      --slate-400: #a3a4a7;
+      --slate-300: #cfcfca;
+      --slate-200: var(--line);
+      --slate-100: var(--soft);
+      --slate-50: #fafaf8;
+      --amber-700: var(--ink);
+      --amber-600: var(--ink);
+      --amber-500: var(--ink);
+      --amber-100: var(--soft);
+      --amber-50: #fafaf8;
+      --teal-800: var(--accent);
+      --teal-700: var(--accent);
+      --teal-600: var(--accent);
+      --teal-100: var(--soft);
+      --teal-50: #fafaf8;
+      --crimson-800: var(--accent);
+      --crimson-700: var(--accent);
+      --crimson-600: var(--accent);
+      --crimson-100: var(--line);
+      --crimson-50: transparent;
+      --font-sans: "Work Sans", system-ui, sans-serif;
+      --font-serif: "Work Sans", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
+
+    /* Compact one-line header */
+    .top-bar {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 24px;
+    }
+    .top-bar-inner {
+      max-width: 1480px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+    }
+    .brand-block { display: flex; align-items: baseline; gap: 12px; }
+    .brand-code-pill { display: none; }
+    .brand-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .brand-sub { font-size: 13px; color: var(--muted); }
+    .security-pills { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .sec-pill { font-size: 13px; color: var(--muted); }
+
+    .workspace {
+      max-width: 1480px;
+      margin: 20px auto 48px;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Toolbar */
+    .preset-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .preset-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .preset-label { font-size: 13px; color: var(--muted); margin-right: 2px; }
+
+    .btn {
+      cursor: pointer;
+      border: 1px solid var(--slate-300);
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 400;
+      padding: 7px 12px;
+      border-radius: 5px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .btn:hover { border-color: var(--ink); }
+    .btn.active-preset { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 700; color: var(--ink); background: #fff; }
+    .btn-teal, .btn-navy { background: #fff; color: var(--ink); border-color: var(--slate-300); font-weight: 700; }
+    .btn-teal:hover, .btn-navy:hover { border-color: var(--ink); background: #fff; color: var(--ink); }
+    /* the single primary action: print the A4 voucher */
+    .btn-amber { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+    .btn-amber:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+
+    /* KPI row: numbers on paper, separated by thin rules */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .kpi-box { padding: 14px 18px; border-left: 1px solid var(--line); }
+    .kpi-box:first-child { border-left: none; }
+    .kpi-title { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .kpi-value { font-size: 20px; font-family: var(--font-mono); letter-spacing: -0.02em; color: var(--ink); }
+    .kpi-box.fx-alert .kpi-value { color: var(--ink); }
+    .kpi-box.landed .kpi-value { color: var(--accent); font-weight: 700; }
+    .kpi-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Config panels */
+    .config-grid { display: grid; grid-template-columns: 1.05fr 1.1fr 1.25fr; gap: 20px; }
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 18px 18px;
+    }
+    .panel-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; gap: 10px; }
+    .panel-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .panel-badge { display: none; }
+
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 12.5px; color: var(--muted); }
+    .field input, .field select {
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
+      padding: 7px 9px;
+      font-size: 13.5px;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background: #fff;
+    }
+    .field input.num-input { font-family: var(--font-mono); text-align: right; }
+    .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+
+    .fx-callout {
+      margin-top: 14px;
+      padding: 10px 12px;
+      background: var(--slate-50);
+      border-left: 2px solid var(--ink);
+      font-size: 12.5px;
+      color: var(--slate-700);
+    }
+
+    .alloc-mode-bar {
+      display: flex;
+      margin-bottom: 14px;
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .alloc-pill {
+      flex: 1;
+      cursor: pointer;
+      padding: 7px 8px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid var(--slate-300);
+      background: #fff;
+      color: var(--ink);
+    }
+    .alloc-pill:first-child { border-left: none; }
+    .alloc-pill.active { background: var(--accent); color: #fff; font-weight: 700; }
+
+    /* SKU table */
+    .sku-section {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 18px 18px;
+    }
+    .sku-header-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+    .sku-header-bar > div:first-child > div:last-child { font-size: 12.5px !important; }
+    .margin-bar { display: flex; align-items: center; gap: 2px; }
+    .margin-bar > span { font-weight: 400 !important; font-size: 13px !important; color: var(--muted) !important; margin-right: 6px; }
+    .margin-pill {
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      color: var(--ink);
+    }
+    .margin-pill:hover { border-color: var(--slate-300); }
+    .margin-pill.active { background: var(--accent); color: #fff; }
+
+    .table-scroll { overflow-x: auto; border-top: 1px solid var(--line); }
+    table.data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    table.data-table thead th {
+      background: transparent;
+      color: var(--muted);
+      font-weight: 400;
+      padding: 8px 6px;
+      text-align: right;
+      border-bottom: 1.5px solid var(--ink);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    table.data-table thead th.left { text-align: left; }
+    table.data-table thead th.center { text-align: center; }
+    table.data-table thead th.highlight-col, table.data-table thead th.price-col { color: var(--ink); font-weight: 700; background: transparent; }
+    table.data-table tbody td {
+      padding: 4px 6px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      font-family: var(--font-mono);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    table.data-table tbody td.left { text-align: left; font-family: var(--font-sans); }
+    table.data-table tbody td.center { text-align: center; }
+    table.data-table tbody tr:hover { background: var(--slate-50); }
+    table.data-table tbody td.unit-landed-cell { color: var(--accent); font-weight: 700; background: transparent; }
+    table.data-table tbody td.wholesale-cell { color: var(--ink); font-weight: 700; background: transparent; }
+    table.data-table tfoot td {
+      background: transparent;
+      font-weight: 700;
+      padding: 9px 6px;
+      border-top: 1.5px solid var(--ink);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--ink);
+    }
+    table.data-table tfoot td.left { text-align: left; font-family: var(--font-sans); }
+
+    .cell-edit {
+      width: 100%;
+      border: 1px solid transparent;
+      background: transparent;
+      font-family: inherit;
+      font-size: 12.5px;
+      color: inherit;
+      text-align: inherit;
+      padding: 3px 4px;
+      border-radius: 3px;
+    }
+    .cell-edit:hover { border-color: var(--slate-300); background: #fff; }
+    .cell-edit:focus { border-color: var(--accent); background: #fff; outline: none; }
+
+    .del-row-btn {
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+    .del-row-btn:hover { border-color: var(--slate-300); color: var(--ink); }
+
+    .csv-drawer {
+      display: none;
+      margin: 0 0 14px;
+      padding: 14px;
+      background: var(--slate-50);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    .csv-drawer.open { display: block; }
+    .csv-drawer strong { font-weight: 700 !important; font-size: 13px !important; }
+    .csv-drawer textarea {
+      width: 100%;
+      min-height: 110px;
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      padding: 8px;
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
+      margin: 8px 0;
+    }
+    code { font-family: var(--font-mono); font-size: 0.95em; }
+
+    /* Printable A4 voucher: keeps the formal Vietnamese form layout */
+    .a4-wrapper-section { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+    .a4-paper {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 32px 36px;
+      font-family: var(--font-sans);
+      color: #000;
+      border-radius: 2px;
+    }
+    .a4-top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .a4-co-name { font-size: 13px; font-weight: 700; }
+    .a4-co-meta { font-size: 12px; margin-top: 2px; }
+    .a4-motto { text-align: center; font-size: 12px; font-weight: 700; }
+    .a4-doc-title { text-align: center; margin: 14px 0 14px; }
+    .a4-doc-title h2 { font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
+    .a4-doc-title p { font-size: 12px; font-style: italic; margin-top: 3px; }
+    .a4-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 18px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-top: 1px solid #999;
+      border-bottom: 1px solid #999;
+    }
+    table.a4-table { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-bottom: 10px; }
+    table.a4-table th, table.a4-table td { border: 1px solid #555; padding: 5px 6px; }
+    table.a4-table th { background: transparent; font-weight: 700; text-align: center; }
+    table.a4-table td.num { text-align: right; font-family: var(--font-mono); font-size: 11px; }
+    .a4-words-line { font-size: 12px; margin: 8px 0 14px; padding: 4px 0; }
+    .a4-signatures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; margin-top: 18px; font-size: 12px; }
+    .red-audit-stamp {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 10px;
+      border: 1.5px solid #555;
+      color: #333;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Sidebar */
+    .exec-sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .exec-sidebar .panel > div[style] { font-size: 12.5px !important; }
+    .journal-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; }
+    .journal-table th, .journal-table td { padding: 6px 6px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .journal-table th { font-weight: 400; color: var(--muted); border-bottom-color: var(--ink); }
+    .journal-table td.num { text-align: right; font-family: var(--font-mono); }
+    .journal-table tr:last-child td { font-weight: 700; color: var(--accent); }
+    .exec-msg-box {
+      width: 100%;
+      min-height: 185px;
+      padding: 10px;
+      border: 1px solid var(--slate-300);
+      border-radius: 5px;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--slate-50);
+      resize: vertical;
+    }
+
+    .toast-banner {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 1240px) {
+      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+      .kpi-box { border-left: none; border-top: 1px solid var(--line); }
+      .config-grid, .a4-wrapper-section { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .top-bar, .workspace { padding-left: 16px; padding-right: 16px; }
+      .kpi-strip, .form-grid-2 { grid-template-columns: 1fr; }
+      .alloc-mode-bar { flex-direction: column; }
+      .alloc-pill { border-left: none; border-top: 1px solid var(--slate-300); }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .top-bar, .preset-toolbar, .kpi-strip, .config-grid, .sku-section, .exec-sidebar, .toast-banner { display: none !important; }
+      .workspace { margin: 0; padding: 0; max-width: 100%; }
+      .a4-wrapper-section { display: block; }
+      .a4-paper { border: none; box-shadow: none; padding: 0; }
+      table.a4-table tr { break-inside: avoid; }
+    }
+
+    /* grid children must be allowed to shrink, otherwise wide tables push the page sideways */
+    .config-grid > *, .a4-wrapper-section > *, .kpi-strip > *, .form-grid-2 > * { min-width: 0; }
+    .field input, .field select { width: 100%; min-width: 0; }
+    .a4-paper { overflow-x: auto; }
+    .cell-edit { font-size: 12px; }
+    [style*="#F0FDFA"], [style*="#F1F5F9"] { background: transparent !important; }
+    .config-grid { grid-template-columns: 1.25fr 1fr 1.2fr; }
+    .config-grid > .panel:first-child .field:has(select),
+    .config-grid > .panel:first-child .field:has(#portNameInput),
+    .config-grid > .panel:first-child .field:has(#invoiceNoInput) { grid-column: 1 / -1; }
+    table.data-table thead th { padding: 8px 4px; }
+    table.data-table tbody td { padding: 3px 3px; }
+    .cell-edit { font-size: 11.5px; padding: 3px 2px; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Security & Compliance Ribbon -->
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand-block">
+        <div>
+          <div class="brand-title">Tính giá vốn hàng nhập khẩu và phân bổ phí cảng</div>
+          <div class="brand-sub">Tách tỷ giá hải quan (ECUS5-VNACCS) và tỷ giá thanh toán T/T; phân bổ TK 1561 / 1562 / 3333 / 33312 theo Thông tư 200/2014/TT-BTC</div>
+        </div>
+      </div>
+      <div class="security-pills">
+        <span class="sec-pill highlight">Chạy offline trong trình duyệt, không gửi dữ liệu đi</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+
+    <!-- 1. Preset Scenarios & Action Bar -->
+    <section class="preset-toolbar">
+      <div class="preset-group">
+        <span class="preset-label">Nạp lô hàng mẫu 1 chạm:</span>
+        <button type="button" class="btn active-preset" data-preset="usd_catlai">Lô thiết bị tự động hóa (USD • Cát Lái)</button>
+        <button type="button" class="btn" data-preset="cny_haiphong">Lô hạt nhựa &amp; phụ kiện nội thất (CNY • Hải Phòng)</button>
+        <button type="button" class="btn" data-preset="eur_noibai">Lô hóa chất chuẩn &amp; Y tế (EUR • Nội Bài Air)</button>
+      </div>
+      <div class="preset-group">
+        <button type="button" class="btn" id="toggleCsvDrawerBtn">Dán / kéo thả bảng kê Excel - ECUS5</button>
+        <button type="button" class="btn" id="addSkuRowBtn">+ Thêm dòng SKU</button>
+        <button type="button" class="btn btn-teal" id="exportMisaCsvBtn">Xuất CSV hạch toán MISA / FAST (UTF-8)</button>
+        <button type="button" class="btn btn-amber" id="printA4VoucherBtn">In / xuất PDF phiếu giá vốn A4</button>
+      </div>
+    </section>
+
+    <!-- 2. 5-Card Executive KPI Strip -->
+    <section class="kpi-strip">
+      <div class="kpi-box">
+        <div class="kpi-title">Giá mua thực tế T/T (TK 1561)</div>
+        <div class="kpi-value" id="kpiTk1561">0 đ</div>
+        <div class="kpi-note" id="kpiForeignTotalNote">0,00 USD quy đổi theo tỷ giá T/T</div>
+      </div>
+      <div class="kpi-box fx-alert">
+        <div class="kpi-title">Đội vốn tỷ giá T/T vs hải quan</div>
+        <div class="kpi-value" id="kpiFxVariance">0 đ</div>
+        <div class="kpi-note" id="kpiFxRateNote">Chênh lệch tỷ giá thanh toán thực tế</div>
+      </div>
+      <div class="kpi-box tax">
+        <div class="kpi-title">Thuế NK + TTĐB cộng vào giá vốn</div>
+        <div class="kpi-value" id="kpiNonRefundTax">0 đ</div>
+        <div class="kpi-note" id="kpiImportVatNote">Thuế GTGT NK khấu trừ (TK 33312): 0 đ</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-title">Tổng phí cảng &amp; logistics (TK 1562)</div>
+        <div class="kpi-value" id="kpiTk1562">0 đ</div>
+        <div class="kpi-note" id="kpiLogisticsRatioNote">Tỷ trọng phí thu mua / giá mua: 0%</div>
+      </div>
+      <div class="kpi-box landed">
+        <div class="kpi-title">Tổng giá vốn nhập kho (Landed Cost)</div>
+        <div class="kpi-value" id="kpiTotalLandedCost">0 đ</div>
+        <div class="kpi-note" id="kpiTotalTaxPayableNote">Tổng tiền thuế nộp NSNN tại cảng: 0 đ</div>
+      </div>
+    </section>
+
+    <!-- 3. 3-Column Configuration: Customs Declaration + Dual FX + 5 Logistics Buckets -->
+    <section class="config-grid">
+
+      <!-- Column A: Company & Customs Declaration Info -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">1. Hồ sơ tờ khai hải quan &amp; lô hàng</span>
+          <span class="panel-badge">ECUS5-VNACCS</span>
+        </div>
+        <div class="form-grid-2">
+          <div class="field full">
+            <label for="importerNameInput">Tên doanh nghiệp nhập khẩu (in trên phiếu A4)</label>
+            <input type="text" id="importerNameInput" value="CÔNG TY TNHH XNK MẪU A" />
+          </div>
+          <div class="field">
+            <label for="importerMstInput">Mã số thuế doanh nghiệp</label>
+            <input type="text" id="importerMstInput" value="0100000011" />
+          </div>
+          <div class="field">
+            <label for="customsNoInput">Số tờ khai hải quan (12 số)</label>
+            <input type="text" id="customsNoInput" value="100000000003" />
+          </div>
+          <div class="field">
+            <label for="invoiceNoInput">Số Commercial Invoice / B/L</label>
+            <input type="text" id="invoiceNoInput" value="INV-KR261031 / HDMU882910" />
+          </div>
+          <div class="field">
+            <label for="portNameInput">Cửa khẩu / cảng đích &amp; ngày mở TK</label>
+            <input type="text" id="portNameInput" value="Cảng Cát Lái (02CI) - 31/10/2026" />
+          </div>
+          <div class="field">
+            <label for="incotermSelect">Điều kiện cơ sở giao hàng (Incoterms)</label>
+            <select id="incotermSelect">
+              <option value="FOB" selected>FOB / EXW (cộng cước + bảo hiểm QT vào trị giá tính thuế HQ)</option>
+              <option value="CIF">CIF / CIP (đơn giá ngoại tệ đã gồm cước + bảo hiểm QT)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="vatModeSelect">Phương pháp hạch toán thuế GTGT hàng NK</label>
+            <select id="vatModeSelect">
+              <option value="deductible" selected>Khấu trừ thuế GTGT (TK 1331 - không cộng vào giá vốn)</option>
+              <option value="non_deductible">Không khấu trừ (cộng thẳng GTGT NK vào giá vốn)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column B: Dual Exchange Rate Engine (TT200) -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">2. Tách bạch tỷ giá hải quan &amp; tỷ giá ngân hàng T/T</span>
+          <span class="panel-badge tt200">THÔNG TƯ 200 / ĐIỀU 69</span>
+        </div>
+        <div class="form-grid-2">
+          <div class="field">
+            <label for="currencySelect">Đồng tiền thanh toán quốc tế</label>
+            <select id="currencySelect">
+              <option value="USD" selected>USD - Đô la Mỹ</option>
+              <option value="CNY">CNY - Nhân dân tệ Trung Quốc</option>
+              <option value="EUR">EUR - Đồng Euro Châu Âu</option>
+              <option value="JPY">JPY - Yên Nhật</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="supplierNameInput">Nhà cung cấp nước ngoài (exporter)</label>
+            <input type="text" id="supplierNameInput" value="SAMPLE AUTOMATION SUPPLIER CO., LTD (KR)" />
+          </div>
+          <div class="field">
+            <label for="customsRateInput">Tỷ giá tính thuế trên tờ khai HQ (VND)</label>
+            <input type="number" step="0.01" id="customsRateInput" class="num-input" value="25420" />
+          </div>
+          <div class="field">
+            <label for="bankTtRateInput">Tỷ giá mua ngoại tệ T/T thực tế NH (VND)</label>
+            <input type="number" step="0.01" id="bankTtRateInput" class="num-input" value="25790" />
+          </div>
+        </div>
+        <div class="fx-callout" id="fxExplainBox">
+          <strong>Chuẩn mực kế toán XNK:</strong> Thuế nhập khẩu (TK 3333) và GTGT hàng nhập khẩu (TK 33312) bắt buộc tính theo <em>Tỷ giá tờ khai hải quan</em>, trong khi giá mua nhập kho (TK 1561) phải ghi nhận theo <em>Tỷ giá thanh toán T/T thực tế bình quân</em> tại ngân hàng thương mại. Nếu báo giá bán sỉ theo tỷ giá tờ khai, doanh nghiệp sẽ mất phần chênh lệch tỷ giá.
+        </div>
+      </div>
+
+      <!-- Column C: 5-Bucket Inbound Logistics Allocation (TK 1562) -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">3. Chi phí thu mua, cảng biển &amp; tiêu thức phân bổ</span>
+          <span class="panel-badge tk1562">PHÂN BỔ TK 1562</span>
+        </div>
+
+        <div class="alloc-mode-bar" id="allocBasisBar">
+          <button type="button" class="alloc-pill active" data-basis="value">1. Theo trị giá ngoại tệ (%)</button>
+          <button type="button" class="alloc-pill" data-basis="weight">2. Theo trọng lượng (kg)</button>
+          <button type="button" class="alloc-pill" data-basis="cbm">3. Theo thể tích (CBM m3)</button>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="field">
+            <label for="intlFreightVndInput">Cước vận tải quốc tế biển/air (VND)</label>
+            <input type="number" step="1000" id="intlFreightVndInput" class="num-input" value="32500000" />
+          </div>
+          <div class="field">
+            <label for="insuranceVndInput">Bảo hiểm hàng hóa quốc tế (VND)</label>
+            <input type="number" step="1000" id="insuranceVndInput" class="num-input" value="2850000" />
+          </div>
+          <div class="field">
+            <label for="localChargesVndInput">Local Charges (THC, D/O, CIC, handling - VND)</label>
+            <input type="number" step="1000" id="localChargesVndInput" class="num-input" value="11400000" />
+          </div>
+          <div class="field">
+            <label for="portDemDetVndInput">Hạ tầng cảng, nâng hạ, kiểm hóa, DEM/DET (VND)</label>
+            <input type="number" step="1000" id="portDemDetVndInput" class="num-input" value="6800000" />
+          </div>
+          <div class="field full">
+            <label for="inlandTruckingVndInput">Vận chuyển nội địa kéo cont về kho, bốc xếp &amp; kiểm định chuyên ngành (VND)</label>
+            <input type="number" step="1000" id="inlandTruckingVndInput" class="num-input" value="9450000" />
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 4. SKU Allocation Matrix & Margin Guard -->
+    <section class="sku-section">
+      <div class="sku-header-bar">
+        <div>
+          <div class="panel-title">4. Bảng phân bổ giá vốn nhập kho từng mã hàng (SKU) &amp; đề xuất giá bán sỉ tối thiểu</div>
+          <div style="font-size:11.5px; color:var(--slate-600); margin-top:2px;">
+            Chỉnh sửa trực tiếp từng ô số lượng, đơn giá ngoại tệ, thuế suất NK (%), trọng lượng (kg), số khối (CBM) — giá vốn đơn vị cập nhật tức thì.
+          </div>
+        </div>
+        <div class="margin-bar" id="marginSelectorBar">
+          <span style="font-size:11.5px; font-weight:800; color:var(--navy-900); padding-left:4px;">Biên lãi gộp mục tiêu:</span>
+          <button type="button" class="margin-pill" data-margin="20">20%</button>
+          <button type="button" class="margin-pill" data-margin="25">25%</button>
+          <button type="button" class="margin-pill active" data-margin="30">30%</button>
+          <button type="button" class="margin-pill" data-margin="35">35%</button>
+        </div>
+      </div>
+
+      <!-- Optional CSV/TSV Paste & File Drop Drawer -->
+      <div class="csv-drawer" id="csvDrawer">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <strong style="font-size:12px; color:var(--navy-900);">
+            Dán vùng copy từ Excel / tờ khai ECUS5-VNACCS (11 cột phân cách bằng Tab hoặc dấu chấm phẩy `;` / phẩy `,`):
+          </strong>
+          <input type="file" id="csvFileInput" accept=".csv,.tsv,.txt" style="font-size:11.5px;" />
+        </div>
+        <div style="font-size:11px; color:var(--slate-600); margin-top:3px;">
+          Thứ tự cột: <code>Mã SKU | Tên hàng hóa | Mã HS | ĐVT | Số lượng | Đơn giá ngoại tệ | Thuế NK % | Thuế TTĐB % | Thuế GTGT NK % | Trọng lượng kg | Thể tích CBM</code>
+        </div>
+        <textarea id="csvPasteArea" placeholder="Ví dụ:&#10;INV-15KW&#9;Biến tần công nghiệp 3 pha 15kW&#9;85044090&#9;Bộ&#9;20&#9;410&#9;5&#9;0&#9;8&#9;260&#9;0.85"></textarea>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-teal" id="applyCsvImportBtn">Nạp dữ liệu vào bảng tính giá vốn</button>
+          <button type="button" class="btn" id="closeCsvDrawerBtn">Đóng khung nhập</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th class="center">#</th>
+              <th class="left">Mã SKU</th>
+              <th class="left" style="min-width:200px;">Tên hàng hóa nhập khẩu</th>
+              <th class="center">Mã HS</th>
+              <th class="center">ĐVT</th>
+              <th>SL</th>
+              <th id="thForeignUnit">Đơn giá (USD)</th>
+              <th>NK %</th>
+              <th>TTĐB %</th>
+              <th>GTGT %</th>
+              <th>KL (kg)</th>
+              <th>CBM (m3)</th>
+              <th>Tỷ trọng PB</th>
+              <th>Giá mua T/T (1561)</th>
+              <th>Thuế NK+TTĐB</th>
+              <th>Phí cảng (1562)</th>
+              <th class="highlight-col">Giá vốn / 1 ĐVT</th>
+              <th class="price-col" id="thSuggestedPrice">Giá sỉ đề xuất (30%)</th>
+              <th class="center">Xóa</th>
+            </tr>
+          </thead>
+          <tbody id="skuTableBody"></tbody>
+          <tfoot id="skuTableFoot"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. Printable A4 Landed Cost Voucher + Accounting Journal & Director Summary -->
+    <section class="a4-wrapper-section">
+
+      <!-- Left: Crisp Printable A4 Sheet -->
+      <div class="a4-paper" id="a4VoucherSheet">
+        <div class="a4-top-header">
+          <div>
+            <div class="a4-co-name" id="a4CompanyName">CÔNG TY TNHH XNK MẪU A</div>
+            <div class="a4-co-meta">Mã số thuế: <strong id="a4CompanyMst">0100000011</strong></div>
+            <div class="a4-co-meta">Phòng kế toán xuất nhập khẩu &amp; kiểm soát giá thành</div>
+          </div>
+          <div class="a4-motto">
+            <div>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</div>
+            <div style="text-decoration:underline; font-weight:700; margin-top:2px;">Độc lập - Tự do - Hạnh phúc</div>
+            <div style="font-weight:400; font-style:italic; font-size:11.5px; margin-top:4px;">Ban hành kèm chứng từ nhập kho chuẩn Thông tư 200/2014/TT-BTC</div>
+          </div>
+        </div>
+
+        <div class="a4-doc-title">
+          <h2>PHIẾU TÍNH GIÁ VỐN LÔ HÀNG NHẬP KHẨU &amp; ĐỀ XUẤT GIÁ BÁN SỈ</h2>
+          <p id="a4DocSubLine">Tờ khai hải quan số: 100000000003 • Invoice/BL: INV-KR261031 / HDMU882910</p>
+        </div>
+
+        <div class="a4-meta-grid" id="a4MetaGrid"></div>
+
+        <table class="a4-table">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Mã SKU / mã HS</th>
+              <th>Tên hàng hóa nhập khẩu</th>
+              <th>ĐVT</th>
+              <th>SL</th>
+              <th id="a4ThForeign">Đơn giá NT</th>
+              <th>Giá mua T/T (TK 1561)</th>
+              <th>Thuế NK+TTĐB</th>
+              <th>Phí logistics (TK 1562)</th>
+              <th>Tổng giá vốn nhập kho</th>
+              <th>Giá vốn / 1 ĐVT</th>
+              <th id="a4ThWholesale">Giá bán sỉ tối thiểu</th>
+            </tr>
+          </thead>
+          <tbody id="a4TableBody"></tbody>
+          <tfoot id="a4TableFoot"></tfoot>
+        </table>
+
+        <div class="a4-words-line">
+          <strong>Tổng giá trị nhập kho thực tế viết bằng chữ (TK 156):</strong>
+          <em id="a4AmountInWords">Không đồng chẵn.</em>
+        </div>
+
+        <div class="a4-signatures">
+          <div>
+            <strong>NGƯỜI LẬP PHIẾU / KẾ TOÁN XNK</strong>
+            <div style="font-style:italic; font-size:11px;">(Ký, ghi rõ họ tên)</div>
+            <div style="height:58px;"></div>
+            <div>Đã đối chiếu tờ khai &amp; hóa đơn cảng</div>
+          </div>
+          <div>
+            <strong>KẾ TOÁN TRƯỞNG KIỂM SOÁT</strong>
+            <div style="font-style:italic; font-size:11px;">(Ký, kiểm tra định khoản TT200)</div>
+            <div>
+              <span class="red-audit-stamp">Đã kiểm soát giá vốn XNK</span>
+            </div>
+          </div>
+          <div>
+            <strong>GIÁM ĐỐC PHÊ DUYỆT GIÁ BÁN</strong>
+            <div style="font-style:italic; font-size:11px;">(Ký, đóng dấu duyệt bảng giá sỉ)</div>
+            <div style="height:58px;"></div>
+            <div>Áp dụng cho phòng kinh doanh</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: MISA/FAST Accounting Entries & 1-Click Director Summary -->
+      <aside class="exec-sidebar">
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-title">Định khoản hạch toán chuẩn TT200</span>
+            <span class="panel-badge tt200">MISA / FAST</span>
+          </div>
+          <div style="font-size:11.5px; color:var(--slate-600);">
+            Bút toán tự động tách bạch giá mua T/T, chi phí thu mua cảng biển và thuế nộp Ngân sách Nhà nước tại khâu nhập khẩu:
+          </div>
+          <table class="journal-table" id="journalEntriesTable"></table>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-title">Báo cáo nhanh gửi giám đốc / sales</span>
+            <span class="panel-badge tk1562">1-CLICK ZALO</span>
+          </div>
+          <textarea class="exec-msg-box" id="directorZaloSummary" readonly></textarea>
+          <button type="button" class="btn btn-navy" id="copyDirectorSummaryBtn" style="width:100%; margin-top:8px;">
+            Sao chép báo cáo giá vốn và giá sỉ
+          </button>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <div class="toast-banner" id="appToast">Đã thực hiện thao tác thành công!</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =====================================================================
+       * 1. THREE REALISTIC IMPORT SHIPMENT PRESETS (USD / CNY / EUR)
+       * ===================================================================== */
+      const SHIPMENT_PRESETS = {
+        usd_catlai: {
+          importerName: 'CÔNG TY TNHH XNK MẪU A',
+          importerMst: '0100000011',
+          customsNo: '100000000003',
+          invoiceNo: 'INV-KR261031 / HDMU882910',
+          portName: 'Cảng Cát Lái (02CI) - 31/10/2026',
+          incoterm: 'FOB',
+          vatMode: 'deductible',
+          currency: 'USD',
+          supplierName: 'SAMPLE AUTOMATION SUPPLIER CO., LTD (KR)',
+          customsRate: 25420,
+          bankTtRate: 25790,
+          allocBasis: 'value',
+          targetMargin: 30,
+          intlFreightVnd: 32500000,
+          insuranceVnd: 2850000,
+          localChargesVnd: 11400000,
+          portDemDetVnd: 6800000,
+          inlandTruckingVnd: 9450000,
+          items: [
+            { sku: 'INV-KR-15KW', name: 'Biến tần công nghiệp 3 pha 15kW chuẩn IP55', hs: '85044090', unit: 'Bộ', qty: 20, unitForeign: 410.00, nkPct: 5, ttdbPct: 0, vatPct: 8, weightKg: 260, cbm: 0.92 },
+            { sku: 'PLC-MOD-32I', name: 'Bộ điều khiển lập trình PLC 32 ngõ vào/ra', hs: '85371019', unit: 'Bộ', qty: 35, unitForeign: 195.00, nkPct: 0, ttdbPct: 0, vatPct: 8, weightKg: 78, cbm: 0.34 },
+            { sku: 'VAL-HYD-24V', name: 'Van điện từ thủy lực áp suất cao 315 Bar', hs: '84812000', unit: 'Cái', qty: 60, unitForeign: 88.50, nkPct: 5, ttdbPct: 0, vatPct: 10, weightKg: 210, cbm: 0.45 },
+            { sku: 'SEN-OPT-M18', name: 'Cảm biến quang học thân đồng M18 chống nhiễu', hs: '85365099', unit: 'Cái', qty: 150, unitForeign: 24.00, nkPct: 3, ttdbPct: 0, vatPct: 8, weightKg: 42, cbm: 0.18 },
+            { sku: 'FLW-MAG-DN50', name: 'Đồng hồ đo lưu lượng điện từ mặt bích DN50', hs: '90261090', unit: 'Bộ', qty: 15, unitForeign: 320.00, nkPct: 0, ttdbPct: 0, vatPct: 8, weightKg: 195, cbm: 0.68 },
+            { sku: 'CYL-PNE-63X2', name: 'Xy lanh khí nén hợp kim nhôm hành trình 200mm', hs: '84123100', unit: 'Cây', qty: 80, unitForeign: 42.00, nkPct: 5, ttdbPct: 0, vatPct: 10, weightKg: 248, cbm: 0.56 },
+            { sku: 'CPL-SERVO-45', name: 'Khớp nối trục đàn hồi Servo cơ khí chính xác', hs: '84836000', unit: 'Cái', qty: 120, unitForeign: 18.50, nkPct: 5, ttdbPct: 0, vatPct: 10, weightKg: 96, cbm: 0.22 },
+            { sku: 'PSU-DIN-480W', name: 'Bộ nguồn xung gắn thanh ray DIN 24VDC - 480W', hs: '85044090', unit: 'Bộ', qty: 50, unitForeign: 54.00, nkPct: 5, ttdbPct: 0, vatPct: 8, weightKg: 85, cbm: 0.31 }
+          ]
+        },
+        cny_haiphong: {
+          importerName: 'CÔNG TY TNHH NỘI THẤT MẪU B',
+          importerMst: '0100000012',
+          customsNo: '100000000001',
+          invoiceNo: 'SH-INV2026108 / SITC994120',
+          portName: 'Cảng Đình Vũ Hải Phòng (03TG) - 31/10/2026',
+          incoterm: 'FOB',
+          vatMode: 'deductible',
+          currency: 'CNY',
+          supplierName: 'SAMPLE POLYMER SUPPLIER CO., LTD (CN)',
+          customsRate: 3545,
+          bankTtRate: 3635,
+          allocBasis: 'cbm',
+          targetMargin: 25,
+          intlFreightVnd: 18500000,
+          insuranceVnd: 1450000,
+          localChargesVnd: 8900000,
+          portDemDetVnd: 5400000,
+          inlandTruckingVnd: 11200000,
+          items: [
+            { sku: 'ABS-757-25KG', name: 'Hạt nhựa kỹ thuật ABS nguyên sinh bao 25kg', hs: '39033090', unit: 'Bao', qty: 240, unitForeign: 315.00, nkPct: 3, ttdbPct: 0, vatPct: 10, weightKg: 6000, cbm: 9.80 },
+            { sku: 'BOPP-MAT-500', name: 'Cuộn màng BOPP mờ cán nhiệt khổ 500mm', hs: '39202010', unit: 'Cuộn', qty: 90, unitForeign: 260.00, nkPct: 6, ttdbPct: 0, vatPct: 8, weightKg: 1800, cbm: 3.40 },
+            { sku: 'HNG-304-SOFT', name: 'Bản lề hơi giảm chấn Inox 304 tháo lắp nhanh', hs: '83021000', unit: 'Bộ', qty: 3000, unitForeign: 6.80, nkPct: 12, ttdbPct: 0, vatPct: 10, weightKg: 690, cbm: 1.65 },
+            { sku: 'SLD-450-3F', name: 'Ray trượt bi 3 tầng thép mạ kẽm dài 450mm', hs: '83024290', unit: 'Cặp', qty: 1200, unitForeign: 18.50, nkPct: 12, ttdbPct: 0, vatPct: 10, weightKg: 1680, cbm: 2.10 },
+            { sku: 'ADH-EVA-20KG', name: 'Keo hạt nhiệt EVA dán cạnh gỗ công nghiệp 20kg', hs: '35069100', unit: 'Bao', qty: 110, unitForeign: 245.00, nkPct: 5, ttdbPct: 0, vatPct: 8, weightKg: 2200, cbm: 3.90 },
+            { sku: 'LCK-RFID-CAB', name: 'Khóa thẻ từ âm tủ locker thông minh hợp kim', hs: '83013000', unit: 'Bộ', qty: 400, unitForeign: 42.00, nkPct: 15, ttdbPct: 0, vatPct: 10, weightKg: 220, cbm: 0.75 },
+            { sku: 'HDL-PVD-160', name: 'Tay nắm tủ hợp kim kẽm mạ PVD vàng xước 160mm', hs: '83024290', unit: 'Cái', qty: 1800, unitForeign: 8.20, nkPct: 12, ttdbPct: 0, vatPct: 10, weightKg: 340, cbm: 0.85 },
+            { sku: 'LED-PRO-2M', name: 'Thanh nhôm định hình đèn LED tủ bếp kèm nắp tán', hs: '76042990', unit: 'Thanh', qty: 800, unitForeign: 14.50, nkPct: 10, ttdbPct: 0, vatPct: 8, weightKg: 380, cbm: 1.95 }
+          ]
+        },
+        eur_noibai: {
+          importerName: 'CÔNG TY TNHH THIẾT BỊ Y SINH MẪU C',
+          importerMst: '0100000013',
+          customsNo: '100000000002',
+          invoiceNo: 'DE-FRA-26109 / LH07728192',
+          portName: 'HQ CKSB Quốc tế Nội Bài (01AB) - 31/10/2026',
+          incoterm: 'FOB',
+          vatMode: 'deductible',
+          currency: 'EUR',
+          supplierName: 'SAMPLE DIAGNOSTICS GMBH (DE)',
+          customsRate: 27510,
+          bankTtRate: 27960,
+          allocBasis: 'weight',
+          targetMargin: 35,
+          intlFreightVnd: 44800000,
+          insuranceVnd: 3200000,
+          localChargesVnd: 7600000,
+          portDemDetVnd: 4900000,
+          inlandTruckingVnd: 6500000,
+          items: [
+            { sku: 'CENT-MICRO-24', name: 'Máy ly tâm lạnh vi thể phòng xét nghiệm 24 ống', hs: '84211990', unit: 'Máy', qty: 4, unitForeign: 1480.00, nkPct: 0, ttdbPct: 0, vatPct: 5, weightKg: 116, cbm: 0.64 },
+            { sku: 'PIP-AUTO-8CH', name: 'Micropipet đa kênh chuẩn ISO 8655 khử trùng hấp', hs: '90268000', unit: 'Cây', qty: 25, unitForeign: 185.00, nkPct: 0, ttdbPct: 0, vatPct: 5, weightKg: 18, cbm: 0.14 },
+            { sku: 'REG-HPLC-25L', name: 'Dung môi Acetonitrile tinh khiết sắc ký HPLC 2.5L', hs: '29269000', unit: 'Chai', qty: 80, unitForeign: 38.50, nkPct: 3, ttdbPct: 0, vatPct: 8, weightKg: 235, cbm: 0.52 },
+            { sku: 'KIT-PCR-96T', name: 'Bộ sinh phẩm chuẩn định lượng sinh học 96 test', hs: '38221900', unit: 'Hộp', qty: 30, unitForeign: 162.00, nkPct: 0, ttdbPct: 0, vatPct: 5, weightKg: 45, cbm: 0.28 },
+            { sku: 'ANAL-BAL-01M', name: 'Cân phân tích điện tử chuẩn nội 0.0001g lồng kính', hs: '90160000', unit: 'Cái', qty: 6, unitForeign: 890.00, nkPct: 0, ttdbPct: 0, vatPct: 8, weightKg: 54, cbm: 0.42 },
+            { sku: 'FLT-PTFE-022', name: 'Màng lọc đầu kim PTFE kỵ nước 0.22 micron hộp 100c', hs: '84212990', unit: 'Hộp', qty: 90, unitForeign: 26.00, nkPct: 5, ttdbPct: 0, vatPct: 8, weightKg: 27, cbm: 0.19 },
+            { sku: 'PH-PRO-BENCH', name: 'Máy đo pH/ORP để bàn kèm điện cực thủy tinh Đức', hs: '90278900', unit: 'Bộ', qty: 10, unitForeign: 340.00, nkPct: 0, ttdbPct: 0, vatPct: 8, weightKg: 36, cbm: 0.25 },
+            { sku: 'VIAL-AMB-2ML', name: 'Lọ thủy tinh nâu sắc ký 2ml nắp vặn Septa thùng 1000', hs: '70179000', unit: 'Thùng', qty: 20, unitForeign: 95.00, nkPct: 5, ttdbPct: 0, vatPct: 8, weightKg: 88, cbm: 0.36 }
+          ]
+        }
+      };
+
+      /* =====================================================================
+       * 2. STATE & HELPERS
+       * ===================================================================== */
+      let state = JSON.parse(JSON.stringify(SHIPMENT_PRESETS.usd_catlai));
+
+      function fmtVnd(n) {
+        return Math.round(n || 0).toLocaleString('vi-VN') + ' đ';
+      }
+
+      function fmtInt(n) {
+        return Math.round(n || 0).toLocaleString('vi-VN');
+      }
+
+      function fmtDec(n, digits) {
+        return Number(n || 0).toLocaleString('vi-VN', {
+          minimumFractionDigits: digits,
+          maximumFractionDigits: digits
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function showToast(msg) {
+        const el = document.getElementById('appToast');
+        el.textContent = msg;
+        el.style.display = 'block';
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(function () {
+          el.style.display = 'none';
+        }, 2800);
+      }
+
+      /* Vietnamese Accounting Number-to-Words (Chuẩn Thông tư 200) */
+      function readVndWords(amount) {
+        const num = Math.round(Math.abs(amount || 0));
+        if (num === 0) return 'Không đồng chẵn.';
+        const digits = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+        const scales = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ', 'triệu tỷ'];
+
+        function readTriple(n, full) {
+          const h = Math.floor(n / 100);
+          const t = Math.floor((n % 100) / 10);
+          const u = n % 10;
+          let parts = [];
+          if (h > 0 || full) {
+            parts.push(digits[h] + ' trăm');
+          }
+          if (t > 1) {
+            parts.push(digits[t] + ' mươi');
+            if (u === 1) parts.push('mốt');
+            else if (u === 4) parts.push('tư');
+            else if (u === 5) parts.push('lăm');
+            else if (u > 0) parts.push(digits[u]);
+          } else if (t === 1) {
+            parts.push('mười');
+            if (u === 5) parts.push('lăm');
+            else if (u > 0) parts.push(digits[u]);
+          } else if (t === 0 && u > 0) {
+            if (h > 0 || full) parts.push('lẻ');
+            parts.push(digits[u]);
+          }
+          return parts.join(' ');
+        }
+
+        let groups = [];
+        let temp = num;
+        while (temp > 0) {
+          groups.push(temp % 1000);
+          temp = Math.floor(temp / 1000);
+        }
+
+        let words = [];
+        for (let i = groups.length - 1; i >= 0; i--) {
+          if (groups[i] > 0) {
+            const isFull = i < groups.length - 1;
+            const seg = readTriple(groups[i], isFull);
+            words.push(seg + (scales[i] ? ' ' + scales[i] : ''));
+          }
+        }
+        const sentence = words.join(' ').replace(/\s+/g, ' ').trim();
+        return sentence.charAt(0).toUpperCase() + sentence.slice(1) + ' đồng chẵn.';
+      }
+
+      /* =====================================================================
+       * 3. CORE TT200 LANDED COST & CUSTOMS CALCULATION ENGINE
+       * ===================================================================== */
+      function computeShipment() {
+        const customsRate = Math.max(0, Number(state.customsRate) || 0);
+        const bankTtRate = Math.max(0, Number(state.bankTtRate) || 0);
+        const intlFreight = Math.max(0, Number(state.intlFreightVnd) || 0);
+        const insurance = Math.max(0, Number(state.insuranceVnd) || 0);
+        const localCharges = Math.max(0, Number(state.localChargesVnd) || 0);
+        const portDemDet = Math.max(0, Number(state.portDemDetVnd) || 0);
+        const inlandTruck = Math.max(0, Number(state.inlandTruckingVnd) || 0);
+
+        const totalIntlFreightInsVnd = intlFreight + insurance;
+        const totalDomesticPortVnd = localCharges + portDemDet + inlandTruck;
+        const totalLogisticsTk1562 = totalIntlFreightInsVnd + totalDomesticPortVnd;
+
+        let sumForeign = 0;
+        let sumWeight = 0;
+        let sumCbm = 0;
+
+        state.items.forEach(function (it) {
+          const qty = Math.max(0, Number(it.qty) || 0);
+          const uf = Math.max(0, Number(it.unitForeign) || 0);
+          sumForeign += qty * uf;
+          sumWeight += Math.max(0, Number(it.weightKg) || 0);
+          sumCbm += Math.max(0, Number(it.cbm) || 0);
+        });
+
+        const marginRatio = Math.min(0.85, Math.max(0.01, (Number(state.targetMargin) || 30) / 100));
+
+        let totTk1561 = 0;
+        let totCustomsVal = 0;
+        let totImportDuty = 0;
+        let totExciseTax = 0;
+        let totImportVat = 0;
+        let totNonRefundTax = 0;
+        let totLandedCost = 0;
+
+        const computedRows = state.items.map(function (it, idx) {
+          const qty = Math.max(0.0001, Number(it.qty) || 0);
+          const uf = Math.max(0, Number(it.unitForeign) || 0);
+          const lineForeign = qty * uf;
+          const weightKg = Math.max(0, Number(it.weightKg) || 0);
+          const cbm = Math.max(0, Number(it.cbm) || 0);
+
+          let ratio = 0;
+          if (state.allocBasis === 'weight' && sumWeight > 0) {
+            ratio = weightKg / sumWeight;
+          } else if (state.allocBasis === 'cbm' && sumCbm > 0) {
+            ratio = cbm / sumCbm;
+          } else if (sumForeign > 0) {
+            ratio = lineForeign / sumForeign;
+          } else if (state.items.length > 0) {
+            ratio = 1 / state.items.length;
+          }
+
+          /* 1. Giá mua hàng nhập kho theo Tỷ giá T/T Ngân hàng thực tế (TK 1561) */
+          const linePurchaseTtVnd = Math.round(lineForeign * bankTtRate);
+
+          /* 2. Trị giá tính thuế Hải quan (CIF quy đổi theo Tỷ giá tờ khai HQ) */
+          const allocIntlVnd = Math.round(totalIntlFreightInsVnd * ratio);
+          const lineCustomsBaseVnd = state.incoterm === 'FOB'
+            ? Math.round(lineForeign * customsRate) + allocIntlVnd
+            : Math.round(lineForeign * customsRate);
+
+          /* 3. Thuế Nhập khẩu (TK 3333), Thuế TTĐB (TK 3332), Thuế GTGT hàng NK (TK 33312) */
+          const nkPct = Math.max(0, Number(it.nkPct) || 0);
+          const ttdbPct = Math.max(0, Number(it.ttdbPct) || 0);
+          const vatPct = Math.max(0, Number(it.vatPct) || 0);
+
+          const importDutyVnd = Math.round(lineCustomsBaseVnd * (nkPct / 100));
+          const exciseTaxVnd = Math.round((lineCustomsBaseVnd + importDutyVnd) * (ttdbPct / 100));
+          const importVatVnd = Math.round((lineCustomsBaseVnd + importDutyVnd + exciseTaxVnd) * (vatPct / 100));
+
+          const nonRefundTaxVnd = state.vatMode === 'non_deductible'
+            ? (importDutyVnd + exciseTaxVnd + importVatVnd)
+            : (importDutyVnd + exciseTaxVnd);
+
+          /* 4. Phân bổ Chi phí thu mua & Cảng biển (TK 1562)
+           * Nếu điều kiện CIF thì cước + bảo hiểm QT đã nằm trong đơn giá ngoại tệ, chỉ phân bổ phí từ cảng đích về kho;
+           * Nếu điều kiện FOB/EXW thì toàn bộ 5 nhóm chi phí Logistics đều cộng vào TK 1562.
+           */
+          const effectivePoolTk1562 = state.incoterm === 'FOB' ? totalLogisticsTk1562 : totalDomesticPortVnd;
+          const allocLogisticsVnd = Math.round(effectivePoolTk1562 * ratio);
+
+          /* 5. Tổng giá vốn nhập kho & Giá vốn 1 ĐVT */
+          const lineLandedVnd = linePurchaseTtVnd + nonRefundTaxVnd + allocLogisticsVnd;
+          const unitLandedVnd = Math.round(lineLandedVnd / qty);
+
+          /* 6. Giá bán sỉ tối thiểu theo Biên lợi nhuận gộp mục tiêu (làm tròn lên 100đ) */
+          const rawSuggested = unitLandedVnd / (1 - marginRatio);
+          const suggestedWholesaleVnd = Math.ceil(rawSuggested / 100) * 100;
+
+          totTk1561 += linePurchaseTtVnd;
+          totCustomsVal += Math.round(lineForeign * customsRate);
+          totImportDuty += importDutyVnd;
+          totExciseTax += exciseTaxVnd;
+          totImportVat += importVatVnd;
+          totNonRefundTax += nonRefundTaxVnd;
+          totLandedCost += lineLandedVnd;
+
+          return {
+            idx: idx,
+            sku: it.sku,
+            name: it.name,
+            hs: it.hs,
+            unit: it.unit,
+            qty: Number(it.qty) || 0,
+            unitForeign: uf,
+            lineForeign: lineForeign,
+            nkPct: nkPct,
+            ttdbPct: ttdbPct,
+            vatPct: vatPct,
+            weightKg: weightKg,
+            cbm: cbm,
+            ratioPct: ratio * 100,
+            linePurchaseTtVnd: linePurchaseTtVnd,
+            importDutyVnd: importDutyVnd,
+            exciseTaxVnd: exciseTaxVnd,
+            importVatVnd: importVatVnd,
+            nonRefundTaxVnd: nonRefundTaxVnd,
+            allocLogisticsVnd: allocLogisticsVnd,
+            lineLandedVnd: lineLandedVnd,
+            unitLandedVnd: unitLandedVnd,
+            suggestedWholesaleVnd: suggestedWholesaleVnd
+          };
+        });
+
+        const effectivePoolTk1562 = state.incoterm === 'FOB' ? totalLogisticsTk1562 : totalDomesticPortVnd;
+        const fxVarianceVnd = totTk1561 - totCustomsVal;
+        const totalStateBudgetTax = totImportDuty + totExciseTax + totImportVat;
+
+        return {
+          rows: computedRows,
+          sumForeign: sumForeign,
+          sumWeight: sumWeight,
+          sumCbm: sumCbm,
+          totTk1561: totTk1561,
+          totCustomsVal: totCustomsVal,
+          fxVarianceVnd: fxVarianceVnd,
+          totImportDuty: totImportDuty,
+          totExciseTax: totExciseTax,
+          totImportVat: totImportVat,
+          totNonRefundTax: totNonRefundTax,
+          effectivePoolTk1562: effectivePoolTk1562,
+          totLandedCost: totLandedCost,
+          totalStateBudgetTax: totalStateBudgetTax
+        };
+      }
+
+      /* =====================================================================
+       * 4. SYNC INPUTS & RENDER ALL VIEWS
+       * ===================================================================== */
+      function syncInputsFromState() {
+        document.getElementById('importerNameInput').value = state.importerName;
+        document.getElementById('importerMstInput').value = state.importerMst;
+        document.getElementById('customsNoInput').value = state.customsNo;
+        document.getElementById('invoiceNoInput').value = state.invoiceNo;
+        document.getElementById('portNameInput').value = state.portName;
+        document.getElementById('incotermSelect').value = state.incoterm;
+        document.getElementById('vatModeSelect').value = state.vatMode;
+        document.getElementById('currencySelect').value = state.currency;
+        document.getElementById('supplierNameInput').value = state.supplierName;
+        document.getElementById('customsRateInput').value = state.customsRate;
+        document.getElementById('bankTtRateInput').value = state.bankTtRate;
+        document.getElementById('intlFreightVndInput').value = state.intlFreightVnd;
+        document.getElementById('insuranceVndInput').value = state.insuranceVnd;
+        document.getElementById('localChargesVndInput').value = state.localChargesVnd;
+        document.getElementById('portDemDetVndInput').value = state.portDemDetVnd;
+        document.getElementById('inlandTruckingVndInput').value = state.inlandTruckingVnd;
+
+        document.querySelectorAll('#allocBasisBar .alloc-pill').forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-basis') === state.allocBasis);
+        });
+        document.querySelectorAll('#marginSelectorBar .margin-pill').forEach(function (btn) {
+          btn.classList.toggle('active', Number(btn.getAttribute('data-margin')) === Number(state.targetMargin));
+        });
+      }
+
+      function renderAll() {
+        const res = computeShipment();
+        const cur = state.currency;
+
+        /* 1. KPIs */
+        document.getElementById('kpiTk1561').textContent = fmtVnd(res.totTk1561);
+        document.getElementById('kpiForeignTotalNote').textContent =
+          fmtDec(res.sumForeign, 2) + ' ' + cur + ' × Tỷ giá T/T ' + fmtInt(state.bankTtRate);
+
+        const fxSign = res.fxVarianceVnd >= 0 ? '+' : '';
+        document.getElementById('kpiFxVariance').textContent = fxSign + fmtVnd(res.fxVarianceVnd);
+        document.getElementById('kpiFxRateNote').textContent =
+          'HQ: ' + fmtInt(state.customsRate) + ' vs T/T: ' + fmtInt(state.bankTtRate) + ' VND/' + cur;
+
+        document.getElementById('kpiNonRefundTax').textContent = fmtVnd(res.totNonRefundTax);
+        document.getElementById('kpiImportVatNote').textContent =
+          'GTGT NK (TK 33312): ' + fmtVnd(res.totImportVat);
+
+        document.getElementById('kpiTk1562').textContent = fmtVnd(res.effectivePoolTk1562);
+        const logRatio = res.totTk1561 > 0 ? ((res.effectivePoolTk1562 / res.totTk1561) * 100) : 0;
+        document.getElementById('kpiLogisticsRatioNote').textContent =
+          'Chiếm ' + fmtDec(logRatio, 1) + '% trên giá mua hàng ngoại tệ';
+
+        document.getElementById('kpiTotalLandedCost').textContent = fmtVnd(res.totLandedCost);
+        document.getElementById('kpiTotalTaxPayableNote').textContent =
+          'Tổng thuế nộp NSNN tại cảng: ' + fmtVnd(res.totalStateBudgetTax);
+
+        /* 2. Table Headers */
+        document.getElementById('thForeignUnit').textContent = 'Đơn Giá (' + cur + ')';
+        document.getElementById('thSuggestedPrice').textContent = 'Giá Sỉ Đề Xuất (' + state.targetMargin + '%)';
+
+        /* 3. Interactive SKU Rows */
+        const tbody = document.getElementById('skuTableBody');
+        tbody.innerHTML = res.rows.map(function (r) {
+          return (
+            '<tr data-idx="' + r.idx + '">' +
+              '<td class="center">' + (r.idx + 1) + '</td>' +
+              '<td class="left"><input class="cell-edit" data-field="sku" value="' + escapeHtml(r.sku) + '" style="width:94px; font-weight:700;" /></td>' +
+              '<td class="left"><input class="cell-edit" data-field="name" value="' + escapeHtml(r.name) + '" style="width:190px;" /></td>' +
+              '<td class="center"><input class="cell-edit" data-field="hs" value="' + escapeHtml(r.hs) + '" style="width:66px; text-align:center;" /></td>' +
+              '<td class="center"><input class="cell-edit" data-field="unit" value="' + escapeHtml(r.unit) + '" style="width:38px; text-align:center;" /></td>' +
+              '<td><input type="number" step="1" class="cell-edit" data-field="qty" value="' + r.qty + '" style="width:44px;" /></td>' +
+              '<td><input type="number" step="0.01" class="cell-edit" data-field="unitForeign" value="' + r.unitForeign + '" style="width:58px;" /></td>' +
+              '<td><input type="number" step="0.5" class="cell-edit" data-field="nkPct" value="' + r.nkPct + '" style="width:36px;" /></td>' +
+              '<td><input type="number" step="0.5" class="cell-edit" data-field="ttdbPct" value="' + r.ttdbPct + '" style="width:36px;" /></td>' +
+              '<td><input type="number" step="1" class="cell-edit" data-field="vatPct" value="' + r.vatPct + '" style="width:36px;" /></td>' +
+              '<td><input type="number" step="0.1" class="cell-edit" data-field="weightKg" value="' + r.weightKg + '" style="width:48px;" /></td>' +
+              '<td><input type="number" step="0.01" class="cell-edit" data-field="cbm" value="' + r.cbm + '" style="width:44px;" /></td>' +
+              '<td>' + fmtDec(r.ratioPct, 1) + '%</td>' +
+              '<td>' + fmtInt(r.linePurchaseTtVnd) + '</td>' +
+              '<td>' + fmtInt(r.nonRefundTaxVnd) + '</td>' +
+              '<td>' + fmtInt(r.allocLogisticsVnd) + '</td>' +
+              '<td class="unit-landed-cell">' + fmtInt(r.unitLandedVnd) + '</td>' +
+              '<td class="wholesale-cell">' + fmtInt(r.suggestedWholesaleVnd) + '</td>' +
+              '<td class="center"><button type="button" class="del-row-btn" data-del="' + r.idx + '">X</button></td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        document.getElementById('skuTableFoot').innerHTML =
+          '<tr>' +
+            '<td colspan="5" class="left">TỔNG CỘNG LÔ HÀNG (' + res.rows.length + ' MÃ SKU — NGOẠI TỆ: ' + fmtDec(res.sumForeign, 2) + ' ' + cur + ')</td>' +
+            '<td>' + fmtInt(res.rows.reduce(function (s, x) { return s + x.qty; }, 0)) + '</td>' +
+            '<td>' + fmtDec(res.sumForeign, 2) + '</td>' +
+            '<td colspan="3"></td>' +
+            '<td>' + fmtDec(res.sumWeight, 1) + '</td>' +
+            '<td>' + fmtDec(res.sumCbm, 2) + '</td>' +
+            '<td>100,0%</td>' +
+            '<td>' + fmtInt(res.totTk1561) + '</td>' +
+            '<td>' + fmtInt(res.totNonRefundTax) + '</td>' +
+            '<td>' + fmtInt(res.effectivePoolTk1562) + '</td>' +
+            '<td colspan="3" style="text-align:right; color:var(--teal-800);">TỔNG NHẬP KHO: ' + fmtVnd(res.totLandedCost) + '</td>' +
+          '</tr>';
+
+        /* 4. Printable A4 Costing Voucher */
+        document.getElementById('a4CompanyName').textContent = state.importerName;
+        document.getElementById('a4CompanyMst').textContent = state.importerMst;
+        document.getElementById('a4DocSubLine').textContent =
+          'Tờ khai Hải quan số: ' + state.customsNo + ' • Invoice / Vận đơn: ' + state.invoiceNo + ' • Cửa khẩu: ' + state.portName;
+
+        const basisNameMap = {
+          value: 'Theo Trị giá ngoại tệ lô hàng (%)',
+          weight: 'Theo Trọng lượng Gross Weight (kg)',
+          cbm: 'Theo Thể tích đóng hàng (CBM m3)'
+        };
+
+        document.getElementById('a4MetaGrid').innerHTML =
+          '<div><strong>Nhà xuất khẩu:</strong> ' + escapeHtml(state.supplierName) + ' (' + state.incoterm + ')</div>' +
+          '<div><strong>Tổng trị giá Invoice:</strong> ' + fmtDec(res.sumForeign, 2) + ' ' + cur + ' (' + fmtDec(res.sumWeight, 1) + ' kg / ' + fmtDec(res.sumCbm, 2) + ' m3)</div>' +
+          '<div><strong>Tỷ giá tính thuế Hải quan:</strong> ' + fmtInt(state.customsRate) + ' VND/' + cur + '</div>' +
+          '<div><strong>Tỷ giá thanh toán T/T thực tế:</strong> ' + fmtInt(state.bankTtRate) + ' VND/' + cur + ' (Lệch: ' + fxSign + fmtVnd(res.fxVarianceVnd) + ')</div>' +
+          '<div><strong>Tiêu thức phân bổ TK 1562:</strong> ' + basisNameMap[state.allocBasis] + '</div>' +
+          '<div><strong>Thuế nộp NSNN tại cảng:</strong> NK ' + fmtVnd(res.totImportDuty) + ' + GTGT NK ' + fmtVnd(res.totImportVat) + '</div>';
+
+        document.getElementById('a4ThForeign').textContent = 'Đơn Giá (' + cur + ')';
+        document.getElementById('a4ThWholesale').textContent = 'Giá Sỉ Đề Xuất (' + state.targetMargin + '%)';
+
+        document.getElementById('a4TableBody').innerHTML = res.rows.map(function (r, i) {
+          return (
+            '<tr>' +
+              '<td style="text-align:center;">' + (i + 1) + '</td>' +
+              '<td><strong>' + escapeHtml(r.sku) + '</strong><br/><span style="font-size:10px;">HS: ' + escapeHtml(r.hs) + '</span></td>' +
+              '<td>' + escapeHtml(r.name) + '</td>' +
+              '<td style="text-align:center;">' + escapeHtml(r.unit) + '</td>' +
+              '<td class="num">' + fmtInt(r.qty) + '</td>' +
+              '<td class="num">' + fmtDec(r.unitForeign, 2) + '</td>' +
+              '<td class="num">' + fmtInt(r.linePurchaseTtVnd) + '</td>' +
+              '<td class="num">' + fmtInt(r.nonRefundTaxVnd) + '</td>' +
+              '<td class="num">' + fmtInt(r.allocLogisticsVnd) + '</td>' +
+              '<td class="num"><strong>' + fmtInt(r.lineLandedVnd) + '</strong></td>' +
+              '<td class="num"><strong>' + fmtInt(r.unitLandedVnd) + '</strong></td>' +
+              '<td class="num"><strong>' + fmtInt(r.suggestedWholesaleVnd) + '</strong></td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        document.getElementById('a4TableFoot').innerHTML =
+          '<tr style="background:#F1F5F9; font-weight:700;">' +
+            '<td colspan="6" style="text-align:right;">TỔNG CỘNG LÔ HÀNG NHẬP KHO (VND):</td>' +
+            '<td class="num">' + fmtInt(res.totTk1561) + '</td>' +
+            '<td class="num">' + fmtInt(res.totNonRefundTax) + '</td>' +
+            '<td class="num">' + fmtInt(res.effectivePoolTk1562) + '</td>' +
+            '<td class="num">' + fmtInt(res.totLandedCost) + '</td>' +
+            '<td colspan="2" style="text-align:center;">Biên gộp: ' + state.targetMargin + '%</td>' +
+          '</tr>';
+
+        document.getElementById('a4AmountInWords').textContent = readVndWords(res.totLandedCost);
+
+        /* 5. MISA / FAST Journal Entries */
+        const vatDebitAccount = state.vatMode === 'deductible' ? 'Nợ TK 1331 / Có TK 33312' : 'Nợ TK 1561 / Có TK 33312';
+        document.getElementById('journalEntriesTable').innerHTML =
+          '<thead><tr><th>Định khoản TT200</th><th>Diễn giải</th><th style="text-align:right;">Số tiền (VND)</th></tr></thead>' +
+          '<tbody>' +
+            '<tr><td><strong>Nợ 1561 / Có 331</strong></td><td>Giá mua hàng NK theo tỷ giá T/T</td><td class="num">' + fmtInt(res.totTk1561) + '</td></tr>' +
+            '<tr><td><strong>Nợ 1561 / Có 3333</strong></td><td>Thuế Nhập khẩu (+TTĐB) cộng giá vốn</td><td class="num">' + fmtInt(res.totImportDuty + res.totExciseTax) + '</td></tr>' +
+            '<tr><td><strong>Nợ 1562 / Có 331,112</strong></td><td>Phân bổ cước QT, Local Charges, kéo cont</td><td class="num">' + fmtInt(res.effectivePoolTk1562) + '</td></tr>' +
+            '<tr><td><strong>' + vatDebitAccount + '</strong></td><td>Thuế GTGT hàng nhập khẩu tờ khai HQ</td><td class="num">' + fmtInt(res.totImportVat) + '</td></tr>' +
+            '<tr style="background:#F0FDFA;"><td><strong>Tổng Giá Vốn TK 156</strong></td><td><strong>Giá trị nhập kho thực tế</strong></td><td class="num" style="color:var(--teal-800);">' + fmtInt(res.totLandedCost) + '</td></tr>' +
+          '</tbody>';
+
+        /* 6. Director Zalo / Email 1-Click Summary */
+        const topPreviewLines = res.rows.slice(0, 4).map(function (r) {
+          return '- ' + r.sku + ': Giá vốn ' + fmtInt(r.unitLandedVnd) + 'đ/' + r.unit + ' -> Giá sỉ tối thiểu (' + state.targetMargin + '%): ' + fmtInt(r.suggestedWholesaleVnd) + 'đ';
+        }).join('\n');
+
+        document.getElementById('directorZaloSummary').value =
+          '[BÁO CÁO GIÁ VỐN LÔ HÀNG NHẬP KHẨU - TỜ KHAI ' + state.customsNo + ']\n' +
+          '• Đơn vị: ' + state.importerName + '\n' +
+          '• Trị giá Invoice: ' + fmtDec(res.sumForeign, 2) + ' ' + cur + ' | Tỷ giá HQ: ' + fmtInt(state.customsRate) + ' | Tỷ giá T/T thực tế: ' + fmtInt(state.bankTtRate) + ' (Chênh lệch tỷ giá: ' + fxSign + fmtVnd(res.fxVarianceVnd) + ')\n' +
+          '• Thuế NK+TTĐB cộng giá vốn: ' + fmtVnd(res.totNonRefundTax) + ' | Phí cảng & Logistics (TK 1562): ' + fmtVnd(res.effectivePoolTk1562) + '\n' +
+          '• TỔNG GIÁ VỐN NHẬP KHO (TK 156): ' + fmtVnd(res.totLandedCost) + '\n' +
+          '• Đề xuất giá sỉ tối thiểu (biên gộp ' + state.targetMargin + '%):\n' + topPreviewLines;
+      }
+
+      /* =====================================================================
+       * 5. EVENT LISTENERS & CSV IMPORT / EXPORT
+       * ===================================================================== */
+      document.querySelectorAll('[data-preset]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const key = btn.getAttribute('data-preset');
+          if (!SHIPMENT_PRESETS[key]) return;
+          document.querySelectorAll('[data-preset]').forEach(function (b) { b.classList.remove('active-preset'); });
+          btn.classList.add('active-preset');
+          state = JSON.parse(JSON.stringify(SHIPMENT_PRESETS[key]));
+          syncInputsFromState();
+          renderAll();
+          showToast('Đã nạp dữ liệu lô hàng mẫu: ' + state.importerName);
+        });
+      });
+
+      const fieldBindings = [
+        ['importerNameInput', 'importerName', false],
+        ['importerMstInput', 'importerMst', false],
+        ['customsNoInput', 'customsNo', false],
+        ['invoiceNoInput', 'invoiceNo', false],
+        ['portNameInput', 'portName', false],
+        ['incotermSelect', 'incoterm', false],
+        ['vatModeSelect', 'vatMode', false],
+        ['currencySelect', 'currency', false],
+        ['supplierNameInput', 'supplierName', false],
+        ['customsRateInput', 'customsRate', true],
+        ['bankTtRateInput', 'bankTtRate', true],
+        ['intlFreightVndInput', 'intlFreightVnd', true],
+        ['insuranceVndInput', 'insuranceVnd', true],
+        ['localChargesVndInput', 'localChargesVnd', true],
+        ['portDemDetVndInput', 'portDemDetVnd', true],
+        ['inlandTruckingVndInput', 'inlandTruckingVnd', true]
+      ];
+
+      fieldBindings.forEach(function (cfg) {
+        const el = document.getElementById(cfg[0]);
+        const prop = cfg[1];
+        const isNum = cfg[2];
+        el.addEventListener('input', function () {
+          state[prop] = isNum ? (parseFloat(el.value) || 0) : el.value;
+          renderAll();
+        });
+        el.addEventListener('change', function () {
+          state[prop] = isNum ? (parseFloat(el.value) || 0) : el.value;
+          renderAll();
+        });
+      });
+
+      document.getElementById('allocBasisBar').addEventListener('click', function (e) {
+        const pill = e.target.closest('.alloc-pill');
+        if (!pill) return;
+        state.allocBasis = pill.getAttribute('data-basis');
+        syncInputsFromState();
+        renderAll();
+      });
+
+      document.getElementById('marginSelectorBar').addEventListener('click', function (e) {
+        const pill = e.target.closest('.margin-pill');
+        if (!pill) return;
+        state.targetMargin = Number(pill.getAttribute('data-margin')) || 30;
+        syncInputsFromState();
+        renderAll();
+      });
+
+      /* Inline Table Editing & Row Delete */
+      document.getElementById('skuTableBody').addEventListener('change', function (e) {
+        const input = e.target.closest('.cell-edit');
+        if (!input) return;
+        const tr = input.closest('tr');
+        const idx = Number(tr.getAttribute('data-idx'));
+        const field = input.getAttribute('data-field');
+        if (!state.items[idx]) return;
+        const numericFields = { qty: 1, unitForeign: 1, nkPct: 1, ttdbPct: 1, vatPct: 1, weightKg: 1, cbm: 1 };
+        state.items[idx][field] = numericFields[field] ? (parseFloat(input.value) || 0) : input.value;
+        renderAll();
+      });
+
+      document.getElementById('skuTableBody').addEventListener('click', function (e) {
+        const delBtn = e.target.closest('[data-del]');
+        if (!delBtn) return;
+        const idx = Number(delBtn.getAttribute('data-del'));
+        if (state.items.length <= 1) {
+          showToast('Cần giữ ít nhất 01 mã hàng trong lô nhập khẩu.');
+          return;
+        }
+        state.items.splice(idx, 1);
+        renderAll();
+      });
+
+      document.getElementById('addSkuRowBtn').addEventListener('click', function () {
+        state.items.push({
+          sku: 'SKU-NEW-' + (state.items.length + 1),
+          name: 'Mặt hàng nhập khẩu mới',
+          hs: '84798990',
+          unit: 'Cái',
+          qty: 10,
+          unitForeign: 100,
+          nkPct: 5,
+          ttdbPct: 0,
+          vatPct: 8,
+          weightKg: 50,
+          cbm: 0.25
+        });
+        renderAll();
+      });
+
+      /* CSV Import Drawer */
+      document.getElementById('toggleCsvDrawerBtn').addEventListener('click', function () {
+        document.getElementById('csvDrawer').classList.toggle('open');
+      });
+      document.getElementById('closeCsvDrawerBtn').addEventListener('click', function () {
+        document.getElementById('csvDrawer').classList.remove('open');
+      });
+
+      function parseDelimitedText(raw) {
+        const lines = String(raw || '').split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+        const parsed = [];
+        lines.forEach(function (line, i) {
+          const delim = line.indexOf('\t') !== -1 ? '\t' : (line.indexOf(';') !== -1 ? ';' : ',');
+          const cols = line.split(delim).map(function (c) { return c.replace(/^"|"$/g, '').trim(); });
+          if (cols.length < 6) return;
+          if (i === 0 && isNaN(parseFloat(cols[4]))) return;
+          parsed.push({
+            sku: cols[0] || ('SKU-' + (i + 1)),
+            name: cols[1] || 'Hàng nhập khẩu',
+            hs: cols[2] || '84798990',
+            unit: cols[3] || 'Cái',
+            qty: parseFloat(cols[4]) || 1,
+            unitForeign: parseFloat(cols[5]) || 0,
+            nkPct: parseFloat(cols[6]) || 0,
+            ttdbPct: parseFloat(cols[7]) || 0,
+            vatPct: cols[8] !== undefined && cols[8] !== '' ? (parseFloat(cols[8]) || 0) : 8,
+            weightKg: parseFloat(cols[9]) || 10,
+            cbm: parseFloat(cols[10]) || 0.1
+          });
+        });
+        return parsed;
+      }
+
+      document.getElementById('applyCsvImportBtn').addEventListener('click', function () {
+        const raw = document.getElementById('csvPasteArea').value;
+        const rows = parseDelimitedText(raw);
+        if (!rows.length) {
+          showToast('Chưa đọc được dòng hợp lệ — vui lòng kiểm tra thứ tự cột.');
+          return;
+        }
+        state.items = rows;
+        document.getElementById('csvDrawer').classList.remove('open');
+        renderAll();
+        showToast('Đã nạp thành công ' + rows.length + ' mã SKU từ bảng kê!');
+      });
+
+      document.getElementById('csvFileInput').addEventListener('change', function (e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (ev) {
+          document.getElementById('csvPasteArea').value = String(ev.target.result || '');
+          const rows = parseDelimitedText(ev.target.result || '');
+          if (rows.length) {
+            state.items = rows;
+            document.getElementById('csvDrawer').classList.remove('open');
+            renderAll();
+            showToast('Đã nạp file ' + file.name + ' (' + rows.length + ' mã SKU)!');
+          }
+        };
+        reader.readAsText(file, 'UTF-8');
+      });
+
+      /* Export UTF-8 BOM CSV for MISA / FAST */
+      document.getElementById('exportMisaCsvBtn').addEventListener('click', function () {
+        const res = computeShipment();
+        const header = [
+          'So_To_Khai_HQ', 'Ma_SKU', 'Ten_Hang_Hoa', 'Ma_HS', 'DVT', 'So_Luong',
+          'Ngoai_Te', 'Don_Gia_NT', 'Ty_Gia_HQ', 'Ty_Gia_TT_NganHang',
+          'Gia_Mua_TK1561_VND', 'Thue_NK_TK3333_VND', 'Thue_TTDB_TK3332_VND',
+          'Thue_GTGT_NK_TK33312_VND', 'Phi_Thu_Mua_TK1562_VND',
+          'Tong_Gia_Von_TK156_VND', 'Gia_Von_1_DVT_VND', 'Gia_Ban_Si_De_Xuat_VND'
+        ];
+        const lines = [header.join(',')];
+        res.rows.forEach(function (r) {
+          lines.push([
+            '"' + state.customsNo + '"',
+            '"' + r.sku.replace(/"/g, '""') + '"',
+            '"' + r.name.replace(/"/g, '""') + '"',
+            '"' + r.hs + '"',
+            '"' + r.unit + '"',
+            r.qty,
+            state.currency,
+            r.unitForeign,
+            state.customsRate,
+            state.bankTtRate,
+            r.linePurchaseTtVnd,
+            r.importDutyVnd,
+            r.exciseTaxVnd,
+            r.importVatVnd,
+            r.allocLogisticsVnd,
+            r.lineLandedVnd,
+            r.unitLandedVnd,
+            r.suggestedWholesaleVnd
+          ].join(','));
+        });
+        const csvContent = '\uFEFF' + lines.join('\r\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Phieu_Gia_Von_Nhap_Khau_' + state.customsNo + '.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Đã xuất file CSV hạch toán MISA/FAST chuẩn UTF-8 BOM!');
+      });
+
+      document.getElementById('printA4VoucherBtn').addEventListener('click', function () {
+        window.print();
+      });
+
+      document.getElementById('copyDirectorSummaryBtn').addEventListener('click', function () {
+        const txt = document.getElementById('directorZaloSummary').value;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(function () {
+            showToast('Đã sao chép Báo cáo Giá vốn & Giá sỉ gửi Giám đốc!');
+          });
+        } else {
+          const area = document.getElementById('directorZaloSummary');
+          area.select();
+          document.execCommand('copy');
+          showToast('Đã sao chép Báo cáo Giá vốn & Giá sỉ gửi Giám đốc!');
+        }
+      });
+
+      /* URL Query Personalization Support (?company=...&mst=...) */
+      (function applyUrlParams() {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get('company')) state.importerName = params.get('company');
+          if (params.get('mst')) state.importerMst = params.get('mst');
+          if (params.get('currency') && ['USD', 'CNY', 'EUR', 'JPY'].indexOf(params.get('currency').toUpperCase()) !== -1) {
+            state.currency = params.get('currency').toUpperCase();
+          }
+        } catch (err) {
+          /* ignore */
+        }
+      })();
+
+      syncInputsFromState();
+      renderAll();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ Thống Tính Hoa Hồng Bác Sĩ / Tư Vấn (Trừ Labo &amp; Phí POS) &amp; Theo Dõi Đợt Thu Trả Góp 2026 — Offline 100%</title>
+  <style>
+    :root {
+      --teal-950: #042F2E;
+      --teal-900: #064E3B;
+      --teal-800: #065F46;
+      --teal-700: #047857;
+      --teal-600: #0D9488;
+      --teal-100: #CCFBF1;
+      --teal-50: #F0FDFA;
+      --navy-950: #0B1528;
+      --navy-900: #112240;
+      --navy-800: #1E3A6D;
+      --gold-700: #92600A;
+      --gold-600: #B47814;
+      --gold-500: #D49A2A;
+      --gold-100: #FEF7E6;
+      --crimson-700: #B91C1C;
+      --crimson-600: #DC2626;
+      --crimson-50: #FEF2F2;
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50: #F8FAFC;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #EDF2F7;
+      color: var(--slate-900);
+      line-height: 1.48;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Header */
+    .app-header {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--teal-900) 65%, #0B5246 100%);
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--gold-500);
+      padding: 14px 24px;
+      box-shadow: 0 8px 24px rgba(4, 47, 46, 0.2);
+    }
+
+    .header-inner {
+      max-width: 1520px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #F5D07A, #C2881E);
+      color: var(--navy-950);
+      font-weight: 900;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: #CCFBF1;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .offline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.18);
+      border: 1px solid rgba(110, 231, 183, 0.45);
+      color: #A7F3D0;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+
+    .dot-live {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34D399;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: 7px;
+      font-size: 12.2px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      font-family: var(--font-sans);
+      transition: all 0.15s ease;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #F5D07A 0%, #CFA349 100%);
+      color: var(--navy-950);
+      border-color: #EAB308;
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.04);
+    }
+
+    .btn-teal {
+      background: var(--teal-800);
+      color: #FFFFFF;
+      border-color: var(--teal-900);
+    }
+
+    .btn-teal:hover {
+      background: var(--teal-700);
+    }
+
+    .btn-ghost-light {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-ghost-light:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      color: var(--slate-800);
+      border-color: var(--slate-300);
+    }
+
+    .btn-outline:hover {
+      background: var(--slate-50);
+      border-color: var(--slate-400);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1520px;
+      margin: 18px auto 40px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Top Control & Organization Bar */
+    .control-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      padding: 15px 18px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+
+    .preset-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .preset-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--slate-300);
+      background: var(--slate-50);
+      color: var(--slate-700);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .preset-pill.active {
+      background: var(--teal-900);
+      color: #FDE68A;
+      border-color: var(--teal-900);
+    }
+
+    .org-config-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 0.8fr 0.85fr 0.9fr 1fr 1.1fr 1.15fr;
+      gap: 10px;
+      align-items: end;
+    }
+
+    @media (max-width: 1280px) {
+      .org-config-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--slate-600);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 7px 9px;
+      border: 1px solid var(--slate-300);
+      border-radius: 6px;
+      font-size: 12.2px;
+      font-family: var(--font-sans);
+      color: var(--slate-900);
+      background: #FFFFFF;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--teal-700);
+      box-shadow: 0 0 0 2px rgba(4, 120, 87, 0.14);
+    }
+
+    /* 6-KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 1240px) {
+      .kpi-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .kpi-box {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-top: 3px solid var(--navy-800);
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+
+    .kpi-box.emerald {
+      border-top-color: var(--teal-700);
+      background: #F7FEFC;
+    }
+
+    .kpi-box.deduct {
+      border-top-color: var(--crimson-600);
+      background: #FFF9F9;
+    }
+
+    .kpi-box.gold {
+      border-top-color: var(--gold-600);
+      background: #FFFDF6;
+    }
+
+    .kpi-lbl {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--slate-600);
+      letter-spacing: 0.02em;
+    }
+
+    .kpi-val {
+      font-size: 18.5px;
+      font-weight: 900;
+      color: var(--slate-900);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-box.emerald .kpi-val {
+      color: var(--teal-900);
+    }
+
+    .kpi-box.deduct .kpi-val {
+      color: var(--crimson-700);
+    }
+
+    .kpi-box.gold .kpi-val {
+      color: var(--gold-700);
+    }
+
+    .kpi-note {
+      font-size: 11px;
+      color: var(--slate-500);
+      margin-top: 3px;
+    }
+
+    /* Ledger Table Card */
+    .ledger-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .ledger-toolbar {
+      padding: 12px 16px;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ledger-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--navy-950);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table.comm-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.4px;
+    }
+
+    table.comm-table th {
+      background: var(--navy-950);
+      color: #F8FAFC;
+      font-weight: 700;
+      padding: 8px 6px;
+      border: 1px solid #1E293B;
+      text-align: left;
+      font-size: 10.6px;
+      line-height: 1.28;
+      text-transform: uppercase;
+    }
+
+    table.comm-table th.sub-deduct {
+      background: #581C1C;
+      color: #FECACA;
+    }
+
+    table.comm-table th.sub-net {
+      background: var(--teal-900);
+      color: #CCFBF1;
+    }
+
+    table.comm-table th.sub-comm {
+      background: #4A3508;
+      color: #FDE68A;
+    }
+
+    table.comm-table td {
+      padding: 6px 6px;
+      border: 1px solid var(--slate-200);
+      vertical-align: middle;
+    }
+
+    table.comm-table tbody tr:nth-child(even) td {
+      background: #FAFBFD;
+    }
+
+    table.comm-table tbody tr:hover td {
+      background: #F0FDFA;
+    }
+
+    table.comm-table tfoot td {
+      background: var(--gold-100);
+      font-weight: 900;
+      border-top: 2px solid var(--gold-600);
+      color: var(--navy-950);
+      padding: 8px 6px;
+    }
+
+    .right {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .badge-method {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .badge-method.pos {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .badge-method.installment {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+
+    .debt-tag {
+      color: var(--crimson-700);
+      font-weight: 800;
+    }
+
+    .paid-done {
+      color: var(--teal-800);
+      font-weight: 700;
+    }
+
+    .row-action-btn {
+      padding: 3px 7px;
+      border-radius: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      border: 1px solid var(--teal-700);
+      background: var(--teal-50);
+      color: var(--teal-900);
+      cursor: pointer;
+    }
+
+    .row-action-btn:hover {
+      background: var(--teal-700);
+      color: #FFFFFF;
+    }
+
+    /* Quick Add Case Drawer */
+    .quick-add-bar {
+      padding: 12px 16px;
+      background: #F8FAFC;
+      border-top: 1px solid var(--slate-200);
+      display: none;
+    }
+
+    .quick-add-bar.open {
+      display: block;
+    }
+
+    .quick-add-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      align-items: end;
+    }
+
+    /* Bottom Dual Workstation Grid: Staff Commission Summary + Official Printable A4 Sheet */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 420px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 1180px) {
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .side-box {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      padding: 15px 16px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .staff-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.8px;
+    }
+
+    .staff-summary-table th {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-size: 10.8px;
+      text-transform: uppercase;
+      padding: 6px 8px;
+      text-align: left;
+      border-bottom: 1.5px solid var(--slate-300);
+    }
+
+    .staff-summary-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .staff-row-click {
+      cursor: pointer;
+    }
+
+    .staff-row-click:hover td,
+    .staff-row-click.active td {
+      background: var(--teal-50);
+    }
+
+    .role-pill {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      background: var(--slate-200);
+      color: var(--slate-800);
+    }
+
+    /* Printable A4 Switcher & Sheet */
+    .a4-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 11px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .a4-mode-tabs {
+      background: var(--navy-950);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .a4-tab-btn {
+      padding: 7px 13px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+      color: #CBD5E1;
+      cursor: pointer;
+    }
+
+    .a4-tab-btn.active {
+      background: var(--gold-500);
+      color: var(--navy-950);
+      border-color: var(--gold-500);
+    }
+
+    .a4-filter-bar {
+      padding: 10px 18px;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .a4-paper {
+      padding: 28px 34px 32px;
+      background: #FFFFFF;
+      color: #111827;
+    }
+
+    .a4-head-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--teal-900);
+    }
+
+    .a4-org-name {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--teal-900);
+      text-transform: uppercase;
+    }
+
+    .a4-org-meta {
+      font-size: 11.4px;
+      color: var(--slate-600);
+      margin-top: 2px;
+    }
+
+    .a4-motto {
+      text-align: center;
+      font-size: 11.5px;
+    }
+
+    .a4-doc-title {
+      text-align: center;
+      margin: 15px 0 12px;
+    }
+
+    .a4-doc-title h2 {
+      font-size: 16.5px;
+      font-weight: 900;
+      color: var(--navy-950);
+      text-transform: uppercase;
+      letter-spacing: 0.015em;
+    }
+
+    .a4-doc-title p {
+      font-size: 11.8px;
+      color: var(--slate-600);
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    .a4-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.4px;
+      margin-top: 10px;
+    }
+
+    .a4-table th {
+      background: var(--teal-900);
+      color: #FFFFFF;
+      padding: 6px 8px;
+      border: 1px solid var(--teal-900);
+      text-align: left;
+      font-size: 10.8px;
+      text-transform: uppercase;
+    }
+
+    .a4-table td {
+      padding: 6px 8px;
+      border: 1px solid var(--slate-300);
+    }
+
+    .a4-table tfoot td {
+      background: var(--gold-100);
+      font-weight: 900;
+      border-top: 2px solid var(--gold-600);
+    }
+
+    .words-banner {
+      margin-top: 8px;
+      padding: 7px 11px;
+      background: #F8FAFC;
+      border: 1px dashed var(--slate-300);
+      border-radius: 5px;
+      font-size: 11.6px;
+    }
+
+    .sig-3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+      text-align: center;
+      font-size: 11.5px;
+    }
+
+    .sig-stamp {
+      display: inline-block;
+      margin: 12px auto 6px;
+      padding: 4px 11px;
+      border: 2px solid var(--crimson-700);
+      color: var(--crimson-700);
+      font-size: 10px;
+      font-weight: 900;
+      border-radius: 4px;
+      transform: rotate(-2deg);
+      background: var(--crimson-50);
+    }
+
+    /* Installment VietQR Notice Layout */
+    .installment-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 16px;
+      margin-top: 12px;
+      align-items: stretch;
+    }
+
+    .inst-info-box {
+      border: 1px solid var(--slate-300);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .inst-qr-box {
+      border: 1.5px solid var(--teal-700);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--teal-50);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .demo-lock-banner {
+      border: 1.5px dashed var(--crimson-600);
+      background: var(--crimson-50);
+      color: var(--crimson-700);
+      border-radius: 7px;
+      padding: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.42;
+      width: 100%;
+    }
+
+    .live-client-qr {
+      width: 156px;
+      height: 156px;
+      padding: 5px;
+      background: #FFFFFF;
+      border: 1px solid var(--slate-300);
+      border-radius: 6px;
+      display: none;
+    }
+
+    .live-client-qr svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .zalo-script-box {
+      margin-top: 12px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-300);
+      border-radius: 7px;
+      padding: 10px 12px;
+      font-size: 11.8px;
+      color: var(--slate-800);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--navy-950);
+      color: #A7F3D0;
+      border: 1px solid var(--teal-600);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 10mm 11mm;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF !important;
+      }
+      .no-print,
+      .app-header,
+      .control-card,
+      .kpi-grid,
+      .ledger-card,
+      .side-box,
+      .a4-mode-tabs,
+      .a4-filter-bar,
+      .zalo-script-box,
+      .toast {
+        display: none !important;
+      }
+      .container,
+      .bottom-grid {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .a4-panel {
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .a4-paper {
+        padding: 0 !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+<style id="paper-workbench">
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+/* Paper workbench: shared visual system, embedded into each standalone file. */
+:root { --paper:#f7f7f2; --surface:#fff; --ink:#252722; --muted:#64685f; --rule:#dcded5; --accent:#aa460e; --signal:#fff3e9; }
+html, body { background:var(--paper) !important; color:var(--ink) !important; font-family:'Work Sans' !important; font-size:14px; }
+body * { font-family:inherit !important; color:inherit !important; border-color:var(--rule) !important; box-shadow:none !important; text-shadow:none !important; background-image:none !important; text-transform:none !important; letter-spacing:normal !important; }
+body :is(div,section,aside,header,span,th,td,label,p,strong,b,footer,a,button) { background-color:transparent !important; }
+body :is(input,select,textarea,button) { font-family:'Work Sans' !important; }
+body :is(.num,code,.qr-memo-tag,.kpi-val,.grand-number,.tier-rate,input[inputmode=numeric],input[type=number]) { font-family:'JetBrains Mono' !important; font-variant-numeric:tabular-nums; }
+body :is(.topbar,.luxury-topbar,.app-header) { position:static; padding:0 24px; background:var(--surface) !important; border-bottom:1px solid var(--rule); }
+body :is(.topbar-inner,.header-inner) { max-width:1500px; padding:16px 0; gap:12px 24px; }
+body .brand-title { font-size:19px; line-height:1.35; font-weight:700; }
+body :is(.brand-sub,.brand-subtitle) { font-size:12px; color:var(--muted) !important; margin-top:5px; max-width:85ch; }
+body :is(.brand-mark,.brand-shield,.brand-icon,.brand-crest,.brand-kicker,.offline-badge,.pulse-dot,.dot-live,.card-tag,.panel-icon,.contact-chip,.trust-pill.emerald,.guard-kicker,.eq-bars,#audioLatencyTag) { display:none; }
+body .luxury-topbar::before { display:none; }
+body :is(.trust-pill,.panel-badge,.napas-badge,.policy-note-badge,.free-laser-badge) { padding:0; border:0; border-radius:0; font-weight:400; font-size:12px; color:var(--muted) !important; }
+body :is(.workspace,.container) { max-width:1500px; }
+body :is(.card,.panel,.panel-card,.control-card,.ledger-card,.side-box,.tier-ladder-card) { background:var(--surface) !important; border:0; border-radius:6px; overflow:hidden; }
+body :is(.card-header,.panel-head,.panel-header,.ledger-toolbar) { background:transparent !important; border-bottom:1px solid var(--rule); padding:18px 20px; gap:12px; }
+body :is(.card-title,.panel-title,.ledger-title,.tier-ladder-title) { font-size:15px; font-weight:700; line-height:1.5; }
+body .card-title-wrap > svg { display:none; }
+body :is(.card-body,.panel-body) { padding:20px; }
+body :is(.field label,.preset-label,.kpi-label,.kpi-lbl) { font-size:12px; font-weight:400; color:var(--muted) !important; line-height:1.5; }
+body :is(input,select,textarea) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule); border-radius:4px !important; font-size:13px; font-weight:400; accent-color:var(--accent) !important; }
+body .field :is(input,select) { min-height:38px; padding:8px 10px; }
+body :is(input,select,textarea,button,a):focus-visible { outline:2px solid var(--accent) !important; outline-offset:3px; }
+body :is(button,.btn,.btn-config-toggle,.btn-primary-print,.btn-zalo-copy,.btn-outline-soft) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule) !important; border-radius:4px; font-weight:700; font-size:12px; line-height:1.4; padding:8px 12px; transform:none !important; }
+body button:hover,body a.btn:hover { background:#f0f1eb !important; }
+body :is(.btn-primary-print,#btnPrintA4,#btnPrintA4Top,#btnSimulateRealTx) { background:var(--accent) !important; color:#fff !important; border-color:var(--accent) !important; }
+body :is(.preset-btn,.preset-pill,.bucket-pill,.dep-tab,.a4-tab-btn,.zalo-tab) { border-radius:4px; font-size:12px; padding:7px 10px; }
+body :is(.preset-btn.active,.preset-pill.active,.bucket-pill.active,.dep-tab.active,.a4-tab-btn.active,.zalo-tab.active-l1,.zalo-tab.active-l2,.zalo-tab.active-l3) { background:#eaece4 !important; border-color:#7c8175 !important; color:var(--ink) !important; }
+body :is(.kpi-box,.kpi-card) { background:transparent !important; border:0; border-left:1px solid var(--rule); padding:10px 18px; border-radius:0; }
+body :is(.kpi-box,.kpi-card):first-child { border-left:0; }
+body .kpi-grid { gap:0; padding:12px 0; }
+body .kpi-val { font-size:20px; font-weight:400; margin:8px 0; }
+body :is(.kpi-meta,.kpi-note,.panel-subtitle,.helper-note) { color:var(--muted) !important; font-size:12px; line-height:1.6; }
+body :is(.table-wrap,.table-scroll,.catalog-table-wrap) { border-radius:0; border:0; overflow-x:auto; }
+body table { border-collapse:collapse; }
+body :is(thead th,table.comm-table th,.a4-table th,.staff-summary-table th) { background:#eff0e9 !important; color:var(--ink) !important; font-weight:700; line-height:1.45; }
+body :is(tbody td,table.comm-table td,.staff-summary-table td) { border-left:0; border-right:0; border-bottom:1px solid var(--rule); line-height:1.5; }
+body tbody tr:hover td { background:#f7f7f2 !important; }
+body :is(tfoot td,.a4-grand-row td) { background:#eff0e9 !important; border-top:1px solid #858a7d !important; }
+body :is(.status-badge,.badge-method,.role-pill,.debt-tag,.paid-done) { border:0; background:transparent !important; border-radius:0; padding:2px 0; font-size:11px; }
+body :is(.a4-shell,.a4-preview-wrapper,.a4-panel) { background:#eceee6 !important; border:0; border-radius:4px; }
+body :is(.a4-sheet,.a4-paper) { background:#fff !important; font-family:'Work Sans' !important; border:1px solid var(--rule); border-radius:0; }
+body :is(.a4-mode-tabs,.a4-filter-bar,.a4-toolbar) { background:transparent !important; padding:14px; gap:10px; }
+body :is(.standee-wrap,.soundbox-panel,.deposit-card,.qr-standee-grid,.grand-total-box) { background:#f3f4ee !important; border:1px solid var(--rule); border-radius:4px; }
+body :is(.qr-paper,.qr-frame,.qr-svg-box) { background:#fff !important; border-radius:2px; }
+body :is(.standee-shop,.qr-bank-line,.qr-amount-display,.grand-number) { color:var(--ink) !important; }
+body :is(.qr-memo-pill,.qr-memo-tag,.emv-inspector,.voice-transcript) { background:transparent !important; border:0; color:var(--muted) !important; border-radius:0; }
+body .guard-banner { background:var(--signal) !important; border:0; border-left:3px solid var(--accent) !important; border-radius:4px; padding:20px; }
+body .guard-headline { font-size:16px; font-weight:700; line-height:1.5; }
+body .guard-desc { font-size:13px; line-height:1.7; margin-top:8px; }
+body .guard-icon-box { display:none; }
+body .guard-badge-big { font-size:11px; white-space:normal; padding:0; border:0; min-width:85px; color:var(--accent) !important; }
+body .guard-banner.confirmed { background:#f3f4ee !important; border-left-color:var(--ink) !important; }
+body :is(.soundbox-top,.speaker-status) { gap:12px; }
+body .soundbox-top { align-items:flex-start; }
+body .soundbox-panel { padding:16px; }
+body .voice-transcript { padding:12px 0 0; font-size:13px; }
+body .tier-ladder-card { padding:20px; }
+body .tier-step { background:transparent !important; border:0; border-left:1px solid var(--rule); border-radius:0; padding:12px 16px; }
+body .tier-step.active { background:#eff0e9 !important; }
+body .tier-rate { font-size:22px; font-weight:400; }
+body :is(.tier-active-tag,.upsell-nudge) { background:transparent !important; color:var(--muted) !important; border:0; border-radius:0; }
+body .grand-total-box { padding:20px; }
+body .grand-label { font-size:13px; }
+body .grand-number { font-size:24px; }
+body :is(.demo-lock-banner,.demo-acc-warning,.a4-qr-lock-box) { background:var(--signal) !important; color:var(--accent) !important; border:1px solid var(--rule); font-weight:400; }
+body :is(.red-audit-stamp,.corporate-red-seal,.sig-stamp) { color:var(--ink) !important; border-color:var(--ink) !important; }
+body .modal-backdrop { background:rgba(37,39,34,.4) !important; }
+body .modal-card { background:#fff !important; }
+body :is(.toast,.copy-toast,.toast-banner) { background:var(--ink) !important; color:#fff !important; }
+body .btn svg { stroke:currentColor; }
+@media screen and (min-width:1101px) {
+ body.ar .workspace { grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); }
+ body.cashier .workspace { grid-template-columns:440px minmax(0,1fr); }
+ body.clinic .brand-title { font-size:17px; }
+}
+@media screen {
+ body :is(.panel,.card,.left-column,.main-grid>*,.bottom-grid>*,.a4-shell,.brand-group,.brand-left) { min-width:0; }
+ body .comm-table { min-width:1450px; }
+ body .comm-table td { padding:12px 9px; font-size:12px; }
+ body .comm-table th { font-size:11px; padding:12px 9px; }
+ body .staff-summary-table td { padding:12px 6px; }
+ body.clinic .org-config-grid { grid-template-columns:2fr 1fr 1fr 1fr; gap:16px; }
+ body .a4-doc-title h1 { font-size:19px; }
+ body .brand-sub,body .brand-subtitle { display:none; }
+ body .toolbar-actions,body .header-actions { gap:8px; }
+ body.ar .brand-title { font-size:17px; }
+ body.ar .topbar-inner { gap:12px; }
+ body :is(.a4-sheet,.a4-paper) { overflow-wrap:anywhere; }
+}
+@media screen and (max-width:760px) {
+ body :is(.topbar,.luxury-topbar,.app-header) { padding:0 16px; }
+ body .brand-title { font-size:17px; }
+ body :is(.workspace,.container) { padding-left:12px; padding-right:12px; }
+ body :is(.form-grid-3,.org-config-grid,.quick-add-grid,.bottom-grid,.main-grid,.workspace,.webhook-grid) { grid-template-columns:minmax(0,1fr) !important; }
+ body :is(.kpi-grid,.tier-steps-grid) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ body :is(.header-actions,.toolbar-actions,.topbar-meta,.preset-group,.preset-strip,.a4-toolbar,.ledger-toolbar,.soundbox-top) { flex-wrap:wrap; }
+ body .brand-group,body .brand-left { max-width:100%; }
+ body :is(.panel-head,.card-header) { flex-wrap:wrap; }
+ body .field { min-width:0; }
+ body .field :is(input,select,textarea) { max-width:100%; }
+ body :is(.a4-sheet,.a4-paper) { padding:18px 12px; }
+ body .guard-banner { flex-direction:column; align-items:flex-start; }
+ body .a4-shell { overflow-x:auto; }
+ body .a4-sheet { min-width:560px; }
+ body .kpi-val { font-size:17px; }
+}
+@media print {
+ html,body { background:#fff !important; }
+ body :is(.a4-sheet,.a4-paper,.standee-wrap,.qr-paper) { background:#fff !important; color:#000 !important; box-shadow:none !important; }
+ body :is(.a4-sheet,.a4-paper) { font-family:'Work Sans' !important; font-size:10px; line-height:1.35; }
+ body :is(th,td) { font-size:9px; }
+ body .a4-sheet { border-color:#888 !important; }
+ body .a4-doc-title h1 { font-size:17px; }
+ body .a4-doc-title h2 { font-size:17px; }
+}
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+/* Final review adjustments. */
+body.cashier { --accent:#176447; --signal:#edf5ef; }
+body.cashier .guard-banner.pending,body.cashier .guard-banner.mismatch { background:#efefea !important; border-left-color:#252722 !important; }
+body.cashier .guard-banner.confirmed { background:#edf5ef !important; border-left-color:var(--accent) !important; }
+body.cashier .guard-banner.confirmed .guard-headline { color:var(--accent) !important; }
+body.cashier input.amount-input { background:#fff !important; color:var(--ink) !important; border-color:var(--rule) !important; }
+body .tier-step.current { background:#eff0e9 !important; border-bottom:2px solid #64685f !important; }
+body table tbody tr { background:transparent !important; }
+body table tbody tr.selected { background:#eff0e9 !important; }
+body .tier-ladder-title svg { display:none; }
+body .sample-note { font-size:12px; color:var(--muted) !important; margin:0 0 8px; }
+body .kpi-note,body .kpi-meta { font-weight:400; }
+body .aging-table td.num { white-space:nowrap; }
+body .status-badge { border:0 !important; }
+body .field :is(input,select,textarea) { font-weight:400; }
+body .kpi-val { white-space:nowrap; }
+body.wholesale .brand-title { text-transform:lowercase !important; }
+body.wholesale .brand-title::first-letter { text-transform:uppercase !important; }
+@media screen and (max-width:760px) {
+ body.clinic .preset-strip>div { max-width:100%; flex-wrap:wrap; }
+ body.clinic .preset-strip select { width:100%; min-width:0; }
+ body :is(.a4-filter-bar,.a4-mode-tabs,.tab-btn-group) { flex-wrap:wrap; max-width:100%; }
+ body .a4-filter-bar select { max-width:100%; }
+ body .sample-note { margin-top:8px; }
+}
+@media print {
+ body .sample-note { display:none !important; }
+ body.cashier .workspace { max-width:420px !important; padding:0 !important; }
+ body :is(.a4-sheet,.a4-paper) { font-size:12px; }
+ body :is(th,td) { font-size:11px; }
+}
+@media print {
+ body.clinic .a4-table { table-layout:fixed; width:100%; }
+ body.clinic .a4-table th:nth-child(1) { width:4%; }
+ body.clinic .a4-table th:nth-child(2) { width:7%; }
+ body.clinic .a4-table th:nth-child(3) { width:23%; }
+ body.clinic .a4-table th:nth-child(8) { width:6%; }
+ body.clinic .a4-table th:nth-child(4),body.clinic .a4-table th:nth-child(5),body.clinic .a4-table th:nth-child(6),body.clinic .a4-table th:nth-child(7),body.clinic .a4-table th:nth-child(9) { width:12%; }
+ body.clinic .a4-table :is(th,td) { padding:8px 4px; font-size:10px; }
+}
+</style>
+</head>
+<body class="clinic">
+
+  <!-- Header -->
+  <header class="app-header no-print">
+    <div class="header-inner">
+      <div class="brand-left">
+        <div class="brand-icon">MED</div>
+        <div>
+          <div class="brand-title">Hoa hồng &amp; thu trả góp phòng khám / học viện</div>
+          <div class="brand-sub">Chuyên dụng cho Phòng Khám Nha Khoa - Da Liễu - Vật Lý Trị Liệu &amp; Học Viện Ngoại Ngữ • Tổng hợp lương và hoa hồng cuối tháng</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="offline-badge">
+          <span class="dot-live"></span>
+          <span>Làm việc offline trên trình duyệt</span>
+        </div>
+        <button type="button" class="btn btn-ghost-light" id="btnExportCsv">
+          Xuất bảng lương &amp; Hoa hồng (.CSV)
+        </button>
+        <button type="button" class="btn btn-gold" id="btnPrintA4Top">
+          In phiếu xác nhận A4 (Ctrl+P)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <p class="sample-note">Dữ liệu mẫu • Phòng khám, khách hàng và nhân sự minh họa.</p>
+<!-- 1. Industry Preset & Clinic/Academy Config -->
+    <section class="control-card no-print">
+      <div class="preset-strip">
+        <div class="preset-group" id="industryPresetGroup">
+          <span style="font-size:12px; font-weight:800; color:var(--navy-950);">Chọn mô hình dữ liệu mẫu:</span>
+          <button type="button" class="preset-pill active" data-preset="dental">
+            Phòng khám nha khoa kỹ thuật cao (implant / invisalign / sứ Labo)
+          </button>
+          <button type="button" class="preset-pill" data-preset="academy">
+            Trung tâm ngoại ngữ &amp; Luyện thi IELTS (trừ giáo trình &amp; Phí trả góp thẻ)
+          </button>
+        </div>
+
+        <div style="display:flex; gap:8px; align-items:center;">
+          <label for="laboRuleSelect" style="font-size:11.5px; font-weight:700; color:var(--slate-700);">Quy tắc khấu trừ Labo / giáo trình:</label>
+          <select id="laboRuleSelect" style="padding:5px 9px; border-radius:6px; border:1px solid var(--slate-300); font-size:12px; font-weight:700;">
+            <option value="prorata" selected>Phân bổ theo tỷ lệ Thực thu / Tổng phác đồ (Chuẩn công bằng trả góp)</option>
+            <option value="upfront">Khấu trừ 100% chi phí Labo ngay trong kỳ thu hiện tại</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="org-config-grid">
+        <div class="field">
+          <label for="orgNameInput">Tên phòng khám / học viện (in trên phiếu A4)</label>
+          <input type="text" id="orgNameInput" value="NHA KHOA MẪU A" />
+        </div>
+        <div class="field">
+          <label for="orgMstInput">Mã số thuế</label>
+          <input type="text" id="orgMstInput" value="0100000007" />
+        </div>
+        <div class="field">
+          <label for="orgPhoneInput">Hotline / Zalo lễ tân</label>
+          <input type="text" id="orgPhoneInput" value="0900 000 000" />
+        </div>
+        <div class="field">
+          <label for="periodInput">Kỳ chốt hoa hồng</label>
+          <input type="text" id="periodInput" value="Tháng 10/2026 (31/10)" />
+        </div>
+        <div class="field">
+          <label for="orgBankSelect">Ngân hàng nhận đợt thu</label>
+          <select id="orgBankSelect">
+            <option value="970422" selected>MB Bank (970422)</option>
+            <option value="970436">Vietcombank (970436)</option>
+            <option value="970407">Techcombank (970407)</option>
+            <option value="970416">ACB (970416)</option>
+            <option value="970415">VietinBank (970415)</option>
+            <option value="970418">BIDV (970418)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="orgAccInput">STK phòng khám (nhập để bật QR)</label>
+          <input type="text" id="orgAccInput" class="num" value="0000000000" placeholder="Nhập STK thật..." />
+        </div>
+        <div class="field">
+          <label for="orgHolderInput">Chủ tài khoản thụ hưởng</label>
+          <input type="text" id="orgHolderInput" value="CONG TY TNHH NHA KHOA MAU A" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 6-KPI Executive Summary -->
+    <section class="kpi-grid no-print">
+      <div class="kpi-box">
+        <div class="kpi-lbl">Tổng giá trị phác đồ / khóa học</div>
+        <div class="kpi-val" id="kpiTotalContract">0 đ</div>
+        <div class="kpi-note" id="kpiCaseCountNote">0 hồ sơ đang theo dõi</div>
+      </div>
+
+      <div class="kpi-box emerald">
+        <div class="kpi-lbl">Thực thu trong kỳ (tháng 10)</div>
+        <div class="kpi-val" id="kpiCollectedPeriod">0 đ</div>
+        <div class="kpi-note">Chỉ tính hoa hồng trên tiền đã thu thực tế</div>
+      </div>
+
+      <div class="kpi-box deduct">
+        <div class="kpi-lbl">Khấu trừ Labo + phí POS trả góp</div>
+        <div class="kpi-val" id="kpiTotalDeductions">0 đ</div>
+        <div class="kpi-note" id="kpiDeductBreakdown">Labo: 0 đ • POS: 0 đ</div>
+      </div>
+
+      <div class="kpi-box emerald">
+        <div class="kpi-lbl">Doanh thu ròng tính hoa hồng</div>
+        <div class="kpi-val" id="kpiNetCommissionBase">0 đ</div>
+        <div class="kpi-note">Thực thu kỳ này trừ Labo &amp; phí quẹt thẻ</div>
+      </div>
+
+      <div class="kpi-box gold">
+        <div class="kpi-lbl">Tổng quỹ hoa hồng chi trả kỳ này</div>
+        <div class="kpi-val" id="kpiTotalCommission">0 đ</div>
+        <div class="kpi-note" id="kpiCommRatioNote">Bác sĩ + Phụ tá + Tư vấn + MKT</div>
+      </div>
+
+      <div class="kpi-box deduct">
+        <div class="kpi-lbl">Dư nợ đợt điều trị / học phí còn thu</div>
+        <div class="kpi-val" id="kpiRemainingInstallments">0 đ</div>
+        <div class="kpi-note" id="kpiInstallmentCountNote">0 khách có lịch đóng đợt kế tiếp</div>
+      </div>
+    </section>
+
+    <!-- 3. Detailed Commission & Installment Ledger -->
+    <section class="ledger-card no-print">
+      <div class="ledger-toolbar">
+        <div>
+          <div class="ledger-title">Sổ chi tiết phân bổ hoa hồng thực thu &amp; Theo dõi đợt trả góp ca điều trị / khóa học</div>
+          <div style="font-size:11.5px; color:var(--slate-500);">
+            Bấm nút <strong>[Phiếu Nhắc Đợt QR]</strong> ở từng dòng để xuất thông báo đóng tiền đợt tiếp theo kèm mã VietQR nội bộ
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-outline" id="btnToggleAddRow">
+            + Thêm ca điều trị / học viên mới
+          </button>
+          <button type="button" class="btn btn-teal" id="btnPasteSampleTsv">
+            Nạp dữ liệu chốt sổ cuối tháng mẫu
+          </button>
+        </div>
+      </div>
+
+      <!-- Collapsible Quick-Add Row -->
+      <div class="quick-add-bar" id="quickAddBar">
+        <div class="quick-add-grid">
+          <div class="field">
+            <label for="addCode">Mã hồ sơ</label>
+            <input type="text" id="addCode" value="NK-1027" />
+          </div>
+          <div class="field">
+            <label for="addCustomer">Họ tên khách / học viên</label>
+            <input type="text" id="addCustomer" placeholder="VD: Nguyễn Thu Hà" />
+          </div>
+          <div class="field">
+            <label for="addService">Dịch vụ / khóa học</label>
+            <input type="text" id="addService" placeholder="VD: Cấy 2 trụ Implant Hàn Quốc" />
+          </div>
+          <div class="field">
+            <label for="addContractAmt">Tổng phác đồ (đ)</label>
+            <input type="number" id="addContractAmt" value="36000000" step="500000" />
+          </div>
+          <div class="field">
+            <label for="addPaidNow">Thực thu kỳ này (đ)</label>
+            <input type="number" id="addPaidNow" value="18000000" step="500000" />
+          </div>
+          <div class="field">
+            <label for="addLaboCost">Tổng giá vốn Labo/sách (đ)</label>
+            <input type="number" id="addLaboCost" value="5400000" step="100000" />
+          </div>
+          <div class="field">
+            <label for="addPosRate">Kênh thu &amp; Phí POS</label>
+            <select id="addPosRate">
+              <option value="0">Chuyển khoản VietQR / Tiền mặt (0%)</option>
+              <option value="1.5">Quẹt thẻ POS thường (1,5%)</option>
+              <option value="2.2" selected>Trả góp thẻ tín dụng MPOS (2,2%)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="addDoctor">Bác sĩ / giảng viên (%)</label>
+            <input type="text" id="addDoctor" value="BS. Trần Minh Quân|12" title="Tên|Tỷ lệ %" />
+          </div>
+          <div class="field">
+            <label for="addAssistant">Phụ tá / trợ giảng (%)</label>
+            <input type="text" id="addAssistant" value="ĐD. Lê Thảo Vy|2" />
+          </div>
+          <div class="field">
+            <label for="addConsultant">Tư vấn chốt ca (%)</label>
+            <input type="text" id="addConsultant" value="TVV. Phạm Khánh Linh|5" />
+          </div>
+          <div class="field">
+            <label for="addNextDue">Hạn đợt tới &amp; Ghi chú</label>
+            <input type="text" id="addNextDue" value="15/11/2026 - Lắp mão sứ đợt 2" />
+          </div>
+          <div class="field">
+            <button type="button" class="btn btn-teal" id="btnConfirmAddRow" style="width:100%;">
+              Ghi vào sổ kỳ này
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="comm-table">
+          <thead>
+            <tr>
+              <th>Mã HS</th>
+              <th>Khách Hàng &amp; Phác Đồ / Khóa Học</th>
+              <th class="right">Tổng HĐ</th>
+              <th class="right">Thực Thu Kỳ Này</th>
+              <th class="right">Còn Nợ Đợt Sau</th>
+              <th class="sub-deduct right">Trừ Labo / Giáo Trình</th>
+              <th class="sub-deduct right">Trừ Phí POS / Trả Góp</th>
+              <th class="sub-net right">DT Ròng Tính HH</th>
+              <th class="sub-comm right">HH Bác Sĩ / GV Chính</th>
+              <th class="sub-comm right">HH Phụ Tá / Trợ Giảng</th>
+              <th class="sub-comm right">HH Sale Tư Vấn</th>
+              <th class="sub-comm right">HH Nguồn GT / MKT</th>
+              <th class="center">Tác Vụ</th>
+            </tr>
+          </thead>
+          <tbody id="ledgerTbody"></tbody>
+          <tfoot id="ledgerTfoot"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. Bottom Grid: Staff Ranking + Official Printable A4 (Commission Slip OR Installment VietQR Notice) -->
+    <section class="bottom-grid">
+
+      <!-- Left: Staff Commission Breakdown -->
+      <aside class="side-box no-print">
+        <div>
+          <div style="font-size:13px; font-weight:800; color:var(--navy-950); text-transform:uppercase;">
+            Tổng hợp hoa hồng theo từng nhân sự
+          </div>
+          <div style="font-size:11.5px; color:var(--slate-500); margin-top:2px;">
+            Bấm vào tên Bác sĩ / Tư vấn viên để xuất ngay Phiếu xác nhận hoa hồng A4 riêng cho người đó ký cuối tháng:
+          </div>
+        </div>
+
+        <table class="staff-summary-table">
+          <thead>
+            <tr>
+              <th>Họ Tên Nhân Sự &amp; Vai Trò</th>
+              <th class="center">Số Ca</th>
+              <th class="right">Thực Lĩnh HH</th>
+            </tr>
+          </thead>
+          <tbody id="staffSummaryTbody"></tbody>
+        </table>
+
+        <div style="padding:10px 12px; border-radius:8px; background:var(--gold-100); border:1px solid var(--gold-500); font-size:11.5px; color:var(--slate-800);">
+          <strong style="color:var(--navy-950);">Chốt chặn chống tranh cãi lương cuối tháng:</strong><br />
+          Mọi khoản hoa hồng đều liệt kê minh bạch 3 cột: <code>Thực thu trong kỳ</code> &rarr; <code>Trừ giá vốn Labo/Giáo trình</code> &rarr; <code>Trừ phí quẹt thẻ POS</code> trước khi nhân tỷ lệ <code>%</code>.
+        </div>
+      </aside>
+
+      <!-- Right: Official Printable A4 Panel -->
+      <div class="a4-panel">
+        <div class="a4-mode-tabs no-print">
+          <div class="tab-btn-group">
+            <button type="button" class="a4-tab-btn active" data-a4tab="commission" id="tabBtnCommission">
+              Mẫu in A4 #1: bảng kê xác nhận hoa hồng cá nhân cuối tháng
+            </button>
+            <button type="button" class="a4-tab-btn" data-a4tab="installment" id="tabBtnInstallment">
+              Mẫu in A4 #2: phiếu nhắc đợt đóng học phí / điều trị + VietQR
+            </button>
+          </div>
+
+          <button type="button" class="btn btn-gold" id="btnPrintA4Inner">
+            In / xuất PDF trang A4 này
+          </button>
+        </div>
+
+        <!-- Filter bar for A4 -->
+        <div class="a4-filter-bar no-print">
+          <div id="commissionFilterGroup" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <label for="staffSelectA4" style="font-size:12px; font-weight:800; color:var(--navy-950);">Chọn nhân sự in phiếu hoa hồng:</label>
+            <select id="staffSelectA4" style="padding:6px 10px; border-radius:6px; border:1px solid var(--slate-300); font-size:12.2px; font-weight:700; min-width:260px;"></select>
+          </div>
+
+          <div id="installmentFilterGroup" style="display:none; align-items:center; gap:8px; flex-wrap:wrap;">
+            <label for="patientSelectA4" style="font-size:12px; font-weight:800; color:var(--navy-950);">Chọn khách hàng / học viên còn đợt thu:</label>
+            <select id="patientSelectA4" style="padding:6px 10px; border-radius:6px; border:1px solid var(--slate-300); font-size:12.2px; font-weight:700; min-width:290px;"></select>
+            <button type="button" class="btn btn-teal" id="btnCopyZaloReminder">
+              Sao chép tin nhắn Zalo nhắc lịch hẹn &amp; Đợt thu
+            </button>
+          </div>
+        </div>
+
+        <!-- Printable A4 Paper Container -->
+        <article class="a4-paper" id="a4PaperContent"></article>
+      </div>
+
+    </section>
+  </main>
+
+  <div class="toast" id="appToast">Đã thực hiện thành công!</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+       * 1. INDUSTRY PRESETS (DENTAL CLINIC & LANGUAGE ACADEMY)
+       * ========================================================================= */
+      const PRESETS = {
+        dental: {
+          orgName: 'NHA KHOA MẪU A',
+          mst: '0100000007',
+          phone: '0900 000 000',
+          holder: 'CONG TY TNHH NHA KHOA MAU A',
+          period: 'Tháng 10/2026 (Chốt sổ 31/10)',
+          cases: [
+            {
+              code: 'NK-26101',
+              customer: 'Nguyễn Minh Tuấn',
+              custPhone: '0900 000 101',
+              service: 'Cấy ghép 02 Trụ Implant Osstem + Phục hình sứ Zirconia',
+              contractAmt: 44000000,
+              paidPrev: 0,
+              paidNow: 26400000,
+              laboTotal: 6800000,
+              posMethod: 'Trả góp MPOS',
+              posRate: 2.2,
+              doctorName: 'BS.CKI Trần Minh Quân',
+              doctorPct: 12,
+              assistName: 'ĐD. Lê Thảo Vy',
+              assistPct: 2,
+              saleName: 'TVV. Phạm Khánh Linh',
+              salePct: 4.5,
+              mktName: 'CTV. Nguồn FB Ads',
+              mktPct: 1.5,
+              nextDueAmt: 17600000,
+              nextDueNote: '14/11/2026 — Tái khám cắt chỉ & lấy dấu gắn Abutment đợt 2'
+            },
+            {
+              code: 'NK-26102',
+              customer: 'Lê Hoàng Bảo Trân',
+              custPhone: '0900 000 102',
+              service: 'Chỉnh nha khay trong suốt Invisalign Comprehensive (Trọn gói)',
+              contractAmt: 78000000,
+              paidPrev: 20000000,
+              paidNow: 25000000,
+              laboTotal: 19500000,
+              posMethod: 'VietQR / CK',
+              posRate: 0,
+              doctorName: 'BS.CKI Vũ Hoàng Nam',
+              doctorPct: 10,
+              assistName: 'ĐD. Nguyễn Ngọc Ánh',
+              assistPct: 1.8,
+              saleName: 'TVV. Phạm Khánh Linh',
+              salePct: 5,
+              mktName: 'Khách cũ giới thiệu',
+              mktPct: 2,
+              nextDueAmt: 33000000,
+              nextDueNote: '20/11/2026 — Giao bộ khay số 08-15 & thu đợt 3 (11.000.000 đ)'
+            },
+            {
+              code: 'NK-26103',
+              customer: 'Phạm Quốc Hưng',
+              custPhone: '0900 000 103',
+              service: 'Thẩm mỹ 16 Răng toàn sứ Lava Plus 3M ESPE chính hãng',
+              contractAmt: 96000000,
+              paidPrev: 0,
+              paidNow: 96000000,
+              laboTotal: 19200000,
+              posMethod: 'Thẻ POS thường',
+              posRate: 1.5,
+              doctorName: 'BS.CKI Trần Minh Quân',
+              doctorPct: 12,
+              assistName: 'ĐD. Lê Thảo Vy',
+              assistPct: 2,
+              saleName: 'TVV. Hoàng Bích Ngọc',
+              salePct: 5,
+              mktName: 'Không phát sinh',
+              mktPct: 0,
+              nextDueAmt: 0,
+              nextDueNote: 'Đã hoàn tất thanh toán 100% — Hẹn kiểm tra khớp cắn định kỳ'
+            },
+            {
+              code: 'NK-26104',
+              customer: 'Đặng Thị Thu Trang',
+              custPhone: '0900 000 104',
+              service: 'Chỉnh nha mắc cài sứ tự buộc Damon Clear 2 hàm',
+              contractAmt: 42000000,
+              paidPrev: 12000000,
+              paidNow: 6000000,
+              laboTotal: 5200000,
+              posMethod: 'VietQR / CK',
+              posRate: 0,
+              doctorName: 'BS.CKI Vũ Hoàng Nam',
+              doctorPct: 11,
+              assistName: 'ĐD. Nguyễn Ngọc Ánh',
+              assistPct: 2,
+              saleName: 'TVV. Hoàng Bích Ngọc',
+              salePct: 4,
+              mktName: 'Không phát sinh',
+              mktPct: 0,
+              nextDueAmt: 24000000,
+              nextDueNote: '08/11/2026 — Siết dây cung tháng thứ 4 (Đóng định kỳ 3.000.000 đ)'
+            },
+            {
+              code: 'NK-26105',
+              customer: 'Võ Thành Đạt',
+              custPhone: '0900 000 105',
+              service: 'Phẫu thuật ghép xương + Cấy 01 Trụ Implant Straumann Thụy Sĩ',
+              contractAmt: 38000000,
+              paidPrev: 0,
+              paidNow: 22800000,
+              laboTotal: 7600000,
+              posMethod: 'Trả góp MPOS',
+              posRate: 2.2,
+              doctorName: 'BS.CKI Trần Minh Quân',
+              doctorPct: 12,
+              assistName: 'ĐD. Lê Thảo Vy',
+              assistPct: 2,
+              saleName: 'TVV. Phạm Khánh Linh',
+              salePct: 4.5,
+              mktName: 'CTV. Bác sĩ tuyến trước',
+              mktPct: 3,
+              nextDueAmt: 15200000,
+              nextDueNote: '25/11/2026 — Phục hình răng sứ trên trụ Implant hoàn tất'
+            }
+          ]
+        },
+
+        academy: {
+          orgName: 'TRUNG TÂM ANH NGỮ MẪU B',
+          mst: '0100000008',
+          phone: '0900 000 000',
+          holder: 'CONG TY TNHH GIAO DUC MAU B',
+          period: 'Tháng 10/2026 (Chốt sổ 31/10)',
+          cases: [
+            {
+              code: 'HV-1081',
+              customer: 'Trần Gia Bảo (PH: Chị Lan)',
+              custPhone: '0900 000 106',
+              service: 'Lộ trình Cam kết đầu ra IELTS 4.5 -> 6.5+ (03 Chặng • 9 Tháng)',
+              contractAmt: 28500000,
+              paidPrev: 0,
+              paidNow: 15000000,
+              laboTotal: 1850000,
+              posMethod: 'Trả góp MPOS',
+              posRate: 2.0,
+              doctorName: 'ThS. Nguyễn Hoàng Hải (IELTS 8.5)',
+              doctorPct: 8,
+              assistName: 'TG. Phan Minh Châu',
+              assistPct: 2,
+              saleName: 'TVTS. Đỗ Thu Phương',
+              salePct: 7,
+              mktName: 'CTV. CLB Tiếng Anh THPT',
+              mktPct: 2,
+              nextDueAmt: 13500000,
+              nextDueNote: '05/11/2026 — Hoàn tất học phí Đợt 2 trước khi lên lớp Intensive 6.5'
+            },
+            {
+              code: 'HV-1082',
+              customer: 'Ngô Khánh Vy (PH: Anh Tùng)',
+              custPhone: '0900 000 107',
+              service: 'Khóa Cambridge Flyers & KET Quốc Tế (12 Tháng + Giáo trình gốc)',
+              contractAmt: 21600000,
+              paidPrev: 0,
+              paidNow: 21600000,
+              laboTotal: 1600000,
+              posMethod: 'VietQR / CK',
+              posRate: 0,
+              doctorName: 'GV. Lương Bảo Ngọc',
+              doctorPct: 8,
+              assistName: 'TG. Phan Minh Châu',
+              assistPct: 2,
+              saleName: 'TVTS. Đỗ Thu Phương',
+              salePct: 7.5,
+              mktName: 'Phụ huynh giới thiệu',
+              mktPct: 2.5,
+              nextDueAmt: 0,
+              nextDueNote: 'Đã đóng trọn gói 100% — Xếp lớp Thứ Bảy - Chủ Nhật'
+            },
+            {
+              code: 'HV-1083',
+              customer: 'Hoàng Minh Khôi',
+              custPhone: '0900 000 108',
+              service: 'Luyện thi IELTS 1-Kèm-1 Cấp tốc Du học (60 Giờ chuyên sâu)',
+              contractAmt: 36000000,
+              paidPrev: 12000000,
+              paidNow: 12000000,
+              laboTotal: 1500000,
+              posMethod: 'Thẻ POS thường',
+              posRate: 1.5,
+              doctorName: 'ThS. Nguyễn Hoàng Hải (IELTS 8.5)',
+              doctorPct: 12,
+              assistName: 'TG. Trần Quốc Bảo',
+              assistPct: 2,
+              saleName: 'TVTS. Vũ Thanh Hà',
+              salePct: 6,
+              mktName: 'Không phát sinh',
+              mktPct: 0,
+              nextDueAmt: 12000000,
+              nextDueNote: '10/11/2026 — Thanh toán Đợt 3 (20 giờ Speaking & Writing cuối)'
+            },
+            {
+              code: 'HV-1084',
+              customer: 'Bùi Phương Thảo',
+              custPhone: '0900 000 109',
+              service: 'Tiếng Anh Giao Tiếp Doanh Nghiệp B2B (Gói VIP 2 Học kỳ)',
+              contractAmt: 18000000,
+              paidPrev: 0,
+              paidNow: 10000000,
+              laboTotal: 1100000,
+              posMethod: 'VietQR / CK',
+              posRate: 0,
+              doctorName: 'GV. Lương Bảo Ngọc',
+              doctorPct: 8,
+              assistName: 'TG. Trần Quốc Bảo',
+              assistPct: 2,
+              saleName: 'TVTS. Vũ Thanh Hà',
+              salePct: 7,
+              mktName: 'CTV. Đối tác HR',
+              mktPct: 2,
+              nextDueAmt: 8000000,
+              nextDueNote: '12/11/2026 — Thu đợt 2 học kỳ Business Presentation'
+            }
+          ]
+        }
+      };
+
+      /* =========================================================================
+       * 2. VIETNAMESE WORDS + SAFE EMVCO VIETQR ENCODER (0000000000 LOCKED)
+       * ========================================================================= */
+      function fmtVnd(n) {
+        return Math.round(Number(n) || 0).toLocaleString('vi-VN') + ' đ';
+      }
+
+      function escapeHtml(s) {
+        return String(s || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function stripVi(str) {
+        return String(str || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd')
+          .replace(/Đ/g, 'D')
+          .replace(/[^A-Za-z0-9 ]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function readThreeDigits(num, showZeroHundred) {
+        const digits = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+        const tram = Math.floor(num / 100);
+        const chuc = Math.floor((num % 100) / 10);
+        const donvi = num % 10;
+        const parts = [];
+        if (tram > 0 || showZeroHundred) parts.push(digits[tram] + ' trăm');
+        if (chuc > 1) {
+          parts.push(digits[chuc] + ' mươi');
+          if (donvi === 1) parts.push('mốt');
+          else if (donvi === 4) parts.push('tư');
+          else if (donvi === 5) parts.push('lăm');
+          else if (donvi > 0) parts.push(digits[donvi]);
+        } else if (chuc === 1) {
+          parts.push('mười');
+          if (donvi === 5) parts.push('lăm');
+          else if (donvi > 0) parts.push(digits[donvi]);
+        } else if (chuc === 0 && donvi > 0) {
+          if (tram > 0 || showZeroHundred) parts.push('lẻ');
+          parts.push(digits[donvi]);
+        }
+        return parts.join(' ');
+      }
+
+      function readVndWords(amount) {
+        const val = Math.round(Number(amount) || 0);
+        if (val <= 0) return 'Không đồng chẵn.';
+        const units = ['', 'nghìn', 'triệu', 'tỷ', 'nghìn tỷ'];
+        const groups = [];
+        let rem = val;
+        while (rem > 0) {
+          groups.push(rem % 1000);
+          rem = Math.floor(rem / 1000);
+        }
+        const words = [];
+        for (let i = groups.length - 1; i >= 0; i--) {
+          const g = groups[i];
+          if (g === 0) continue;
+          const seg = readThreeDigits(g, i < groups.length - 1);
+          if (seg) words.push(seg + (units[i] ? ' ' + units[i] : ''));
+        }
+        const joined = words.join(' ').replace(/\s+/g, ' ').trim();
+        return joined.charAt(0).toUpperCase() + joined.slice(1) + ' đồng chẵn.';
+      }
+
+      function isRealClientAccount(acc) {
+        const clean = String(acc || '').replace(/[^0-9A-Za-z]/g, '');
+        if (!clean || clean.length < 6 || clean.length > 25) return false;
+        if (/^0+$/.test(clean)) return false;
+        if (clean.toUpperCase().indexOf('DEMO') !== -1 || clean.toUpperCase().indexOf('XACNHAN') !== -1) return false;
+        return true;
+      }
+
+      function tlv(id, val) {
+        const s = String(val || '');
+        return id + String(s.length).padStart(2, '0') + s;
+      }
+
+      function crc16CcittFalse(str) {
+        let crc = 0xFFFF;
+        for (let i = 0; i < str.length; i++) {
+          crc ^= (str.charCodeAt(i) & 0xFF) << 8;
+          for (let b = 0; b < 8; b++) {
+            crc = (crc & 0x8000) ? (((crc << 1) ^ 0x1021) & 0xFFFF) : ((crc << 1) & 0xFFFF);
+          }
+        }
+        return crc.toString(16).toUpperCase().padStart(4, '0');
+      }
+
+      function buildVietQrPayload(bin, acc, amount, memo) {
+        if (!isRealClientAccount(acc)) return '';
+        const cleanBin = String(bin || '970422').replace(/\D/g, '').slice(0, 6) || '970422';
+        const cleanAcc = String(acc).replace(/[^0-9A-Za-z]/g, '').slice(0, 25);
+        const intAmt = Math.max(0, Math.round(Number(amount) || 0));
+        const cleanMemo = stripVi(memo).toUpperCase().slice(0, 44);
+        const consumer = tlv('38',
+          tlv('00', 'A000000727') +
+          tlv('01', tlv('00', cleanBin) + tlv('01', cleanAcc)) +
+          tlv('02', 'QRIBFTTA')
+        );
+        const body =
+          '000201' +
+          (intAmt > 0 ? '010212' : '010211') +
+          consumer +
+          '5303704' +
+          (intAmt > 0 ? tlv('54', String(intAmt)) : '') +
+          '5802VN' +
+          (cleanMemo ? tlv('62', tlv('08', cleanMemo)) : '') +
+          '6304';
+        return body + crc16CcittFalse(body);
+      }
+
+      const QrEncoder = (function () {
+        const RS_BLOCKS_M = {
+          1: [1, 26, 16], 2: [1, 44, 28], 3: [1, 70, 44], 4: [2, 50, 32],
+          5: [2, 67, 43], 6: [4, 43, 27], 7: [4, 49, 31], 8: [2, 60, 38, 2, 61, 39],
+          9: [3, 58, 36, 2, 59, 37], 10: [4, 69, 43, 1, 70, 44],
+          11: [1, 80, 50, 4, 81, 51], 12: [6, 58, 36, 2, 59, 37]
+        };
+        const ALIGN_POS = {
+          1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34],
+          7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50],
+          11: [6, 30, 54], 12: [6, 32, 58]
+        };
+        const EXP = new Uint8Array(512);
+        const LOG = new Uint8Array(256);
+        let x = 1;
+        for (let i = 0; i < 255; i++) {
+          EXP[i] = x; LOG[x] = i; x <<= 1;
+          if (x & 0x100) x ^= 0x11D;
+        }
+        for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+
+        function gfMul(a, b) { return (a === 0 || b === 0) ? 0 : EXP[LOG[a] + LOG[b]]; }
+        function polyMul(p, q) {
+          const out = new Uint8Array(p.length + q.length - 1);
+          for (let i = 0; i < p.length; i++) {
+            for (let j = 0; j < q.length; j++) out[i + j] ^= gfMul(p[i], q[j]);
+          }
+          return out;
+        }
+        function rsComputeEc(dataBytes, ecLen) {
+          let gen = new Uint8Array([1]);
+          for (let i = 0; i < ecLen; i++) gen = polyMul(gen, new Uint8Array([1, EXP[i]]));
+          const msg = new Uint8Array(dataBytes.length + ecLen);
+          msg.set(dataBytes, 0);
+          for (let i = 0; i < dataBytes.length; i++) {
+            const c = msg[i];
+            if (c !== 0) {
+              for (let j = 1; j < gen.length; j++) msg[i + j] ^= gfMul(gen[j], c);
+            }
+          }
+          return msg.slice(dataBytes.length);
+        }
+        function expandBlocks(spec) {
+          const res = [];
+          for (let i = 0; i < spec.length; i += 3) {
+            for (let c = 0; c < spec[i]; c++) {
+              res.push({ totalCount: spec[i + 1], dataCount: spec[i + 2], ecCount: spec[i + 1] - spec[i + 2] });
+            }
+          }
+          return res;
+        }
+        function pickVersion(len) {
+          for (let v = 1; v <= 12; v++) {
+            const blocks = expandBlocks(RS_BLOCKS_M[v]);
+            const cap = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+            const maxP = Math.floor((cap * 8 - 4 - (v < 10 ? 8 : 16)) / 8);
+            if (len <= maxP) return v;
+          }
+          return 12;
+        }
+        function bchDigit(d) { let k = 0; while (d !== 0) { k++; d >>>= 1; } return k; }
+        function getBchTypeInfo(data) {
+          let d = data << 10;
+          while (bchDigit(d) - bchDigit(0x537) >= 0) d ^= (0x537 << (bchDigit(d) - bchDigit(0x537)));
+          return ((data << 10) | d) ^ 0x5412;
+        }
+        function getBchTypeNumber(v) {
+          let d = v << 12;
+          while (bchDigit(d) - bchDigit(0x1F25) >= 0) d ^= (0x1F25 << (bchDigit(d) - bchDigit(0x1F25)));
+          return (v << 12) | d;
+        }
+        function buildCodewords(v, bytes) {
+          const blocks = expandBlocks(RS_BLOCKS_M[v]);
+          const totalData = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+          const bits = [];
+          function push(val, l) { for (let i = l - 1; i >= 0; i--) bits.push((val >>> i) & 1); }
+          push(0x4, 4);
+          push(bytes.length, v < 10 ? 8 : 16);
+          for (let i = 0; i < bytes.length; i++) push(bytes[i], 8);
+          for (let i = 0; i < 4 && bits.length < totalData * 8; i++) bits.push(0);
+          while (bits.length % 8 !== 0) bits.push(0);
+
+          const dc = new Uint8Array(totalData);
+          let idx = 0;
+          for (let i = 0; i < bits.length; i += 8) {
+            let b = 0;
+            for (let k = 0; k < 8; k++) b = (b << 1) | bits[i + k];
+            dc[idx++] = b;
+          }
+          let pad = true;
+          while (idx < totalData) { dc[idx++] = pad ? 0xEC : 0x11; pad = !pad; }
+
+          let off = 0, maxD = 0, maxE = 0;
+          const dArr = [], eArr = [];
+          for (let i = 0; i < blocks.length; i++) {
+            const sl = dc.slice(off, off + blocks[i].dataCount);
+            off += blocks[i].dataCount;
+            dArr.push(sl);
+            eArr.push(rsComputeEc(sl, blocks[i].ecCount));
+            if (blocks[i].dataCount > maxD) maxD = blocks[i].dataCount;
+            if (blocks[i].ecCount > maxE) maxE = blocks[i].ecCount;
+          }
+          const out = [];
+          for (let c = 0; c < maxD; c++) for (let r = 0; r < dArr.length; r++) if (c < dArr[r].length) out.push(dArr[r][c]);
+          for (let c = 0; c < maxE; c++) for (let r = 0; r < eArr.length; r++) if (c < eArr[r].length) out.push(eArr[r][c]);
+          return out;
+        }
+        function maskBit(m, r, c) {
+          if (m === 0) return (r + c) % 2 === 0;
+          if (m === 1) return r % 2 === 0;
+          if (m === 2) return c % 3 === 0;
+          if (m === 3) return (r + c) % 3 === 0;
+          if (m === 4) return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+          if (m === 5) return ((r * c) % 2) + ((r * c) % 3) === 0;
+          if (m === 6) return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+          return (((r * c) % 3) + ((r + c) % 2)) % 2 === 0;
+        }
+        function makeMatrix(v, cw, mp) {
+          const sz = v * 4 + 17;
+          const mod = Array.from({ length: sz }, function () { return new Array(sz).fill(null); });
+          function finder(row, col) {
+            for (let r = -1; r <= 7; r++) {
+              if (row + r < 0 || row + r >= sz) continue;
+              for (let c = -1; c <= 7; c++) {
+                if (col + c < 0 || col + c >= sz) continue;
+                mod[row + r][col + c] =
+                  (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                  (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                  (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+              }
+            }
+          }
+          finder(0, 0); finder(sz - 7, 0); finder(0, sz - 7);
+          const pos = ALIGN_POS[v];
+          for (let i = 0; i < pos.length; i++) {
+            for (let j = 0; j < pos.length; j++) {
+              if (mod[pos[i]][pos[j]] !== null) continue;
+              for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                  mod[pos[i] + r][pos[j] + c] = (r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0));
+                }
+              }
+            }
+          }
+          for (let i = 8; i < sz - 8; i++) {
+            if (mod[i][6] === null) mod[i][6] = (i % 2 === 0);
+            if (mod[6][i] === null) mod[6][i] = (i % 2 === 0);
+          }
+          if (v >= 7) {
+            const vb = getBchTypeNumber(v);
+            for (let i = 0; i < 18; i++) {
+              const bit = ((vb >>> i) & 1) === 1;
+              mod[Math.floor(i / 3)][(i % 3) + sz - 11] = bit;
+              mod[(i % 3) + sz - 11][Math.floor(i / 3)] = bit;
+            }
+          }
+          const fb = getBchTypeInfo((0 << 3) | mp);
+          for (let i = 0; i < 15; i++) {
+            const bit = ((fb >>> i) & 1) === 1;
+            if (i < 6) mod[i][8] = bit;
+            else if (i < 8) mod[i + 1][8] = bit;
+            else mod[sz - 15 + i][8] = bit;
+            if (i < 8) mod[8][sz - i - 1] = bit;
+            else if (i < 9) mod[8][15 - i] = bit;
+            else mod[8][15 - i - 1] = bit;
+          }
+          mod[sz - 8][8] = true;
+
+          let inc = -1, row = sz - 1, bIdx = 7, byteIdx = 0;
+          for (let col = sz - 1; col > 0; col -= 2) {
+            if (col === 6) col--;
+            while (true) {
+              for (let c = 0; c < 2; c++) {
+                if (mod[row][col - c] === null) {
+                  let dark = byteIdx < cw.length ? (((cw[byteIdx] >>> bIdx) & 1) === 1) : false;
+                  if (maskBit(mp, row, col - c)) dark = !dark;
+                  mod[row][col - c] = dark;
+                  bIdx--;
+                  if (bIdx === -1) { byteIdx++; bIdx = 7; }
+                }
+              }
+              row += inc;
+              if (row < 0 || row >= sz) { row -= inc; inc = -inc; break; }
+            }
+          }
+          return mod;
+        }
+        function toSvg(text) {
+          const bytes = new TextEncoder().encode(text);
+          const v = pickVersion(bytes.length);
+          const cw = buildCodewords(v, bytes);
+          const m = makeMatrix(v, cw, 2);
+          const n = m.length, q = 3, tot = n + q * 2;
+          let d = '';
+          for (let r = 0; r < n; r++) {
+            for (let c = 0; c < n; c++) {
+              if (m[r][c]) d += 'M' + (c + q) + ',' + (r + q) + 'h1v1h-1z';
+            }
+          }
+          return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + tot + ' ' + tot + '" shape-rendering="crispEdges"><rect width="' + tot + '" height="' + tot + '" fill="#FFFFFF"/><path d="' + d + '" fill="#042F2E"/></svg>';
+        }
+        return { toSvg: toSvg };
+      })();
+
+      /* =========================================================================
+       * 3. STATE & COMMISSION CALCULATION ENGINE
+       * ========================================================================= */
+      let currentPresetKey = 'dental';
+      let cases = JSON.parse(JSON.stringify(PRESETS.dental.cases));
+      let activeA4Tab = 'commission';
+      let selectedStaffKey = '';
+      let selectedPatientCode = '';
+      let computedRows = [];
+      let staffAggList = [];
+
+      function computeAll() {
+        const laboMode = document.getElementById('laboRuleSelect').value;
+        let sumContract = 0;
+        let sumPaidNow = 0;
+        let sumLaboDeduct = 0;
+        let sumPosDeduct = 0;
+        let sumNetBase = 0;
+        let sumTotalComm = 0;
+        let sumRemaining = 0;
+        let installmentCount = 0;
+
+        const staffMap = {};
+
+        function addStaffEntry(name, roleLabel, pct, commAmt, rowObj) {
+          const cleanName = String(name || '').trim();
+          if (!cleanName || cleanName === 'Không phát sinh' || pct <= 0) return;
+          if (!staffMap[cleanName]) {
+            staffMap[cleanName] = {
+              name: cleanName,
+              role: roleLabel,
+              casesCount: 0,
+              totalComm: 0,
+              items: []
+            };
+          }
+          staffMap[cleanName].casesCount += 1;
+          staffMap[cleanName].totalComm += commAmt;
+          staffMap[cleanName].items.push({
+            code: rowObj.code,
+            customer: rowObj.customer,
+            service: rowObj.service,
+            paidNow: rowObj.paidNow,
+            laboDeduct: rowObj.laboDeduct,
+            posDeduct: rowObj.posDeduct,
+            netBase: rowObj.netBase,
+            pct: pct,
+            commAmt: commAmt
+          });
+        }
+
+        computedRows = cases.map(function (c) {
+          const contractAmt = Math.max(1, Number(c.contractAmt) || 0);
+          const paidNow = Math.max(0, Number(c.paidNow) || 0);
+          const paidPrev = Math.max(0, Number(c.paidPrev) || 0);
+          const remaining = Math.max(0, contractAmt - paidPrev - paidNow);
+
+          const ratio = Math.min(1, paidNow / contractAmt);
+          const laboDeduct = laboMode === 'prorata'
+            ? Math.round(Number(c.laboTotal || 0) * ratio)
+            : Math.round(Number(c.laboTotal || 0));
+          const posDeduct = Math.round(paidNow * (Number(c.posRate || 0) / 100));
+          const netBase = Math.max(0, paidNow - laboDeduct - posDeduct);
+
+          const docComm = Math.round(netBase * (Number(c.doctorPct || 0) / 100));
+          const astComm = Math.round(netBase * (Number(c.assistPct || 0) / 100));
+          const saleComm = Math.round(netBase * (Number(c.salePct || 0) / 100));
+          const mktComm = Math.round(netBase * (Number(c.mktPct || 0) / 100));
+          const rowTotalComm = docComm + astComm + saleComm + mktComm;
+
+          sumContract += contractAmt;
+          sumPaidNow += paidNow;
+          sumLaboDeduct += laboDeduct;
+          sumPosDeduct += posDeduct;
+          sumNetBase += netBase;
+          sumTotalComm += rowTotalComm;
+          sumRemaining += remaining;
+          if (remaining > 0) installmentCount += 1;
+
+          const enriched = {
+            code: c.code,
+            customer: c.customer,
+            custPhone: c.custPhone || '0900 000 000',
+            service: c.service,
+            contractAmt: contractAmt,
+            paidPrev: paidPrev,
+            paidNow: paidNow,
+            remaining: remaining,
+            laboTotal: c.laboTotal,
+            laboDeduct: laboDeduct,
+            posMethod: c.posMethod,
+            posRate: c.posRate,
+            posDeduct: posDeduct,
+            netBase: netBase,
+            doctorName: c.doctorName,
+            doctorPct: c.doctorPct,
+            docComm: docComm,
+            assistName: c.assistName,
+            assistPct: c.assistPct,
+            astComm: astComm,
+            saleName: c.saleName,
+            salePct: c.salePct,
+            saleComm: saleComm,
+            mktName: c.mktName,
+            mktPct: c.mktPct,
+            mktComm: mktComm,
+            rowTotalComm: rowTotalComm,
+            nextDueNote: c.nextDueNote || ''
+          };
+
+          addStaffEntry(c.doctorName, currentPresetKey === 'dental' ? 'Bác sĩ điều trị' : 'Giảng viên chính', c.doctorPct, docComm, enriched);
+          addStaffEntry(c.assistName, currentPresetKey === 'dental' ? 'Điều dưỡng / Phụ tá' : 'Trợ giảng học vụ', c.assistPct, astComm, enriched);
+          addStaffEntry(c.saleName, 'Tư vấn viên chốt ca', c.salePct, saleComm, enriched);
+          addStaffEntry(c.mktName, 'Nguồn giới thiệu / MKT', c.mktPct, mktComm, enriched);
+
+          return enriched;
+        });
+
+        staffAggList = Object.keys(staffMap).map(function (k) { return staffMap[k]; }).sort(function (a, b) {
+          return b.totalComm - a.totalComm;
+        });
+
+        if (!selectedStaffKey || !staffMap[selectedStaffKey]) {
+          selectedStaffKey = staffAggList.length > 0 ? staffAggList[0].name : '';
+        }
+
+        const debtRows = computedRows.filter(function (r) { return r.remaining > 0; });
+        if (!selectedPatientCode || !debtRows.some(function (r) { return r.code === selectedPatientCode; })) {
+          selectedPatientCode = debtRows.length > 0 ? debtRows[0].code : (computedRows[0] ? computedRows[0].code : '');
+        }
+
+        // Update KPIs
+        document.getElementById('kpiTotalContract').textContent = fmtVnd(sumContract);
+        document.getElementById('kpiCaseCountNote').textContent = computedRows.length + ' hồ sơ điều trị / khóa học trong kỳ';
+        document.getElementById('kpiCollectedPeriod').textContent = fmtVnd(sumPaidNow);
+        document.getElementById('kpiTotalDeductions').textContent = '- ' + fmtVnd(sumLaboDeduct + sumPosDeduct);
+        document.getElementById('kpiDeductBreakdown').textContent = 'Labo/Sách: ' + fmtVnd(sumLaboDeduct) + ' • POS: ' + fmtVnd(sumPosDeduct);
+        document.getElementById('kpiNetCommissionBase').textContent = fmtVnd(sumNetBase);
+        document.getElementById('kpiTotalCommission').textContent = fmtVnd(sumTotalComm);
+        const pctOfPaid = sumPaidNow > 0 ? ((sumTotalComm / sumPaidNow) * 100).toFixed(1) : '0.0';
+        document.getElementById('kpiCommRatioNote').textContent = 'Chiếm ' + pctOfPaid + '% tổng thực thu kỳ này';
+        document.getElementById('kpiRemainingInstallments').textContent = fmtVnd(sumRemaining);
+        document.getElementById('kpiInstallmentCountNote').textContent = installmentCount + ' hồ sơ còn đợt đóng tiếp theo';
+
+        renderLedgerTable(sumContract, sumPaidNow, sumRemaining, sumLaboDeduct, sumPosDeduct, sumNetBase);
+        renderStaffSidebar();
+        syncDropdowns();
+        renderA4Paper();
+      }
+
+      function renderLedgerTable(sumContract, sumPaidNow, sumRemaining, sumLaboDeduct, sumPosDeduct, sumNetBase) {
+        const tbody = document.getElementById('ledgerTbody');
+        let sumDoc = 0, sumAst = 0, sumSale = 0, sumMkt = 0;
+
+        tbody.innerHTML = computedRows.map(function (r) {
+          sumDoc += r.docComm;
+          sumAst += r.astComm;
+          sumSale += r.saleComm;
+          sumMkt += r.mktComm;
+
+          const posClass = r.posRate >= 2 ? 'installment' : (r.posRate > 0 ? 'pos' : '');
+          return (
+            '<tr>' +
+              '<td style="font-family:var(--font-mono); font-weight:800; color:var(--navy-900);">' + escapeHtml(r.code) + '</td>' +
+              '<td>' +
+                '<div style="font-weight:800; color:var(--slate-900);">' + escapeHtml(r.customer) + '</div>' +
+                '<div style="font-size:10.6px; color:var(--slate-500);">' + escapeHtml(r.service) + '</div>' +
+              '</td>' +
+              '<td class="right">' + fmtVnd(r.contractAmt) + '</td>' +
+              '<td class="right" style="font-weight:800; color:var(--teal-800);">' + fmtVnd(r.paidNow) + '</td>' +
+              '<td class="right">' +
+                (r.remaining > 0
+                  ? '<span class="debt-tag">' + fmtVnd(r.remaining) + '</span>'
+                  : '<span class="paid-done">Đã thu đủ</span>') +
+              '</td>' +
+              '<td class="right" style="color:var(--crimson-700);">- ' + fmtVnd(r.laboDeduct) + '</td>' +
+              '<td class="right">' +
+                '<span class="badge-method ' + posClass + '">' + r.posRate + '%</span><br />' +
+                '<span style="color:var(--crimson-700); font-size:10.6px;">- ' + fmtVnd(r.posDeduct) + '</span>' +
+              '</td>' +
+              '<td class="right" style="font-weight:800; background:#F0FDFA;">' + fmtVnd(r.netBase) + '</td>' +
+              '<td class="right">' +
+                '<div style="font-weight:700;">' + fmtVnd(r.docComm) + '</div>' +
+                '<div style="font-size:10px; color:var(--slate-500);">' + escapeHtml(r.doctorName) + ' (' + r.doctorPct + '%)</div>' +
+              '</td>' +
+              '<td class="right">' +
+                '<div style="font-weight:700;">' + fmtVnd(r.astComm) + '</div>' +
+                '<div style="font-size:10px; color:var(--slate-500);">' + escapeHtml(r.assistName) + ' (' + r.assistPct + '%)</div>' +
+              '</td>' +
+              '<td class="right">' +
+                '<div style="font-weight:700;">' + fmtVnd(r.saleComm) + '</div>' +
+                '<div style="font-size:10px; color:var(--slate-500);">' + escapeHtml(r.saleName) + ' (' + r.salePct + '%)</div>' +
+              '</td>' +
+              '<td class="right">' +
+                '<div style="font-weight:700;">' + fmtVnd(r.mktComm) + '</div>' +
+                '<div style="font-size:10px; color:var(--slate-500);">' + r.mktPct + '%</div>' +
+              '</td>' +
+              '<td class="center">' +
+                '<button type="button" class="row-action-btn" data-jumpcode="' + escapeHtml(r.code) + '">Phiếu Nhắc Đợt QR</button>' +
+              '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        document.getElementById('ledgerTfoot').innerHTML =
+          '<tr>' +
+            '<td colspan="2">TỔNG CỘNG CHỐT SỔ KỲ HIỆN TẠI (' + computedRows.length + ' HỒ SƠ):</td>' +
+            '<td class="right">' + fmtVnd(sumContract) + '</td>' +
+            '<td class="right">' + fmtVnd(sumPaidNow) + '</td>' +
+            '<td class="right">' + fmtVnd(sumRemaining) + '</td>' +
+            '<td class="right">- ' + fmtVnd(sumLaboDeduct) + '</td>' +
+            '<td class="right">- ' + fmtVnd(sumPosDeduct) + '</td>' +
+            '<td class="right">' + fmtVnd(sumNetBase) + '</td>' +
+            '<td class="right">' + fmtVnd(sumDoc) + '</td>' +
+            '<td class="right">' + fmtVnd(sumAst) + '</td>' +
+            '<td class="right">' + fmtVnd(sumSale) + '</td>' +
+            '<td class="right">' + fmtVnd(sumMkt) + '</td>' +
+            '<td class="center">--</td>' +
+          '</tr>';
+
+        tbody.querySelectorAll('[data-jumpcode]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            selectedPatientCode = btn.getAttribute('data-jumpcode');
+            activeA4Tab = 'installment';
+            updateA4TabUI();
+            syncDropdowns();
+            renderA4Paper();
+            document.querySelector('.a4-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      }
+
+      function renderStaffSidebar() {
+        const tb = document.getElementById('staffSummaryTbody');
+        tb.innerHTML = staffAggList.map(function (st) {
+          const isAct = st.name === selectedStaffKey && activeA4Tab === 'commission';
+          return (
+            '<tr class="staff-row-click ' + (isAct ? 'active' : '') + '" data-staff="' + escapeHtml(st.name) + '">' +
+              '<td>' +
+                '<div style="font-weight:800; color:var(--navy-950);">' + escapeHtml(st.name) + '</div>' +
+                '<span class="role-pill">' + escapeHtml(st.role) + '</span>' +
+              '</td>' +
+              '<td class="center" style="font-weight:700;">' + st.casesCount + '</td>' +
+              '<td class="right" style="font-weight:900; color:var(--teal-800);">' + fmtVnd(st.totalComm) + '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        tb.querySelectorAll('.staff-row-click').forEach(function (tr) {
+          tr.addEventListener('click', function () {
+            selectedStaffKey = tr.getAttribute('data-staff');
+            activeA4Tab = 'commission';
+            updateA4TabUI();
+            syncDropdowns();
+            renderStaffSidebar();
+            renderA4Paper();
+          });
+        });
+      }
+
+      function syncDropdowns() {
+        const staffSel = document.getElementById('staffSelectA4');
+        staffSel.innerHTML = staffAggList.map(function (st) {
+          const sel = st.name === selectedStaffKey ? 'selected' : '';
+          return '<option value="' + escapeHtml(st.name) + '" ' + sel + '>' + escapeHtml(st.name) + ' — ' + escapeHtml(st.role) + ' (' + fmtVnd(st.totalComm) + ')</option>';
+        }).join('');
+
+        const patSel = document.getElementById('patientSelectA4');
+        patSel.innerHTML = computedRows.map(function (r) {
+          const sel = r.code === selectedPatientCode ? 'selected' : '';
+          const statusTxt = r.remaining > 0 ? ('Còn thu: ' + fmtVnd(r.remaining)) : 'Đã hoàn tất 100%';
+          return '<option value="' + escapeHtml(r.code) + '" ' + sel + '>[' + escapeHtml(r.code) + '] ' + escapeHtml(r.customer) + ' — ' + statusTxt + '</option>';
+        }).join('');
+      }
+
+      function updateA4TabUI() {
+        document.getElementById('tabBtnCommission').classList.toggle('active', activeA4Tab === 'commission');
+        document.getElementById('tabBtnInstallment').classList.toggle('active', activeA4Tab === 'installment');
+        document.getElementById('commissionFilterGroup').style.display = activeA4Tab === 'commission' ? 'flex' : 'none';
+        document.getElementById('installmentFilterGroup').style.display = activeA4Tab === 'installment' ? 'flex' : 'none';
+      }
+
+      /* =========================================================================
+       * 4. RENDER PRINTABLE A4 (MODE 1: STAFF COMMISSION | MODE 2: INSTALLMENT QR)
+       * ========================================================================= */
+      let currentZaloReminderText = '';
+
+      function renderA4Paper() {
+        const orgName = document.getElementById('orgNameInput').value.trim() || 'ĐƠN VỊ Y TẾ / ĐÀO TẠO';
+        const orgMst = document.getElementById('orgMstInput').value.trim() || 'Đang cập nhật';
+        const orgPhone = document.getElementById('orgPhoneInput').value.trim() || '0900 000 000';
+        const period = document.getElementById('periodInput').value.trim() || 'Tháng 10/2026';
+        const bankBin = document.getElementById('orgBankSelect').value;
+        const bankLabel = document.getElementById('orgBankSelect').options[document.getElementById('orgBankSelect').selectedIndex].text;
+        const accNo = document.getElementById('orgAccInput').value.trim() || '0000000000';
+        const holder = stripVi(document.getElementById('orgHolderInput').value || orgName).toUpperCase();
+
+        const paper = document.getElementById('a4PaperContent');
+
+        if (activeA4Tab === 'commission') {
+          const staffObj = staffAggList.find(function (s) { return s.name === selectedStaffKey; }) || staffAggList[0];
+          if (!staffObj) {
+            paper.innerHTML = '<p>Chưa có dữ liệu nhân sự.</p>';
+            return;
+          }
+
+          let sPaid = 0, sLabo = 0, sPos = 0, sNet = 0;
+          const rowsHtml = staffObj.items.map(function (it, idx) {
+            sPaid += it.paidNow;
+            sLabo += it.laboDeduct;
+            sPos += it.posDeduct;
+            sNet += it.netBase;
+            return (
+              '<tr>' +
+                '<td class="center">' + (idx + 1) + '</td>' +
+                '<td style="font-family:var(--font-mono); font-weight:700;">' + escapeHtml(it.code) + '</td>' +
+                '<td><strong>' + escapeHtml(it.customer) + '</strong><br /><span style="font-size:10.5px; color:#475569;">' + escapeHtml(it.service) + '</span></td>' +
+                '<td class="right">' + fmtVnd(it.paidNow) + '</td>' +
+                '<td class="right">- ' + fmtVnd(it.laboDeduct) + '</td>' +
+                '<td class="right">- ' + fmtVnd(it.posDeduct) + '</td>' +
+                '<td class="right"><strong>' + fmtVnd(it.netBase) + '</strong></td>' +
+                '<td class="center">' + it.pct + '%</td>' +
+                '<td class="right" style="font-weight:900; color:var(--teal-900);">' + fmtVnd(it.commAmt) + '</td>' +
+              '</tr>'
+            );
+          }).join('');
+
+          paper.innerHTML =
+            '<div class="a4-head-grid">' +
+              '<div>' +
+                '<div class="a4-org-name">' + escapeHtml(orgName) + '</div>' +
+                '<div class="a4-org-meta">Mã số thuế: <strong>' + escapeHtml(orgMst) + '</strong> • Hotline nội bộ: <strong>' + escapeHtml(orgPhone) + '</strong></div>' +
+                '<div class="a4-org-meta">Chứng từ kế toán tiền lương nội bộ • Lưu hành đối chiếu cuối tháng</div>' +
+              '</div>' +
+              '<div class="a4-motto">' +
+                '<strong>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</strong><br />' +
+                '<span>Độc lập - Tự do - Hạnh phúc</span><br />' +
+                '<span style="font-size:11px; color:#475569;">Kỳ quyết toán: <strong>' + escapeHtml(period) + '</strong></span>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="a4-doc-title">' +
+              '<h2>BẢNG KÊ ĐỐI CHIẾU &amp; XÁC NHẬN HOA HỒNG CHUYÊN MÔN CÁ NHÂN</h2>' +
+              '<p>Nhân sự thụ hưởng: <strong>' + escapeHtml(staffObj.name) + '</strong> • Chức danh: <strong>' + escapeHtml(staffObj.role) + '</strong></p>' +
+            '</div>' +
+
+            '<table class="a4-table">' +
+              '<thead>' +
+                '<tr>' +
+                  '<th class="center" style="width:32px;">STT</th>' +
+                  '<th style="width:74px;">Mã HS</th>' +
+                  '<th>Khách Hàng &amp; Nội Dung Điều Trị / Khóa Học</th>' +
+                  '<th class="right">Thực Thu Kỳ Này</th>' +
+                  '<th class="right">Trừ Labo/Sách</th>' +
+                  '<th class="right">Trừ Phí POS</th>' +
+                  '<th class="right">DT Ròng Tính HH</th>' +
+                  '<th class="center">% HH</th>' +
+                  '<th class="right">Hoa Hồng Lĩnh</th>' +
+                '</tr>' +
+              '</thead>' +
+              '<tbody>' + rowsHtml + '</tbody>' +
+              '<tfoot>' +
+                '<tr>' +
+                  '<td colspan="3">TỔNG CỘNG HOA HỒNG THỰC LĨNH TRONG KỲ (' + staffObj.items.length + ' CA):</td>' +
+                  '<td class="right">' + fmtVnd(sPaid) + '</td>' +
+                  '<td class="right">- ' + fmtVnd(sLabo) + '</td>' +
+                  '<td class="right">- ' + fmtVnd(sPos) + '</td>' +
+                  '<td class="right">' + fmtVnd(sNet) + '</td>' +
+                  '<td class="center">--</td>' +
+                  '<td class="right" style="color:var(--crimson-700); font-size:12.5px;">' + fmtVnd(staffObj.totalComm) + '</td>' +
+                '</tr>' +
+              '</tfoot>' +
+            '</table>' +
+
+            '<div class="words-banner">' +
+              '<strong>Số tiền hoa hồng thực lĩnh bằng chữ:</strong> ' +
+              '<em style="font-weight:800; color:var(--teal-900);">' + escapeHtml(readVndWords(staffObj.totalComm)) + '</em>' +
+            '</div>' +
+
+            '<div class="sig-3-grid">' +
+              '<div>' +
+                '<strong>KẾ TOÁN TIỀN LƯƠNG LẬP BIỂU</strong><br />' +
+                '<span style="font-size:10.5px; color:#64748B;">(Ký, ghi rõ họ tên)</span>' +
+                '<div style="height:52px;"></div>' +
+                '<strong>Phòng Kế Toán Nội Bộ</strong>' +
+              '</div>' +
+              '<div>' +
+                '<strong>NHÂN SỰ / BÁC SĨ XÁC NHẬN</strong><br />' +
+                '<span style="font-size:10.5px; color:#64748B;">(Đã kiểm tra đúng số thực thu &amp; Labo)</span>' +
+                '<div style="height:52px;"></div>' +
+                '<strong>' + escapeHtml(staffObj.name) + '</strong>' +
+              '</div>' +
+              '<div>' +
+                '<strong>BAN GIÁM ĐỐC PHÊ DUYỆT CHI</strong><br />' +
+                '<span style="font-size:10.5px; color:#64748B;">(Ký duyệt chuyển khoản lương)</span><br />' +
+                '<span class="sig-stamp">ĐÃ ĐỐI CHIẾU CHỐT SỔ CUỐI THÁNG</span><br />' +
+                '<strong>Ban Giám Đốc</strong>' +
+              '</div>' +
+            '</div>';
+          return;
+        }
+
+        // Mode 2: Patient / Student Installment Notice + Safe Sandbox VietQR
+        const pat = computedRows.find(function (r) { return r.code === selectedPatientCode; }) || computedRows[0];
+        if (!pat) return;
+
+        const dueNowAmt = pat.remaining > 0 ? pat.remaining : pat.paidNow;
+        const memo = 'THU DOT ' + pat.code + ' ' + stripVi(pat.customer).toUpperCase().slice(0, 18);
+        const realAccReady = isRealClientAccount(accNo);
+        const qrSvgHtml = realAccReady ? QrEncoder.toSvg(buildVietQrPayload(bankBin, accNo, dueNowAmt, memo)) : '';
+
+        currentZaloReminderText =
+          'Dạ [' + orgName + '] xin phép nhắn lịch hẹn & tiến độ hồ sơ [' + pat.code + '] của Quý khách ' + pat.customer + ' ạ:\n' +
+          '• Dịch vụ / Lộ trình: ' + pat.service + '\n' +
+          '• Tổng giá trị trọn gói: ' + fmtVnd(pat.contractAmt) + ' | Đã thanh toán: ' + fmtVnd(pat.paidPrev + pat.paidNow) + '\n' +
+          '• Số dư đợt tiếp theo: ' + fmtVnd(pat.remaining) + ' (' + pat.nextDueNote + ')\n' +
+          '• Nội dung chuyển khoản định danh: ' + memo + ' | Hotline hỗ trợ đặt lịch ưu tiên: ' + orgPhone + ' ạ!';
+
+        paper.innerHTML =
+          '<div class="a4-head-grid">' +
+            '<div>' +
+              '<div class="a4-org-name">' + escapeHtml(orgName) + '</div>' +
+              '<div class="a4-org-meta">Mã số thuế: <strong>' + escapeHtml(orgMst) + '</strong> • Hotline Lễ tân &amp; Đặt lịch: <strong>' + escapeHtml(orgPhone) + '</strong></div>' +
+            '</div>' +
+            '<div class="a4-motto">' +
+              '<strong>PHIẾU THEO DÕI TIẾN ĐỘ THU ĐỢT</strong><br />' +
+              '<span>Mã hồ sơ: <strong>' + escapeHtml(pat.code) + '</strong></span>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="a4-doc-title">' +
+            '<h2>THÔNG BÁO LỊCH HẸN CHUYÊN MÔN &amp; ĐỐI CHIẾU ĐỢT THANH TOÁN</h2>' +
+            '<p>Kính gửi Quý khách hàng / Học viên: <strong>' + escapeHtml(pat.customer) + '</strong> • SĐT: <strong>' + escapeHtml(pat.custPhone) + '</strong></p>' +
+          '</div>' +
+
+          '<div class="installment-grid">' +
+            '<div class="inst-info-box">' +
+              '<div><strong>1. Hạng mục phác đồ / khóa học đăng ký:</strong><br />' + escapeHtml(pat.service) + '</div>' +
+              '<div style="margin-top:7px;"><strong>2. Phụ trách chuyên môn chính:</strong> ' + escapeHtml(pat.doctorName) + '</div>' +
+              '<div style="margin-top:7px;"><strong>3. Tổng hợp tiến độ tài chính hồ sơ:</strong></div>' +
+              '<ul style="margin:4px 0 0 18px;">' +
+                '<li>Tổng giá trị phác đồ / khóa học: <strong>' + fmtVnd(pat.contractAmt) + '</strong></li>' +
+                '<li>Tổng số tiền đã thu lũy kế: <strong style="color:var(--teal-800);">' + fmtVnd(pat.paidPrev + pat.paidNow) + '</strong></li>' +
+                '<li>Số dư các đợt tiếp theo còn lại: <strong style="color:var(--crimson-700);">' + fmtVnd(pat.remaining) + '</strong></li>' +
+              '</ul>' +
+              '<div style="margin-top:8px; padding:7px 9px; background:#FEF7E6; border-left:3px solid var(--gold-600);">' +
+                '<strong>Lịch hẹn &amp; Đợt thu kế tiếp:</strong><br />' + escapeHtml(pat.nextDueNote) +
+              '</div>' +
+              '<div style="margin-top:8px; font-size:11.3px;">' +
+                'Ngân hàng: <strong>' + escapeHtml(bankLabel) + '</strong> • Chủ TK: <strong>' + escapeHtml(holder) + '</strong><br />' +
+                'STK nhận: <strong>' + escapeHtml(accNo) + '</strong> • Nội dung CK: <strong style="font-family:var(--font-mono); color:var(--crimson-700);">' + escapeHtml(memo) + '</strong>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="inst-qr-box">' +
+              '<div style="font-size:10.5px; font-weight:800; color:var(--teal-900); margin-bottom:6px; text-transform:uppercase;">MÃ VIETQR ĐỊNH DANH HỒ SƠ ' + escapeHtml(pat.code) + '</div>' +
+              (realAccReady
+                ? '<div class="live-client-qr" style="display:block;">' + qrSvgHtml + '</div>' +
+                  '<div style="font-size:10.8px; color:var(--slate-700); margin-top:6px;">Quét mã tự điền <strong>' + fmtVnd(dueNowAmt) + '</strong></div>'
+                : '<div class="demo-lock-banner">[CHẾ ĐỘ CHẠY THỬ DEMO — NHẬP STK CÔNG TY CỦA BẠN ĐỂ TẠO QR THẬT]<br /><span style="font-weight:600; color:#334155;">Đang khóa an toàn ở STK 0000000000 chống chuyển nhầm. Nhập STK thật của Phòng khám/Trung tâm ở thanh cấu hình phía trên để sinh mã VietQR Napas247.</span></div>'
+              ) +
+            '</div>' +
+          '</div>' +
+
+          '<div class="zalo-script-box no-print">' +
+            '<strong>Nội dung tin nhắn Zalo lễ tân gửi tự động (1-Click Copy):</strong><br />' +
+            '<span style="white-space:pre-line;">' + escapeHtml(currentZaloReminderText) + '</span>' +
+          '</div>';
+      }
+
+      /* =========================================================================
+       * 5. EVENT BINDINGS & CSV EXPORT
+       * ========================================================================= */
+      function showToast(msg) {
+        const t = document.getElementById('appToast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(showToast._tm);
+        showToast._tm = setTimeout(function () { t.classList.remove('show'); }, 2400);
+      }
+
+      function applyPreset(key) {
+        const p = PRESETS[key];
+        if (!p) return;
+        currentPresetKey = key;
+        document.querySelectorAll('#industryPresetGroup .preset-pill').forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-preset') === key);
+        });
+        document.getElementById('orgNameInput').value = p.orgName;
+        document.getElementById('orgMstInput').value = p.mst;
+        document.getElementById('orgPhoneInput').value = p.phone;
+        document.getElementById('orgHolderInput').value = p.holder;
+        document.getElementById('periodInput').value = p.period;
+        cases = JSON.parse(JSON.stringify(p.cases));
+        selectedStaffKey = '';
+        selectedPatientCode = '';
+        computeAll();
+      }
+
+      document.querySelectorAll('#industryPresetGroup .preset-pill').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyPreset(btn.getAttribute('data-preset'));
+        });
+      });
+
+      ['laboRuleSelect', 'orgNameInput', 'orgMstInput', 'orgPhoneInput', 'periodInput', 'orgBankSelect', 'orgAccInput', 'orgHolderInput'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', computeAll);
+        document.getElementById(id).addEventListener('change', computeAll);
+      });
+
+      document.getElementById('tabBtnCommission').addEventListener('click', function () {
+        activeA4Tab = 'commission';
+        updateA4TabUI();
+        renderStaffSidebar();
+        renderA4Paper();
+      });
+
+      document.getElementById('tabBtnInstallment').addEventListener('click', function () {
+        activeA4Tab = 'installment';
+        updateA4TabUI();
+        renderStaffSidebar();
+        renderA4Paper();
+      });
+
+      document.getElementById('staffSelectA4').addEventListener('change', function (e) {
+        selectedStaffKey = e.target.value;
+        renderStaffSidebar();
+        renderA4Paper();
+      });
+
+      document.getElementById('patientSelectA4').addEventListener('change', function (e) {
+        selectedPatientCode = e.target.value;
+        renderA4Paper();
+      });
+
+      document.getElementById('btnToggleAddRow').addEventListener('click', function () {
+        document.getElementById('quickAddBar').classList.toggle('open');
+      });
+
+      function parseNamePct(raw, fallbackName, fallbackPct) {
+        const parts = String(raw || '').split('|');
+        const name = (parts[0] || fallbackName).trim();
+        const pct = parts.length > 1 ? (parseFloat(parts[1]) || fallbackPct) : fallbackPct;
+        return { name: name, pct: pct };
+      }
+
+      document.getElementById('btnConfirmAddRow').addEventListener('click', function () {
+        const doc = parseNamePct(document.getElementById('addDoctor').value, 'BS. Điều Trị', 10);
+        const ast = parseNamePct(document.getElementById('addAssistant').value, 'Phụ Tá', 2);
+        const sal = parseNamePct(document.getElementById('addConsultant').value, 'Tư Vấn Viên', 5);
+        const contractAmt = Number(document.getElementById('addContractAmt').value) || 20000000;
+        const paidNow = Number(document.getElementById('addPaidNow').value) || 10000000;
+        const posRate = Number(document.getElementById('addPosRate').value) || 0;
+
+        cases.unshift({
+          code: document.getElementById('addCode').value.trim() || ('HS-' + (cases.length + 101)),
+          customer: document.getElementById('addCustomer').value.trim() || 'Khách Hàng Mới Trong Ngày',
+          custPhone: '0900 000 110',
+          service: document.getElementById('addService').value.trim() || 'Gói điều trị / Khóa học chuyên sâu',
+          contractAmt: contractAmt,
+          paidPrev: 0,
+          paidNow: paidNow,
+          laboTotal: Number(document.getElementById('addLaboCost').value) || 0,
+          posMethod: posRate >= 2 ? 'Trả góp MPOS' : (posRate > 0 ? 'Thẻ POS' : 'VietQR / CK'),
+          posRate: posRate,
+          doctorName: doc.name,
+          doctorPct: doc.pct,
+          assistName: ast.name,
+          assistPct: ast.pct,
+          saleName: sal.name,
+          salePct: sal.pct,
+          mktName: 'Không phát sinh',
+          mktPct: 0,
+          nextDueAmt: Math.max(0, contractAmt - paidNow),
+          nextDueNote: document.getElementById('addNextDue').value.trim() || 'Hẹn thu đợt tiếp theo trong tháng 11/2026'
+        });
+
+        document.getElementById('quickAddBar').classList.remove('open');
+        computeAll();
+        showToast('Đã thêm hồ sơ mới và tính lại hoa hồng tức thì!');
+      });
+
+      document.getElementById('btnPasteSampleTsv').addEventListener('click', function () {
+        applyPreset(currentPresetKey === 'dental' ? 'academy' : 'dental');
+        showToast('Đã chuyển đổi bộ dữ liệu chốt sổ mẫu!');
+      });
+
+      document.getElementById('btnCopyZaloReminder').addEventListener('click', function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(currentZaloReminderText);
+        }
+        showToast('Đã sao chép tin nhắn nhắc lịch hẹn & đợt thu gửi Zalo!');
+      });
+
+      document.getElementById('btnExportCsv').addEventListener('click', function () {
+        const headers = [
+          'Ma_Ho_So', 'Khach_Hang', 'Dich_Vu_Khoa_Hoc', 'Tong_Hop_Dong',
+          'Thuc_Thu_Ky_Nay', 'Con_No_Dot_Sau', 'Tru_Labo_Giao_Trinh',
+          'Tru_Phi_POS', 'Doanh_Thu_Rong_Tinh_HH',
+          'Bac_Si_GV', 'HH_Bac_Si', 'Phu_Ta_TG', 'HH_Phu_Ta',
+          'Sale_Tu_Van', 'HH_Sale', 'HH_MKT'
+        ];
+        const lines = [headers.join(',')];
+        computedRows.forEach(function (r) {
+          lines.push([
+            r.code,
+            '"' + r.customer.replace(/"/g, '""') + '"',
+            '"' + r.service.replace(/"/g, '""') + '"',
+            r.contractAmt,
+            r.paidNow,
+            r.remaining,
+            r.laboDeduct,
+            r.posDeduct,
+            r.netBase,
+            '"' + r.doctorName.replace(/"/g, '""') + '"',
+            r.docComm,
+            '"' + r.assistName.replace(/"/g, '""') + '"',
+            r.astComm,
+            '"' + r.saleName.replace(/"/g, '""') + '"',
+            r.saleComm,
+            r.mktComm
+          ].join(','));
+        });
+        const blob = new Blob(['\uFEFF' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Bang_Chot_Hoa_Hong_Thuc_Thu_Thang_10_2026.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Đã xuất file CSV Bảng chốt hoa hồng thực thu!');
+      });
+
+      document.getElementById('btnPrintA4Top').addEventListener('click', function () { window.print(); });
+      document.getElementById('btnPrintA4Inner').addEventListener('click', function () { window.print(); });
+
+      // Boot
+      computeAll();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trợ Lý Đối Soát Thuế Hộ Kinh Doanh (.XML) & Phí Sàn Shopee/TikTok 2026 — Offline 100%</title>
+  <style id="embedded-fonts">@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Work Sans";src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap}</style>
+  <style>
+    :root {
+      --paper: #f6f6f3;
+      --ink: #1b1c1d;
+      --line: #dfdfda;
+      --accent: #b3360f;       /* signal colour: errors that need action + the primary button */
+      --accent-dark: #8f2a0b;
+      --accent-tint: #fbf0eb;
+      /* old token names kept (JS templates reference some of them), values remapped */
+      --bg: var(--paper);
+      --surface: #ffffff;
+      --surface-alt: #fafaf8;
+      --border: var(--line);
+      --border-strong: #cfcfca;
+      --text: var(--ink);
+      --text-muted: #5f6064;
+      --text-subtle: #7a7b7f;
+      --navy: var(--ink);
+      --primary: var(--accent);
+      --primary-hover: var(--accent-dark);
+      --primary-soft: var(--accent-tint);
+      --emerald: var(--ink);
+      --emerald-soft: #fff;
+      --emerald-border: var(--line);
+      --red: var(--accent);
+      --red-soft: var(--accent-tint);
+      --red-border: #efcfc3;
+      --amber: var(--ink);
+      --amber-soft: #fff;
+      --amber-border: var(--line);
+      --purple: #5f6064;
+      --purple-soft: #fff;
+      --radius: 6px;
+      --shadow: none;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Work Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .num { font-variant-numeric: tabular-nums; }
+    td.num, td.right, .kpi-value { font-family: var(--mono); }
+    code { font-family: var(--mono); font-size: 0.92em; }
+
+    button:focus-visible, input:focus-visible, .dropzone:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Compact header */
+    .topbar { background: var(--paper); border-bottom: 1px solid var(--line); padding: 14px 24px; }
+    .topbar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 6px 24px;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: baseline; gap: 12px; }
+    .brand-mark { display: none; }
+    .brand-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .brand-sub { font-size: 13px; color: var(--text-muted); margin-top: 1px; }
+    .security-badge { font-size: 13px; color: var(--text-muted); }
+    .security-dot { display: none; }
+
+    .container { max-width: 1440px; margin: 20px auto 48px; padding: 0 24px; }
+
+    /* Tabs + actions */
+    .nav-bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+    }
+    .tabs { display: inline-flex; gap: 24px; }
+    .tab-btn {
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 15px;
+      padding: 10px 0 12px;
+      margin-bottom: -1px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--ink); font-weight: 700; border-bottom-color: var(--ink); }
+    .tab-count { font-family: var(--mono); font-size: 12.5px; color: var(--text-muted); font-weight: 400; }
+    .action-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-bottom: 10px; }
+
+    .btn {
+      border: 1px solid var(--border-strong);
+      background: #fff;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13.5px;
+      padding: 7px 13px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .btn:hover { border-color: var(--ink); }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+    .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-emerald { font-weight: 700; }
+
+    /* Upload + summary */
+    .upload-strip { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 20px; }
+    .upload-strip > * { min-width: 0; }
+    @media (max-width: 1024px) { .upload-strip { grid-template-columns: 1fr; } }
+
+    .dropzone {
+      background: #fff;
+      border: 1.5px dashed var(--border-strong);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .dropzone:hover, .dropzone.dragover { border-color: var(--ink); background: #fff; }
+    .dropzone-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+    .dropzone-desc { font-size: 13px; color: var(--text-muted); }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .kpi-grid > * { min-width: 0; }
+    @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: transparent;
+      border: none;
+      border-left: 1px solid var(--line);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .kpi-card:first-child { border-left: none; }
+    .kpi-card.danger, .kpi-card.warning, .kpi-card.success { background: transparent; border-color: var(--line); }
+    .kpi-label { font-size: 13px; color: var(--text-muted); }
+    .kpi-card.danger .kpi-label, .kpi-card.warning .kpi-label, .kpi-card.success .kpi-label { color: var(--text-muted); }
+    .kpi-value { font-size: 22px; margin: 6px 0 3px; letter-spacing: -0.02em; white-space: nowrap; color: var(--ink); }
+    .kpi-card.success .kpi-value, .kpi-card.warning .kpi-value { color: var(--ink); }
+    .kpi-card.danger .kpi-value { color: var(--accent); }
+    .kpi-sub { font-size: 12.5px; color: var(--text-subtle); }
+
+    /* Table panel */
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .toolbar {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-pills { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--ink); }
+    .pill.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .pill.pill-danger.active { background: var(--accent); border-color: var(--accent); }
+    .toolbar label { font-weight: 400 !important; font-size: 13px !important; }
+    .search-input {
+      border: 1px solid var(--border-strong);
+      border-radius: 5px;
+      padding: 6px 10px;
+      font-family: inherit;
+      font-size: 13.5px;
+      min-width: 240px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+
+    .table-wrap { overflow-x: auto; max-height: 540px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: #fff;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 12.5px;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1.5px solid var(--ink);
+      white-space: nowrap;
+    }
+    th.right, td.right { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    tbody td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tbody tr:hover { background: var(--surface-alt); }
+    tbody tr.row-dup, tbody tr.row-danger { background: var(--accent-tint); }
+    tbody tr.row-dup:hover, tbody tr.row-danger:hover { background: #f7e4dc; }
+    tbody tr.row-warn { background: #fafaf6; }
+
+    /* Status labels: plain text, colour only where action is needed */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      margin: 1px 4px 1px 0;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .badge-ok { color: var(--text-muted); border-color: transparent; padding-left: 0; }
+    .badge-warn { color: var(--ink); border-color: var(--border-strong); }
+    .badge-purple { color: var(--text-muted); font-family: var(--mono); font-size: 11.5px; }
+    .badge-danger { color: var(--accent); border-color: var(--red-border); background: #fff; font-weight: 700; }
+
+    .empty-state { padding: 56px 20px; text-align: center; color: var(--text-muted); }
+    .empty-state h3 { font-size: 16px; color: var(--ink); margin-bottom: 6px; }
+    .empty-state p { max-width: 60ch; margin: 0 auto; }
+    .hidden { display: none !important; }
+
+    .footer-note {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      color: var(--text-subtle);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-note code { font-family: inherit; font-size: inherit; }
+
+    .neg-val { color: var(--accent); font-weight: 700; }
+    .pos-val { color: var(--ink); font-weight: 700; }
+
+    @media (max-width: 640px) {
+      .topbar, .container { padding-left: 16px; padding-right: 16px; }
+      .search-input { min-width: 0; width: 100%; }
+      .tabs { gap: 16px; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .topbar, .nav-bar, .dropzone, .toolbar, .footer-note { display: none !important; }
+      .container { margin: 0; padding: 0; max-width: 100%; }
+      .table-wrap { max-height: none; overflow: visible; }
+      thead th { position: static; }
+      tbody tr { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER WITH OFFLINE TRUST SHIELD -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">VN</div>
+          <div>
+            <div class="brand-title">Đối soát hóa đơn điện tử (.xml) và phí sàn Shopee / TikTok Shop</div>
+            <div class="brand-sub">XML theo QĐ 1450/QĐ-TCT, rà MST 13 số sang CCCD 12 số (Thông tư 86/2024), sổ hộ kinh doanh theo Thông tư 88</div>
+          </div>
+      </div>
+      <div class="security-badge" id="offlineShieldBadge">
+        <span class="security-dot"></span>
+        <span>Chạy offline trong trình duyệt, không gửi dữ liệu ra ngoài</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- TOP NAVIGATION & EXPORT BAR -->
+    <div class="nav-bar">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabBtnXml" onclick="switchTab('xml')">
+          <span>Gộp hóa đơn điện tử (.xml / .zip)</span>
+          <span class="tab-count num" id="badgeXmlCount">0</span>
+        </button>
+        <button class="tab-btn" id="tabBtnEcom" onclick="switchTab('ecom')">
+          <span>Đối soát tiền Shopee và TikTok Shop</span>
+          <span class="tab-count num" id="badgeEcomCount">0</span>
+        </button>
+      </div>
+
+      <div class="action-group">
+        <button class="btn" onclick="loadBuiltInDemo()" id="btnDemoSample">
+          Nạp dữ liệu mẫu
+        </button>
+        <button class="btn btn-primary" onclick="exportCurrentCSV()" id="btnExportCsv">
+          Xuất CSV (UTF-8, đọc được tiếng Việt)
+        </button>
+        <button class="btn btn-emerald" onclick="exportWorkbookXLS()" id="btnExportXls">
+          Xuất sổ Excel nhiều sheet (.xls, sổ TT88 và khiếu nại)
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 1: XML E-INVOICE PARSER ==================== -->
+    <section id="sectionXml">
+      <div class="upload-strip">
+        <div class="dropzone" id="xmlDropzone" onclick="document.getElementById('xmlFileInput').click()">
+          <input type="file" id="xmlFileInput" multiple accept=".xml,.zip" class="hidden" onchange="handleXmlFiles(this.files)" />
+          <div class="dropzone-title">Kéo thả file hóa đơn .xml hoặc file nén .zip vào đây</div>
+          <div class="dropzone-desc">
+            Tự giải nén file .zip tải từ <code>hoadondientu.gdt.gov.vn</code> ngay trên máy, đọc thẻ <code>&lt;HDon&gt;</code> theo QĐ 1450/QĐ-TCT và lọc hóa đơn nạp trùng số.
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card success">
+            <div class="kpi-label">Hóa đơn hợp lệ (đã lọc trùng)</div>
+            <div class="kpi-value num" id="kpiXmlValidCount">0 HĐ</div>
+            <div class="kpi-sub" id="kpiXmlLineCount">0 dòng hàng hóa chi tiết</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Tổng tiền hàng trước thuế</div>
+            <div class="kpi-value num" id="kpiXmlPreTax">0 đ</div>
+            <div class="kpi-sub">Chỉ cộng hóa đơn hợp lệ duy nhất</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Tổng thuế GTGT đầu vào</div>
+            <div class="kpi-value num" id="kpiXmlTax">0 đ</div>
+            <div class="kpi-sub" id="kpiXmlTotalPay">Tổng thanh toán: 0 đ</div>
+          </div>
+          <div class="kpi-card danger">
+            <div class="kpi-label">Trùng hoặc sai MST (TT86)</div>
+            <div class="kpi-value num" id="kpiXmlDupCount">0 lỗi</div>
+            <div class="kpi-sub" id="kpiXmlDupSaved">Chặn cộng nhầm: 0 đ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="filter-pills">
+            <button class="pill active" data-xmlview="invoices" onclick="setXmlSubView('invoices', this)">Bảng kê hóa đơn</button>
+            <button class="pill" data-xmlview="items" onclick="setXmlSubView('items', this)">Sổ chi tiết hàng hóa (Thông tư 88)</button>
+            <button class="pill pill-danger" data-xmlview="tt86" onclick="setXmlSubView('tt86', this)">Sai MST 13 số / chưa đổi CCCD 12 số (TT86) (<span id="cntXmlTt86">0</span>)</button>
+            <button class="pill pill-danger" data-xmlview="duplicates" onclick="setXmlSubView('duplicates', this)">HĐ trùng / cảnh báo (<span id="cntXmlWarnAll">0</span>)</button>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="text" class="search-input" id="xmlSearchInput" placeholder="Tìm MST, tên công ty, số hóa đơn, mặt hàng..." oninput="renderXmlTable()" />
+            <button class="btn" onclick="clearXmlData()">Xóa bảng</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="xmlTable">
+            <thead id="xmlThead"></thead>
+            <tbody id="xmlTbody"></tbody>
+          </table>
+          <div class="empty-state" id="xmlEmptyState">
+            <h3>Chưa có tệp hóa đơn .XML nào được nạp</h3>
+            <p>Kéo thả tệp <code>.xml</code> hoặc <code>.zip</code> vào khung phía trên, hoặc bấm <strong>Nạp dữ liệu mẫu</strong> để xem thử.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: SHOPEE & TIKTOK SHOP RECONCILER ==================== -->
+    <section id="sectionEcom" class="hidden">
+      <div class="upload-strip">
+        <div class="dropzone" id="ecomDropzone" onclick="document.getElementById('ecomFileInput').click()">
+          <input type="file" id="ecomFileInput" accept=".csv" class="hidden" onchange="handleEcomFile(this.files)" />
+          <div class="dropzone-title">Kéo thả file báo cáo đối soát Shopee / TikTok Shop (.csv) vào đây</div>
+          <div class="dropzone-desc">
+            Tự quét 4 kiểu thất thoát: (1) đơn hoàn âm tiền ví, (2) cân lố lệch phí vận chuyển, (3) đơn giao quá 10 ngày chưa về tiền, (4) bán lỗ ròng sau phí sàn + KOC.
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card success">
+            <div class="kpi-label">Thực nhận về ví</div>
+            <div class="kpi-value num" id="kpiEcomNetPayout">0 đ</div>
+            <div class="kpi-sub" id="kpiEcomNetProfit">Lãi ròng sau giá vốn: 0 đ</div>
+          </div>
+          <div class="kpi-card danger">
+            <div class="kpi-label">Đơn âm tiền và thu lố phí ship</div>
+            <div class="kpi-value num" id="kpiEcomBleedAmount">0 đ</div>
+            <div class="kpi-sub" id="kpiEcomBleedCount">0 đơn cần khiếu nại sàn ngay</div>
+          </div>
+          <div class="kpi-card warning">
+            <div class="kpi-label">Đơn giao quá 10 ngày chưa về tiền</div>
+            <div class="kpi-value num" id="kpiEcomAgingGmv">0 đ</div>
+            <div class="kpi-sub" id="kpiEcomAgingCount">0 đơn chưa quyết toán về ví</div>
+          </div>
+          <div class="kpi-card danger">
+            <div class="kpi-label">Đơn bán lỗ ròng (phí + affiliate)</div>
+            <div class="kpi-value num" id="kpiEcomLossCount">0 đơn</div>
+            <div class="kpi-sub" id="kpiEcomFeeRatio">Tổng phí sàn + KOC bào: 0% GMV</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="filter-pills" id="ecomFilterPills">
+            <button class="pill active" onclick="setEcomFilter('all', this)">Tất cả đơn (<span id="cntAll">0</span>)</button>
+            <button class="pill pill-danger" onclick="setEcomFilter('flagged', this)">Đơn bất thường (<span id="cntFlagged">0</span>)</button>
+            <button class="pill pill-danger" onclick="setEcomFilter('neg', this)">Đơn âm tiền (<span id="cntNeg">0</span>)</button>
+            <button class="pill pill-danger" onclick="setEcomFilter('ship', this)">Khiếu nại phí ship (<span id="cntShip">0</span>)</button>
+            <button class="pill" onclick="setEcomFilter('aging', this)">Treo quá 10 ngày (<span id="cntAging">0</span>)</button>
+            <button class="pill pill-danger" onclick="setEcomFilter('loss', this)">Đơn bán lỗ (<span id="cntLoss">0</span>)</button>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <label style="font-size:12px; color:var(--text-muted); font-weight:600;">Mốc đối soát:</label>
+            <input type="date" id="auditRefDate" value="2026-10-30" class="search-input" style="min-width:138px; padding:5px 8px;" onchange="recomputeEcomFlags()" />
+            <input type="text" class="search-input" id="ecomSearchInput" placeholder="Tìm mã đơn, SKU, tên sản phẩm..." style="min-width:200px;" oninput="renderEcomTable()" />
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="ecomTable">
+            <thead>
+              <tr>
+                <th>Sàn / mã đơn</th>
+                <th>Sản phẩm (SKU)</th>
+                <th>Ngày giao / quyết toán</th>
+                <th class="right">Doanh thu (GMV)</th>
+                <th class="right">Voucher shop</th>
+                <th class="right">Tổng phí sàn + KOC</th>
+                <th class="right">Lệch phí ship</th>
+                <th class="right">Thực nhận ví</th>
+                <th class="right">Giá vốn</th>
+                <th class="right">Lãi / lỗ ròng</th>
+                <th>Cảnh báo</th>
+              </tr>
+            </thead>
+            <tbody id="ecomTbody"></tbody>
+          </table>
+          <div class="empty-state" id="ecomEmptyState">
+            <h3>Chưa nạp dữ liệu đối soát đơn hàng Shopee / TikTok Shop</h3>
+            <p>Kéo thả file <code>.csv</code> báo cáo doanh thu đơn hàng vào khung trên, hoặc bấm <strong>Nạp dữ liệu mẫu</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      <div>Phiên bản 2026.11. Theo Quyết định 1450/QĐ-TCT, Nghị định 70/2025/NĐ-CP và sổ kế toán hộ kinh doanh Thông tư 88.</div>
+      <div>Thiết kế bởi Trung Thanh Tran (software and automation engineer). Nhận tùy biến mẫu biểu riêng cho kế toán dịch vụ và chủ shop.</div>
+    </div>
+  </main>
+
+  <script>
+    "use strict";
+
+    // =========================================================================
+    // STATE MANAGEMENT
+    // =========================================================================
+    let activeTab = "xml";
+    let xmlSubView = "invoices"; // 'invoices' | 'items' | 'duplicates'
+    let xmlInvoices = [];        // Parsed invoice headers + flags
+    let xmlLineItems = [];       // Flattened TT88 line items (from non-duplicate invoices)
+
+    let rawEcomRows = [];
+    let ecomOrders = [];
+    let ecomFilter = "all";
+
+    const fmtVND = (n) => {
+      const val = Math.round(Number(n) || 0);
+      return val.toLocaleString("vi-VN") + " đ";
+    };
+
+    const escHtml = (str) => String(str ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+    function switchTab(tab) {
+      activeTab = tab;
+      document.getElementById("tabBtnXml").classList.toggle("active", tab === "xml");
+      document.getElementById("tabBtnEcom").classList.toggle("active", tab === "ecom");
+      document.getElementById("sectionXml").classList.toggle("hidden", tab !== "xml");
+      document.getElementById("sectionEcom").classList.toggle("hidden", tab !== "ecom");
+    }
+
+    // =========================================================================
+    // ZERO-DEPENDENCY OFFLINE .ZIP EXTRACTOR (Native Browser DecompressionStream)
+    // =========================================================================
+    async function extractXmlFromZipBuffer(arrayBuffer) {
+      const view = new DataView(arrayBuffer);
+      const bytes = new Uint8Array(arrayBuffer);
+      const extracted = [];
+
+      // Locate End of Central Directory (EOCD) signature 0x06054b50
+      let eocdOffset = -1;
+      const minEocd = Math.max(0, bytes.length - 65557);
+      for (let i = bytes.length - 22; i >= minEocd; i--) {
+        if (view.getUint32(i, true) === 0x06054b50) {
+          eocdOffset = i;
+          break;
+        }
+      }
+      if (eocdOffset === -1) return extracted;
+
+      const totalEntries = view.getUint16(eocdOffset + 10, true);
+      let cdOffset = view.getUint32(eocdOffset + 16, true);
+      const decoder = new TextDecoder("utf-8");
+
+      for (let e = 0; e < totalEntries; e++) {
+        if (cdOffset + 46 > bytes.length || view.getUint32(cdOffset, true) !== 0x02014b50) break;
+        const compressionMethod = view.getUint16(cdOffset + 10, true);
+        const compressedSize = view.getUint32(cdOffset + 20, true);
+        const fileNameLen = view.getUint16(cdOffset + 28, true);
+        const extraLen = view.getUint16(cdOffset + 30, true);
+        const commentLen = view.getUint16(cdOffset + 32, true);
+        const localHeaderOffset = view.getUint32(cdOffset + 42, true);
+
+        const fileName = decoder.decode(bytes.subarray(cdOffset + 46, cdOffset + 46 + fileNameLen));
+        cdOffset += 46 + fileNameLen + extraLen + commentLen;
+
+        if (!fileName.toLowerCase().endsWith(".xml") || fileName.startsWith("__MACOSX")) continue;
+
+        if (view.getUint32(localHeaderOffset, true) !== 0x04034b50) continue;
+        const localNameLen = view.getUint16(localHeaderOffset + 26, true);
+        const localExtraLen = view.getUint16(localHeaderOffset + 28, true);
+        const dataStart = localHeaderOffset + 30 + localNameLen + localExtraLen;
+        const compSlice = bytes.subarray(dataStart, dataStart + compressedSize);
+
+        if (compressionMethod === 0) {
+          extracted.push({ name: fileName, text: decoder.decode(compSlice) });
+        } else if (compressionMethod === 8 && typeof DecompressionStream !== "undefined") {
+          const ds = new DecompressionStream("deflate-raw");
+          const writer = ds.writable.getWriter();
+          writer.write(compSlice);
+          writer.close();
+          const decompBuf = await new Response(ds.readable).arrayBuffer();
+          extracted.push({ name: fileName, text: decoder.decode(decompBuf) });
+        }
+      }
+      return extracted;
+    }
+
+    // =========================================================================
+    // TAB 1: VIETNAMESE E-INVOICE XML PARSER (QUYẾT ĐỊNH 1450/QĐ-TCT)
+    // =========================================================================
+    function getTagText(parent, tagName) {
+      if (!parent) return "";
+      const el = parent.getElementsByTagName(tagName)[0];
+      return el ? (el.textContent || "").trim() : "";
+    }
+
+    function detectTT86MstIssue(tenBan, mstBan, khmshdon) {
+      const name = String(tenBan || "").trim();
+      const mst = String(mstBan || "").trim();
+      if (!mst) return "Thiếu MST người bán trên hóa đơn";
+
+      const isCorp = /(công ty|cong ty|\bcty\b|doanh nghiệp tư nhân|\bdntn\b|tập đoàn|tap doan|hợp tác xã|hop tac xa|ngân hàng|chi nhánh công ty)/i.test(name);
+      const isHkdExplicit = /(hộ kinh doanh|ho kinh doanh|\bhkd\b|cá nhân kinh doanh|\bcnkd\b|cửa hàng|\bshop\b)/i.test(name);
+      const is13Hyphen = /^\d{10}-?\d{3}$/.test(mst);
+      const is10Digit = /^\d{10}$/.test(mst);
+      const is12Cccd = /^\d{12}$/.test(mst);
+      const startsWith8Individual = /^8\d{9}(-\d{3})?$/.test(mst);
+
+      if (!isCorp && (isHkdExplicit || startsWith8Individual || String(khmshdon) === "2")) {
+        if (is13Hyphen) {
+          return `NCC Hộ kinh doanh vẫn xuất MST 13 số cũ (${mst}) thay vì CCCD 12 số — Cần yêu cầu xuất HĐ thay thế (TT 86/2024/TT-BTC)`;
+        }
+        if (is10Digit && !is12Cccd) {
+          return `NCC HKD/Cá nhân vẫn xuất MST 10 số cũ (${mst}) — Chưa đổi sang Số định danh CCCD 12 số (TT 86/2024/TT-BTC)`;
+        }
+        if (!is12Cccd) {
+          return `MST HKD/Cá nhân (${mst}) không đúng chuẩn 12 số CCCD theo Thông tư 86/2024/TT-BTC`;
+        }
+      } else if (is13Hyphen && !/(chi nhánh|văn phòng đại diện|địa điểm kinh doanh)/i.test(name)) {
+        return `MST 13 số (${mst}) nhưng người bán không phải Chi nhánh Công ty — Nghi vấn HKD chưa đổi CCCD 12 số (TT 86/2024)`;
+      }
+      return "";
+    }
+
+    function parseSingleEInvoiceXml(fileName, xmlString) {
+      const parser = new DOMParser();
+      const safeXml = String(xmlString || "").replace(/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;");
+      const doc = parser.parseFromString(safeXml, "text/xml");
+      if (doc.getElementsByTagName("parsererror").length > 0) return null;
+
+      const hdon = doc.getElementsByTagName("HDon")[0] || doc.documentElement;
+      const dlhdon = hdon.getElementsByTagName("DLHDon")[0] || hdon;
+      const ttchung = dlhdon.getElementsByTagName("TTChung")[0];
+      const ndhdon = dlhdon.getElementsByTagName("NDHDon")[0] || dlhdon;
+      const nban = ndhdon.getElementsByTagName("NBan")[0];
+      const nmua = ndhdon.getElementsByTagName("NMua")[0];
+      const ttoan = ndhdon.getElementsByTagName("TToan")[0];
+      const dshhdvu = ndhdon.getElementsByTagName("DSHHDVu")[0] || ndhdon.getElementsByTagName("DSHHDV")[0];
+
+      if (!ttchung && !nban) return null;
+
+      const khmshdon = getTagText(ttchung, "KHMSHDon");
+      const khhdon = getTagText(ttchung, "KHHDon");
+      const shdon = getTagText(ttchung, "SHDon");
+      const nlap = getTagText(ttchung, "NLap");
+      const htttoan = getTagText(ttchung, "HTTToan") || getTagText(ttchung, "HTTT");
+
+      const mstBan = getTagText(nban, "MST");
+      const tenBan = getTagText(nban, "Ten");
+      const dchiBan = getTagText(nban, "DChi");
+
+      const mstMua = getTagText(nmua, "MST");
+      const tenMua = getTagText(nmua, "Ten") || getTagText(nmua, "HVTNMHang") || getTagText(nmua, "HVTNMH");
+
+      const tgTCThue = Number(getTagText(ttoan, "TgTCThue") || 0);
+      const tgTThue = Number(getTagText(ttoan, "TgTThue") || 0);
+      const tgTTTBSo = Number(getTagText(ttoan, "TgTTTBSo") || (tgTCThue + tgTThue));
+
+      const mccqt = getTagText(dlhdon, "MCCQT");
+      const hasSig = hdon.getElementsByTagName("Signature").length > 0;
+
+      const items = [];
+      if (dshhdvu) {
+        const nodes = dshhdvu.getElementsByTagName("HHDVu");
+        for (let i = 0; i < nodes.length; i++) {
+          const node = nodes[i];
+          items.push({
+            stt: getTagText(node, "STT") || String(i + 1),
+            ma: getTagText(node, "MHHDVu"),
+            ten: getTagText(node, "THHDVu"),
+            dvt: getTagText(node, "DVTinh"),
+            sl: Number(getTagText(node, "SLuong") || 0),
+            dgia: Number(getTagText(node, "DGia") || 0),
+            tsuat: getTagText(node, "TSuat"),
+            thtien: Number(getTagText(node, "ThTien") || 0)
+          });
+        }
+      }
+
+      const tt86Issue = detectTT86MstIssue(tenBan, mstBan, khmshdon);
+
+      return {
+        fileName,
+        khmshdon,
+        khhdon,
+        shdon,
+        nlap,
+        htttoan,
+        mstBan,
+        tenBan,
+        dchiBan,
+        mstMua,
+        tenMua,
+        tgTCThue,
+        tgTThue,
+        tgTTTBSo,
+        mccqt,
+        hasSig,
+        tt86Issue,
+        items,
+        uniqueKey: `${mstBan}|${khhdon}|${shdon}`,
+        isDuplicate: false,
+        duplicateOfFile: ""
+      };
+    }
+
+    async function handleXmlFiles(fileList) {
+      if (!fileList || fileList.length === 0) return;
+      const incoming = [];
+      for (const file of fileList) {
+        const lower = file.name.toLowerCase();
+        if (lower.endsWith(".zip")) {
+          const buf = await file.arrayBuffer();
+          const unzipped = await extractXmlFromZipBuffer(buf);
+          incoming.push(...unzipped);
+        } else if (lower.endsWith(".xml")) {
+          const text = await file.text();
+          incoming.push({ name: file.name, text });
+        }
+      }
+      ingestXmlPayloads(incoming);
+    }
+
+    function ingestXmlPayloads(payloads) {
+      const seenKeys = new Map();
+      // Preserve existing loaded keys first
+      xmlInvoices.forEach((inv) => {
+        if (!inv.isDuplicate) seenKeys.set(inv.uniqueKey, inv.fileName);
+      });
+
+      for (const p of payloads) {
+        const parsed = parseSingleEInvoiceXml(p.name, p.text);
+        if (!parsed) continue;
+        if (seenKeys.has(parsed.uniqueKey)) {
+          parsed.isDuplicate = true;
+          parsed.duplicateOfFile = seenKeys.get(parsed.uniqueKey);
+        } else {
+          seenKeys.set(parsed.uniqueKey, parsed.fileName);
+        }
+        xmlInvoices.push(parsed);
+      }
+
+      rebuildXmlAggregates();
+      renderXmlTable();
+    }
+
+    function rebuildXmlAggregates() {
+      xmlLineItems = [];
+      let validCount = 0;
+      let dupCount = 0;
+      let missingCqtCount = 0;
+      let tt86Count = 0;
+      let sumPreTax = 0;
+      let sumTax = 0;
+      let sumTotal = 0;
+      let dupSavedAmount = 0;
+
+      for (const inv of xmlInvoices) {
+        if (inv.isDuplicate) {
+          dupCount++;
+          dupSavedAmount += inv.tgTTTBSo;
+          continue;
+        }
+        validCount++;
+        if (!inv.mccqt) missingCqtCount++;
+        if (inv.tt86Issue) tt86Count++;
+        sumPreTax += inv.tgTCThue;
+        sumTax += inv.tgTThue;
+        sumTotal += inv.tgTTTBSo;
+
+        for (const it of inv.items) {
+          xmlLineItems.push({
+            nlap: inv.nlap,
+            soHD: `${inv.khhdon}-${inv.shdon}`,
+            mstBan: inv.mstBan,
+            tenBan: inv.tenBan,
+            maHang: it.ma,
+            tenHang: it.ten,
+            dvt: it.dvt,
+            sl: it.sl,
+            dgia: it.dgia,
+            tsuat: it.tsuat,
+            thtien: it.thtien
+          });
+        }
+      }
+
+      const totalAlerts = dupCount + missingCqtCount + tt86Count;
+      document.getElementById("badgeXmlCount").textContent = String(xmlInvoices.length);
+      document.getElementById("kpiXmlValidCount").textContent = `${validCount} HĐ`;
+      document.getElementById("kpiXmlLineCount").textContent = `${xmlLineItems.length} dòng hàng hóa TT88`;
+      document.getElementById("kpiXmlPreTax").textContent = fmtVND(sumPreTax);
+      document.getElementById("kpiXmlTax").textContent = fmtVND(sumTax);
+      document.getElementById("kpiXmlTotalPay").textContent = `Tổng thanh toán: ${fmtVND(sumTotal)}`;
+      document.getElementById("kpiXmlDupCount").textContent = `${totalAlerts} cảnh báo`;
+      document.getElementById("kpiXmlDupSaved").textContent = `Chặn trùng: ${fmtVND(dupSavedAmount)} • Sai MST TT86: ${tt86Count} HĐ`;
+      const elTt86 = document.getElementById("cntXmlTt86");
+      const elWarnAll = document.getElementById("cntXmlWarnAll");
+      if (elTt86) elTt86.textContent = String(tt86Count);
+      if (elWarnAll) elWarnAll.textContent = String(totalAlerts);
+    }
+
+    function setXmlSubView(view, btnEl) {
+      xmlSubView = view;
+      document.querySelectorAll("[data-xmlview]").forEach((b) => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      renderXmlTable();
+    }
+
+    function renderXmlTable() {
+      const thead = document.getElementById("xmlThead");
+      const tbody = document.getElementById("xmlTbody");
+      const empty = document.getElementById("xmlEmptyState");
+      const q = (document.getElementById("xmlSearchInput").value || "").toLowerCase().trim();
+
+      if (xmlInvoices.length === 0) {
+        thead.innerHTML = "";
+        tbody.innerHTML = "";
+        empty.classList.remove("hidden");
+        return;
+      }
+      empty.classList.add("hidden");
+
+      if (xmlSubView === "items") {
+        thead.innerHTML = `
+          <tr>
+            <th>Ngày lập</th>
+            <th>Ký hiệu - Số HĐ</th>
+            <th>MST Người bán</th>
+            <th>Nhà cung cấp / Đơn vị xuất</th>
+            <th>Mã hàng</th>
+            <th>Tên hàng hóa, dịch vụ (Sổ chi tiết TT88)</th>
+            <th>ĐVT</th>
+            <th class="right">SL</th>
+            <th class="right">Đơn giá</th>
+            <th>Thuế</th>
+            <th class="right">Thành tiền chưa thuế</th>
+          </tr>`;
+
+        const filtered = xmlLineItems.filter((r) =>
+          !q ||
+          r.soHD.toLowerCase().includes(q) ||
+          r.mstBan.toLowerCase().includes(q) ||
+          r.tenBan.toLowerCase().includes(q) ||
+          r.tenHang.toLowerCase().includes(q)
+        );
+
+        tbody.innerHTML = filtered.map((r) => `
+          <tr>
+            <td class="num">${escHtml(r.nlap)}</td>
+            <td class="num"><strong>${escHtml(r.soHD)}</strong></td>
+            <td class="num">${escHtml(r.mstBan)}</td>
+            <td>${escHtml(r.tenBan)}</td>
+            <td class="num">${escHtml(r.maHang)}</td>
+            <td>${escHtml(r.tenHang)}</td>
+            <td>${escHtml(r.dvt)}</td>
+            <td class="right num">${r.sl.toLocaleString("vi-VN")}</td>
+            <td class="right num">${fmtVND(r.dgia)}</td>
+            <td class="num">${escHtml(r.tsuat)}</td>
+            <td class="right num"><strong>${fmtVND(r.thtien)}</strong></td>
+          </tr>`).join("");
+        return;
+      }
+
+      thead.innerHTML = `
+        <tr>
+          <th>Trạng thái Kiểm toán</th>
+          <th>Ký hiệu & Số HĐ</th>
+          <th>Ngày lập</th>
+          <th>Người bán (MST & Tên đơn vị)</th>
+          <th>Mặt hàng chính (${xmlInvoices.length} tệp)</th>
+          <th class="right">Tiền trước thuế</th>
+          <th class="right">Thuế GTGT</th>
+          <th class="right">Tổng thanh toán</th>
+          <th>Tệp nguồn</th>
+        </tr>`;
+
+      const list = xmlInvoices.filter((inv) => {
+        if (xmlSubView === "tt86" && !inv.tt86Issue) return false;
+        if (xmlSubView === "duplicates" && !inv.isDuplicate && !inv.tt86Issue && inv.mccqt && inv.hasSig) return false;
+        if (!q) return true;
+        const itemSummary = inv.items.map((i) => i.ten).join(" ").toLowerCase();
+        return (
+          inv.shdon.toLowerCase().includes(q) ||
+          inv.khhdon.toLowerCase().includes(q) ||
+          inv.mstBan.toLowerCase().includes(q) ||
+          inv.tenBan.toLowerCase().includes(q) ||
+          itemSummary.includes(q)
+        );
+      });
+
+      tbody.innerHTML = list.map((inv) => {
+        let badges = "";
+        if (inv.isDuplicate) {
+          badges += `<span class="badge badge-danger">[TRÙNG] TRÙNG SỐ HÓA ĐƠN (Đã loại khỏi tổng)</span>`;
+        } else if (inv.tt86Issue) {
+          badges += `<span class="badge badge-danger">[CẢNH BÁO] SAI MST HKD 13 SỐ — TT 86/2024</span>`;
+        } else {
+          badges += `<span class="badge badge-ok">[OK] Hợp lệ QĐ 1450</span>`;
+        }
+        if (inv.mccqt) {
+          badges += `<span class="badge badge-purple">CQT: ${escHtml(inv.mccqt.slice(0, 12))}…</span>`;
+        } else {
+          badges += `<span class="badge badge-warn">[LƯU Ý] Thiếu Mã CQT</span>`;
+        }
+
+        const firstItem = inv.items[0] ? inv.items[0].ten : "(Không có dòng hàng)";
+        const extraItems = inv.items.length > 1 ? ` <strong style="color:var(--primary)">(+${inv.items.length - 1} dòng)</strong>` : "";
+        const rowCls = inv.isDuplicate ? "row-dup" : (inv.tt86Issue ? "row-warn" : "");
+
+        return `
+          <tr class="${rowCls}">
+            <td>
+              <div>${badges}</div>
+              ${inv.isDuplicate ? `<div style="font-size:11.5px; color:var(--red); margin-top:3px;">Trùng với tệp: ${escHtml(inv.duplicateOfFile)}</div>` : ""}
+              ${!inv.isDuplicate && inv.tt86Issue ? `<div style="font-size:11.5px; color:#b45309; font-weight:600; margin-top:3px;">${escHtml(inv.tt86Issue)}</div>` : ""}
+            </td>
+            <td class="num"><strong>${escHtml(inv.khhdon)}</strong><br/>Số: <strong>${escHtml(inv.shdon)}</strong></td>
+            <td class="num">${escHtml(inv.nlap)}<br/><span style="font-size:11.5px;color:var(--text-subtle)">${escHtml(inv.htttoan)}</span></td>
+            <td><strong>${escHtml(inv.tenBan)}</strong><br/><span class="num" style="font-size:12px;color:${inv.tt86Issue ? "var(--red)" : "var(--text-muted)"};font-weight:${inv.tt86Issue ? "700" : "400"};">MST: ${escHtml(inv.mstBan)}</span></td>
+            <td>${escHtml(firstItem)}${extraItems}</td>
+            <td class="right num">${fmtVND(inv.tgTCThue)}</td>
+            <td class="right num">${fmtVND(inv.tgTThue)}</td>
+            <td class="right num"><strong>${fmtVND(inv.tgTTTBSo)}</strong></td>
+            <td style="font-size:12px;color:var(--text-subtle);max-width:190px;word-break:break-all;">${escHtml(inv.fileName)}</td>
+          </tr>`;
+      }).join("");
+    }
+
+    function clearXmlData() {
+      xmlInvoices = [];
+      xmlLineItems = [];
+      rebuildXmlAggregates();
+      renderXmlTable();
+    }
+
+    // =========================================================================
+    // TAB 2: SHOPEE & TIKTOK SHOP CSV PARSER + 4 RED-FLAG ENGINE
+    // =========================================================================
+    function parseCSVText(text) {
+      const clean = text.replace(/^\uFEFF/, "");
+      const rows = [];
+      let row = [];
+      let cur = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < clean.length; i++) {
+        const ch = clean[i];
+        const next = clean[i + 1];
+        if (inQuotes) {
+          if (ch === '"' && next === '"') {
+            cur += '"';
+            i++;
+          } else if (ch === '"') {
+            inQuotes = false;
+          } else {
+            cur += ch;
+          }
+        } else {
+          if (ch === '"') {
+            inQuotes = true;
+          } else if (ch === ",") {
+            row.push(cur.trim());
+            cur = "";
+          } else if (ch === "\n" || (ch === "\r" && next === "\n")) {
+            if (ch === "\r") i++;
+            row.push(cur.trim());
+            if (row.some((c) => c !== "")) rows.push(row);
+            row = [];
+            cur = "";
+          } else {
+            cur += ch;
+          }
+        }
+      }
+      if (cur !== "" || row.length > 0) {
+        row.push(cur.trim());
+        if (row.some((c) => c !== "")) rows.push(row);
+      }
+      return rows;
+    }
+
+    function parseNum(v) {
+      if (typeof v === "number") return v;
+      if (!v) return 0;
+      const cleaned = String(v).replace(/[^\d.-]/g, "");
+      return Number(cleaned) || 0;
+    }
+
+    function findColIdx(headers, keywords) {
+      const lowerHeaders = headers.map((h) => h.toLowerCase());
+      for (const kw of keywords) {
+        const idx = lowerHeaders.findIndex((h) => h.includes(kw));
+        if (idx !== -1) return idx;
+      }
+      return -1;
+    }
+
+    async function handleEcomFile(files) {
+      if (!files || files.length === 0) return;
+      const text = await files[0].text();
+      ingestEcomCSV(text);
+      switchTab("ecom");
+    }
+
+    function ingestEcomCSV(csvText) {
+      const matrix = parseCSVText(csvText);
+      if (matrix.length < 2) return;
+      const h = matrix[0];
+
+      const idx = {
+        platform: findColIdx(h, ["sàn", "platform", "kênh"]),
+        orderId: findColIdx(h, ["mã đơn", "order id", "order/adjustment"]),
+        sku: findColIdx(h, ["sku", "mã sản phẩm"]),
+        name: findColIdx(h, ["tên sản phẩm", "product name"]),
+        createdDate: findColIdx(h, ["ngày tạo", "creation time"]),
+        deliveredDate: findColIdx(h, ["ngày giao", "delivered"]),
+        settledDate: findColIdx(h, ["ngày quyết toán", "settlement date"]),
+        status: findColIdx(h, ["trạng thái", "status"]),
+        gmv: findColIdx(h, ["doanh thu", "tổng giá tiền", "subtotal", "gmv"]),
+        sellerVoucher: findColIdx(h, ["trợ giá", "giảm giá của shop", "seller discount"]),
+        commFee: findColIdx(h, ["phí cố định", "hoa hồng tiktok", "commission fee"]),
+        serviceFee: findColIdx(h, ["phí dịch vụ", "service fee"]),
+        txFee: findColIdx(h, ["phí thanh toán", "phí giao dịch", "transaction fee"]),
+        affFee: findColIdx(h, ["affiliate", "liên kết"]),
+        shipEst: findColIdx(h, ["khách trả", "ước tính", "estimated shipping"]),
+        shipActual: findColIdx(h, ["phí ship thực tế", "actual shipping"]),
+        shipDiff: findColIdx(h, ["chênh lệch phí vận chuyển", "shipping fee discrepancy"]),
+        payout: findColIdx(h, ["thực nhận", "số tiền quyết toán", "settlement amount", "escrow"]),
+        cogs: findColIdx(h, ["giá vốn", "cogs"])
+      };
+
+      rawEcomRows = matrix.slice(1).map((r) => ({
+        platform: idx.platform >= 0 ? r[idx.platform] : "TMĐT",
+        orderId: idx.orderId >= 0 ? r[idx.orderId] : "",
+        sku: idx.sku >= 0 ? r[idx.sku] : "",
+        name: idx.name >= 0 ? r[idx.name] : "",
+        createdDate: idx.createdDate >= 0 ? r[idx.createdDate] : "",
+        deliveredDate: idx.deliveredDate >= 0 ? r[idx.deliveredDate] : "",
+        settledDate: idx.settledDate >= 0 ? r[idx.settledDate] : "",
+        status: idx.status >= 0 ? r[idx.status] : "",
+        gmv: idx.gmv >= 0 ? parseNum(r[idx.gmv]) : 0,
+        sellerVoucher: idx.sellerVoucher >= 0 ? parseNum(r[idx.sellerVoucher]) : 0,
+        commFee: idx.commFee >= 0 ? Math.abs(parseNum(r[idx.commFee])) : 0,
+        serviceFee: idx.serviceFee >= 0 ? Math.abs(parseNum(r[idx.serviceFee])) : 0,
+        txFee: idx.txFee >= 0 ? Math.abs(parseNum(r[idx.txFee])) : 0,
+        affFee: idx.affFee >= 0 ? Math.abs(parseNum(r[idx.affFee])) : 0,
+        shipEst: idx.shipEst >= 0 ? parseNum(r[idx.shipEst]) : 0,
+        shipActual: idx.shipActual >= 0 ? parseNum(r[idx.shipActual]) : 0,
+        shipDiff: idx.shipDiff >= 0 ? parseNum(r[idx.shipDiff]) : 0,
+        payout: idx.payout >= 0 ? parseNum(r[idx.payout]) : 0,
+        cogs: idx.cogs >= 0 ? parseNum(r[idx.cogs]) : 0
+      }));
+
+      recomputeEcomFlags();
+    }
+
+    function recomputeEcomFlags() {
+      const refStr = document.getElementById("auditRefDate").value || "2026-10-30";
+      const refTime = new Date(refStr + "T23:59:59").getTime();
+
+      let sumPayout = 0;
+      let sumNetProfit = 0;
+      let sumGmv = 0;
+      let sumTotalFees = 0;
+
+      let bleedAmount = 0;
+      let bleedCount = 0;
+      let agingGmv = 0;
+      let agingCount = 0;
+      let lossCount = 0;
+
+      let cntNeg = 0, cntShip = 0, cntFlagged = 0;
+
+      ecomOrders = rawEcomRows.map((o) => {
+        const totalFees = o.commFee + o.serviceFee + o.txFee + o.affFee;
+        const shipDiscrepancy = o.shipDiff !== 0 ? o.shipDiff : (o.shipEst - o.shipActual);
+
+        // Flag 1: Negative Settlement
+        const flagNeg = o.payout < 0;
+
+        // Flag 2: Shipping Weight/Size Overcharge (excluding pure returned orders already in Flag 1)
+        const flagShip = !flagNeg && shipDiscrepancy < 0;
+
+        // Flag 3: Delivered > 10 days without settlement
+        let agingDays = 0;
+        let flagAging = false;
+        if (o.deliveredDate && !o.settledDate) {
+          const delivTime = new Date(o.deliveredDate + "T00:00:00").getTime();
+          if (!isNaN(delivTime)) {
+            agingDays = Math.floor((refTime - delivTime) / 86400000);
+            if (agingDays > 10) flagAging = true;
+          }
+        }
+
+        // Net Profit (only computed as settled profit/loss if settled or negative return; unsettled pending orders aren't realized loss yet)
+        const isUnsettledPending = !o.settledDate && o.payout === 0 && !flagNeg;
+        const netMargin = isUnsettledPending ? 0 : (o.payout - o.cogs);
+
+        // Flag 4: Realized Margin Loss on completed sale (exclude unsettled & pure failed delivery where COGS=0)
+        const flagLoss = !isUnsettledPending && !flagNeg && netMargin < 0;
+
+        const hasAnyFlag = flagNeg || flagShip || flagAging || flagLoss;
+
+        sumGmv += o.gmv;
+        sumTotalFees += totalFees;
+        sumPayout += o.payout;
+        if (!isUnsettledPending) sumNetProfit += netMargin;
+
+        if (flagNeg) {
+          cntNeg++;
+          bleedCount++;
+          bleedAmount += Math.abs(o.payout);
+        }
+        if (flagShip) {
+          cntShip++;
+          bleedCount++;
+          bleedAmount += Math.abs(shipDiscrepancy);
+        }
+        if (flagAging) {
+          agingCount++;
+          agingGmv += o.gmv;
+        }
+        if (flagLoss) {
+          lossCount++;
+        }
+        if (hasAnyFlag) cntFlagged++;
+
+        return {
+          ...o,
+          totalFees,
+          shipDiscrepancy,
+          agingDays,
+          isUnsettledPending,
+          netMargin,
+          flagNeg,
+          flagShip,
+          flagAging,
+          flagLoss,
+          hasAnyFlag
+        };
+      });
+
+      document.getElementById("badgeEcomCount").textContent = String(ecomOrders.length);
+      document.getElementById("kpiEcomNetPayout").textContent = fmtVND(sumPayout);
+      document.getElementById("kpiEcomNetProfit").textContent = `Lãi ròng sau giá vốn: ${fmtVND(sumNetProfit)}`;
+      document.getElementById("kpiEcomBleedAmount").textContent = fmtVND(bleedAmount);
+      document.getElementById("kpiEcomBleedCount").textContent = `${bleedCount} đơn âm ví / cân lố phí ship`;
+      document.getElementById("kpiEcomAgingGmv").textContent = fmtVND(agingGmv);
+      document.getElementById("kpiEcomAgingCount").textContent = `${agingCount} đơn quá hạn >10 ngày chưa về ví`;
+      document.getElementById("kpiEcomLossCount").textContent = `${lossCount} đơn bán lỗ`;
+      const feePct = sumGmv > 0 ? ((sumTotalFees / sumGmv) * 100).toFixed(1) : "0.0";
+      document.getElementById("kpiEcomFeeRatio").textContent = `Tổng phí sàn + KOC: ${feePct}% GMV`;
+
+      document.getElementById("cntAll").textContent = String(ecomOrders.length);
+      document.getElementById("cntFlagged").textContent = String(cntFlagged);
+      document.getElementById("cntNeg").textContent = String(cntNeg);
+      document.getElementById("cntShip").textContent = String(cntShip);
+      document.getElementById("cntAging").textContent = String(agingCount);
+      document.getElementById("cntLoss").textContent = String(lossCount);
+
+      renderEcomTable();
+    }
+
+    function setEcomFilter(filterKey, btnEl) {
+      ecomFilter = filterKey;
+      document.querySelectorAll("#ecomFilterPills .pill").forEach((b) => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      renderEcomTable();
+    }
+
+    function renderEcomTable() {
+      const tbody = document.getElementById("ecomTbody");
+      const empty = document.getElementById("ecomEmptyState");
+      const q = (document.getElementById("ecomSearchInput").value || "").toLowerCase().trim();
+
+      if (ecomOrders.length === 0) {
+        tbody.innerHTML = "";
+        empty.classList.remove("hidden");
+        return;
+      }
+      empty.classList.add("hidden");
+
+      const list = ecomOrders.filter((o) => {
+        if (ecomFilter === "flagged" && !o.hasAnyFlag) return false;
+        if (ecomFilter === "neg" && !o.flagNeg) return false;
+        if (ecomFilter === "ship" && !o.flagShip) return false;
+        if (ecomFilter === "aging" && !o.flagAging) return false;
+        if (ecomFilter === "loss" && !o.flagLoss) return false;
+        if (!q) return true;
+        return (
+          o.orderId.toLowerCase().includes(q) ||
+          o.sku.toLowerCase().includes(q) ||
+          o.name.toLowerCase().includes(q) ||
+          o.platform.toLowerCase().includes(q)
+        );
+      });
+
+      tbody.innerHTML = list.map((o) => {
+        let flagsHtml = "";
+        if (o.flagNeg) flagsHtml += `<span class="badge badge-danger">[P0] Âm tiền ví (${fmtVND(o.payout)})</span>`;
+        if (o.flagShip) flagsHtml += `<span class="badge badge-danger">[SHIP] Cân lố Ship (${fmtVND(o.shipDiscrepancy)})</span>`;
+        if (o.flagAging) flagsHtml += `<span class="badge badge-warn">[TREO] Treo ${o.agingDays} ngày chưa về ví</span>`;
+        if (o.flagLoss) flagsHtml += `<span class="badge badge-danger">[LỖ] Bán lỗ SKU (${fmtVND(o.netMargin)})</span>`;
+        if (!o.hasAnyFlag) flagsHtml = `<span class="badge badge-ok">[OK] Khớp chuẩn</span>`;
+
+        const rowClass = (o.flagNeg || o.flagShip || o.flagLoss) ? "row-danger" : (o.flagAging ? "row-warn" : "");
+
+        return `
+          <tr class="${rowClass}">
+            <td>
+              <strong>${escHtml(o.platform)}</strong><br/>
+              <span class="num" style="font-size:12px;color:var(--primary);font-weight:700;">#${escHtml(o.orderId)}</span>
+            </td>
+            <td>
+              <div style="font-weight:600;">${escHtml(o.name)}</div>
+              <div class="num" style="font-size:11.5px;color:var(--text-subtle);">SKU: ${escHtml(o.sku)}</div>
+            </td>
+            <td class="num" style="font-size:12px;">
+              Giao: ${escHtml(o.deliveredDate || "—")}<br/>
+              QT: <strong>${escHtml(o.settledDate || "Chưa QT")}</strong>
+            </td>
+            <td class="right num">${fmtVND(o.gmv)}</td>
+            <td class="right num">${o.sellerVoucher ? "-" + fmtVND(o.sellerVoucher) : "0 đ"}</td>
+            <td class="right num">${o.totalFees ? "-" + fmtVND(o.totalFees) : "0 đ"}</td>
+            <td class="right num ${o.shipDiscrepancy < 0 ? "neg-val" : ""}">${fmtVND(o.shipDiscrepancy)}</td>
+            <td class="right num ${o.payout < 0 ? "neg-val" : "pos-val"}">${fmtVND(o.payout)}</td>
+            <td class="right num">${o.isUnsettledPending ? "—" : fmtVND(o.cogs)}</td>
+            <td class="right num ${o.netMargin < 0 ? "neg-val" : "pos-val"}">${o.isUnsettledPending ? "Đang treo" : fmtVND(o.netMargin)}</td>
+            <td>${flagsHtml}</td>
+          </tr>`;
+      }).join("");
+    }
+
+    // =========================================================================
+    // DRAG & DROP BINDINGS
+    // =========================================================================
+    function bindDropzone(zoneId, callback) {
+      const el = document.getElementById(zoneId);
+      ["dragenter", "dragover"].forEach((ev) => {
+        el.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.add("dragover");
+        });
+      });
+      ["dragleave", "drop"].forEach((ev) => {
+        el.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.remove("dragover");
+        });
+      });
+      el.addEventListener("drop", (e) => {
+        if (e.dataTransfer && e.dataTransfer.files) callback(e.dataTransfer.files);
+      });
+    }
+
+    bindDropzone("xmlDropzone", handleXmlFiles);
+    bindDropzone("ecomDropzone", handleEcomFile);
+
+    // =========================================================================
+    // EXPORTERS: UTF-8 BOM CSV & MULTI-SHEET EXCEL WORKBOOK (.XLS SPREADSHEETML)
+    // =========================================================================
+    function triggerDownload(filename, mimeType, contentStr) {
+      const blob = new Blob([contentStr], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 250);
+    }
+
+    function toCsvLine(arr) {
+      return arr.map((v) => {
+        const s = String(v ?? "");
+        return (s.includes(",") || s.includes('"') || s.includes("\n"))
+          ? '"' + s.replace(/"/g, '""') + '"'
+          : s;
+      }).join(",");
+    }
+
+    function exportCurrentCSV() {
+      const BOM = "\uFEFF";
+      if (activeTab === "xml") {
+        if (xmlInvoices.length === 0) return alert("Chưa có dữ liệu Hóa đơn XML để xuất!");
+        const lines = [
+          toCsvLine(["Trạng thái", "Cảnh báo MST Thông tư 86", "Mẫu số", "Ký hiệu", "Số HĐ", "Ngày lập", "MST Người bán", "Tên Người bán", "Tiền trước thuế", "Thuế GTGT", "Tổng thanh toán", "Mã CQT", "Tệp nguồn"])
+        ];
+        xmlInvoices.forEach((inv) => {
+          lines.push(toCsvLine([
+            inv.isDuplicate ? "TRÙNG SỐ HĐ (LOẠI)" : (inv.tt86Issue ? "SAI MST TT86/2024" : "Hợp lệ"),
+            inv.tt86Issue || "Đạt chuẩn",
+            inv.khmshdon, inv.khhdon, inv.shdon, inv.nlap,
+            inv.mstBan, inv.tenBan, inv.tgTCThue, inv.tgTThue, inv.tgTTTBSo, inv.mccqt, inv.fileName
+          ]));
+        });
+        triggerDownload("Bang_Ke_Hoa_Don_XML_2026.csv", "text/csv;charset=utf-8", BOM + lines.join("\r\n"));
+      } else {
+        if (ecomOrders.length === 0) return alert("Chưa có dữ liệu Đối soát TMĐT để xuất!");
+        const lines = [
+          toCsvLine(["Sàn", "Mã đơn hàng", "SKU", "Tên sản phẩm", "Ngày giao", "Ngày quyết toán", "GMV", "Voucher Shop", "Tổng Phí Sàn + KOC", "Chênh lệch Phí Ship", "Thực nhận Ví", "Giá vốn", "Lãi/Lỗ Ròng", "Cảnh báo Đỏ"])
+        ];
+        ecomOrders.forEach((o) => {
+          const flags = [];
+          if (o.flagNeg) flags.push("ÂM TIỀN VÍ");
+          if (o.flagShip) flags.push("KHIẾU NẠI LỆCH SHIP");
+          if (o.flagAging) flags.push(`TREO ${o.agingDays} NGÀY`);
+          if (o.flagLoss) flags.push("BÁN LỖ RÒNG");
+          lines.push(toCsvLine([
+            o.platform, o.orderId, o.sku, o.name, o.deliveredDate, o.settledDate,
+            o.gmv, o.sellerVoucher, o.totalFees, o.shipDiscrepancy, o.payout, o.cogs, o.netMargin,
+            flags.join(" | ") || "Chuẩn"
+          ]));
+        });
+        triggerDownload("Bao_Cao_Doi_Soat_Shopee_TikTok_2026.csv", "text/csv;charset=utf-8", BOM + lines.join("\r\n"));
+      }
+    }
+
+    function exportWorkbookXLS() {
+      if (xmlInvoices.length === 0 && ecomOrders.length === 0) {
+        return alert("Vui lòng nạp dữ liệu Hóa đơn XML hoặc Đối soát TMĐT trước khi xuất Sổ Excel!");
+      }
+      const xmlEsc = (s) => escHtml(s);
+      const makeCell = (val, isNum = false) =>
+        isNum ? `<Cell><Data ss:Type="Number">${Number(val) || 0}</Data></Cell>`
+              : `<Cell><Data ss:Type="String">${xmlEsc(val)}</Data></Cell>`;
+
+      let sheet1Rows = `<Row>${["Trạng thái", "Kiểm tra MST Thông tư 86/2024", "Ký hiệu", "Số HĐ", "Ngày lập", "MST Bán", "Đơn vị bán", "Tiền trước thuế", "Thuế GTGT", "Tổng thanh toán", "Mã CQT"].map((h) => makeCell(h)).join("")}</Row>`;
+      xmlInvoices.forEach((inv) => {
+        sheet1Rows += `<Row>${[
+          makeCell(inv.isDuplicate ? "TRÙNG SỐ HĐ" : (inv.tt86Issue ? "CẢNH BÁO MST TT86" : "Hợp lệ")),
+          makeCell(inv.tt86Issue || "Đạt chuẩn"),
+          makeCell(inv.khhdon), makeCell(inv.shdon), makeCell(inv.nlap),
+          makeCell(inv.mstBan), makeCell(inv.tenBan),
+          makeCell(inv.tgTCThue, true), makeCell(inv.tgTThue, true), makeCell(inv.tgTTTBSo, true),
+          makeCell(inv.mccqt)
+        ].join("")}</Row>`;
+      });
+
+      let sheet2Rows = `<Row>${["Ngày lập", "Số HĐ", "MST Bán", "Nhà cung cấp", "Mã hàng", "Tên hàng hóa dịch vụ (TT88)", "ĐVT", "Số lượng", "Đơn giá", "Thuế suất", "Thành tiền"].map((h) => makeCell(h)).join("")}</Row>`;
+      xmlLineItems.forEach((r) => {
+        sheet2Rows += `<Row>${[
+          makeCell(r.nlap), makeCell(r.soHD), makeCell(r.mstBan), makeCell(r.tenBan),
+          makeCell(r.maHang), makeCell(r.tenHang), makeCell(r.dvt),
+          makeCell(r.sl, true), makeCell(r.dgia, true), makeCell(r.tsuat), makeCell(r.thtien, true)
+        ].join("")}</Row>`;
+      });
+
+      let sheet3Rows = `<Row>${["Sàn", "Mã đơn hàng", "SKU", "Tên sản phẩm", "Ngày giao", "Ngày quyết toán", "GMV", "Tổng Phí Sàn + KOC", "Lệch Phí Ship", "Thực nhận Ví", "Giá vốn", "Lãi/Lỗ Ròng", "Cờ Đỏ Khiếu Nại"].map((h) => makeCell(h)).join("")}</Row>`;
+      ecomOrders.forEach((o) => {
+        const flags = [];
+        if (o.flagNeg) flags.push("ÂM TIỀN VÍ");
+        if (o.flagShip) flags.push("KHIẾU NẠI LỆCH SHIP");
+        if (o.flagAging) flags.push(`TREO ${o.agingDays} NGÀY`);
+        if (o.flagLoss) flags.push("BÁN LỖ RÒNG");
+        sheet3Rows += `<Row>${[
+          makeCell(o.platform), makeCell(o.orderId), makeCell(o.sku), makeCell(o.name),
+          makeCell(o.deliveredDate), makeCell(o.settledDate),
+          makeCell(o.gmv, true), makeCell(o.totalFees, true), makeCell(o.shipDiscrepancy, true),
+          makeCell(o.payout, true), makeCell(o.cogs, true), makeCell(o.netMargin, true),
+          makeCell(flags.join(" | ") || "Chuẩn")
+        ].join("")}</Row>`;
+      });
+
+      const workbookXml = `<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Worksheet ss:Name="1_Bang_Ke_Hoa_Don_XML"><Table>${sheet1Rows}</Table></Worksheet>
+ <Worksheet ss:Name="2_So_Chi_Tiet_Hang_Hoa_TT88"><Table>${sheet2Rows}</Table></Worksheet>
+ <Worksheet ss:Name="3_Doi_Soat_Shopee_TikTok"><Table>${sheet3Rows}</Table></Worksheet>
+</Workbook>`;
+
+      triggerDownload("So_Ke_Toan_Va_Doi_Soat_HKD_2026.xls", "application/vnd.ms-excel;charset=utf-8", workbookXml);
+    }
+
+    // =========================================================================
+    // 1-CLICK BUILT-IN DEMO LOADER (FOR 60-SECOND CLIENT SCREENCASTS)
+    // =========================================================================
+    function loadBuiltInDemo() {
+      clearXmlData();
+      const demoXml1 = `<?xml version="1.0" encoding="UTF-8"?><HDon><DLHDon><TTChung><KHMSHDon>1</KHMSHDon><KHHDon>1C26TSP</KHHDon><SHDon>00148921</SHDon><NLap>2026-10-25</NLap><HTTToan>Bù trừ ví Seller</HTTToan></TTChung><NDHDon><NBan><Ten>CÔNG TY TNHH SÀN TMĐT MẪU</Ten><MST>0100000014</MST></NBan><NMua><Ten>HKD THỜI TRANG MẪU</Ten><MST>0100000016-001</MST></NMua><DSHHDVu><HHDVu><STT>1</STT><MHHDVu>SP-FEE</MHHDVu><THHDVu>Phí cố định &amp; Voucher Xtra Shopee T10/2026</THHDVu><DVTinh>Gói</DVTinh><SLuong>1</SLuong><DGia>9950000</DGia><ThTien>9950000</ThTien><TSuat>8%</TSuat></HHDVu></DSHHDVu><TToan><TgTCThue>9950000</TgTCThue><TgTThue>796000</TgTThue><TgTTTBSo>10746000</TgTTTBSo></TToan></NDHDon><MCCQT>M1-26-98A7C-00148921F8E</MCCQT></DLHDon><Signature>OK</Signature></HDon>`;
+      const demoXml2 = `<?xml version="1.0" encoding="UTF-8"?><HDon><DLHDon><TTChung><KHMSHDon>1</KHMSHDon><KHHDon>1C26TGH</KHHDon><SHDon>00083412</SHDon><NLap>2026-10-26</NLap><HTTToan>Chuyển khoản</HTTToan></TTChung><NDHDon><NBan><Ten>CÔNG TY CP GIAO HÀNG MẪU</Ten><MST>0100000015</MST></NBan><NMua><Ten>HKD THỜI TRANG MẪU</Ten></NMua><DSHHDVu><HHDVu><STT>1</STT><MHHDVu>GHN-10</MHHDVu><THHDVu>Cước vận chuyển &amp; hoàn hàng T10/2026</THHDVu><DVTinh>Chuyến</DVTinh><SLuong>209</SLuong><DGia>20736</DGia><ThTien>4334000</ThTien><TSuat>8%</TSuat></HHDVu></DSHHDVu><TToan><TgTCThue>4334000</TgTCThue><TgTThue>346720</TgTThue><TgTTTBSo>4680720</TgTTTBSo></TToan></NDHDon><MCCQT>M1-26-44B2D-00083412A1C</MCCQT></DLHDon><Signature>OK</Signature></HDon>`;
+      const demoXmlTt86 = `<?xml version="1.0" encoding="UTF-8"?><HDon><DLHDon><TTChung><KHMSHDon>2</KHMSHDon><KHHDon>2C26TNP</KHHDon><SHDon>00000319</SHDon><NLap>2026-10-29</NLap><HTTToan>TM/CK</HTTToan></TTChung><NDHDon><NBan><Ten>HỘ KINH DOANH PHỤ LIỆU MẪU</Ten><MST>0100000017-001</MST></NBan><NMua><Ten>HKD THỜI TRANG MẪU</Ten></NMua><DSHHDVu><HHDVu><STT>1</STT><MHHDVu>PL-KHOAK</MHHDVu><THHDVu>Khóa kéo đồng &amp; nút khuy áo khoác Kaki</THHDVu><DVTinh>Lô</DVTinh><SLuong>1</SLuong><DGia>3200000</DGia><ThTien>3200000</ThTien><TSuat>KCT</TSuat></HHDVu></DSHHDVu><TToan><TgTCThue>3200000</TgTCThue><TgTThue>0</TgTThue><TgTTTBSo>3200000</TgTTTBSo></TToan></NDHDon><MCCQT>M2-26-55K1P-00000319D4A</MCCQT></DLHDon><Signature>OK</Signature></HDon>`;
+      const demoXmlDup = demoXml2;
+
+      ingestXmlPayloads([
+        { name: "HD_01_Shopee_PhiSan.xml", text: demoXml1 },
+        { name: "HD_02_GHN_VanChuyen.xml", text: demoXml2 },
+        { name: "HD_06_HKD_SaiMST_13So_TT86.xml", text: demoXmlTt86 },
+        { name: "HD_02_GHN_BanSaoNapTrung.xml", text: demoXmlDup }
+      ]);
+
+      const demoCsv = [
+        "Sàn TMĐT,Mã đơn hàng,SKU,Tên sản phẩm,Ngày tạo đơn,Ngày giao thành công,Ngày quyết toán,Trạng thái đơn,Doanh thu đơn hàng (GMV),Shop trợ giá Voucher,Phí cố định sàn,Phí dịch vụ (Voucher/Freeship Xtra),Phí thanh toán,Hoa hồng Affiliate KOC,Phí ship khách trả/ước tính,Phí ship thực tế NVC thu,Chênh lệch phí vận chuyển,Số tiền thực nhận về Ví,Giá vốn hàng bán",
+        "Shopee,261018SP9011,QK-FORM-SUONG,Quần Kaki ống suông Thu Đông,2026-10-18,,2026-10-24,Hoàn hàng / Trả hàng,380000,0,0,0,0,0,0,42500,-42500,-42500,0",
+        "Shopee,261020SP8821,AT-COT-250,Áo thun Cotton 250gsm (Cân nhầm 2.5kg),2026-10-20,2026-10-22,2026-10-24,Đã quyết toán,250000,10000,19200,14400,12000,0,22000,68000,-46000,148400,85000",
+        "Shopee,261011SP7701,QK-FORM-SUONG,Quần Kaki ống suông (Combo 2),2026-10-11,2026-10-14,,Đã giao - Chờ quyết toán,760000,30000,58400,43800,36500,0,30000,30000,0,0,250000",
+        "TikTok Shop,57920481088,AT-COT-250,Áo thun Cotton 250gsm (Flash Sale + KOC 20%),2026-10-23,2026-10-25,2026-10-27,Đã quyết toán,159000,35000,12400,9920,7440,24800,20000,28000,-8000,61440,85000",
+        "Shopee,261026SP8905,QK-FORM-SUONG,Quần Kaki ống suông (Combo 2),2026-10-26,2026-10-28,2026-10-30,Đã quyết toán,750000,30000,57600,43200,36000,0,30000,30000,0,583200,250000"
+      ].join("\n");
+      ingestEcomCSV(demoCsv);
+    }
+  </script>
+</body>
+</html>

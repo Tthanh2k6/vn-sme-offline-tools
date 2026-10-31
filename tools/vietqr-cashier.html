@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VietQR Dynamic &amp; Loa Đọc Tiền Chống Bill Giả 2026 — Chuẩn NAPAS 247 &amp; Sổ S2e-HKD</title>
+  <style>
+    :root {
+      --bg-page: #F1F5F9;
+      --bg-surface: #FFFFFF;
+      --bg-slate-950: #09101F;
+      --bg-slate-900: #0F172A;
+      --bg-slate-800: #1E293B;
+      --bg-slate-100: #F8FAFC;
+      --border-subtle: #E2E8F0;
+      --border-strong: #CBD5E1;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --emerald-900: #064E3B;
+      --emerald-800: #065F46;
+      --emerald-700: #047857;
+      --emerald-600: #059669;
+      --emerald-500: #10B981;
+      --emerald-100: #D1FAE5;
+      --emerald-50: #ECFDF5;
+      --crimson-800: #991B1B;
+      --crimson-700: #B91C1C;
+      --crimson-600: #DC2626;
+      --crimson-100: #FEE2E2;
+      --crimson-50: #FEF2F2;
+      --amber-800: #92400E;
+      --amber-600: #D97706;
+      --amber-100: #FEF3C7;
+      --amber-50: #FFFBEB;
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 4px 12px -4px rgba(15, 23, 42, 0.04);
+      --shadow-elevated: 0 20px 40px -14px rgba(6, 78, 59, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Top Enterprise Header */
+    .topbar {
+      background: linear-gradient(135deg, var(--bg-slate-950) 0%, var(--bg-slate-900) 60%, var(--emerald-900) 100%);
+      color: #FFFFFF;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 16px 24px;
+    }
+
+    .topbar-inner {
+      max-width: 1420px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--emerald-500), var(--emerald-700));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #F8FAFC;
+    }
+
+    .brand-subtitle {
+      font-size: 12.5px;
+      color: #94A3B8;
+      margin-top: 2px;
+    }
+
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #E2E8F0;
+      white-space: nowrap;
+    }
+
+    .trust-pill.emerald {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #A7F3D0;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-500);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Main Workspace Layout */
+    .workspace {
+      max-width: 1420px;
+      margin: 22px auto 40px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 510px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-slate-100);
+    }
+
+    .card-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: var(--emerald-50);
+      color: var(--emerald-800);
+      border: 1px solid #A7F3D0;
+      white-space: nowrap;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Form Controls */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: #FFFFFF;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: var(--emerald-600);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.14);
+    }
+
+    .amount-input {
+      font-size: 18px !important;
+      font-weight: 800 !important;
+      color: var(--emerald-800) !important;
+      background: var(--emerald-50) !important;
+      border-color: var(--emerald-600) !important;
+    }
+
+    .quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip-btn {
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 7px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-slate-100);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--emerald-600);
+      color: var(--emerald-800);
+      background: var(--emerald-50);
+    }
+
+    .inline-input-btn {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 15px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, var(--emerald-600), var(--emerald-800));
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.28);
+    }
+
+    .btn-emerald:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(5, 150, 105, 0.36);
+    }
+
+    .btn-slate {
+      background: var(--bg-slate-900);
+      color: #FFFFFF;
+    }
+
+    .btn-slate:hover {
+      background: var(--bg-slate-800);
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--emerald-600);
+      color: var(--emerald-800);
+      background: var(--emerald-50);
+    }
+
+    .btn-crimson-soft {
+      background: var(--crimson-50);
+      border-color: #FECACA;
+      color: var(--crimson-700);
+    }
+
+    .btn-crimson-soft:hover {
+      background: var(--crimson-100);
+    }
+
+    /* VietQR Standee Card */
+    .standee-wrap {
+      margin-top: 18px;
+      background: linear-gradient(160deg, var(--bg-slate-950) 0%, var(--emerald-900) 100%);
+      border-radius: 16px;
+      padding: 18px;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .standee-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .standee-shop {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #F8FAFC;
+    }
+
+    .napas-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.22);
+      border: 1px solid rgba(110, 231, 183, 0.45);
+      color: #A7F3D0;
+    }
+
+    .qr-paper {
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 16px;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .qr-bank-line {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--emerald-800);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .qr-svg-box {
+      width: 236px;
+      height: 236px;
+      margin: 10px auto;
+      padding: 8px;
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-svg-box svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-amount-display {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--emerald-800);
+      margin-top: 4px;
+    }
+
+    .qr-memo-pill {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--bg-slate-900);
+      color: #A7F3D0;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .qr-account-meta {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-strong);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-secondary);
+      gap: 8px;
+    }
+
+    .emv-inspector {
+      margin-top: 12px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: #CBD5E1;
+      word-break: break-all;
+      line-height: 1.45;
+    }
+
+    .standee-actions {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    /* Right Column Stack */
+    .right-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Anti-Fake-Bill Guard Banner */
+    .guard-banner {
+      border-radius: var(--radius-xl);
+      padding: 20px 22px;
+      border: 2px solid;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      transition: all 0.25s ease;
+    }
+
+    .guard-banner.pending {
+      background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);
+      border-color: var(--crimson-600);
+      color: var(--crimson-800);
+      box-shadow: 0 12px 28px -10px rgba(220, 38, 38, 0.22);
+    }
+
+    .guard-banner.confirmed {
+      background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+      border-color: var(--emerald-600);
+      color: var(--emerald-900);
+      box-shadow: 0 14px 32px -10px rgba(5, 150, 105, 0.28);
+    }
+
+    .guard-banner.mismatch {
+      background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%);
+      border-color: #FCA5A5;
+      color: #FFFFFF;
+      box-shadow: 0 16px 36px -8px rgba(185, 28, 28, 0.48);
+    }
+
+    .guard-left {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .guard-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .guard-banner.pending .guard-icon-box {
+      background: var(--crimson-600);
+      color: #FFFFFF;
+    }
+
+    .guard-banner.confirmed .guard-icon-box {
+      background: var(--emerald-600);
+      color: #FFFFFF;
+    }
+
+    .guard-banner.mismatch .guard-icon-box {
+      background: #FEF2F2;
+      color: var(--crimson-700);
+    }
+
+    .guard-kicker {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .guard-headline {
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.28;
+      margin-top: 3px;
+    }
+
+    .guard-desc {
+      font-size: 13.5px;
+      margin-top: 6px;
+      opacity: 0.92;
+    }
+
+    .guard-badge-big {
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .guard-banner.pending .guard-badge-big {
+      background: var(--crimson-700);
+      color: #FFFFFF;
+    }
+
+    .guard-banner.confirmed .guard-badge-big {
+      background: var(--emerald-700);
+      color: #FFFFFF;
+    }
+
+    .guard-banner.mismatch .guard-badge-big {
+      background: #FEF2F2;
+      color: var(--crimson-800);
+    }
+
+    /* Soundbox Console */
+    .soundbox-panel {
+      background: var(--bg-slate-900);
+      color: #F8FAFC;
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .soundbox-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .speaker-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 20px;
+      padding: 0 4px;
+    }
+
+    .eq-bars span {
+      width: 4px;
+      height: 6px;
+      border-radius: 2px;
+      background: var(--emerald-500);
+      transition: height 0.15s ease;
+    }
+
+    .eq-bars.speaking span:nth-child(1) { animation: eqBounce 0.55s infinite ease-in-out 0.0s; }
+    .eq-bars.speaking span:nth-child(2) { animation: eqBounce 0.55s infinite ease-in-out 0.12s; }
+    .eq-bars.speaking span:nth-child(3) { animation: eqBounce 0.55s infinite ease-in-out 0.24s; }
+    .eq-bars.speaking span:nth-child(4) { animation: eqBounce 0.55s infinite ease-in-out 0.08s; }
+
+    @keyframes eqBounce {
+      0%, 100% { height: 5px; }
+      50% { height: 20px; }
+    }
+
+    .voice-transcript {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .demo-cta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    /* KPI Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .kpi-box {
+      background: var(--bg-slate-100);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .kpi-val {
+      font-size: 21px;
+      font-weight: 800;
+      margin-top: 4px;
+      color: var(--text-primary);
+    }
+
+    .kpi-val.emerald {
+      color: var(--emerald-700);
+    }
+
+    .kpi-val.crimson {
+      color: var(--crimson-600);
+    }
+
+    /* Ledger Table */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: var(--bg-slate-900);
+      color: #F8FAFC;
+      text-align: left;
+      padding: 11px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr.highlight-new {
+      background: var(--emerald-50);
+    }
+
+    tbody tr.highlight-alert {
+      background: var(--crimson-50);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .status-badge.confirmed {
+      background: var(--emerald-100);
+      color: var(--emerald-900);
+      border: 1px solid #6EE7B7;
+    }
+
+    .status-badge.mismatch {
+      background: var(--crimson-100);
+      color: var(--crimson-800);
+      border: 1px solid #FCA5A5;
+    }
+
+    /* Webhook Sync Drawer */
+    .webhook-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .helper-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    @media print {
+      body { background: #FFFFFF; }
+      .topbar, .right-stack, .form-section-hide-print, .standee-actions, .emv-inspector {
+        display: none !important;
+      }
+      .workspace {
+        display: block;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .card { border: none; box-shadow: none; }
+    }
+
+    @media (max-width: 1100px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar { padding: 14px 16px; }
+      .workspace { padding: 0 12px; margin-top: 14px; }
+      .form-grid, .kpi-grid, .webhook-grid, .standee-actions {
+        grid-template-columns: 1fr;
+      }
+      .guard-banner {
+        flex-direction: column;
+      }
+      .demo-cta-bar .btn {
+        width: 100%;
+      }
+    }
+  </style>
+<style id="paper-workbench">
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Work Sans';src:url(../assets/fonts/WorkSans-Bold.ttf) format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url(../assets/fonts/JetBrainsMono-Regular.ttf) format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+/* Paper workbench: shared visual system, embedded into each standalone file. */
+:root { --paper:#f7f7f2; --surface:#fff; --ink:#252722; --muted:#64685f; --rule:#dcded5; --accent:#aa460e; --signal:#fff3e9; }
+html, body { background:var(--paper) !important; color:var(--ink) !important; font-family:'Work Sans' !important; font-size:14px; }
+body * { font-family:inherit !important; color:inherit !important; border-color:var(--rule) !important; box-shadow:none !important; text-shadow:none !important; background-image:none !important; text-transform:none !important; letter-spacing:normal !important; }
+body :is(div,section,aside,header,span,th,td,label,p,strong,b,footer,a,button) { background-color:transparent !important; }
+body :is(input,select,textarea,button) { font-family:'Work Sans' !important; }
+body :is(.num,code,.qr-memo-tag,.kpi-val,.grand-number,.tier-rate,input[inputmode=numeric],input[type=number]) { font-family:'JetBrains Mono' !important; font-variant-numeric:tabular-nums; }
+body :is(.topbar,.luxury-topbar,.app-header) { position:static; padding:0 24px; background:var(--surface) !important; border-bottom:1px solid var(--rule); }
+body :is(.topbar-inner,.header-inner) { max-width:1500px; padding:16px 0; gap:12px 24px; }
+body .brand-title { font-size:19px; line-height:1.35; font-weight:700; }
+body :is(.brand-sub,.brand-subtitle) { font-size:12px; color:var(--muted) !important; margin-top:5px; max-width:85ch; }
+body :is(.brand-mark,.brand-shield,.brand-icon,.brand-crest,.brand-kicker,.offline-badge,.pulse-dot,.dot-live,.card-tag,.panel-icon,.contact-chip,.trust-pill.emerald,.guard-kicker,.eq-bars,#audioLatencyTag) { display:none; }
+body .luxury-topbar::before { display:none; }
+body :is(.trust-pill,.panel-badge,.napas-badge,.policy-note-badge,.free-laser-badge) { padding:0; border:0; border-radius:0; font-weight:400; font-size:12px; color:var(--muted) !important; }
+body :is(.workspace,.container) { max-width:1500px; }
+body :is(.card,.panel,.panel-card,.control-card,.ledger-card,.side-box,.tier-ladder-card) { background:var(--surface) !important; border:0; border-radius:6px; overflow:hidden; }
+body :is(.card-header,.panel-head,.panel-header,.ledger-toolbar) { background:transparent !important; border-bottom:1px solid var(--rule); padding:18px 20px; gap:12px; }
+body :is(.card-title,.panel-title,.ledger-title,.tier-ladder-title) { font-size:15px; font-weight:700; line-height:1.5; }
+body .card-title-wrap > svg { display:none; }
+body :is(.card-body,.panel-body) { padding:20px; }
+body :is(.field label,.preset-label,.kpi-label,.kpi-lbl) { font-size:12px; font-weight:400; color:var(--muted) !important; line-height:1.5; }
+body :is(input,select,textarea) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule); border-radius:4px !important; font-size:13px; font-weight:400; accent-color:var(--accent) !important; }
+body .field :is(input,select) { min-height:38px; padding:8px 10px; }
+body :is(input,select,textarea,button,a):focus-visible { outline:2px solid var(--accent) !important; outline-offset:3px; }
+body :is(button,.btn,.btn-config-toggle,.btn-primary-print,.btn-zalo-copy,.btn-outline-soft) { background:var(--surface) !important; color:var(--ink) !important; border:1px solid var(--rule) !important; border-radius:4px; font-weight:700; font-size:12px; line-height:1.4; padding:8px 12px; transform:none !important; }
+body button:hover,body a.btn:hover { background:#f0f1eb !important; }
+body :is(.btn-primary-print,#btnPrintA4,#btnPrintA4Top,#btnSimulateRealTx) { background:var(--accent) !important; color:#fff !important; border-color:var(--accent) !important; }
+body :is(.preset-btn,.preset-pill,.bucket-pill,.dep-tab,.a4-tab-btn,.zalo-tab) { border-radius:4px; font-size:12px; padding:7px 10px; }
+body :is(.preset-btn.active,.preset-pill.active,.bucket-pill.active,.dep-tab.active,.a4-tab-btn.active,.zalo-tab.active-l1,.zalo-tab.active-l2,.zalo-tab.active-l3) { background:#eaece4 !important; border-color:#7c8175 !important; color:var(--ink) !important; }
+body :is(.kpi-box,.kpi-card) { background:transparent !important; border:0; border-left:1px solid var(--rule); padding:10px 18px; border-radius:0; }
+body :is(.kpi-box,.kpi-card):first-child { border-left:0; }
+body .kpi-grid { gap:0; padding:12px 0; }
+body .kpi-val { font-size:20px; font-weight:400; margin:8px 0; }
+body :is(.kpi-meta,.kpi-note,.panel-subtitle,.helper-note) { color:var(--muted) !important; font-size:12px; line-height:1.6; }
+body :is(.table-wrap,.table-scroll,.catalog-table-wrap) { border-radius:0; border:0; overflow-x:auto; }
+body table { border-collapse:collapse; }
+body :is(thead th,table.comm-table th,.a4-table th,.staff-summary-table th) { background:#eff0e9 !important; color:var(--ink) !important; font-weight:700; line-height:1.45; }
+body :is(tbody td,table.comm-table td,.staff-summary-table td) { border-left:0; border-right:0; border-bottom:1px solid var(--rule); line-height:1.5; }
+body tbody tr:hover td { background:#f7f7f2 !important; }
+body :is(tfoot td,.a4-grand-row td) { background:#eff0e9 !important; border-top:1px solid #858a7d !important; }
+body :is(.status-badge,.badge-method,.role-pill,.debt-tag,.paid-done) { border:0; background:transparent !important; border-radius:0; padding:2px 0; font-size:11px; }
+body :is(.a4-shell,.a4-preview-wrapper,.a4-panel) { background:#eceee6 !important; border:0; border-radius:4px; }
+body :is(.a4-sheet,.a4-paper) { background:#fff !important; font-family:'Work Sans' !important; border:1px solid var(--rule); border-radius:0; }
+body :is(.a4-mode-tabs,.a4-filter-bar,.a4-toolbar) { background:transparent !important; padding:14px; gap:10px; }
+body :is(.standee-wrap,.soundbox-panel,.deposit-card,.qr-standee-grid,.grand-total-box) { background:#f3f4ee !important; border:1px solid var(--rule); border-radius:4px; }
+body :is(.qr-paper,.qr-frame,.qr-svg-box) { background:#fff !important; border-radius:2px; }
+body :is(.standee-shop,.qr-bank-line,.qr-amount-display,.grand-number) { color:var(--ink) !important; }
+body :is(.qr-memo-pill,.qr-memo-tag,.emv-inspector,.voice-transcript) { background:transparent !important; border:0; color:var(--muted) !important; border-radius:0; }
+body .guard-banner { background:var(--signal) !important; border:0; border-left:3px solid var(--accent) !important; border-radius:4px; padding:20px; }
+body .guard-headline { font-size:16px; font-weight:700; line-height:1.5; }
+body .guard-desc { font-size:13px; line-height:1.7; margin-top:8px; }
+body .guard-icon-box { display:none; }
+body .guard-badge-big { font-size:11px; white-space:normal; padding:0; border:0; min-width:85px; color:var(--accent) !important; }
+body .guard-banner.confirmed { background:#f3f4ee !important; border-left-color:var(--ink) !important; }
+body :is(.soundbox-top,.speaker-status) { gap:12px; }
+body .soundbox-top { align-items:flex-start; }
+body .soundbox-panel { padding:16px; }
+body .voice-transcript { padding:12px 0 0; font-size:13px; }
+body .tier-ladder-card { padding:20px; }
+body .tier-step { background:transparent !important; border:0; border-left:1px solid var(--rule); border-radius:0; padding:12px 16px; }
+body .tier-step.active { background:#eff0e9 !important; }
+body .tier-rate { font-size:22px; font-weight:400; }
+body :is(.tier-active-tag,.upsell-nudge) { background:transparent !important; color:var(--muted) !important; border:0; border-radius:0; }
+body .grand-total-box { padding:20px; }
+body .grand-label { font-size:13px; }
+body .grand-number { font-size:24px; }
+body :is(.demo-lock-banner,.demo-acc-warning,.a4-qr-lock-box) { background:var(--signal) !important; color:var(--accent) !important; border:1px solid var(--rule); font-weight:400; }
+body :is(.red-audit-stamp,.corporate-red-seal,.sig-stamp) { color:var(--ink) !important; border-color:var(--ink) !important; }
+body .modal-backdrop { background:rgba(37,39,34,.4) !important; }
+body .modal-card { background:#fff !important; }
+body :is(.toast,.copy-toast,.toast-banner) { background:var(--ink) !important; color:#fff !important; }
+body .btn svg { stroke:currentColor; }
+@media screen and (min-width:1101px) {
+ body.ar .workspace { grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); }
+ body.cashier .workspace { grid-template-columns:440px minmax(0,1fr); }
+ body.clinic .brand-title { font-size:17px; }
+}
+@media screen {
+ body :is(.panel,.card,.left-column,.main-grid>*,.bottom-grid>*,.a4-shell,.brand-group,.brand-left) { min-width:0; }
+ body .comm-table { min-width:1450px; }
+ body .comm-table td { padding:12px 9px; font-size:12px; }
+ body .comm-table th { font-size:11px; padding:12px 9px; }
+ body .staff-summary-table td { padding:12px 6px; }
+ body.clinic .org-config-grid { grid-template-columns:2fr 1fr 1fr 1fr; gap:16px; }
+ body .a4-doc-title h1 { font-size:19px; }
+ body .brand-sub,body .brand-subtitle { display:none; }
+ body .toolbar-actions,body .header-actions { gap:8px; }
+ body.ar .brand-title { font-size:17px; }
+ body.ar .topbar-inner { gap:12px; }
+ body :is(.a4-sheet,.a4-paper) { overflow-wrap:anywhere; }
+}
+@media screen and (max-width:760px) {
+ body :is(.topbar,.luxury-topbar,.app-header) { padding:0 16px; }
+ body .brand-title { font-size:17px; }
+ body :is(.workspace,.container) { padding-left:12px; padding-right:12px; }
+ body :is(.form-grid-3,.org-config-grid,.quick-add-grid,.bottom-grid,.main-grid,.workspace,.webhook-grid) { grid-template-columns:minmax(0,1fr) !important; }
+ body :is(.kpi-grid,.tier-steps-grid) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ body :is(.header-actions,.toolbar-actions,.topbar-meta,.preset-group,.preset-strip,.a4-toolbar,.ledger-toolbar,.soundbox-top) { flex-wrap:wrap; }
+ body .brand-group,body .brand-left { max-width:100%; }
+ body :is(.panel-head,.card-header) { flex-wrap:wrap; }
+ body .field { min-width:0; }
+ body .field :is(input,select,textarea) { max-width:100%; }
+ body :is(.a4-sheet,.a4-paper) { padding:18px 12px; }
+ body .guard-banner { flex-direction:column; align-items:flex-start; }
+ body .a4-shell { overflow-x:auto; }
+ body .a4-sheet { min-width:560px; }
+ body .kpi-val { font-size:17px; }
+}
+@media print {
+ html,body { background:#fff !important; }
+ body :is(.a4-sheet,.a4-paper,.standee-wrap,.qr-paper) { background:#fff !important; color:#000 !important; box-shadow:none !important; }
+ body :is(.a4-sheet,.a4-paper) { font-family:'Work Sans' !important; font-size:10px; line-height:1.35; }
+ body :is(th,td) { font-size:9px; }
+ body .a4-sheet { border-color:#888 !important; }
+ body .a4-doc-title h1 { font-size:17px; }
+ body .a4-doc-title h2 { font-size:17px; }
+}
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
+/* Final review adjustments. */
+body.cashier { --accent:#176447; --signal:#edf5ef; }
+body.cashier .guard-banner.pending,body.cashier .guard-banner.mismatch { background:#efefea !important; border-left-color:#252722 !important; }
+body.cashier .guard-banner.confirmed { background:#edf5ef !important; border-left-color:var(--accent) !important; }
+body.cashier .guard-banner.confirmed .guard-headline { color:var(--accent) !important; }
+body.cashier input.amount-input { background:#fff !important; color:var(--ink) !important; border-color:var(--rule) !important; }
+body .tier-step.current { background:#eff0e9 !important; border-bottom:2px solid #64685f !important; }
+body table tbody tr { background:transparent !important; }
+body table tbody tr.selected { background:#eff0e9 !important; }
+body .tier-ladder-title svg { display:none; }
+body .sample-note { font-size:12px; color:var(--muted) !important; margin:0 0 8px; }
+body .kpi-note,body .kpi-meta { font-weight:400; }
+body .aging-table td.num { white-space:nowrap; }
+body .status-badge { border:0 !important; }
+body .field :is(input,select,textarea) { font-weight:400; }
+body .kpi-val { white-space:nowrap; }
+body.wholesale .brand-title { text-transform:lowercase !important; }
+body.wholesale .brand-title::first-letter { text-transform:uppercase !important; }
+@media screen and (max-width:760px) {
+ body.clinic .preset-strip>div { max-width:100%; flex-wrap:wrap; }
+ body.clinic .preset-strip select { width:100%; min-width:0; }
+ body :is(.a4-filter-bar,.a4-mode-tabs,.tab-btn-group) { flex-wrap:wrap; max-width:100%; }
+ body .a4-filter-bar select { max-width:100%; }
+ body .sample-note { margin-top:8px; }
+}
+@media print {
+ body .sample-note { display:none !important; }
+ body.cashier .workspace { max-width:420px !important; padding:0 !important; }
+ body :is(.a4-sheet,.a4-paper) { font-size:12px; }
+ body :is(th,td) { font-size:11px; }
+}
+@media print {
+ body.clinic .a4-table { table-layout:fixed; width:100%; }
+ body.clinic .a4-table th:nth-child(1) { width:4%; }
+ body.clinic .a4-table th:nth-child(2) { width:7%; }
+ body.clinic .a4-table th:nth-child(3) { width:23%; }
+ body.clinic .a4-table th:nth-child(8) { width:6%; }
+ body.clinic .a4-table th:nth-child(4),body.clinic .a4-table th:nth-child(5),body.clinic .a4-table th:nth-child(6),body.clinic .a4-table th:nth-child(7),body.clinic .a4-table th:nth-child(9) { width:12%; }
+ body.clinic .a4-table :is(th,td) { padding:8px 4px; font-size:10px; }
+}
+</style>
+</head>
+<body class="cashier">
+
+  <!-- ENTERPRISE FINTECH TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">VietQR động &amp; loa thu ngân chống bill giả</div>
+          <div class="brand-subtitle">Chuẩn EMVCo NAPAS 247 Offline-Ready &bull; Kết nối Google Sheets Webhook &bull; Xuất Sổ S2e-HKD (TT 152/2025/TT-BTC)</div>
+        </div>
+      </div>
+      <div class="trust-badges">
+        <span class="trust-pill emerald">
+          <span class="pulse-dot"></span>
+          0 VND Phí Thuê Bao Tháng &bull; 100% Chạy Độc Lập
+        </span>
+        <span class="trust-pill" id="syncStatePill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg>
+          Chế độ: Trực chiến Quầy Thu Ngân (Offline + Webhook)
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- LEFT COLUMN: DYNAMIC VIETQR GENERATOR & STANDEE -->
+    <section class="card">
+      <div class="card-header form-section-hide-print">
+        <div class="card-title-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <h2 class="card-title">1. Khởi tạo mã VietQR động theo đơn hàng</h2>
+        </div>
+        <span class="card-tag">15 Ngân Hàng NAPAS</span>
+      </div>
+
+      <div class="card-body">
+        <div class="form-grid form-section-hide-print">
+          <div class="field full">
+            <label for="shopNameInput">Tên quán / cửa hàng / phòng khám (hiển thị trên bảng QR)</label>
+            <input type="text" id="shopNameInput" value="CỬA HÀNG MẪU" />
+          </div>
+
+          <div class="field">
+            <label for="bankSelect">Ngân hàng thụ hưởng (NAPAS)</label>
+            <select id="bankSelect"></select>
+          </div>
+
+          <div class="field">
+            <label for="accountNoInput">Số tài khoản nhận tiền (nhập STK thật để bật QR)</label>
+            <input type="text" id="accountNoInput" class="num" value="0000000000" placeholder="Nhập STK công ty/cửa hàng..." />
+          </div>
+
+          <div class="field full">
+            <label for="accountNameInput">Tên chủ tài khoản (không dấu chuẩn NH)</label>
+            <input type="text" id="accountNameInput" value="CONG TY DEMO CHAY THU" />
+          </div>
+
+          <div class="field">
+            <label for="amountInput">
+              <span>Số tiền đơn (VND)</span>
+              <span style="color:#059669;font-weight:700;white-space:nowrap;">QR động</span>
+            </label>
+            <input type="text" id="amountInput" class="amount-input num" value="485.000" inputmode="numeric" />
+          </div>
+
+          <div class="field">
+            <label for="orderCodeInput">Mã đơn chống nhầm lẫn</label>
+            <div class="inline-input-btn">
+              <input type="text" id="orderCodeInput" class="num" value="DH-8821" />
+              <button type="button" class="btn btn-outline" id="btnNextOrder" title="Tạo mã đơn tiếp theo">Đơn mới</button>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Chọn nhanh mệnh giá quầy thu ngân</label>
+            <div class="quick-chips">
+              <button type="button" class="chip-btn num" data-amt="65000">65.000Đ</button>
+              <button type="button" class="chip-btn num" data-amt="145000">145.000Đ</button>
+              <button type="button" class="chip-btn num" data-amt="280000">280.000Đ</button>
+              <button type="button" class="chip-btn num" data-amt="485000">485.000Đ</button>
+              <button type="button" class="chip-btn num" data-amt="890000">890.000Đ</button>
+              <button type="button" class="chip-btn num" data-amt="1450000">1.450.000Đ</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE SCANNABLE VIETQR STANDEE -->
+        <div class="standee-wrap" id="qrStandeeCard">
+          <div class="standee-top">
+            <div class="standee-shop" id="standeeShopTitle">CỬA HÀNG MẪU</div>
+            <span class="napas-badge">VIETQR &bull; NAPAS 247</span>
+          </div>
+
+          <div class="qr-paper">
+            <div class="qr-bank-line" id="qrBankLabel">MB BANK &bull; BIN 970422</div>
+            <div class="qr-svg-box" id="qrSvgContainer" role="img" aria-label="Mã VietQR Động chuẩn EMVCo NAPAS 247"></div>
+            <div class="qr-amount-display num" id="qrAmountText">485.000 VND</div>
+            <div class="qr-memo-pill num" id="qrMemoText">Nội dung tự động: DH8821</div>
+            <div class="qr-account-meta">
+              <span>STK: <strong class="num" id="qrAccText">0000000000</strong></span>
+              <span>Chủ TK: <strong id="qrHolderText">CONG TY DEMO CHAY THU</strong></span>
+            </div>
+          </div>
+
+          <div class="emv-inspector" id="emvPayloadBox" title="Chuỗi chuẩn EMVCo NAPAS 247 kèm mã kiểm tra CRC16-CCITT"></div>
+
+          <div class="standee-actions">
+            <button type="button" class="btn btn-outline" id="btnCopyEmv">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Sao chép EMVCo
+            </button>
+            <button type="button" class="btn btn-outline" id="btnPrintQr">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              In standee quầy
+            </button>
+            <button type="button" class="btn btn-outline" id="btnCopyShareUrl">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              Link cá nhân hóa quán
+            </button>
+            <a class="btn btn-outline" id="btnOpenVietQrIo" href="#" target="_blank" rel="noopener noreferrer">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Mẫu VietQR.io Online
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: ANTI-FAKE-BILL GUARD, VOICE SOUNDBOX & S2e-HKD LEDGER -->
+    <div class="right-stack">
+
+      <!-- REAL-TIME ANTI-FAKE-BILL CASHIER GUARD BANNER -->
+      <section class="guard-banner pending" id="antiFakeBillBanner" aria-live="polite">
+        <div class="guard-left">
+          <div class="guard-icon-box" id="guardIconBox">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div>
+            <div class="guard-kicker" id="guardKicker">TRẠM KIỂM SOÁT CHỐNG BILL CHỤP MÀN HÌNH GIẢ MẠO</div>
+            <div class="guard-headline" id="guardHeadline">CHƯA NHẬN TIỀN THẬT — CẢNH GIÁC BILL CHỤP MÀN HÌNH (ĐƠN DH-8821: 485.000 VND)</div>
+            <div class="guard-desc" id="guardDesc">
+              Nhân viên thu ngân tuyệt đối KHÔNG giao hàng khi khách chỉ giơ ảnh chụp màn hình chuyển khoản. Chỉ xuất hàng khi khung này chuyển sang XANH NGỌC và Loa đọc đúng số tiền + mã đơn.
+            </div>
+          </div>
+        </div>
+        <div class="guard-badge-big num" id="guardBadge">CHỜ TIỀN VÀO NH</div>
+      </section>
+
+      <!-- SOUNDBOX SYNTHESIZER & DEMO ENGINE -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            <h2 class="card-title">2. Loa đọc tiền tiếng việt tự động (Web Audio chime + Web Speech API)</h2>
+          </div>
+          <span class="card-tag">0 File MP3 Ngoài</span>
+        </div>
+
+        <div class="card-body">
+          <div class="soundbox-panel">
+            <div class="soundbox-top">
+              <div class="speaker-status">
+                <div class="eq-bars" id="eqBars">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <div>
+                  <div style="font-size:14px;font-weight:700;">Bộ Tổng Hợp Sóng Âm Tinh Thể &amp; Giọng Đọc Thu Ngân Tiếng Việt</div>
+                  <div style="font-size:12px;color:#94A3B8;">Tự động phát chuông Đa Hài Âm (E5-G#5-B5-E6) và đọc rõ từng nghìn đồng ngay khi Webhook báo tiền vào</div>
+                </div>
+              </div>
+              <label style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;cursor:pointer;color:#A7F3D0;">
+                <input type="checkbox" id="voiceToggle" checked style="width:16px;height:16px;accent-color:#10B981;" />
+                Bật loa đọc tiền tự động
+              </label>
+            </div>
+
+            <div class="voice-transcript">
+              <span id="lastSpokenText">Sẵn sàng trực chiến: Bấm nút [Chạy Mô Phỏng Giao Dịch Thật Để Xem Demo] bên dưới để nghe chuông và giọng đọc thu ngân.</span>
+              <span class="num" style="font-size:12px;color:#6EE7B7;font-weight:700;" id="audioLatencyTag">Độ trễ: &lt; 0.3s</span>
+            </div>
+          </div>
+
+          <div class="demo-cta-bar">
+            <button type="button" class="btn btn-emerald" id="btnSimulateRealTx" style="padding:10px 14px;font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Chạy mô phỏng giao dịch thật để xem demo
+            </button>
+
+            <button type="button" class="btn btn-crimson-soft" id="btnSimulateScamTx" style="padding:10px 13px;font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              Mô phỏng chuyển thiếu số 0 (48.500đ)
+            </button>
+
+            <button type="button" class="btn btn-outline" id="btnTestChimeOnly" style="padding:10px 13px;font-size:13px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              Thử loa
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BANK-VERIFIED LEDGER & CIRCULAR 152/2025/TT-BTC EXPORT -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <h2 class="card-title">3. Sổ đối soát tiền vào đã xác thực ngân hàng (chuẩn mẫu S2e-HKD)</h2>
+          </div>
+          <button type="button" class="btn btn-slate" id="btnExportS2eCsv" style="padding:7px 12px;font-size:12.5px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Xuất sổ S2e-HKD (TT 152/2025)
+          </button>
+        </div>
+
+        <div class="card-body">
+          <p class="sample-note">Dữ liệu mẫu • Các giao dịch bên dưới dùng để minh họa.</p>
+          <div class="kpi-grid">
+            <div class="kpi-box">
+              <div class="kpi-label">Tổng thực thu NH ca hôm nay</div>
+              <div class="kpi-val emerald num" id="kpiTotalVerified">1.085.000 VND</div>
+            </div>
+            <div class="kpi-box">
+              <div class="kpi-label">Đơn khớp lệnh xác thực (confirmed)</div>
+              <div class="kpi-val num" id="kpiConfirmedCount">3 đơn</div>
+            </div>
+            <div class="kpi-box">
+              <div class="kpi-label">Cảnh báo chuyển thiếu / nghi vấn</div>
+              <div class="kpi-val crimson num" id="kpiMismatchCount">0 vụ</div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Giờ NH</th>
+                  <th>Mã Đơn</th>
+                  <th>Số Tiền Thực Nhận</th>
+                  <th>Mã Tham Chiếu FT</th>
+                  <th>Ngân Hàng</th>
+                  <th>Trạng Thái Xác Thực</th>
+                </tr>
+              </thead>
+              <tbody id="ledgerTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- GOOGLE SHEETS APPS SCRIPT WEBHOOK CONNECTOR -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <h2 class="card-title">4. Kết nối trực tiếp Google Sheets Webhook của chủ quán (0 VND/tháng)</h2>
+          </div>
+          <span class="card-tag">SePay / Casso + Apps Script</span>
+        </div>
+        <div class="card-body">
+          <div class="webhook-grid">
+            <div class="field">
+              <label for="gasUrlInput">Google Apps Script Web App URL (sepay_casso_telegram_sheets_webhook.gs)</label>
+              <input type="url" id="gasUrlInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec" />
+            </div>
+            <div class="field">
+              <label for="gasReadKeyInput">Khóa đọc (SOUNDBOX_READ_KEY)</label>
+              <input type="password" id="gasReadKeyInput" placeholder="VN_SOUNDBOX_READONLY_2026..." />
+            </div>
+            <button type="button" class="btn btn-outline" id="btnToggleLiveSync">Lưu &amp; Bật đồng bộ 3s</button>
+          </div>
+          <p class="helper-note" id="webhookHelperStatus">
+            Mẹo bảo mật: Màn hình quầy thu ngân chỉ giữ khóa Read-Only (?read_key=...), tách biệt hoàn toàn với khóa Write nhận Webhook từ SePay/Casso. Dữ liệu cấu hình lưu cục bộ trên trình duyệt máy thu ngân.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+       * 1. TOP 15 NAPAS VIETNAM BANKS DIRECTORY (CHUẨN BIN 6 SỐ EMVCO NAPAS 247)
+       * ========================================================================= */
+      const NAPAS_BANKS = [
+        { code: 'MB',   bin: '970422', name: 'MB Bank (Quân Đội)' },
+        { code: 'VCB',  bin: '970436', name: 'Vietcombank (Ngoại Thương)' },
+        { code: 'TCB',  bin: '970407', name: 'Techcombank (Kỹ Thương)' },
+        { code: 'BIDV', bin: '970418', name: 'BIDV (Đầu Tư & Phát Triển)' },
+        { code: 'ACB',  bin: '970416', name: 'ACB (Á Châu)' },
+        { code: 'VPB',  bin: '970432', name: 'VPBank (Việt Nam Thịnh Vượng)' },
+        { code: 'ICB',  bin: '970415', name: 'VietinBank (Công Thương)' },
+        { code: 'TPB',  bin: '970423', name: 'TPBank (Tiên Phong)' },
+        { code: 'STB',  bin: '970403', name: 'Sacombank (Sài Gòn Thương Tín)' },
+        { code: 'VIB',  bin: '970441', name: 'VIB (Quốc Tế)' },
+        { code: 'HDB',  bin: '970437', name: 'HDBank (Phát Triển TP.HCM)' },
+        { code: 'SHB',  bin: '970443', name: 'SHB (Sài Gòn - Hà Nội)' },
+        { code: 'MSB',  bin: '970426', name: 'MSB (Hàng Hải)' },
+        { code: 'OCB',  bin: '970448', name: 'OCB (Phương Đông)' },
+        { code: 'VBA',  bin: '970405', name: 'Agribank (NN & PTNT)' }
+      ];
+
+      /* =========================================================================
+       * 2. CHUẨN EMVCO NAPAS 247 DYNAMIC VIETQR + CRC16-CCITT (POLY 0x1021)
+       * ========================================================================= */
+      function tlv(id, value) {
+        const str = String(value || '');
+        const len = String(str.length).padStart(2, '0');
+        return id + len + str;
+      }
+
+      function crc16CcittFalse(asciiStr) {
+        let crc = 0xFFFF;
+        for (let i = 0; i < asciiStr.length; i++) {
+          crc ^= (asciiStr.charCodeAt(i) & 0xFF) << 8;
+          for (let b = 0; b < 8; b++) {
+            if ((crc & 0x8000) !== 0) {
+              crc = ((crc << 1) ^ 0x1021) & 0xFFFF;
+            } else {
+              crc = (crc << 1) & 0xFFFF;
+            }
+          }
+        }
+        return crc.toString(16).toUpperCase().padStart(4, '0');
+      }
+
+      function stripVietnameseTones(str) {
+        return String(str || '')
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd')
+          .replace(/Đ/g, 'D')
+          .replace(/[^A-Za-z0-9 \-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function buildVietQrEmvPayload(bankBin, accountNo, amountVnd, orderMemo) {
+        const cleanAcc = String(accountNo || '').replace(/[^0-9A-Za-z]/g, '').slice(0, 25) || '0000000000';
+        const cleanBin = String(bankBin || '970422').replace(/\D/g, '').slice(0, 6);
+        const intAmount = Math.max(0, Math.round(Number(amountVnd) || 0));
+        const cleanMemo = stripVietnameseTones(orderMemo).replace(/[^A-Za-z0-9 ]/g, '').trim().slice(0, 50);
+
+        const beneficiary = tlv('00', cleanBin) + tlv('01', cleanAcc);
+        const consumerAccountInfo = tlv('38',
+          tlv('00', 'A000000727') +
+          tlv('01', beneficiary) +
+          tlv('02', 'QRIBFTTA')
+        );
+
+        const pointOfInitiation = intAmount > 0 ? '010212' : '010211';
+        const amountTag = intAmount > 0 ? tlv('54', String(intAmount)) : '';
+        const additionalDataTag = cleanMemo ? tlv('62', tlv('08', cleanMemo)) : '';
+
+        const payloadWithoutCrc =
+          '000201' +
+          pointOfInitiation +
+          consumerAccountInfo +
+          '5303704' +
+          amountTag +
+          '5802VN' +
+          additionalDataTag +
+          '6304';
+
+        return payloadWithoutCrc + crc16CcittFalse(payloadWithoutCrc);
+      }
+
+      /* =========================================================================
+       * 3. PURE-JS OFFLINE ISO/IEC 18004 QR CODE ENCODER (VERSIONS 1-12, LEVEL M)
+       *    100% Scannable by Real Banking Apps & OpenCV QRCodeDetector (0 Network)
+       * ========================================================================= */
+      const QrIso18004 = (function () {
+        // Exact ISO/IEC 18004 RS Block Table for Error Correction Level M (format indicator = 0)
+        const RS_BLOCKS_M = {
+          1:  [1, 26, 16],
+          2:  [1, 44, 28],
+          3:  [1, 70, 44],
+          4:  [2, 50, 32],
+          5:  [2, 67, 43],
+          6:  [4, 43, 27],
+          7:  [4, 49, 31],
+          8:  [2, 60, 38, 2, 61, 39],
+          9:  [3, 58, 36, 2, 59, 37],
+          10: [4, 69, 43, 1, 70, 44],
+          11: [1, 80, 50, 4, 81, 51],
+          12: [6, 58, 36, 2, 59, 37]
+        };
+
+        const ALIGN_POS = {
+          1: [], 2: [6, 18], 3: [6, 22], 4: [6, 26], 5: [6, 30], 6: [6, 34],
+          7: [6, 22, 38], 8: [6, 24, 42], 9: [6, 26, 46], 10: [6, 28, 50],
+          11: [6, 30, 54], 12: [6, 32, 58]
+        };
+
+        const EXP = new Uint8Array(512);
+        const LOG = new Uint8Array(256);
+        (function initGf256() {
+          let x = 1;
+          for (let i = 0; i < 255; i++) {
+            EXP[i] = x;
+            LOG[x] = i;
+            x <<= 1;
+            if (x & 0x100) x ^= 0x11D;
+          }
+          for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+        })();
+
+        function gfMul(a, b) {
+          if (a === 0 || b === 0) return 0;
+          return EXP[LOG[a] + LOG[b]];
+        }
+
+        function polyMul(p, q) {
+          const out = new Uint8Array(p.length + q.length - 1);
+          for (let i = 0; i < p.length; i++) {
+            for (let j = 0; j < q.length; j++) {
+              out[i + j] ^= gfMul(p[i], q[j]);
+            }
+          }
+          return out;
+        }
+
+        function rsGeneratorPoly(ecLen) {
+          let poly = new Uint8Array([1]);
+          for (let i = 0; i < ecLen; i++) {
+            poly = polyMul(poly, new Uint8Array([1, EXP[i]]));
+          }
+          return poly;
+        }
+
+        function rsComputeEc(dataBytes, ecLen) {
+          const gen = rsGeneratorPoly(ecLen);
+          const msg = new Uint8Array(dataBytes.length + ecLen);
+          msg.set(dataBytes, 0);
+          for (let i = 0; i < dataBytes.length; i++) {
+            const coef = msg[i];
+            if (coef !== 0) {
+              for (let j = 1; j < gen.length; j++) {
+                msg[i + j] ^= gfMul(gen[j], coef);
+              }
+            }
+          }
+          return msg.slice(dataBytes.length);
+        }
+
+        function expandRsBlocks(spec) {
+          const list = [];
+          for (let i = 0; i < spec.length; i += 3) {
+            const count = spec[i], totalCount = spec[i + 1], dataCount = spec[i + 2];
+            for (let c = 0; c < count; c++) {
+              list.push({ totalCount: totalCount, dataCount: dataCount, ecCount: totalCount - dataCount });
+            }
+          }
+          return list;
+        }
+
+        function pickVersion(byteLen) {
+          for (let v = 1; v <= 12; v++) {
+            const blocks = expandRsBlocks(RS_BLOCKS_M[v]);
+            const totalDataBytes = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+            const lenBits = v < 10 ? 8 : 16;
+            const maxPayload = Math.floor((totalDataBytes * 8 - 4 - lenBits) / 8);
+            if (byteLen <= maxPayload) return v;
+          }
+          throw new Error('Chuỗi QR vượt quá dung lượng Version 12.');
+        }
+
+        function bchDigit(data) {
+          let digit = 0;
+          while (data !== 0) { digit++; data >>>= 1; }
+          return digit;
+        }
+
+        function getBchTypeInfo(data) {
+          let d = data << 10;
+          while (bchDigit(d) - bchDigit(0x537) >= 0) {
+            d ^= (0x537 << (bchDigit(d) - bchDigit(0x537)));
+          }
+          return ((data << 10) | d) ^ 0x5412;
+        }
+
+        function getBchTypeNumber(version) {
+          let d = version << 12;
+          while (bchDigit(d) - bchDigit(0x1F25) >= 0) {
+            d ^= (0x1F25 << (bchDigit(d) - bchDigit(0x1F25)));
+          }
+          return (version << 12) | d;
+        }
+
+        function buildCodewords(version, utf8Bytes) {
+          const blocks = expandRsBlocks(RS_BLOCKS_M[version]);
+          const totalDataBytes = blocks.reduce(function (s, b) { return s + b.dataCount; }, 0);
+          const bits = [];
+          function pushBits(val, len) {
+            for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1);
+          }
+
+          // Mode indicator: Byte mode = 0100
+          pushBits(0x4, 4);
+          pushBits(utf8Bytes.length, version < 10 ? 8 : 16);
+          for (let i = 0; i < utf8Bytes.length; i++) pushBits(utf8Bytes[i], 8);
+
+          const maxBits = totalDataBytes * 8;
+          for (let i = 0; i < 4 && bits.length < maxBits; i++) bits.push(0);
+          while (bits.length % 8 !== 0) bits.push(0);
+
+          const dataCodewords = new Uint8Array(totalDataBytes);
+          let byteIdx = 0;
+          for (let i = 0; i < bits.length; i += 8) {
+            let b = 0;
+            for (let k = 0; k < 8; k++) b = (b << 1) | bits[i + k];
+            dataCodewords[byteIdx++] = b;
+          }
+          let padToggle = true;
+          while (byteIdx < totalDataBytes) {
+            dataCodewords[byteIdx++] = padToggle ? 0xEC : 0x11;
+            padToggle = !padToggle;
+          }
+
+          // Split into RS blocks & interleave
+          let offset = 0;
+          const dcBlocks = [];
+          const ecBlocks = [];
+          let maxDc = 0, maxEc = 0;
+          for (let i = 0; i < blocks.length; i++) {
+            const b = blocks[i];
+            const slice = dataCodewords.slice(offset, offset + b.dataCount);
+            offset += b.dataCount;
+            const ec = rsComputeEc(slice, b.ecCount);
+            dcBlocks.push(slice);
+            ecBlocks.push(ec);
+            if (b.dataCount > maxDc) maxDc = b.dataCount;
+            if (b.ecCount > maxEc) maxEc = b.ecCount;
+          }
+
+          const finalBytes = [];
+          for (let c = 0; c < maxDc; c++) {
+            for (let r = 0; r < dcBlocks.length; r++) {
+              if (c < dcBlocks[r].length) finalBytes.push(dcBlocks[r][c]);
+            }
+          }
+          for (let c = 0; c < maxEc; c++) {
+            for (let r = 0; r < ecBlocks.length; r++) {
+              if (c < ecBlocks[r].length) finalBytes.push(ecBlocks[r][c]);
+            }
+          }
+          return finalBytes;
+        }
+
+        function maskBit(maskPattern, r, c) {
+          switch (maskPattern) {
+            case 0: return (r + c) % 2 === 0;
+            case 1: return r % 2 === 0;
+            case 2: return c % 3 === 0;
+            case 3: return (r + c) % 3 === 0;
+            case 4: return (Math.floor(r / 2) + Math.floor(c / 3)) % 2 === 0;
+            case 5: return ((r * c) % 2) + ((r * c) % 3) === 0;
+            case 6: return (((r * c) % 2) + ((r * c) % 3)) % 2 === 0;
+            case 7: return (((r * c) % 3) + ((r + c) % 2)) % 2 === 0;
+            default: return false;
+          }
+        }
+
+        function createMatrixWithMask(version, codewords, maskPattern) {
+          const size = version * 4 + 17;
+          const modules = Array.from({ length: size }, function () { return new Array(size).fill(null); });
+
+          function placeFinder(row, col) {
+            for (let r = -1; r <= 7; r++) {
+              if (row + r < 0 || row + r >= size) continue;
+              for (let c = -1; c <= 7; c++) {
+                if (col + c < 0 || col + c >= size) continue;
+                const on = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+                           (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+                           (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+                modules[row + r][col + c] = on;
+              }
+            }
+          }
+
+          placeFinder(0, 0);
+          placeFinder(size - 7, 0);
+          placeFinder(0, size - 7);
+
+          // Alignment patterns
+          const pos = ALIGN_POS[version];
+          for (let i = 0; i < pos.length; i++) {
+            for (let j = 0; j < pos.length; j++) {
+              const row = pos[i], col = pos[j];
+              if (modules[row][col] !== null) continue;
+              for (let r = -2; r <= 2; r++) {
+                for (let c = -2; c <= 2; c++) {
+                  modules[row + r][col + c] =
+                    r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0);
+                }
+              }
+            }
+          }
+
+          // Timing patterns
+          for (let i = 8; i < size - 8; i++) {
+            if (modules[i][6] === null) modules[i][6] = (i % 2 === 0);
+            if (modules[6][i] === null) modules[6][i] = (i % 2 === 0);
+          }
+
+          // Version info (for v >= 7)
+          if (version >= 7) {
+            const vBits = getBchTypeNumber(version);
+            for (let i = 0; i < 18; i++) {
+              const bit = ((vBits >>> i) & 1) === 1;
+              modules[Math.floor(i / 3)][(i % 3) + size - 11] = bit;
+              modules[(i % 3) + size - 11][Math.floor(i / 3)] = bit;
+            }
+          }
+
+          // Format info (EC Level M => ecIndicator = 0)
+          const fBits = getBchTypeInfo((0 << 3) | maskPattern);
+          for (let i = 0; i < 15; i++) {
+            const bit = ((fBits >>> i) & 1) === 1;
+            if (i < 6) modules[i][8] = bit;
+            else if (i < 8) modules[i + 1][8] = bit;
+            else modules[size - 15 + i][8] = bit;
+
+            if (i < 8) modules[8][size - i - 1] = bit;
+            else if (i < 9) modules[8][15 - i - 1 + 1] = bit;
+            else modules[8][15 - i - 1] = bit;
+          }
+          // Fixed dark module
+          modules[size - 8][8] = true;
+
+          // Zigzag data placement
+          let inc = -1;
+          let row = size - 1;
+          let bitIndex = 7;
+          let byteIndex = 0;
+
+          for (let col = size - 1; col > 0; col -= 2) {
+            if (col === 6) col--;
+            while (true) {
+              for (let c = 0; c < 2; c++) {
+                if (modules[row][col - c] === null) {
+                  let dark = false;
+                  if (byteIndex < codewords.length) {
+                    dark = ((codewords[byteIndex] >>> bitIndex) & 1) === 1;
+                  }
+                  if (maskBit(maskPattern, row, col - c)) dark = !dark;
+                  modules[row][col - c] = dark;
+                  bitIndex--;
+                  if (bitIndex === -1) {
+                    byteIndex++;
+                    bitIndex = 7;
+                  }
+                }
+              }
+              row += inc;
+              if (row < 0 || row >= size) {
+                row -= inc;
+                inc = -inc;
+                break;
+              }
+            }
+          }
+          return modules;
+        }
+
+        function penaltyScore(modules) {
+          const n = modules.length;
+          let score = 0;
+          // Rule 1: 5+ consecutive modules in row/col
+          for (let r = 0; r < n; r++) {
+            let runColor = modules[r][0], runLen = 1;
+            for (let c = 1; c < n; c++) {
+              if (modules[r][c] === runColor) {
+                runLen++;
+              } else {
+                if (runLen >= 5) score += 3 + (runLen - 5);
+                runColor = modules[r][c];
+                runLen = 1;
+              }
+            }
+            if (runLen >= 5) score += 3 + (runLen - 5);
+          }
+          for (let c = 0; c < n; c++) {
+            let runColor = modules[0][c], runLen = 1;
+            for (let r = 1; r < n; r++) {
+              if (modules[r][c] === runColor) {
+                runLen++;
+              } else {
+                if (runLen >= 5) score += 3 + (runLen - 5);
+                runColor = modules[r][c];
+                runLen = 1;
+              }
+            }
+            if (runLen >= 5) score += 3 + (runLen - 5);
+          }
+          // Rule 2: 2x2 blocks
+          for (let r = 0; r < n - 1; r++) {
+            for (let c = 0; c < n - 1; c++) {
+              const v = modules[r][c];
+              if (v === modules[r][c + 1] && v === modules[r + 1][c] && v === modules[r + 1][c + 1]) {
+                score += 3;
+              }
+            }
+          }
+          return score;
+        }
+
+        function toSvg(text) {
+          const utf8 = new TextEncoder().encode(text);
+          const version = pickVersion(utf8.length);
+          const codewords = buildCodewords(version, utf8);
+
+          let bestMatrix = null;
+          let bestPenalty = Infinity;
+          for (let m = 0; m < 8; m++) {
+            const candidate = createMatrixWithMask(version, codewords, m);
+            const p = penaltyScore(candidate);
+            if (p < bestPenalty) {
+              bestPenalty = p;
+              bestMatrix = candidate;
+            }
+          }
+
+          const n = bestMatrix.length;
+          const quiet = 3;
+          const total = n + quiet * 2;
+          let pathData = '';
+          for (let r = 0; r < n; r++) {
+            for (let c = 0; c < n; c++) {
+              if (bestMatrix[r][c]) {
+                pathData += 'M' + (c + quiet) + ',' + (r + quiet) + 'h1v1h-1z';
+              }
+            }
+          }
+
+          return (
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + total + ' ' + total + '" shape-rendering="crispEdges">' +
+            '<rect width="' + total + '" height="' + total + '" fill="#FFFFFF"/>' +
+            '<path d="' + pathData + '" fill="#09101F"/>' +
+            '</svg>'
+          );
+        }
+
+        return { toSvg: toSvg };
+      })();
+
+      /* =========================================================================
+       * 4. VIETNAMESE CURRENCY NUMBER-TO-WORDS & WEB AUDIO + SPEECH SOUNDBOX
+       * ========================================================================= */
+      let sharedAudioCtx = null;
+      function getAudioCtx() {
+        if (!sharedAudioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (Ctx) sharedAudioCtx = new Ctx();
+        }
+        if (sharedAudioCtx && sharedAudioCtx.state === 'suspended') {
+          sharedAudioCtx.resume().catch(function () {});
+        }
+        return sharedAudioCtx;
+      }
+
+      function playCrystalSuccessChime() {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const notes = [659.25, 830.61, 987.77, 1318.51]; // E5 -> G#5 -> B5 -> E6
+        const now = ctx.currentTime;
+        notes.forEach(function (freq, idx) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = idx === 3 ? 'triangle' : 'sine';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.085);
+          gain.gain.setValueAtTime(0.001, now + idx * 0.085);
+          gain.gain.exponentialRampToValueAtTime(0.22, now + idx * 0.085 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.085 + 0.48);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.085);
+          osc.stop(now + idx * 0.085 + 0.5);
+        });
+      }
+
+      function playScamWarningBuzzer() {
+        const ctx = getAudioCtx();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        [0, 0.22, 0.44].forEach(function (offset) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(240, now + offset);
+          osc.frequency.linearRampToValueAtTime(175, now + offset + 0.16);
+          gain.gain.setValueAtTime(0.18, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.18);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.19);
+        });
+      }
+
+      function vndToVietnameseWords(amount) {
+        const n = Math.round(Math.abs(Number(amount) || 0));
+        if (n === 0) return 'không đồng';
+        const digits = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+
+        function readTriple(num, showZeroHundred) {
+          const h = Math.floor(num / 100);
+          const t = Math.floor((num % 100) / 10);
+          const u = num % 10;
+          const parts = [];
+          if (h > 0 || showZeroHundred) {
+            parts.push(digits[h] + ' trăm');
+          }
+          if (t === 0 && u > 0 && (h > 0 || showZeroHundred)) {
+            parts.push('lẻ');
+          } else if (t === 1) {
+            parts.push('mười');
+          } else if (t > 1) {
+            parts.push(digits[t] + ' mươi');
+          }
+          if (u > 0) {
+            if (u === 1 && t > 1) parts.push('mốt');
+            else if (u === 5 && t >= 1) parts.push('lăm');
+            else if (u === 4 && t > 1) parts.push('tư');
+            else parts.push(digits[u]);
+          }
+          return parts.join(' ');
+        }
+
+        const billions = Math.floor(n / 1000000000);
+        const millions = Math.floor((n % 1000000000) / 1000000);
+        const thousands = Math.floor((n % 1000000) / 1000);
+        const remainder = n % 1000;
+
+        const chunks = [];
+        if (billions > 0) chunks.push(readTriple(billions, false) + ' tỷ');
+        if (millions > 0) chunks.push(readTriple(millions, billions > 0) + ' triệu');
+        if (thousands > 0) chunks.push(readTriple(thousands, billions > 0 || millions > 0) + ' nghìn');
+        if (remainder > 0) chunks.push(readTriple(remainder, billions > 0 || millions > 0 || thousands > 0));
+        return chunks.join(' ') + ' đồng';
+      }
+
+      function spellOrderCodeForSpeech(code) {
+        return String(code || '')
+          .replace(/[-_]/g, '')
+          .split('')
+          .join(' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function speakVietnamese(sentence) {
+        const eqEl = document.getElementById('eqBars');
+        const transcriptEl = document.getElementById('lastSpokenText');
+        transcriptEl.textContent = 'Loa thu ngân phát thanh: "' + sentence + '"';
+        eqEl.classList.add('speaking');
+
+        const stopAnimTimer = setTimeout(function () {
+          eqEl.classList.remove('speaking');
+        }, 3200);
+
+        if (!document.getElementById('voiceToggle').checked) return;
+        if (!('speechSynthesis' in window)) return;
+
+        try {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(sentence);
+          utter.lang = 'vi-VN';
+          utter.rate = 1.02;
+          utter.pitch = 1.04;
+          const voices = window.speechSynthesis.getVoices() || [];
+          const viVoice = voices.find(function (v) { return /vi/i.test(v.lang); });
+          if (viVoice) utter.voice = viVoice;
+          utter.onend = function () {
+            clearTimeout(stopAnimTimer);
+            eqEl.classList.remove('speaking');
+          };
+          window.speechSynthesis.speak(utter);
+        } catch (_) {}
+      }
+
+      /* =========================================================================
+       * 5. STATE, DOM BINDINGS & ANTI-FAKE-BILL LEDGER ENGINE
+       * ========================================================================= */
+      const bankSelect = document.getElementById('bankSelect');
+      const shopNameInput = document.getElementById('shopNameInput');
+      const accountNoInput = document.getElementById('accountNoInput');
+      const accountNameInput = document.getElementById('accountNameInput');
+      const amountInput = document.getElementById('amountInput');
+      const orderCodeInput = document.getElementById('orderCodeInput');
+
+      let currentEmvString = '';
+      let orderSequence = 8821;
+      let pollTimer = null;
+      const seenTxKeys = new Set();
+
+      const ledgerEntries = [
+        {
+          time: '2026-10-31 08:42:19',
+          orderCode: 'DH-8820',
+          amount: 320000,
+          expected: 320000,
+          ref: 'FT26304771920',
+          bank: 'Vietcombank',
+          status: 'CONFIRMED',
+          memo: 'DH8820 thanh toan ban 02'
+        },
+        {
+          time: '2026-10-31 08:19:05',
+          orderCode: 'DH-8819',
+          amount: 485000,
+          expected: 485000,
+          ref: 'FT26304760411',
+          bank: 'MB Bank',
+          status: 'CONFIRMED',
+          memo: 'DH8819 NGUYEN THI LAN chuyen tien'
+        },
+        {
+          time: '2026-10-31 07:54:48',
+          orderCode: 'DH-8818',
+          amount: 280000,
+          expected: 280000,
+          ref: 'FT26304748803',
+          bank: 'Techcombank',
+          status: 'CONFIRMED',
+          memo: 'DH8818 don mang ve'
+        }
+      ];
+
+      function formatVnd(n) {
+        return Math.round(Number(n) || 0).toLocaleString('vi-VN');
+      }
+
+      function parseVndInput(raw) {
+        const digits = String(raw || '').replace(/\D/g, '');
+        return digits ? parseInt(digits, 10) : 0;
+      }
+
+      function populateBanks() {
+        bankSelect.innerHTML = NAPAS_BANKS.map(function (b) {
+          return '<option value="' + b.bin + '" data-code="' + b.code + '">' + b.name + ' — ' + b.bin + '</option>';
+        }).join('');
+      }
+
+      function applyUrlQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('shop')) shopNameInput.value = params.get('shop');
+        if (params.get('bin')) {
+          const found = NAPAS_BANKS.find(function (b) { return b.bin === params.get('bin') || b.code === params.get('bin').toUpperCase(); });
+          if (found) bankSelect.value = found.bin;
+        }
+        if (params.get('acc')) accountNoInput.value = params.get('acc');
+        if (params.get('holder')) accountNameInput.value = params.get('holder').toUpperCase();
+        if (params.get('amount')) amountInput.value = formatVnd(parseVndInput(params.get('amount')));
+        if (params.get('code')) orderCodeInput.value = params.get('code').toUpperCase();
+      }
+
+      function setGuardBannerState(mode, details) {
+        const banner = document.getElementById('antiFakeBillBanner');
+        const iconBox = document.getElementById('guardIconBox');
+        const kicker = document.getElementById('guardKicker');
+        const headline = document.getElementById('guardHeadline');
+        const desc = document.getElementById('guardDesc');
+        const badge = document.getElementById('guardBadge');
+
+        banner.className = 'guard-banner ' + mode;
+        if (mode === 'pending') {
+          iconBox.innerHTML = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+          kicker.textContent = 'TRẠM KIỂM SOÁT CHỐNG BILL CHỤP MÀN HÌNH GIẢ MẠO';
+          headline.textContent = 'CHƯA NHẬN TIỀN THẬT — CẢNH GIÁC BILL CHỤP MÀN HÌNH (' + details.orderCode + ': ' + formatVnd(details.expected) + ' VND)';
+          desc.textContent = 'Nhân viên thu ngân tuyệt đối KHÔNG giao hàng khi khách chỉ giơ ảnh chụp màn hình. Chỉ giao khi khung này chuyển sang XANH NGỌC và Loa đọc đúng số tiền + mã đơn.';
+          badge.textContent = 'CHỜ TIỀN VÀO NH';
+        } else if (mode === 'confirmed') {
+          iconBox.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+          kicker.textContent = 'XÁC THỰC BIẾN ĐỘNG SỐ DƯ NGÂN HÀNG THÀNH CÔNG';
+          headline.textContent = 'ĐÃ NHẬN TIỀN THẬT +' + formatVnd(details.amount) + ' VND — KHỚP MÃ ĐƠN ' + details.orderCode;
+          desc.textContent = 'Mã tham chiếu NH: ' + details.ref + ' (' + details.bank + ' lúc ' + details.time + '). Thu ngân được phép in hóa đơn & giao hàng ngay!';
+          badge.textContent = 'CONFIRMED • HỢP LỆ';
+        } else if (mode === 'mismatch') {
+          iconBox.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+          kicker.textContent = 'BÁO ĐỘNG ĐỎ — PHÁT HIỆN CHUYỂN THIẾU TIỀN / NGHI VẤN GIAN LẬN';
+          const missing = Math.max(0, details.expected - details.amount);
+          headline.textContent = 'CHỈ NHẬN ĐƯỢC ' + formatVnd(details.amount) + ' VND — CÒN THIẾU ' + formatVnd(missing) + ' VND (' + details.orderCode + ')!';
+          desc.textContent = 'Cảnh giác chiêu lừa bỏ bớt 1 chữ số 0! Tuyệt đối dừng giao hàng và yêu cầu khách chuyển bù đủ ' + formatVnd(missing) + ' VND.';
+          badge.textContent = 'THIẾU TIỀN • DỪNG GIAO';
+        }
+      }
+
+      function refreshVietQrStandee(resetBanner) {
+        const selectedOpt = bankSelect.options[bankSelect.selectedIndex];
+        const bankBin = bankSelect.value;
+        const bankCode = selectedOpt ? selectedOpt.getAttribute('data-code') : 'MB';
+        const bankTitle = selectedOpt ? selectedOpt.text.split('—')[0].trim() : 'MB Bank';
+
+        const shopName = shopNameInput.value.trim() || 'CỬA HÀNG VIETQR 2026';
+        const accNo = accountNoInput.value.trim() || '0000000000';
+        const cleanAccDigits = accNo.replace(/[^0-9A-Za-z]/g, '');
+        const isDemoSandboxAcc = !cleanAccDigits || /^0+$/.test(cleanAccDigits) || cleanAccDigits.length < 6;
+        const holder = stripVietnameseTones(accountNameInput.value).toUpperCase() || 'CONG TY DEMO CHAY THU';
+        const amount = parseVndInput(amountInput.value);
+        const rawCode = orderCodeInput.value.trim() || 'DH-8821';
+        const normalizedMemo = rawCode.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+
+        document.getElementById('standeeShopTitle').textContent = shopName;
+        document.getElementById('qrBankLabel').textContent = bankTitle.toUpperCase() + ' • BIN ' + bankBin;
+        document.getElementById('qrAmountText').textContent = amount > 0 ? (formatVnd(amount) + ' VND') : 'KHÁCH TỰ NHẬP SỐ TIỀN';
+        document.getElementById('qrMemoText').textContent = 'Nội dung tự động: ' + normalizedMemo;
+        document.getElementById('qrAccText').textContent = accNo;
+        document.getElementById('qrHolderText').textContent = holder;
+
+        if (isDemoSandboxAcc) {
+          currentEmvString = '';
+          document.getElementById('qrSvgContainer').innerHTML =
+            '<div style="padding:14px 10px;border:2px dashed #DC2626;border-radius:10px;background:#FEF2F2;color:#991B1B;font-size:11.5px;font-weight:800;line-height:1.45;text-align:center;">' +
+            '[CHẾ ĐỘ CHẠY THỬ DEMO — NHẬP STK CÔNG TY CỦA BẠN ĐỂ TẠO QR THẬT]' +
+            '<div style="margin-top:6px;font-weight:600;color:#7F1D1D;font-size:11px;">STK mặc định 0000000000 đã khóa chống chuyển nhầm. Gõ thử STK thật của chính bạn vào ô bên trên để tạo mã VietQR Napas247 ngay tức khắc!</div>' +
+            '</div>';
+          document.getElementById('emvPayloadBox').textContent =
+            '[CHẾ ĐỘ CHẠY THỬ DEMO — NHẬP STK CÔNG TY CỦA BẠN ĐỂ SINH CHUỖI EMVCO NAPAS 247 THẬT]';
+          document.getElementById('btnOpenVietQrIo').href = '#';
+        } else {
+          currentEmvString = buildVietQrEmvPayload(bankBin, accNo, amount, normalizedMemo);
+          document.getElementById('qrSvgContainer').innerHTML = QrIso18004.toSvg(currentEmvString);
+          document.getElementById('emvPayloadBox').textContent = 'EMVCo NAPAS 247 (CRC16 Verified): ' + currentEmvString;
+
+          const vietQrIoUrl =
+            'https://img.vietqr.io/image/' + encodeURIComponent(bankCode) + '-' + encodeURIComponent(accNo) +
+            '-compact2.png?amount=' + encodeURIComponent(amount) +
+            '&addInfo=' + encodeURIComponent(normalizedMemo) +
+            '&accountName=' + encodeURIComponent(holder);
+          document.getElementById('btnOpenVietQrIo').href = vietQrIoUrl;
+        }
+
+        if (resetBanner) {
+          setGuardBannerState('pending', { orderCode: rawCode, expected: amount });
+        }
+      }
+
+      function renderLedger() {
+        const tbody = document.getElementById('ledgerTbody');
+        let totalVerified = 0;
+        let confirmedCount = 0;
+        let mismatchCount = 0;
+
+        tbody.innerHTML = ledgerEntries.map(function (item, idx) {
+          if (item.status === 'CONFIRMED') {
+            totalVerified += item.amount;
+            confirmedCount++;
+          } else {
+            mismatchCount++;
+          }
+
+          const rowClass = idx === 0 && item.isFresh
+            ? (item.status === 'CONFIRMED' ? 'highlight-new' : 'highlight-alert')
+            : '';
+
+          const badgeHtml = item.status === 'CONFIRMED'
+            ? '<span class="status-badge confirmed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>CONFIRMED</span>'
+            : '<span class="status-badge mismatch"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>THIẾU TIỀN</span>';
+
+          return (
+            '<tr class="' + rowClass + '">' +
+              '<td class="num">' + item.time.slice(11) + '</td>' +
+              '<td><strong class="num">' + item.orderCode + '</strong></td>' +
+              '<td class="num" style="font-weight:800;color:' + (item.status === 'CONFIRMED' ? '#047857' : '#DC2626') + ';">+' + formatVnd(item.amount) + ' đ</td>' +
+              '<td class="num" style="font-family:monospace;font-size:12px;">' + item.ref + '</td>' +
+              '<td>' + item.bank + '</td>' +
+              '<td>' + badgeHtml + '</td>' +
+            '</tr>'
+          );
+        }).join('');
+
+        document.getElementById('kpiTotalVerified').textContent = formatVnd(totalVerified) + ' VND';
+        document.getElementById('kpiConfirmedCount').textContent = confirmedCount + ' đơn';
+        document.getElementById('kpiMismatchCount').textContent = mismatchCount + ' vụ';
+      }
+
+      function nowTimestampVn() {
+        const d = new Date();
+        const pad = function (x) { return String(x).padStart(2, '0'); };
+        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' +
+               pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      }
+
+      function processIncomingBankTransaction(tx) {
+        const expectedAmount = parseVndInput(amountInput.value);
+        const activeOrderCode = orderCodeInput.value.trim() || 'DH-8821';
+        const isConfirmed = tx.amount >= expectedAmount && expectedAmount > 0;
+
+        const record = {
+          time: tx.time || nowTimestampVn(),
+          orderCode: tx.orderCode || activeOrderCode,
+          amount: tx.amount,
+          expected: expectedAmount,
+          ref: tx.ref || ('FT26304' + Math.floor(100000 + Math.random() * 899999)),
+          bank: tx.bank || 'MB Bank',
+          status: isConfirmed ? 'CONFIRMED' : 'MISMATCH',
+          memo: tx.memo || (activeOrderCode.replace(/[^A-Za-z0-9]/g, '') + ' chuyen khoan'),
+          isFresh: true
+        };
+
+        ledgerEntries.unshift(record);
+        renderLedger();
+
+        if (isConfirmed) {
+          setGuardBannerState('confirmed', record);
+          playCrystalSuccessChime();
+          const spoken = 'Đã nhận thành công ' + vndToVietnameseWords(record.amount) + ', mã đơn ' + spellOrderCodeForSpeech(record.orderCode);
+          speakVietnamese(spoken);
+        } else {
+          setGuardBannerState('mismatch', record);
+          playScamWarningBuzzer();
+          const missing = Math.max(0, expectedAmount - record.amount);
+          const spoken = 'Cảnh báo chuyển thiếu tiền! Chỉ nhận được ' + vndToVietnameseWords(record.amount) + ', còn thiếu ' + vndToVietnameseWords(missing) + ' cho đơn ' + spellOrderCodeForSpeech(record.orderCode);
+          speakVietnamese(spoken);
+        }
+      }
+
+      /* =========================================================================
+       * 6. CIRCULAR 152/2025/TT-BTC (MẪU SỐ S2e-HKD: SỔ CHI TIẾT TIỀN) CSV EXPORT
+       * ========================================================================= */
+      function exportCircular152S2eCsv() {
+        const shopName = shopNameInput.value.trim() || 'HỘ KINH DOANH VIETQR';
+        const accNo = accountNoInput.value.trim();
+        const lines = [
+          ['HỘ KINH DOANH / CỬA HÀNG:', shopName, '', '', 'Mẫu số S2e-HKD'],
+          ['Tài khoản ngân hàng:', "'" + accNo, '', '', '(Ban hành kèm theo Thông tư số 152/2025/TT-BTC ngày 31/12/2025 của Bộ Tài chính)'],
+          ['SỔ CHI TIẾT TIỀN GỬI NGÂN HÀNG (ĐỐI SOÁT CHỐNG BILL GIẢ)'],
+          [],
+          ['Ngày giờ ghi sổ', 'Số hiệu chứng từ (Mã FT)', 'Mã đơn hàng', 'Diễn giải / Nội dung giao dịch', 'Số tiền Thu - Gửi vào (VND)', 'Số tiền Chi - Rút ra (VND)', 'Ngân hàng', 'Trạng thái xác thực']
+        ];
+
+        ledgerEntries.slice().reverse().forEach(function (r) {
+          lines.push([
+            r.time,
+            r.ref,
+            r.orderCode,
+            r.memo,
+            r.amount,
+            0,
+            r.bank,
+            r.status
+          ]);
+        });
+
+        const csvContent = '\uFEFF' + lines.map(function (row) {
+          return row.map(function (cell) {
+            const s = String(cell === undefined || cell === null ? '' : cell);
+            return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+          }).join(',');
+        }).join('\r\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'So_Chi_Tiet_Tien_Mau_S2e_HKD_TT152_2026.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+
+      /* =========================================================================
+       * 7. LIVE GOOGLE APPS SCRIPT WEBHOOK POLLING (`doGet`)
+       * ========================================================================= */
+      async function pollGoogleSheetsWebhook() {
+        const baseUrl = document.getElementById('gasUrlInput').value.trim();
+        const readKey = document.getElementById('gasReadKeyInput').value.trim();
+        if (!baseUrl || !readKey) return;
+
+        try {
+          const sep = baseUrl.indexOf('?') === -1 ? '?' : '&';
+          const res = await fetch(baseUrl + sep + 'read_key=' + encodeURIComponent(readKey) + '&limit=10', {
+            method: 'GET',
+            cache: 'no-store'
+          });
+          const data = await res.json();
+          if (data && data.ok && Array.isArray(data.transactions)) {
+            data.transactions.slice().reverse().forEach(function (tx) {
+              const key = tx.dedupKey || tx.referenceCode;
+              if (key && !seenTxKeys.has(key)) {
+                seenTxKeys.add(key);
+                processIncomingBankTransaction({
+                  time: tx.transactionDate,
+                  orderCode: tx.orderCode,
+                  amount: Number(tx.amount) || 0,
+                  ref: tx.referenceCode,
+                  bank: tx.gateway,
+                  memo: tx.content
+                });
+              }
+            });
+          }
+        } catch (err) {
+          document.getElementById('webhookHelperStatus').textContent =
+            'Không thể kết nối URL Apps Script (kiểm tra lại quyền Deploy Anyone hoặc mạng Internet): ' + err.message;
+        }
+      }
+
+      /* =========================================================================
+       * 8. WIRE EVENTS & INITIALIZE
+       * ========================================================================= */
+      populateBanks();
+      applyUrlQueryParams();
+
+      [shopNameInput, bankSelect, accountNoInput, accountNameInput, orderCodeInput].forEach(function (el) {
+        el.addEventListener('input', function () { refreshVietQrStandee(true); });
+        el.addEventListener('change', function () { refreshVietQrStandee(true); });
+      });
+
+      amountInput.addEventListener('input', function () {
+        const val = parseVndInput(amountInput.value);
+        amountInput.value = val > 0 ? formatVnd(val) : '';
+        refreshVietQrStandee(true);
+      });
+
+      document.querySelectorAll('.chip-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const amt = parseInt(btn.getAttribute('data-amt'), 10);
+          amountInput.value = formatVnd(amt);
+          refreshVietQrStandee(true);
+        });
+      });
+
+      document.getElementById('btnNextOrder').addEventListener('click', function () {
+        orderSequence++;
+        orderCodeInput.value = 'DH-' + orderSequence;
+        refreshVietQrStandee(true);
+      });
+
+      document.getElementById('btnSimulateRealTx').addEventListener('click', function () {
+        const expected = parseVndInput(amountInput.value) || 485000;
+        const selectedBank = bankSelect.options[bankSelect.selectedIndex].text.split('(')[0].trim();
+        processIncomingBankTransaction({
+          amount: expected,
+          orderCode: orderCodeInput.value.trim() || 'DH-8821',
+          bank: selectedBank,
+          ref: 'FT26304' + Math.floor(800000 + Math.random() * 190000)
+        });
+      });
+
+      document.getElementById('btnSimulateScamTx').addEventListener('click', function () {
+        const expected = parseVndInput(amountInput.value) || 485000;
+        const scamAmount = Math.max(1000, Math.floor(expected / 10));
+        processIncomingBankTransaction({
+          amount: scamAmount,
+          orderCode: orderCodeInput.value.trim() || 'DH-8821',
+          bank: 'Chuyển khoản liên NH',
+          ref: 'FT26304SCAM10'
+        });
+      });
+
+      document.getElementById('btnTestChimeOnly').addEventListener('click', function () {
+        playCrystalSuccessChime();
+        speakVietnamese('Hệ thống loa thu ngân chống bill giả đã sẵn sàng hoạt động.');
+      });
+
+      document.getElementById('btnCopyEmv').addEventListener('click', function () {
+        if (navigator.clipboard) navigator.clipboard.writeText(currentEmvString).catch(function () {});
+        document.getElementById('btnCopyEmv').textContent = 'Đã chép chuỗi EMVCo!';
+        setTimeout(function () { document.getElementById('btnCopyEmv').textContent = 'Sao chép EMVCo'; }, 1800);
+      });
+
+      document.getElementById('btnCopyShareUrl').addEventListener('click', function () {
+        const url = new URL(window.location.href);
+        url.searchParams.set('shop', shopNameInput.value.trim());
+        url.searchParams.set('bin', bankSelect.value);
+        url.searchParams.set('acc', accountNoInput.value.trim());
+        url.searchParams.set('holder', stripVietnameseTones(accountNameInput.value).toUpperCase());
+        url.searchParams.set('amount', String(parseVndInput(amountInput.value)));
+        url.searchParams.set('code', orderCodeInput.value.trim());
+        if (navigator.clipboard) navigator.clipboard.writeText(url.toString()).catch(function () {});
+        document.getElementById('btnCopyShareUrl').textContent = 'Đã chép Link riêng!';
+        setTimeout(function () { document.getElementById('btnCopyShareUrl').textContent = 'Link Cá Nhân Hóa Quán'; }, 1800);
+      });
+
+      document.getElementById('btnPrintQr').addEventListener('click', function () {
+        window.print();
+      });
+
+      document.getElementById('btnExportS2eCsv').addEventListener('click', exportCircular152S2eCsv);
+
+      // Load saved Google Apps Script webhook config
+      try {
+        const savedUrl = localStorage.getItem('vn_soundbox_gas_url') || '';
+        const savedKey = localStorage.getItem('vn_soundbox_gas_read_key') || '';
+        if (savedUrl) document.getElementById('gasUrlInput').value = savedUrl;
+        if (savedKey) document.getElementById('gasReadKeyInput').value = savedKey;
+      } catch (_) {}
+
+      document.getElementById('btnToggleLiveSync').addEventListener('click', function () {
+        const btn = document.getElementById('btnToggleLiveSync');
+        const gasUrl = document.getElementById('gasUrlInput').value.trim();
+        const gasKey = document.getElementById('gasReadKeyInput').value.trim();
+
+        if (pollTimer) {
+          clearInterval(pollTimer);
+          pollTimer = null;
+          btn.textContent = 'Lưu & Bật Đồng Bộ 3s';
+          document.getElementById('syncStatePill').textContent = 'Chế độ: Đã tạm dừng đồng bộ đám mây';
+          return;
+        }
+
+        try {
+          localStorage.setItem('vn_soundbox_gas_url', gasUrl);
+          localStorage.setItem('vn_soundbox_gas_read_key', gasKey);
+        } catch (_) {}
+
+        if (!gasUrl || !gasKey) {
+          document.getElementById('webhookHelperStatus').textContent =
+            'Vui lòng nhập đầy đủ Google Apps Script Web App URL và Khóa Đọc (SOUNDBOX_READ_KEY) trước khi bật đồng bộ.';
+          return;
+        }
+
+        pollTimer = setInterval(pollGoogleSheetsWebhook, 3000);
+        pollGoogleSheetsWebhook();
+        btn.textContent = 'Đang Đồng Bộ 3s (Bấm Để Dừng)';
+        document.getElementById('syncStatePill').textContent = 'Đang kết nối trực tiếp Google Sheets Webhook (Chu kỳ 3s)';
+        document.getElementById('webhookHelperStatus').textContent =
+          'Đã kích hoạt lắng nghe biến động số dư thời gian thực từ Google Sheets S2e-HKD.';
+      });
+
+      refreshVietQrStandee(true);
+      renderLedger();
+    })();
+  </script>
+</body>
+</html>
