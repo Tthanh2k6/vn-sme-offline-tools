@@ -6,6 +6,13 @@ Offline browser tools for Vietnamese small businesses: VietQR cashier, receivabl
 
 **Status:** Built as demos/templates; adapt fields to each business.
 
+<p>
+  <a href="https://tthanh2k6.github.io/vn-sme-offline-tools/"><img src="https://img.shields.io/badge/M%E1%BB%9F_demo-Open_live_demo-E0461D?style=for-the-badge&logo=githubpages&logoColor=white" alt="Mở demo / Open live demo" /></a>
+  <a href="assets/video/gioi-thieu-720p.mp4"><img src="https://img.shields.io/badge/Video_tour-41s-1C1B19?style=for-the-badge" alt="Video tour, 41 seconds" /></a>
+</p>
+
+<a href="https://tthanh2k6.github.io/vn-sme-offline-tools/"><img src="assets/tour.gif" alt="Real screens: B2B debt aging, fleet reconciliation, VietQR cashier, wholesale quote" width="100%" /></a>
+
 **Live demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/ · **Video tour (41 s, no sound):** [assets/video/gioi-thieu-720p.mp4](assets/video/gioi-thieu-720p.mp4)
 
 ## How it works
