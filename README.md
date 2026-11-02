@@ -18,11 +18,7 @@ Offline browser tools for Vietnamese small businesses: VietQR cashier, receivabl
 
 ## Run it
 
-<<<<<<< HEAD
 - **Online demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/ (GitHub Pages)
-=======
-- **Online demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/
->>>>>>> 5d7726b (README: correct localStorage, QR badge and booking-form claims; demo booking alert no longer says the request was recorded)
 - **Locally:** download or clone the repo and open `index.html` in Chrome, Edge or Firefox. Keep the folder structure: the tools load fonts from `assets/fonts/`.
 
 ```
