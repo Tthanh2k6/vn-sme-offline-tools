@@ -11,14 +11,18 @@ Offline browser tools for Vietnamese small businesses: VietQR cashier, receivabl
 ## How it works
 
 - Every tool is a single HTML page with vanilla JavaScript. There is no server, no build step and no account.
-- Data you type or import stays on your device; nothing is uploaded unless you turn on one of the optional features below. Some tools save their state in `localStorage` (the VietQR cashier, the fleet reconciler and the year-end party check-in), so a page refresh does not lose your work.
+- Data you type or import stays on your device; nothing is uploaded unless you turn on one of the optional features below. The fleet reconciler and the year-end party check-in save their state in `localStorage`, so a page refresh does not lose your work there. The VietQR cashier only remembers its webhook settings; its sales list starts again from the sample data on reload.
 - All names, tax IDs, phone numbers and bank accounts in the sample data are placeholders (for example `0100000001`, `0900 000 000`, account `0000000000`). The QR codes are locked to the placeholder account until you enter your own.
 - Optional features that talk to the network are off by default: the VietQR cashier can call a Google Apps Script webhook if you paste its URL, the wholesale quote builder can load a price list from a published Google Sheets CSV link, and the cashier can show a QR image from the public `img.vietqr.io` API. Everything else works without a connection.
 - The Apps Script that would receive SePay / Casso payment notifications for the cashier (`sepay_casso_telegram_sheets_webhook.gs`, named in the cashier page) is not included in this repository yet. Without it, the cashier cannot see real bank transfers: the voice alert can only be tried with the built-in simulation buttons, so it does not by itself protect against fake transfer screenshots.
 
 ## Run it
 
+<<<<<<< HEAD
 - **Online demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/ (GitHub Pages)
+=======
+- **Online demo:** https://tthanh2k6.github.io/vn-sme-offline-tools/
+>>>>>>> 5d7726b (README: correct localStorage, QR badge and booking-form claims; demo booking alert no longer says the request was recorded)
 - **Locally:** download or clone the repo and open `index.html` in Chrome, Edge or Firefox. Keep the folder structure: the tools load fonts from `assets/fonts/`.
 
 ```
@@ -90,7 +94,7 @@ Imports trip sheets from Excel (.xlsx) or CSV, compares fuel used against the no
 
 *Check-in QR & quay số year-end party* · [`tools/yep-lucky-draw.html`](tools/yep-lucky-draw.html)
 
-Issues QR tickets, checks guests in, blocks duplicate scans, and runs the stage draw with crypto.getRandomValues.
+Gives each guest a ticket code with a QR-style badge, checks guests in by ticket code (typed, or read by a keyboard-mode barcode scanner), blocks duplicate check-ins, and runs the stage draw with crypto.getRandomValues. The badge is a decorative pattern generated in the page, not a standard scannable QR code.
 
 ![Year-end party QR check-in and lucky draw](assets/screenshots/yep-lucky-draw.png)
 
@@ -98,7 +102,7 @@ Issues QR tickets, checks guests in, blocks duplicate scans, and runs the stage 
 
 *Mẫu website tiệm nail (Mỹ / Úc)* · [`tools/nail-salon-booking.html`](tools/nail-salon-booking.html)
 
-Landing and booking page for Vietnamese-owned nail salons abroad; name, address, hours and currency come from URL parameters.
+Landing and booking page for Vietnamese-owned nail salons abroad; name, address, hours and currency come from URL parameters. The booking form is not connected to anything yet: it only shows a confirmation popup, so wire it to a booking system or form service before using it with real customers.
 
 ![Nail salon booking page template](assets/screenshots/nail-salon-booking.png)
 

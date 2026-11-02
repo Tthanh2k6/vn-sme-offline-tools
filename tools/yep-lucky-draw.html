@@ -611,7 +611,7 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 3: FULLSCREEN 60FPS LUCKY DRAW STAGE ==================== -->
+    <!-- ==================== TAB 3: FULLSCREEN LUCKY DRAW STAGE ==================== -->
     <section id="secStage" class="hidden">
       <div class="stage-wrapper">
         <canvas id="confettiCanvas"></canvas>
@@ -1172,7 +1172,7 @@
     }
 
     // =========================================================================
-    // TAB 3: 60FPS CRYPTOGRAPHIC SLOT-ROLL LUCKY DRAW ENGINE
+    // TAB 3: CRYPTOGRAPHIC SLOT-ROLL LUCKY DRAW ENGINE (requestAnimationFrame)
     // =========================================================================
     function getEligiblePool() {
       return state.guests.filter((g) => g.checkedIn && !g.wonPrize);
@@ -1337,7 +1337,7 @@
     }
 
     // =========================================================================
-    // CHAMPAGNE GOLD PARTICLE FIREWORKS ON STAGE CANVAS (60FPS)
+    // CHAMPAGNE GOLD PARTICLE FIREWORKS ON STAGE CANVAS (requestAnimationFrame)
     // =========================================================================
     let particles = [];
     let confettiAnimId = 0;
