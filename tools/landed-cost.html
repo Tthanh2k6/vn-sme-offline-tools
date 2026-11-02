@@ -1538,15 +1538,18 @@
 
       document.getElementById('copyDirectorSummaryBtn').addEventListener('click', function () {
         const txt = document.getElementById('directorZaloSummary').value;
+        function copyBySelection() {
+          const area = document.getElementById('directorZaloSummary');
+          area.select();
+          const ok = document.execCommand('copy');
+          showToast(ok ? 'Đã sao chép Báo cáo Giá vốn & Giá sỉ gửi Giám đốc!' : 'Trình duyệt chặn sao chép tự động: nội dung đã được bôi đen, hãy bấm Ctrl+C.');
+        }
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(txt).then(function () {
             showToast('Đã sao chép Báo cáo Giá vốn & Giá sỉ gửi Giám đốc!');
-          });
+          }).catch(copyBySelection);
         } else {
-          const area = document.getElementById('directorZaloSummary');
-          area.select();
-          document.execCommand('copy');
-          showToast('Đã sao chép Báo cáo Giá vốn & Giá sỉ gửi Giám đốc!');
+          copyBySelection();
         }
       });
 

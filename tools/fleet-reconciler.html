@@ -2787,6 +2787,8 @@ table.fleet-table th,.driver-table th,.a4-table th {font-family:var(--font-sans)
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(msg).then(function () {
             showToast('Đã sao chép Phiếu lương & đối chiếu dầu gửi Zalo cho tài xế ' + drv.driver + '!');
+          }).catch(function () {
+            showToast('Trình duyệt chặn sao chép tự động, chưa sao chép được tin nhắn.');
           });
         } else {
           showToast('Đã sẵn sàng sao chép tin nhắn Zalo!');

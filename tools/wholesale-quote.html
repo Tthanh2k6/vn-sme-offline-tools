@@ -3111,6 +3111,8 @@ body.wholesale .brand-title::first-letter { text-transform:uppercase !important;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(fullUrl).then(function () {
             showToast('Đã sao chép Link Báo Giá Cá Nhân Hóa cho ' + state.brand + '!');
+          }).catch(function () {
+            showToast('Link cá nhân hóa: ' + fullUrl);
           });
         } else {
           showToast('Link cá nhân hóa: ' + fullUrl);

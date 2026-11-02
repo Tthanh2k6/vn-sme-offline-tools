@@ -2186,12 +2186,19 @@ body.wholesale .brand-title::first-letter { text-transform:uppercase !important;
 
       document.getElementById('btnCopyZaloScript').addEventListener('click', function () {
         const text = document.getElementById('zaloScriptTextarea').value;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text);
-        }
         const toast = document.getElementById('copyStatusToast');
-        toast.textContent = 'Đã sao chép kịch bản nhắc nợ Zalo vào bộ nhớ tạm!';
-        setTimeout(function () { toast.textContent = ''; }, 3000);
+        function setCopyStatus(msg) {
+          toast.textContent = msg;
+          setTimeout(function () { toast.textContent = ''; }, 3000);
+        }
+        const copyFailedMsg = 'Trình duyệt chặn sao chép tự động: hãy bôi đen kịch bản và bấm Ctrl+C.';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            setCopyStatus('Đã sao chép kịch bản nhắc nợ Zalo vào bộ nhớ tạm!');
+          }).catch(function () { setCopyStatus(copyFailedMsg); });
+        } else {
+          setCopyStatus(copyFailedMsg);
+        }
       });
 
       document.getElementById('btnLoadSample').addEventListener('click', function () {

@@ -2493,10 +2493,14 @@ body.wholesale .brand-title::first-letter { text-transform:uppercase !important;
       });
 
       document.getElementById('btnCopyZaloReminder').addEventListener('click', function () {
+        const copyFailedMsg = 'Trình duyệt chặn sao chép tự động: hãy bôi đen tin nhắn và bấm Ctrl+C.';
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(currentZaloReminderText);
+          navigator.clipboard.writeText(currentZaloReminderText).then(function () {
+            showToast('Đã sao chép tin nhắn nhắc lịch hẹn & đợt thu gửi Zalo!');
+          }).catch(function () { showToast(copyFailedMsg); });
+        } else {
+          showToast(copyFailedMsg);
         }
-        showToast('Đã sao chép tin nhắn nhắc lịch hẹn & đợt thu gửi Zalo!');
       });
 
       document.getElementById('btnExportCsv').addEventListener('click', function () {
