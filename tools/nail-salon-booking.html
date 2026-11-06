@@ -139,6 +139,7 @@
     .btn-primary:hover { background: #6f1a28; border-color: #6f1a28; }
     .btn-gold { background: transparent; border-color: var(--ink); color: var(--ink); }
     .btn-gold:hover { background: var(--ink); color: var(--paper); }
+    .btn:disabled { opacity: 0.65; cursor: not-allowed; }
 
     /* Hero */
     .hero {
@@ -329,7 +330,7 @@
     }
     .booking-modal h3 { font-weight: 700; font-size: 22px !important; }
     .form-field { margin-bottom: 14px; }
-    .form-field > label, .form-field > legend {
+    .form-field > label, .form-field > legend, .datetime-col > label {
       display: block;
       width: 100%;
       font-size: 14px;
@@ -347,6 +348,57 @@
       font-size: 15px;
       background: #fff;
       color: var(--ink);
+    }
+    .form-field input[aria-invalid="true"] {
+      border-color: var(--accent);
+    }
+    .datetime-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .datetime-col {
+      min-width: 0;
+    }
+    .datetime-col input[type="date"],
+    .datetime-col input[type="time"] {
+      min-height: 44px;
+      min-width: 0;
+      line-height: 1.3;
+    }
+    @media (max-width: 440px) {
+      .datetime-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .form-field input:not([type="radio"]), .form-field select { font-size: 16px; }
+    }
+    .hp-wrap, .hp-field {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .form-alert {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(138, 36, 51, 0.28);
+      border-left: 3px solid var(--accent);
+      background: #f9f1f2;
+      color: var(--ink);
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .form-alert a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
     .tech-fieldset {
       border: 0;
@@ -487,6 +539,10 @@
       border-radius: var(--radius-md);
       padding: 10px 12px;
       margin-bottom: 16px;
+    }
+    .summary-note.is-sent {
+      color: var(--ink);
+      border-left: 3px solid var(--accent);
     }
     .summary-note strong { color: var(--ink); }
     .summary-note a {
@@ -799,13 +855,35 @@
             </label>
           </div>
         </fieldset>
-        <div class="form-field">
+        <div class="form-field" id="demoDateTimeField">
           <label for="bookingDateTime">Preferred date and time</label>
           <input id="bookingDateTime" name="preferredTime" type="text" required placeholder="e.g. Friday Nov 20 at 2:30 PM" />
         </div>
+        <div class="form-field hidden" id="apiDateTimeFields">
+          <div class="datetime-row">
+            <div class="datetime-col">
+              <label for="bookingDate">Preferred date</label>
+              <input id="bookingDate" name="bookingDate" class="num" type="date" disabled />
+            </div>
+            <div class="datetime-col">
+              <label for="bookingTime">Preferred time</label>
+              <input id="bookingTime" name="bookingTime" class="num" type="time" step="900" aria-describedby="bookingSlotError" disabled />
+            </div>
+          </div>
+          <div class="form-alert hidden" id="bookingSlotError" role="alert"></div>
+        </div>
+        <div class="form-field">
+          <label for="bookingNotes">Notes (optional)</label>
+          <input id="bookingNotes" name="notes" type="text" maxlength="2000" placeholder="e.g. Gel soak-off, nail art idea (optional)" />
+        </div>
+        <div class="hp-wrap" aria-hidden="true">
+          <label for="bookingHp">Leave this field empty</label>
+          <input id="bookingHp" class="hp-field" name="hp" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        </div>
+        <div class="form-alert hidden" id="bookingFormError" role="alert"></div>
         <div style="display:flex; gap:10px; margin-top:16px;">
-          <button type="submit" class="btn btn-primary" style="flex:1;">Send request</button>
-          <button type="button" class="btn btn-outline" onclick="closeBookingModal()">Close</button>
+          <button type="submit" class="btn btn-primary" id="bookingSubmitBtn" style="flex:1;">Send request</button>
+          <button type="button" class="btn btn-outline" id="bookingCloseBtn" onclick="closeBookingModal()">Close</button>
         </div>
       </form>
 
@@ -832,13 +910,17 @@
             <span class="summary-label">Email</span>
             <span class="summary-val" id="summaryEmail"></span>
           </div>
+          <div class="summary-row hidden" id="summaryNotesRow">
+            <span class="summary-label">Notes</span>
+            <span class="summary-val" id="summaryNotes"></span>
+          </div>
         </div>
-        <div class="summary-note">
+        <div class="summary-note" id="summaryNote">
           Demo only: this booking form is not connected yet, so your request for <strong id="summarySalonName">Demo Nail Spa</strong> was not sent. Please call <a href="tel:5550100100" class="num" id="summarySalonPhone">(555) 010-0100</a> to book.
         </div>
         <div style="display:flex; gap:10px;">
           <button type="button" class="btn btn-primary" id="summaryDoneBtn" style="flex:1;" onclick="closeBookingModal()">Done</button>
-          <button type="button" class="btn btn-outline" onclick="editBookingRequest()">Edit details</button>
+          <button type="button" class="btn btn-outline" id="summaryEditBtn" onclick="editBookingRequest()">Edit details</button>
         </div>
       </div>
     </div>
@@ -889,12 +971,26 @@
       }
       const techs = parsedTechs.length > 0 ? parsedTechs : ["Lan", "Vy", "Kevin"];
 
+      const rawApi = (merged.get("api") || "").trim();
+      let api = "";
+      if (rawApi.startsWith("https://script.google.com/") && !/\s/.test(rawApi)) {
+        try {
+          const parsedApi = new URL(rawApi);
+          if (parsedApi.origin === "https://script.google.com") {
+            api = rawApi;
+          }
+        } catch (_) {
+          api = "";
+        }
+      }
+
       return {
         name,
         city,
         addr,
         phone,
         posUrl,
+        api,
         hours,
         season,
         curr: currMeta.symbol,
@@ -1050,6 +1146,165 @@
     }
 
     let lastModalTrigger = null;
+    let isSubmittingBooking = false;
+
+    function getTodayLocalISO() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatDisplayDateTime(dateStr, timeStr) {
+      const dMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+      const tMatch = /^(\d{2}):(\d{2})/.exec(timeStr);
+      if (!dMatch || !tMatch) return `${dateStr} ${timeStr}`.trim();
+      const localDate = new Date(
+        Number(dMatch[1]),
+        Number(dMatch[2]) - 1,
+        Number(dMatch[3]),
+        Number(tMatch[1]),
+        Number(tMatch[2])
+      );
+      if (Number.isNaN(localDate.getTime())) return `${dateStr} ${timeStr}`;
+      try {
+        const datePart = new Intl.DateTimeFormat("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        }).format(localDate);
+        const timePart = new Intl.DateTimeFormat("en-US", {
+          hour: "numeric",
+          minute: "2-digit"
+        }).format(localDate);
+        return `${datePart} • ${timePart}`;
+      } catch (_) {
+        return `${dateStr} ${timeStr.slice(0, 5)}`;
+      }
+    }
+
+    function renderDemoSummaryNote() {
+      const noteEl = document.getElementById("summaryNote");
+      if (!noteEl) return;
+      const cleanDigits = cfg.phone.replace(/[^\d+]/g, "");
+      noteEl.classList.remove("is-sent");
+      noteEl.textContent = "";
+      noteEl.appendChild(
+        document.createTextNode("Demo only: this booking form is not connected yet, so your request for ")
+      );
+      const salonStrong = document.createElement("strong");
+      salonStrong.id = "summarySalonName";
+      salonStrong.textContent = cfg.name;
+      noteEl.appendChild(salonStrong);
+      noteEl.appendChild(document.createTextNode(" was not sent. Please call "));
+      const phoneLink = document.createElement("a");
+      phoneLink.id = "summarySalonPhone";
+      phoneLink.className = "num";
+      phoneLink.href = `tel:${cleanDigits}`;
+      phoneLink.textContent = cfg.phone;
+      noteEl.appendChild(phoneLink);
+      noteEl.appendChild(document.createTextNode(" to book."));
+    }
+
+    function renderSentSummaryNote(email) {
+      const noteEl = document.getElementById("summaryNote");
+      if (!noteEl) return;
+      noteEl.classList.add("is-sent");
+      noteEl.textContent = "";
+      noteEl.appendChild(document.createTextNode("Request sent. "));
+      const salonStrong = document.createElement("strong");
+      salonStrong.id = "summarySalonName";
+      salonStrong.textContent = cfg.name;
+      noteEl.appendChild(salonStrong);
+      const tail = email
+        ? " will confirm by phone or email. A confirmation was emailed to you."
+        : " will confirm by phone or email.";
+      noteEl.appendChild(document.createTextNode(tail));
+    }
+
+    function configureBookingMode() {
+      const demoField = document.getElementById("demoDateTimeField");
+      const demoInput = document.getElementById("bookingDateTime");
+      const apiFields = document.getElementById("apiDateTimeFields");
+      const dateInput = document.getElementById("bookingDate");
+      const timeInput = document.getElementById("bookingTime");
+      const todayIso = getTodayLocalISO();
+
+      if (cfg.api) {
+        demoField.classList.add("hidden");
+        demoInput.disabled = true;
+        demoInput.required = false;
+
+        apiFields.classList.remove("hidden");
+        dateInput.disabled = false;
+        dateInput.required = true;
+        dateInput.min = todayIso;
+        timeInput.disabled = false;
+        timeInput.required = true;
+        timeInput.step = "900";
+      } else {
+        apiFields.classList.add("hidden");
+        dateInput.disabled = true;
+        dateInput.required = false;
+        timeInput.disabled = true;
+        timeInput.required = false;
+
+        demoField.classList.remove("hidden");
+        demoInput.disabled = false;
+        demoInput.required = true;
+        renderDemoSummaryNote();
+      }
+    }
+
+    function clearSlotError() {
+      const slotErr = document.getElementById("bookingSlotError");
+      const timeInput = document.getElementById("bookingTime");
+      if (slotErr) {
+        slotErr.textContent = "";
+        slotErr.classList.add("hidden");
+      }
+      if (timeInput) {
+        timeInput.removeAttribute("aria-invalid");
+      }
+    }
+
+    function clearBookingErrors() {
+      clearSlotError();
+      const formErr = document.getElementById("bookingFormError");
+      if (formErr) {
+        formErr.textContent = "";
+        formErr.classList.add("hidden");
+      }
+    }
+
+    function showSlotTakenError() {
+      const slotErr = document.getElementById("bookingSlotError");
+      const timeInput = document.getElementById("bookingTime");
+      slotErr.textContent = "";
+      slotErr.textContent =
+        "That time is already booked for this nail tech. Please pick another time or choose Any available tech.";
+      slotErr.classList.remove("hidden");
+      if (timeInput) {
+        timeInput.setAttribute("aria-invalid", "true");
+        timeInput.focus();
+      }
+    }
+
+    function showNetworkOrApiError() {
+      const formErr = document.getElementById("bookingFormError");
+      const cleanDigits = cfg.phone.replace(/[^\d+]/g, "");
+      formErr.textContent = "";
+      formErr.appendChild(document.createTextNode("Could not send right now. Please call "));
+      const phoneLink = document.createElement("a");
+      phoneLink.href = `tel:${cleanDigits}`;
+      phoneLink.className = "num";
+      phoneLink.textContent = cfg.phone;
+      formErr.appendChild(phoneLink);
+      formErr.appendChild(document.createTextNode("."));
+      formErr.classList.remove("hidden");
+    }
 
     function syncTechChipSelection() {
       const group = document.getElementById("techChipGroup");
@@ -1093,7 +1348,14 @@
       });
     }
 
-    document.getElementById("techChipGroup").addEventListener("change", syncTechChipSelection);
+    document.getElementById("techChipGroup").addEventListener("change", () => {
+      syncTechChipSelection();
+      clearSlotError();
+    });
+    document.getElementById("bookingDate").addEventListener("input", clearSlotError);
+    document.getElementById("bookingDate").addEventListener("change", clearSlotError);
+    document.getElementById("bookingTime").addEventListener("input", clearSlotError);
+    document.getElementById("bookingTime").addEventListener("change", clearSlotError);
 
     function applyPersonalization() {
       document.title = `${cfg.name} — ${cfg.city} | Luxury Nail Care, Spa Pedicure & Gift Cards`;
@@ -1116,11 +1378,9 @@
       document.getElementById("footerAddrPhone").textContent = `${cfg.addr} • ${cfg.phone}`;
       document.getElementById("footerMapBtn").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cfg.name + " " + cfg.addr)}`;
       document.getElementById("modalBookingTitle").textContent = `Reserve at ${cfg.name}`;
-      document.getElementById("summarySalonName").textContent = cfg.name;
-      const summaryPhoneEl = document.getElementById("summarySalonPhone");
-      summaryPhoneEl.textContent = cfg.phone;
-      summaryPhoneEl.href = `tel:${cleanDigits}`;
+      renderDemoSummaryNote();
       renderTechOptions(cfg.techs);
+      configureBookingMode();
 
       // Scale tiered salon prices for GBP / EUR while keeping USD/AUD/CAD 100% unchanged
       document.querySelectorAll(".p-val").forEach((el) => {
@@ -1174,6 +1434,10 @@
       }
       e.preventDefault();
       lastModalTrigger = (e && e.currentTarget) ? e.currentTarget : document.activeElement;
+      clearBookingErrors();
+      if (cfg.api) {
+        document.getElementById("bookingDate").min = getTodayLocalISO();
+      }
       document.getElementById("bookingSummary").classList.add("hidden");
       document.getElementById("bookingForm").classList.remove("hidden");
       document.getElementById("modalBookingTitle").textContent = `Reserve at ${cfg.name}`;
@@ -1200,6 +1464,8 @@
       if (wasConfirmed) {
         document.getElementById("bookingForm").reset();
         syncTechChipSelection();
+        clearBookingErrors();
+        configureBookingMode();
         summary.classList.add("hidden");
         document.getElementById("bookingForm").classList.remove("hidden");
         document.getElementById("modalBookingTitle").textContent = `Reserve at ${cfg.name}`;
@@ -1210,19 +1476,19 @@
       }
     }
 
-    function submitBookingRequest(e) {
-      e.preventDefault();
-      const fullName = document.getElementById("bookingName").value.trim();
-      const phone = document.getElementById("bookingPhone").value.trim();
-      const email = document.getElementById("bookingEmail").value.trim();
-      const treatment = document.getElementById("bookingTreatment").value;
-      const checkedTech = document.querySelector('#techChipGroup input[name="nailTech"]:checked');
-      const selectedTech = checkedTech ? checkedTech.value : "Any available tech";
-      const dateTime = document.getElementById("bookingDateTime").value.trim();
-
+    function populateBookingSummary({
+      treatment,
+      selectedTech,
+      displayDateTime,
+      fullName,
+      phone,
+      email,
+      notes,
+      isLiveSent
+    }) {
       document.getElementById("summaryTreatment").textContent = treatment;
       document.getElementById("summaryTech").textContent = selectedTech;
-      document.getElementById("summaryDateTime").textContent = dateTime;
+      document.getElementById("summaryDateTime").textContent = displayDateTime;
       document.getElementById("summaryGuest").textContent = `${fullName} • ${phone}`;
 
       const emailRow = document.getElementById("summaryEmailRow");
@@ -1234,10 +1500,136 @@
         emailRow.classList.add("hidden");
       }
 
+      const notesRow = document.getElementById("summaryNotesRow");
+      if (notesRow) {
+        if (notes) {
+          document.getElementById("summaryNotes").textContent = notes;
+          notesRow.classList.remove("hidden");
+        } else {
+          document.getElementById("summaryNotes").textContent = "";
+          notesRow.classList.add("hidden");
+        }
+      }
+
+      const editBtn = document.getElementById("summaryEditBtn");
+      if (isLiveSent) {
+        renderSentSummaryNote(email);
+        if (editBtn) editBtn.classList.add("hidden");
+      } else {
+        renderDemoSummaryNote();
+        if (editBtn) editBtn.classList.remove("hidden");
+      }
+
       document.getElementById("modalBookingTitle").textContent = `Appointment summary — ${cfg.name}`;
       document.getElementById("bookingForm").classList.add("hidden");
       document.getElementById("bookingSummary").classList.remove("hidden");
       document.getElementById("summaryDoneBtn").focus();
+    }
+
+    async function submitBookingRequest(e) {
+      e.preventDefault();
+      if (isSubmittingBooking) return;
+
+      clearBookingErrors();
+
+      const fullName = document.getElementById("bookingName").value.trim();
+      const phone = document.getElementById("bookingPhone").value.trim();
+      const email = document.getElementById("bookingEmail").value.trim();
+      const treatment = document.getElementById("bookingTreatment").value;
+      const checkedTech = document.querySelector('#techChipGroup input[name="nailTech"]:checked');
+      const selectedTech = checkedTech ? checkedTech.value : "Any available tech";
+      const notes = document.getElementById("bookingNotes").value.trim();
+      const hp = document.getElementById("bookingHp").value;
+
+      if (!cfg.api) {
+        const dateTime = document.getElementById("bookingDateTime").value.trim();
+        populateBookingSummary({
+          treatment,
+          selectedTech,
+          displayDateTime: dateTime,
+          fullName,
+          phone,
+          email,
+          notes,
+          isLiveSent: false
+        });
+        return;
+      }
+
+      const dateVal = document.getElementById("bookingDate").value.trim();
+      const rawTimeVal = document.getElementById("bookingTime").value.trim();
+      const timeVal = rawTimeVal.slice(0, 5);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(dateVal) || !/^\d{2}:\d{2}$/.test(timeVal)) {
+        const dateInput = document.getElementById("bookingDate");
+        const timeInput = document.getElementById("bookingTime");
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(dateVal)) {
+          dateInput.focus();
+        } else {
+          timeInput.focus();
+        }
+        return;
+      }
+      const datetime = `${dateVal}T${timeVal}`;
+
+      const submitBtn = document.getElementById("bookingSubmitBtn");
+      isSubmittingBooking = true;
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+      submitBtn.textContent = "Sending…";
+
+      try {
+        const response = await fetch(cfg.api, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            salon: cfg.name,
+            service: treatment,
+            tech: selectedTech,
+            datetime,
+            name: fullName,
+            phone,
+            email,
+            notes,
+            hp
+          })
+        });
+
+        let payload = null;
+        if (response && typeof response.json === "function") {
+          try {
+            payload = await response.json();
+          } catch (_) {
+            payload = null;
+          }
+        }
+        if (response && response.ok === false && (!payload || typeof payload.ok !== "boolean")) {
+          payload = null;
+        }
+
+        if (payload && payload.ok === true) {
+          populateBookingSummary({
+            treatment,
+            selectedTech,
+            displayDateTime: formatDisplayDateTime(dateVal, timeVal),
+            fullName,
+            phone,
+            email,
+            notes,
+            isLiveSent: true
+          });
+        } else if (payload && payload.ok === false && payload.error === "slot_taken") {
+          showSlotTakenError();
+        } else {
+          showNetworkOrApiError();
+        }
+      } catch (_) {
+        showNetworkOrApiError();
+      } finally {
+        isSubmittingBooking = false;
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute("aria-busy");
+        submitBtn.textContent = "Send request";
+      }
     }
 
     document.addEventListener("keydown", (ev) => {
